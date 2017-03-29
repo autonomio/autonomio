@@ -54,7 +54,7 @@ There are two kinds of interactions:
 - input a list of sites to API
 - get a dictionary/json in return with the classification 
 
-# 4. 3rd-party technology
+## 4. 3rd-party technology
 
 - Pandas for data wrangling
 - Numpy for arrays and maths
@@ -62,7 +62,12 @@ There are two kinds of interactions:
 - nightmare.js or some other headless browswer for html extraction
 - Beautiful soup for clear text extraction
 
-# 5. System requirements 
+## 5. System requirements 
 
 The solution is able to perform classification for a single site in less than 5 seconds using an AWS micro instance with GB1 of RAM. 
 
+## 6. Style guide
+
+- PEP8 (at least close)
+- no line of code longer than 50 chars
+- no function longer than 50 rows 
