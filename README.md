@@ -31,3 +31,25 @@ The solution consist of three primary capabilities:
 - run models 
 - output classification 
 
+## 3. User Interactions
+
+There are two kinds of interactions: 
+
+1) configuration
+2) regular use 
+
+### 3.1. Configuration 
+
+- create a list of seed sites for the category
+- run through test results that prove the model works
+- tweak the seed:
+ - add or remove words
+ - define co-occurance of words
+ - define weights for words
+ - define proximities 
+
+### 3.2. Regular Use
+
+- input a single site to API
+- input a list of sites to API
+- get a dictionary/json in return with the classification 
