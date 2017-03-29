@@ -1,6 +1,6 @@
 # contexor
 
-#### A python classifier that provides accurates contextual classifying for any website in seconds. 
+### A python classifier that provides accurates contextual classifying for any website in seconds. 
 
 ## 1. Background 
 
