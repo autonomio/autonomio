@@ -53,3 +53,16 @@ There are two kinds of interactions:
 - input a single site to API
 - input a list of sites to API
 - get a dictionary/json in return with the classification 
+
+# 4. 3rd-party technology
+
+- Pandas for data wrangling
+- Numpy for arrays and maths
+- nltk for semantics 
+- nightmare.js or some other headless browswer for html extraction
+- Beautiful soup for clear text extraction
+
+# 5. System requirements 
+
+The solution is able to perform classification for a single site in less than 5 seconds using an AWS micro instance with GB1 of RAM. 
+
