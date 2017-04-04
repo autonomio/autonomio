@@ -1,3 +1,7 @@
+import urllib2
+import spacy
+from bs4 import BeautifulSoup
+
 class Contexor:
     
     'EXAMPLE USE: o = Contexor(\'nytimes.com\') and then o.similar([\'cnn.com\',\'wsj.com\',\'bbc.com\'])'
@@ -13,7 +17,7 @@ class Contexor:
         
         html = self.req.open('http://' + self.control_url)
         soup = BeautifulSoup(html, "lxml")
-        self.control_doc = nlp(unicode(soup.find_all('p')))
+        self.control_doc = self.nlp(unicode(soup.find_all('p')))
         
         return self.control_doc
     
@@ -27,6 +31,16 @@ class Contexor:
         
             html = self.req.open('http://' + url)
             soup = BeautifulSoup(html, "lxml")
-            self.comparison_doc = nlp(unicode(soup.find_all('p')))
+            
+            text = ''
+
+            for item in soup.find_all('p'):
+
+                item = item.get_text()
+                item = unicode(item)
+                item = item.replace('  ','')
+                text += ' ' + item
+                
+            self.comparison_doc = self.nlp(unicode(text))
         
             print url,self.control_doc.similarity(self.comparison_doc)
