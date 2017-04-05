@@ -2,7 +2,7 @@ import urllib2
 import spacy
 from bs4 import BeautifulSoup
 
-class Contexor:
+class Similarity:
     
     'EXAMPLE USE: o = Contexor(\'nytimes.com\') and then o.similar([\'cnn.com\',\'wsj.com\',\'bbc.com\'])'
 
