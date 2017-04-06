@@ -6,10 +6,21 @@ import io
 import spacy
 from spacy.attrs import ORTH
 from spacy import en
+import somecode as some
+import pandas as pd
+import ascify as asc
 
 class Frequency:
+
+    '''
+    USE EXAMPLE: 
+
+        freq = f.Frequency(out)
+        print freq.noun_token()
+
+    '''
     
-    def __init__(self, data):
+    def __init__(self,data):
         
         self.en = en
         self.nlp = spacy.load('en')
@@ -18,8 +29,11 @@ class Frequency:
 
     def _get_data(self,data):
 
-        data = data.sort_index()
-        text = [line.decode('utf-8').strip() for line in data.text]
+        if type(data) != 'pandas.core.series.Series':
+            
+            data = pd.Series(data)
+
+        text = [str(line).strip() for line in data]
 
         out = ''
 
@@ -38,10 +52,6 @@ class Frequency:
         stopwords = some.stopword()
         stopwords = stopwords[0]
 
-        stopwords.insert(0,'’s')
-        stopwords.insert(0,'\n&amp')
-        stopwords.insert(0,'\nkim')
-
         for word in self.en.STOP_WORDS:
             
             stopwords.append(word)
@@ -57,10 +67,10 @@ class Frequency:
 
         for word_id, count in sorted(counts.items(), reverse=True, key=lambda item: item[1]):
 
-            if nlp.vocab.strings[word_id] not in en.STOP_WORDS:
-                if nlp.vocab.strings[word_id] not in stopwords:
-                    if len(nlp.vocab.strings[word_id]) > 2:
-                        l.append([count, nlp.vocab.strings[word_id]])
+            if self.nlp.vocab.strings[word_id] not in en.STOP_WORDS:
+                if self.nlp.vocab.strings[word_id] not in self.stopwords:
+                    if len(self.nlp.vocab.strings[word_id]) > 2:
+                        l.append([count, self.nlp.vocab.strings[word_id]])
 
         df = pd.DataFrame(l)
         df.columns = ['frequency','word']
