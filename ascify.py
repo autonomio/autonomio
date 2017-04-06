@@ -1,6 +1,13 @@
 import string
 
 class Ascify:
+
+    '''
+    USE EXAMPLE: 
+
+        out = asc.Ascify(df.text).ascify()
+
+    '''
     
     def __init__(self,s):
 
