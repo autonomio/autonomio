@@ -1,3 +1,5 @@
+import string
+
 class Ascify:
     
     def __init__(self,s):
@@ -49,7 +51,7 @@ class Ascify:
         return out
     
 
-    def run(self):
+    def ascify(self):
         
         if self.iterable == False:
             
