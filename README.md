@@ -6,6 +6,19 @@
 
 Researchers commonly can benefit from a capability to classify websites automatically based on prominent content on the site. For example, a researcher may want to scan a large number of sites to identify sites that have a strong affinity with a specific topic ('privacy') or behaviour ('strong language').
 
+### 1.1. How to use? 
+
+    predictions = kuubio(X='text',
+                         Y='value',
+                         data=train_20, 
+                         dims=299,
+                         epoch=40,
+                         flatten='none',
+                         model='model',
+                         loss='binary_crossentropy',
+                         save_model=False)
+
+
 ## 2. Solution 
 
 The solution consist of three primary capabilities: 
