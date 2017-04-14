@@ -8,17 +8,27 @@ Researchers commonly can benefit from a capability to classify websites automati
 
 ### 1.1. How to use? 
 
-    predictions = kuubio(X='text',
-                         Y='value',
-                         data=train_20, 
-                         dims=299,
-                         epoch=40,
-                         flatten='none',
-                         model='model',
-                         loss='binary_crossentropy',
-                         save_model=False)
+    predictions = kuubio(X=[0:300],                   # features
+                             Y='ivt',                 # indepedent variable
+                             data=sites,              # name of dataframe
+                             dims=300,                # number of features
+                             epoch=5,                 # no of training cycles
+                             flatten=.8,              # conversion to binary
+                             layers=5,                # number of layers in the model
+                             neuron_first='auto',     # number of neurons on first layer
+                             neuron_last=1,           # number of neurons on last layer
+                             model='model',           # option to load model
+                             loss='binary_crossentropy',  # which model to use
+                             save_model=False)        # option to save model
 
 
+### 1.2. Capabilities 
+
+Basically the rule is that everything that can be done now in Keras, to the extent of what are the most commonly used features by researchers in our field, can be done in a one line command. The other rule is that the one line command has to run with as little input as x,y and still perform. So the simplest use case is: 
+
+     kuubio('feature','indepedent_var',df)
+     
+    
 ## 2. Solution 
 
 The solution consist of three primary capabilities: 
