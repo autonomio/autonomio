@@ -6,7 +6,20 @@
 
 Researchers commonly can benefit from a capability to classify websites automatically based on prominent content on the site. For example, a researcher may want to scan a large number of sites to identify sites that have a strong affinity with a specific topic ('privacy') or behaviour ('strong language').
 
-### 1.1. How to use? 
+Kuubio uses Keras with TensorFlow backend, spaCy, Pandas and Numpy.
+
+## 2. Key Features 
+
+The Kuubio principles is that running state-of-the-art deep learning models should be in 99% of the cases possible from a one line command. Kuubio already makes this possible, and removes some of the remnants of obstacles between researchers and the mythical deep learning method. 
+
+- seamless deep learning pipeline where you can do everything from one command
+- automatic conversion of text to word vectors using word2vec 
+- state-of-the-art language and topic agnostic NLP 
+
+### 3. How to use? 
+
+The current version of Kuubio deep learning function looks like this. No other code is needed.
+
 
     predictions = kuubio(X=[0:300],                   # features
                              Y='ivt',                 # indepedent variable
@@ -22,14 +35,30 @@ Researchers commonly can benefit from a capability to classify websites automati
                              save_model=False)        # option to save model
 
 
-### 1.2. Capabilities 
+### 3.2. Basic use
 
-Basically the rule is that everything that can be done now in Keras, to the extent of what are the most commonly used features by researchers in our field, can be done in a one line command. The other rule is that the one line command has to run with as little input as x,y and still perform. So the simplest use case is: 
+The other rule is that the one line command has to run with as little input as x,y and the model should still perform. This is not too hard as Keras has made it sure that various models work out of the box. So the simplest use case is: 
 
      kuubio('feature','indepedent_var',df)
      
+There are a couple of very useful hidden features in inputting X. 
+
+###### 3.2.1 Input a range of columns 
+
+use list for a range of columns: 
+
+     kuubio([0:300],'ind_var',df)
+
+###### 3.2.1 Input column labels
+
+     kuubio(['var1','var2'],'ind_var',df)
+
+
+### 3.3. Use with Text 
+
+ 
     
-## 2. Solution 
+## 4. Solution 
 
 The solution consist of three primary capabilities: 
 
