@@ -35,12 +35,12 @@ To train a neural network, and then use it for making a prediction on a differen
 
 Instead of the default 5 epochs, we're setting epoch to 10 and increase dropout rate between layers to 50%. Also instead of using the default flattening (transforming y feature to 0 and 1), we take only the bottom 30% in the *inter quartile range*. 
 
-This will yield:
+## Standard training output
 
 ![test result output](http://i.imgur.com/i4MkYmo.png)
 
 
-## dependencies 
+## Dependencies 
 
 #### Data Manipulation
 
