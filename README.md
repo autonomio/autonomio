@@ -2,9 +2,13 @@
 
 Autonomio provides a very high level abstraction layer on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. 
 
-## Deep learning in two simple commands
+## Deep learning in two simple commands (first time use)
 
 Open a jupyter notebook (or python console) and type: 
+
+    python -m spacy download en
+
+and then:
 
     from autonomio.commands import *
     %matplotlib inline
@@ -28,10 +32,6 @@ This will yield a pandas dataframe with the values and whichever label you ware 
 #### Word Processing
 
 [spaCy](https://spacy.io/)
-
-NOTE: you have to download spacy language file: 
-
-    python -m spacy download en
 
 #### Deep Learning
 
