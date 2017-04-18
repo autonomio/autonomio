@@ -2,7 +2,7 @@
 
 Autonomio provides a very high level abstraction layer on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. 
 
-## Deep learning in less than 60 seconds
+## Deep learning in two simple commands
 
 Open a jupyter notebook (or python console) and type: 
 
