@@ -13,13 +13,13 @@ Autonomio provides a very high level abstraction layer on top of Keras, using Te
 
 For most use cases succesfully running a state-of-the-art AI works out of the box in less than 60 seconds to first trained model.
 
-## Deep learning in two simple commands (first time use)
+## Deep learning in two simple commands
 
-Open a jupyter notebook (or python console) and type: 
+For first time use: 
 
     python -m spacy download en
 
-and then:
+Open a jupyter notebook (or python console) and type: 
 
     from autonomio.commands import *
     %matplotlib inline
