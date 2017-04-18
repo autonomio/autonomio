@@ -37,7 +37,7 @@ Instead of the default 5 epochs, we're setting epoch to 10 and increase dropout 
 
 This will yield:
 
-!https://ibb.co/i3HS85
+![test result output](https://ibb.co/i3HS85)
 
 
 ## dependencies 
