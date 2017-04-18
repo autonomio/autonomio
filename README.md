@@ -17,6 +17,25 @@ Even if 'x' is unstructured/text, this command will yield a functional neural ne
     
 This will yield a pandas dataframe with the values and whichever label you ware connecting the value with.     
 
+## dependencies 
+
+#### Data Manipulation
+
+[Numpy](http://www.numpy.org/)
+[Pandas](http://pandas.pydata.org/)
+
+#### Deep Learning
+
+[Keras](http://keras.io)
+[Tensorflow](https://www.tensorflow.org/)
+
+#### Visualization
+
+[Matplotlib](http://matplotlib.org/)
+[Seaborn](http://seaborn.pydata.org/)
+[mpld3](http://mpld3.github.io/)
+
+
 ## background 
 
 Up until today most of linguistic technologies, not to mention deep learning, have not been accessible in the way that they would allow seamless workflow that supports the need of even less computer savvy researchers. Yet the modern researcher can benefit significantly from unlocking the value in unstructured data, and there are by some estimates 9 times more of unstructured data than structured. Autonomio combines two cutting edge AI technologies - word vectorizing and deep learning - in to one intuitive tool researchers from wide range of backgrounds can benefit from.
