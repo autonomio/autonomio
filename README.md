@@ -25,6 +25,14 @@ This will yield a pandas dataframe with the values and whichever label you ware 
 
 [Pandas](http://pandas.pydata.org/)
 
+#### Word Processing
+
+[spaCy](https://spacy.io/)
+
+NOTE: you have to download spacy language file: 
+
+    python -m spacy download en
+
 #### Deep Learning
 
 [Keras](http://keras.io)
