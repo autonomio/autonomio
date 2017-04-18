@@ -22,17 +22,21 @@ This will yield a pandas dataframe with the values and whichever label you ware 
 #### Data Manipulation
 
 [Numpy](http://www.numpy.org/)
+
 [Pandas](http://pandas.pydata.org/)
 
 #### Deep Learning
 
 [Keras](http://keras.io)
+
 [Tensorflow](https://www.tensorflow.org/)
 
 #### Visualization
 
 [Matplotlib](http://matplotlib.org/)
+
 [Seaborn](http://seaborn.pydata.org/)
+
 [mpld3](http://mpld3.github.io/)
 
 
