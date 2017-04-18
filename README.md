@@ -21,6 +21,25 @@ Even if 'x' is unstructured/text, this command will yield a functional neural ne
     
 This will yield a pandas dataframe with the values and whichever label you ware connecting the value with.     
 
+## Slightly more involving use
+
+To train a neural network, and then use it for making a prediction on a different dataset is almost as easy as the first example. This time let's also introduce some of the command parameters available for 'train' function. 
+
+    train('text','quality_score',
+          tweets.head(3000),
+          epoch=10,
+          dropout=.5,
+          flatten=.3,
+          save_model=True,
+          verbose=0)
+
+Instead of the default 5 epochs, we're setting epoch to 10 and increase dropout rate between layers to 50%. Also instead of using the default flattening (transforming y feature to 0 and 1), we take only the bottom 30% in the *inter quartile range*. 
+
+This will yield:
+
+!https://ibb.co/i3HS85
+
+
 ## dependencies 
 
 #### Data Manipulation
