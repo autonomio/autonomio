@@ -4,11 +4,20 @@ Autonomio v.0.1.1 User Manual
 
 This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
-Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. That's right, to have 100% control over Autonomio's powerful features, you just have to know three commands. 
+Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
 
-- train (trains a model) 
-- test (performs a test using a trained model)
-- data (loads ready datasets)
+To train (and save) model::
+
+    train()
+    
+To test (and load) model:
+
+    test()
+    
+To load a dataset:
+
+    data()
+
 
 -----
 TRAIN
@@ -63,11 +72,24 @@ By default verbosity from Keras is at mimimum, and you may want the live mode fo
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,verbose=1)
 
 
-
 TRAIN ARGUMENTS
 ---------------
 
-Even though it's possible to use Autonomio mostly with few arguments, there are a total 11 arguments that can be used to improving model accuracy. 
+Even though it's possible to use Autonomio mostly with few arguments, there are a total 11 arguments that can be used to improving model accuracy::
+
+    def train(X,Y,data,
+                dims=300,
+                epoch=5,
+                flatten='mean',
+                dropout=.2,
+                layers=3,
+                model='train',
+                loss='binary_crossentropy',
+                save_model=False,
+                neuron_first='auto',
+                neuron_last=1,
+                batch_size=10,
+                verbose=0):
 
 +-------------------+-------------------------+-------------------------+
 |                   |                         |                         |
@@ -105,14 +127,32 @@ Even though it's possible to use Autonomio mostly with few arguments, there are 
 
 Note that the network shape is roughly an upside-down pyramind. To change this you would want to change the code in train_new.py.
 
-
 ----
 TEST
 ----
+Once you've trained a model with train(), you can use it easily on any dataset::
 
-     
-     def test(X,data,labels,saved_model,y_scatter=False)
-     
+
+   test('text',data,'handle','model.json')
+    
+Or if you want to see an interactive scatter plot visualization with new y variable::
+
+   test('text',data,'handle','model.json',y_scatter='influence_score')
+   
+Whatever y_scatter is set as, will be set as the y-axis for the scatter plot. 
+
+To yield the scatter plot, you have to call it specifically::
+
+   test_result = test('text',data,'handle','model.json',y_scatter='influence_score')
+   test_result[1]
+
+
+TEST ARGUMENTS
+--------------
+
+The only difference between the two modes of test() is if a scatter plot is called::   
+       
+    def test(X,data,labels,saved_model,y_scatter=False)
      
 +-------------------+-------------------------+-------------------------+
 |                   |                         |                         |
@@ -120,14 +160,14 @@ TEST
 +===================+=========================+=========================+
 | X                 | string, int, float      | NA                      |
 +-------------------+-------------------------+-------------------------+
-| Y                 | int,float,categorical   | NA                      |
+| data              | int,float,categorical   | NA                      |
 +-------------------+-------------------------+-------------------------+
-| data              | data object             | NA                      |
+| labels            | data object             | NA                      |
 +-------------------+-------------------------+-------------------------+
-| epoch             | int                     | 5                       |
+| saved_model       | int                     | 5                       |
 +-------------------+-------------------------+-------------------------+
-| flatten           | string, float           | 'mean'                  |
- 
+| y_scatter         | string, float           | 'mean'                  |
++-------------------+-------------------------+-------------------------+ 
 
 ----
 DATA
