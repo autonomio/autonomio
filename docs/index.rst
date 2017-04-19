@@ -17,7 +17,38 @@ The absolute minimum use case using an Autonomio dataset is::
     from autonomio.commands import *
     %matplotlib inline
     train('text','neg',data('random_tweets'))
+    
+Using this example and NLTK's sentiment analyzer as an input for the ground truth, Autonomio yields 85% prediction result out of the box with with nothing but:: 
 
+    train('text','neg',data('random_tweets'))
+
+A slightly more involving example may include changing the number of epochs:
+
+    train('text','neg',data('random_tweets'),epoch=20)
+    
+For flattening the options are 'mean', 'median', 'none' and IQR. IQR is invoked by inputting a float: 
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3)
+    
+Dropout is one of the most important aspects of neural network:
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropout=.5)
+    
+You might want to change the number of layers in the network: 
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4)
+
+
+
+For a complete list of supported losses see Keras manual: 
+
+.. https://keras.io/losses/
+
+
+ARGUMENTS
+---------
+
+Even though it's possible to use Autonomio mostly with few arguments, there are a total 11 arguments that can be used to improving model accuracy. 
 
 +-------------------+-------------------------+-------------------------+
 |                   |                         |                         |
@@ -54,23 +85,6 @@ The absolute minimum use case using an Autonomio dataset is::
 
 
 Note that the network shape is roughly an upside-down pyramind. To change this you would want to change the code in train_new.py.
-
-
-
-
-def train(X,Y,data,
-			dims=300,
-			epoch=5,
-			flatten='mean',
-       		dropout=.2,
-       		layers=3,
-       		model='train',
-       		loss='binary_crossentropy',
-       		save_model=False,
-       		neuron_first='auto',
-       		neuron_last=1,
-       		batch_size=10,
-       		verbose=0):
 
 
 ----
