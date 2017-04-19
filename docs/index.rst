@@ -1,5 +1,5 @@
 ========
-Autonomio v.0.1.1 Manual
+Autonomio v.0.1.1 User Manual
 ========
 
 Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. That's right, to have 100% control over Autonomio's powerful features, you just have to know three commands. 
