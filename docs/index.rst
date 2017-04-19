@@ -111,7 +111,7 @@ Even though it's possible to use Autonomio mostly with few arguments, there are 
 +-------------------+-------------------------+-------------------------+
 | model             | int                     | 'train' (OBSOLETE)      |
 +-------------------+-------------------------+-------------------------+
-| loss              | string [Keras_Losses]   | 'binary_crossentropy'   |
+| loss              | string [Keras_Losses]_  | 'binary_crossentropy'   |
 +-------------------+-------------------------+-------------------------+
 | save_model        | string,                 | False                   |
 +-------------------+-------------------------+-------------------------+
