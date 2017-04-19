@@ -110,6 +110,24 @@ Note that the network shape is roughly an upside-down pyramind. To change this y
 TEST
 ----
 
+     
+     def test(X,data,labels,saved_model,y_scatter=False)
+     
+     
++-------------------+-------------------------+-------------------------+
+|                   |                         |                         |
+| ARGUMENT          | REQUIRED INPUT          | DEFAULT                 |
++===================+=========================+=========================+
+| X                 | string, int, float      | NA                      |
++-------------------+-------------------------+-------------------------+
+| Y                 | int,float,categorical   | NA                      |
++-------------------+-------------------------+-------------------------+
+| data              | data object             | NA                      |
++-------------------+-------------------------+-------------------------+
+| epoch             | int                     | 5                       |
++-------------------+-------------------------+-------------------------+
+| flatten           | string, float           | 'mean'                  |
+ 
 
 ----
 DATA
@@ -150,16 +168,11 @@ The data command is provided for both convinience, and to give the user access t
 |                   |                         |                         |
 | ARGUMENT          | REQUIRED INPUT          | DEFAULT                 |
 +===================+=========================+=========================+
-| X                 | string, int, float      | NA                      |
+| name              | string                  | NA                      |
 +-------------------+-------------------------+-------------------------+
-| Y                 | int,float,categorical   | NA                      |
+| mode              | string ('file')         | NA                      |
 +-------------------+-------------------------+-------------------------+
-| data              | data object             | NA                      |
-+-------------------+-------------------------+-------------------------+
-| epoch             | int                     | 5                       |
-+-------------------+-------------------------+-------------------------+   
 
-     
      
 LINKS
 -----
