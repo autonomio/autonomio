@@ -42,7 +42,7 @@ Or change the loss of the model::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4,loss='kullback_leibler_divergence')
 
-For a complete list of supported losses see Keras manual: 
+For a complete list of supported losses see [Keras]_ 
 
 .. https://keras.io/losses/
 
@@ -131,7 +131,6 @@ DATA
      20,000 tweets main intended for 
      
      
-     
-Lorem ipsum [Ref]_ dolor sit amet.
 
-.. [Ref] Book or article reference, URL or whatever.
+
+.. [Keras] https://keras.io/losses/
