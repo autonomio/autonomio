@@ -42,9 +42,7 @@ Or change the loss of the model::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4,loss='kullback_leibler_divergence')
 
-For a complete list of supported losses see [Keras]_ 
-
-.. https://keras.io/losses/
+For a complete list of supported losses see [Keras_Losses]_ 
 
 If you want to save the model, be mindful of using .json ending::
 
@@ -133,4 +131,4 @@ DATA
      
 
 
-.. [Keras] https://keras.io/losses/
+.. [Keras_Losses] https://keras.io/losses/
