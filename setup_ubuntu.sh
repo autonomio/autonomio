@@ -6,6 +6,7 @@ sudo apt-get update -y
 sudo apt-get install build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip -y
 sudo apt-get install python-dev -y
 sudo apt-get install python-pip -y
+sudo pip install --upgrade pip
 sudo pip install numpy
 sudo pip install numpy --upgrade
 sudo pip install pandas
