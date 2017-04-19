@@ -142,7 +142,9 @@ Data from both buy and sell side and over 10 other sources::
 DATA ARGUMENTS
 ---------------
 
-    def test(X,data,labels,saved_model,y_scatter=False)
+The data command is provided for both convinience, and to give the user access to unique deep learning datasets. In addition to allowing access to Autonomio datasets, the function also supports importing from csv, json, and excel. The data importing function is for most cases we face, but is not intended as a replacement to pandas read functions::
+
+    def data(name,mode='default')
 
 +-------------------+-------------------------+-------------------------+
 |                   |                         |                         |
