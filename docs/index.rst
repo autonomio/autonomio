@@ -46,19 +46,19 @@ For a complete list of supported losses see Keras manual:
 
 .. https://keras.io/losses/
 
-If you want to save the model, be mindful of using .json ending:
+If you want to save the model, be mindful of using .json ending::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,save_model='model.json')
 
-Control the neuron size by setting the number of neurons on the input layer: 
+Control the neuron size by setting the number of neurons on the input layer:: 
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,neuron_first=50)
 
-Sometimes changing the batch size can improve the model significantly: 
+Sometimes changing the batch size can improve the model significantly::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,batch_size=15)
 
-By default verbosity from Keras is at mimimum, and you may want the live mode for training: 
+By default verbosity from Keras is at mimimum, and you may want the live mode for training:: 
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,verbose=1)
 
