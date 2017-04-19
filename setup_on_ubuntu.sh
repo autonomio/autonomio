@@ -33,3 +33,4 @@ unzip git.zip
 mv autonomio-master autonomio
 cd autonomio 
 ls -lhtr
+jupyter notebook
