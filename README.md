@@ -53,7 +53,7 @@ Instead of the default 5 epochs, we're setting epoch to 10 and increase dropout 
 
 ## Dependencies 
 
-![Here is the list](./docs/dependencies_linux.md) of linux commands to take care of all the depencies. 
+[Here is the list](./docs/dependencies_linux.md) of linux commands to take care of all the depencies. 
 
 #### Data Manipulation
 
