@@ -30,7 +30,7 @@ Even if 'x' is unstructured/text, this command will yield a functional neural ne
 
     test(x,data)
     
-This will yield a pandas dataframe with the values and whichever label you ware connecting the value with.     
+This will yield a pandas dataframe with the values and whichever label you were connecting the value with.     
 
 ## Slightly more involving use
 
