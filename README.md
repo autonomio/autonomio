@@ -1,5 +1,7 @@
 <img src="./docs/autonomio_logo_new.png"  width="250">
 
+This document provides a high-level overview of Autonomio's capabilities. If you're looking for the User Manual, you may want to look [read the docs](http://autonomio.readthedocs.io/en/latest/) instead.
+
 Autonomio provides a very high level abstraction layer for rapidly testing research ideas and instantly creating neural network based decision making models. Autonomio is built on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. 
 
 ## Key Features
