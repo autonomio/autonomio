@@ -9,7 +9,7 @@ Autonomio provides a very high level abstraction layer for rapidly testing resea
 - 'x' can be text, continues or categorial data
 - 15 optional configurations from a single command
 - seamlessly integrates word2vec with keras deep learning
-- interactive plots specifically designed for deep learning
+- interactive plots specifically designed for deep learning model evaluation
 
 For most use cases succesfully running a state-of-the-art neural network works out of the box with zero configuration yielding a model that can be used to predict outcomes later. 
 
