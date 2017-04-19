@@ -6,6 +6,7 @@ import ascify as asc
 import pandas as pd
 
 from vectorize_text import *
+from plots import *
 
 from keras.models import Sequential
 from keras.layers import Dense
@@ -58,12 +59,19 @@ def _transform_data(x_text,y_var,data,flatten):
     return df_x,df_y
 
 
-def kuubio(X,Y,data,dims=300,epoch=5,flatten='mean',
-           dropout=.2,layers=3,
-           model='train',loss='binary_crossentropy',
-           save_model=False,
-           neuron_first='auto',neuron_last=1,
-           batch_size=10,verbose=0):
+def kuubio(X,Y,data,
+            dims,
+            epoch,
+            flatten,
+            dropout,
+            layers,
+            model,
+            loss,
+            save_model,
+            neuron_first,
+            neuron_last,
+            batch_size,
+            verbose):
     
     ind_var = Y
     X,Y = _transform_data(X,Y,data,flatten)
@@ -147,11 +155,11 @@ def kuubio(X,Y,data,dims=300,epoch=5,flatten='mean',
         print(model.summary())
         print ""
         network_scale = len(X) * epoch * layers * neuron_first 
-        print "network scale : " + str(network_scale)
+        print "network scale index : " + str(network_scale)
 
         if verbose == 0:
-            if network_scale > 100000000:
-                print "This could take " + str(network_scale / 1000000) + " minutes. Why not have a break?"
+            if network_scale > 3000000000:
+                print "This could take a while. Why not check back in a moment?"
 
         time.sleep(0.2)
         history = model.fit(X, Y, validation_split=0.33, epochs=epoch, verbose=verbose, batch_size=batch_size)
@@ -167,6 +175,7 @@ def kuubio(X,Y,data,dims=300,epoch=5,flatten='mean',
         print "indepedent variable : " + ind_var
         print "n= : " + str(len(X))
 
+        print "epochs : " + str(epoch)
         print "features : " + str(dims)
         print "layers : " + str(layers)
         print "dropout : " + str(dropout)
@@ -174,29 +183,12 @@ def kuubio(X,Y,data,dims=300,epoch=5,flatten='mean',
         print "flatten : " + str(flatten)
         print "batch_size : " + str(batch_size) 
 
-	plt.style.use('bmh')
-        fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
+        accuracy(history)
 
-        ax1.plot(history.history['acc'])
-        ax1.plot(history.history['val_acc'])
-        ax2.plot(history.history['loss'])
-        ax2.plot(history.history['val_loss'])
-
-        ax1.set_title('accuracy')
-        ax1.set_xlabel('epoch')
-
-        #ax1.set_ylabel('accuracy')
-
-        ax2.set_title('loss')
-        ax2.set_xlabel('epoch')
-        #ax3.set_ylabel('loss')
-
-        fig.set_size_inches(12,3)
-
-        if save_model == True:
+        if save_model != False:
 
             model_json = model.to_json()
-            with open("model.json", "w") as json_file:
+            with open(save_model, "w") as json_file:
                 json_file.write(model_json)
             model.save_weights("model.h5")
             print("Saved model to disk")
@@ -205,7 +197,5 @@ def kuubio(X,Y,data,dims=300,epoch=5,flatten='mean',
         predictions = model.predict(X)
         # round predictions
         rounded = [round(x[0]) for x in predictions]
-
-        fig.show() 
     
     return rounded

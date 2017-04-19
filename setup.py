@@ -27,9 +27,9 @@ DISTNAME = 'autonomio'
 MAINTAINER = 'Mikko Kotila'
 MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://botlab.io'
-LICENSE = 'BSD (3-clause)'
+LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/botlabio/autonomio/'
-VERSION = '0.1.dev'
+VERSION = '0.1.1.dev'
 
 try:
     from setuptools import setup
@@ -40,9 +40,6 @@ except ImportError:
 def check_dependencies():
     install_requires = []
 
-    # Just make sure dependencies exist, I haven't rigorously
-    # tested what the minimal versions that will work are
-    # (help on that would be awesome)
     try:
         import numpy
     except ImportError:

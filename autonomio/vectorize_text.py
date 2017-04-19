@@ -18,7 +18,7 @@ def vectorize_text(data):
 
     for i in range(c):
 
-        asc_string = Ascify(str(data[i])).ascify()
+        asc_string = Ascify(str(data[i:i+1])).ascify()
         uni_string = unicode(asc_string)
         vec_obj = nlp(uni_string)
         vector = vec_obj.vector

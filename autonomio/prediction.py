@@ -4,32 +4,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
 from vectorize_text import *
+from plots import *
 
-def _load_model():
+def _load_model(saved_model,saved_model_weights):
     
-    json_file = open('model.json', 'r')
+    json_file = open(saved_model, 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = model_from_json(loaded_model_json)
     # load weights into new model
-    loaded_model.load_weights("model.h5")
+    loaded_model.load_weights(saved_model_weights)
     print("Loaded model from disk")
     
     return loaded_model
-    
-def _distribution_plot(data):
 
-    sns.set_style("white")
-    plt.figure(figsize=(14, 4))
-    plt.xlim(-0.005,1.0)
-    sns.kdeplot(data,legend=False)
-    sns.despine(right=False)
+def make_prediction(X,data,name,saved_model):
 
-def make_prediction(signals,name):
-    
+    signals = data[X]
+    name = data[name]
+
+    part_string = saved_model.replace('.json','')
+    saved_model_weights = part_string + '.h5'
+
     l=[]
     i=0
-    loaded_model = _load_model()
+    loaded_model = _load_model(saved_model,saved_model_weights)
     np.set_printoptions(suppress=True)
     
     try: 
@@ -52,14 +51,14 @@ def make_prediction(signals,name):
                                
     for pred in predict:
                                       
-        l.append([pred[0],name[i]])
+        l.append([pred[0],name[i:i+1].values[0]])
         i+=1
         
     out = pd.DataFrame(l)
     out.columns = ['value','name']
     out = out.sort_values('value',ascending=False)
     
-    _distribution_plot(out.value)
+    distribution(out.value)
     print out.head(10)
     print ""
     print out.tail(10)
