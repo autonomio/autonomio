@@ -26,7 +26,7 @@ sudo pip install mpld3 --upgrade
 sudo pip install jupyter
 sudo pip install jupyter --upgrade
 
-python -m spacy download en
+sudo python -m spacy download en
 
 wget https://github.com/botlabio/autonomio/archive/master.zip -O git.zip
 unzip git.zip
