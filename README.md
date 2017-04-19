@@ -1,6 +1,6 @@
 <img src="./docs/autonomio_logo_new.png"  width="250">
 
-Autonomio provides a very high level abstraction layer on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. 
+Autonomio provides a very high level abstraction layer for rapidly testing research ideas and instantly creating neural network based decision making models. Autonomio is built on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. 
 
 ## Key Features
 
@@ -11,7 +11,7 @@ Autonomio provides a very high level abstraction layer on top of Keras, using Te
 - seamlessly integrates word2vec with keras deep learning
 - interactive plots specifically designed for deep learning
 
-For most use cases succesfully running a state-of-the-art AI works out of the box in less than 60 seconds to first trained model.
+For most use cases succesfully running a state-of-the-art neural network works out of the box with zero configuration yielding a model that can be used to predict outcomes later. 
 
 ## Deep learning in two simple commands
 
