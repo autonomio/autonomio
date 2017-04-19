@@ -138,3 +138,7 @@ NOTE: the spacy language libraries have to be downloaded each separately.
 ### Adding new languages 
 
 spaCy makes it reletively streamlined to create support for any language and the challenge can (and should be) approached iteratively. 
+
+### Tested Systems
+
+Autonomio have been tested in several Mac OSX and Ubuntu environments (both server and desktop). 
