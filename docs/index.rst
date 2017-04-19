@@ -64,8 +64,8 @@ By default verbosity from Keras is at mimimum, and you may want the live mode fo
 
 
 
-ARGUMENTS
----------
+TRAIN ARGUMENTS
+---------------
 
 Even though it's possible to use Autonomio mostly with few arguments, there are a total 11 arguments that can be used to improving model accuracy. 
 
@@ -139,6 +139,24 @@ Data from both buy and sell side and over 10 other sources::
 
     data('random_tweets')            
     
+DATA ARGUMENTS
+---------------
+
+    def test(X,data,labels,saved_model,y_scatter=False)
+
++-------------------+-------------------------+-------------------------+
+|                   |                         |                         |
+| ARGUMENT          | REQUIRED INPUT          | DEFAULT                 |
++===================+=========================+=========================+
+| X                 | string, int, float      | NA                      |
++-------------------+-------------------------+-------------------------+
+| Y                 | int,float,categorical   | NA                      |
++-------------------+-------------------------+-------------------------+
+| data              | data object             | NA                      |
++-------------------+-------------------------+-------------------------+
+| epoch             | int                     | 5                       |
++-------------------+-------------------------+-------------------------+   
+
      
      
 LINKS
