@@ -1,13 +1,12 @@
 ========
-SOMECODE
+Autonomio v.0.1.1 Manual
 ========
 
-SOMECODE is a research platform for serious observation and analysis of Twitter data. SOMECODE brings together 9 years of unbroken continuity in developing social media research tools. Previous tools and processes developed by the contributor team are in daily use by many FORTUNE100 companies and major advertising agencies. SOMECODE is the solution we always wanted to build, but due to the kinds of restraints commercial entities have, never got to. ::
+Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. That's right, to have 100% control over Autonomio's powerful features, you just have to know three commands. 
 
-    pip install somecode
-
-All you need to have is Python 2.7 and the somecode installation will take care of all the dependencies. 
-
+- train (trains a model) 
+- test (performs a test using a trained model)
+- data (loads ready datasets)
 
 -----
 TRAIN
@@ -18,7 +17,6 @@ The absolute minimum use case using an Autonomio dataset is::
     from autonomio.commands import *
     %matplotlib inline
     train('text','neg',data('random_tweets'))
-
 
 
 +-------------------+-------------------------+-------------------------+
