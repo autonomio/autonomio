@@ -115,23 +115,34 @@ TEST
 DATA
 ----
 
-    'election_in_twitter'      
-     Dataset consisting of 10 minute samples of 80 million tweets
-    
-    'sites_category_and_vec'   
-     4,000 sites with word vectors and 5 categories
-    
-    'programmatic_ad_fraud'    
-     Data from both buy and sell side and over 10 other sources
-    
-    'parties_and_employment'   
-     9 years of monthly poll and unemployment numbers 
-    
-    'random_tweets'            
-     20,000 tweets main intended for 
-     
-     
+Dataset consisting of 10 minute samples of 80 million tweets::
 
+    data('election_in_twitter')
+
+4,000 ad funded websites with word vectors and 5 categories::
+   
+    data('sites_category_and_vec')   
+
+Data from both buy and sell side and over 10 other sources::
+    
+    data('programmatic_ad_fraud')    
+    
+9 years of monthly poll and unemployment numbers:: 
+    
+    data('parties_and_employment')   
+  
+120,000 tweets with sentiment classification from NLTK::
+    
+    data('tweet_sentiment')
+    
+20,000 random tweets::
+
+    data('random_tweets')            
+    
+     
+     
+LINKS
+-----
 
 .. [Keras_Losses] https://keras.io/losses/
 .. [Autonomio_Overview] https://github.com/botlabio/autonomio/blob/master/README.md
