@@ -38,7 +38,7 @@ You might want to change the number of layers in the network::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4)
 
-Or change the loss of the model: 
+Or change the loss of the model:: 
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4,loss='kullback_leibler_divergence')
 
