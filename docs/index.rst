@@ -1,6 +1,8 @@
-========
+=============================
 Autonomio v.0.1.1 User Manual
-========
+=============================
+
+This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
 Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. That's right, to have 100% control over Autonomio's powerful features, you just have to know three commands. 
 
@@ -132,3 +134,4 @@ DATA
 
 
 .. [Keras_Losses] https://keras.io/losses/
+.. [Autonomio_Overview] https://github.com/botlabio/autonomio/blob/master/README.md
