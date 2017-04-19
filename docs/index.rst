@@ -22,27 +22,46 @@ Using this example and NLTK's sentiment analyzer as an input for the ground trut
 
     train('text','neg',data('random_tweets'))
 
-A slightly more involving example may include changing the number of epochs:
+A slightly more involving example may include changing the number of epochs::
 
     train('text','neg',data('random_tweets'),epoch=20)
     
-For flattening the options are 'mean', 'median', 'none' and IQR. IQR is invoked by inputting a float: 
+For flattening the options are 'mean', 'median', 'none' and IQR. IQR is invoked by inputting a float::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3)
     
-Dropout is one of the most important aspects of neural network:
+Dropout is one of the most important aspects of neural network::
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropout=.5)
     
-You might want to change the number of layers in the network: 
+You might want to change the number of layers in the network:: 
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4)
 
+Or change the loss of the model: 
 
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,dropouts=.5,layers=4,loss='kullback_leibler_divergence')
 
 For a complete list of supported losses see Keras manual: 
 
 .. https://keras.io/losses/
+
+If you want to save the model, be mindful of using .json ending:
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,save_model='model.json')
+
+Control the neuron size by setting the number of neurons on the input layer: 
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,neuron_first=50)
+
+Sometimes changing the batch size can improve the model significantly: 
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,batch_size=15)
+
+By default verbosity from Keras is at mimimum, and you may want the live mode for training: 
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,verbose=1)
+
 
 
 ARGUMENTS
@@ -72,7 +91,7 @@ Even though it's possible to use Autonomio mostly with few arguments, there are 
 +-------------------+-------------------------+-------------------------+
 | loss              | int                     | 'binary_crossentropy'   |
 +-------------------+-------------------------+-------------------------+
-| save_model        | string, int, float      | False                   |
+| save_model        | string,                 | False                   |
 +-------------------+-------------------------+-------------------------+
 | neuron_first      | int,float,categorical   | 300                     |
 +-------------------+-------------------------+-------------------------+
