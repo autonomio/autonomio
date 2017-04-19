@@ -10,11 +10,11 @@ To train (and save) model::
 
     train()
     
-To test (and load) model:
+To test (and load) model::
 
     test()
     
-To load a dataset:
+To load a dataset::
 
     data()
 
