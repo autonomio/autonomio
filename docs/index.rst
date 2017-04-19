@@ -111,7 +111,7 @@ Even though it's possible to use Autonomio mostly with few arguments, there are 
 +-------------------+-------------------------+-------------------------+
 | model             | int                     | 'train' (OBSOLETE)      |
 +-------------------+-------------------------+-------------------------+
-| loss              | int                     | 'binary_crossentropy'   |
+| loss              | string [Keras_Losses]   | 'binary_crossentropy'   |
 +-------------------+-------------------------+-------------------------+
 | save_model        | string,                 | False                   |
 +-------------------+-------------------------+-------------------------+
@@ -158,15 +158,15 @@ The only difference between the two modes of test() is if a scatter plot is call
 |                   |                         |                         |
 | ARGUMENT          | REQUIRED INPUT          | DEFAULT                 |
 +===================+=========================+=========================+
-| X                 | string, int, float      | NA                      |
+| X                 | variable/s in dataframe | NA                      |
 +-------------------+-------------------------+-------------------------+
-| data              | int,float,categorical   | NA                      |
+| data              | pandas dataframe        | NA                      |
 +-------------------+-------------------------+-------------------------+
-| labels            | data object             | NA                      |
+| labels            | variable/s in dataframe | NA                      |
 +-------------------+-------------------------+-------------------------+
-| saved_model       | int                     | 5                       |
+| saved_model       | filename                | 5                       |
 +-------------------+-------------------------+-------------------------+
-| y_scatter         | string, float           | 'mean'                  |
+| y_scatter         | variable in dataframe   | 'mean'                  |
 +-------------------+-------------------------+-------------------------+ 
 
 ----
@@ -208,7 +208,7 @@ The data command is provided for both convinience, and to give the user access t
 |                   |                         |                         |
 | ARGUMENT          | REQUIRED INPUT          | DEFAULT                 |
 +===================+=========================+=========================+
-| name              | string                  | NA                      |
+| name              | dataset or filename     | NA                      |
 +-------------------+-------------------------+-------------------------+
 | mode              | string ('file')         | NA                      |
 +-------------------+-------------------------+-------------------------+
