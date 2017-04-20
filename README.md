@@ -52,6 +52,19 @@ Instead of the default 5 epochs, we're setting epoch to 10 and increase dropout 
 
 ![test result output](http://i.imgur.com/i4MkYmo.png)
 
+## System configuration 
+
+Autonomio have been tested in various Ubuntu and Mac system with success using the provided setup scripts. 
+
+#### Minimum setup 
+
+You need a machine with at least 4gb of memory if you want to do text processing, and othewrise 2gb is totally fine and 1gb might be ok. Actually very low spec AWS instance runs Autonomio just fine. 
+
+#### Recommended setup
+
+For research and production envrionments we recommend one server with at least 4gb memory as a 'work station' and a separate insatance with high-end CUDA supported GPU. The GPU instance costs roughly $1 per hour, and can be shut down when not used. 
+
+As setting up the GPU station from ground can be a bit of a headache, we recommend using the [AWS Machine Learning AMI](https://aws.amazon.com/marketplace/pp/B01M0AXXQB) to get setup quickly. 
 
 ## Dependencies 
 
