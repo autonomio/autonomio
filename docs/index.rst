@@ -255,6 +255,11 @@ You could have a very similar error message from Keras if your dims is not same 
     
 NOTE: Your dims number must be exactly the same as the number of features in your mode ('x') except with series of text as an input where the default setting 300 is correct. 
 
+If your dims (input layer) is smaller than output layer (neuron_last)::
+
+    ValueError: Input arrays should have the same number of samples as target arrays. Found 100 input samples and 1 target samples.
+
+
 -----     
 LINKS
 -----
