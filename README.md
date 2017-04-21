@@ -9,6 +9,7 @@ This document focus on a high-level overview of Autonomio's capabilities. If you
 - intuitive single-command neural network training
 - training command accepts as little as 'x' and 'y' as inputs 
 - 'x' can be text, continues or categorial data
+- even 'y' and 'x' both as text yields a succesful result
 - 15 optional configurations from a single command
 - seamlessly integrates word2vec with keras deep learning
 - interactive plots specifically designed for deep learning model evaluation
