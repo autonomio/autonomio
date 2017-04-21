@@ -1,5 +1,5 @@
 =============================
-Autonomio v.0.1.1 User Manual
+Autonomio v.0.1.2 User Manual
 =============================
 
 This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
