@@ -19,6 +19,32 @@ To load a dataset::
     data()
 
 
+-----------
+DATA INPUTS
+-----------
+
+The expected input dataformat is Pandas dataframe. Deep learning is most useful in solving classification problems, and for that we are providing two modes 'binary' and 'categorical'. 
+
+BINARY (default)
+................
+
+- X can be text, integer 
+- Y can be an integer 
+
+The default settings are optimized for making a 1 or 0 prediction and for example in the case of predicting sentiment from tweets, Autonomio gives 85% accuracy out-of-the-box for classifying tweets that rank in the most negative 20% according to NLTK Vader sentiment analysis. 
+
+
+CATEGORICAL
+...........
+
+- X can be text, integer 
+- Y can be an integer or text
+- output layer neurons must match number of categories
+- change activation_out
+
+It's not a good idea to have too many categories, maybe 10 is pushing it in most cases. 
+
+
 -----
 TRAIN
 -----
