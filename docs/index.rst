@@ -26,7 +26,7 @@ DATA INPUTS
 The expected input dataformat is Pandas dataframe. Deep learning is most useful in solving classification problems, and for that we are providing two modes 'binary' and 'categorical'. 
 
 BINARY (default)
-................
+---------------
 
 - X can be text, integer 
 - Y can be an integer 
@@ -35,7 +35,7 @@ The default settings are optimized for making a 1 or 0 prediction and for exampl
 
 
 CATEGORICAL
-...........
+-----------
 
 - X can be text, integer 
 - Y can be an integer or text
