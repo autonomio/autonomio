@@ -239,7 +239,17 @@ The data command is provided for both convinience, and to give the user access t
 | mode              | string ('file')         | NA                      |
 +-------------------+-------------------------+-------------------------+
 
-     
+---------------
+TROUBLESHOOTING
+---------------
+
+One of the most common errors is related with your output layer::
+
+    ValueError: Error when checking model target: expected dense_22 to have shape (None, 2) but got array with shape (1000, 
+
+This means that your neuron_last does not match the number of categories in 'y'. Usually you would only see this with in cases where you have an output other than 1 or 0, or when you do have that but for some reason changed neuron_last to something else than 1 from train().
+
+-----     
 LINKS
 -----
 
