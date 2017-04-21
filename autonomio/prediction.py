@@ -3,10 +3,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
-from vectorize_text import *
-from plots import *
+from vectorize_text import vectorize_text
+from plots import distribution
 
-def _load_model(saved_model,saved_model_weights):
+def load_model(saved_model,saved_model_weights):
     
     json_file = open(saved_model, 'r')
     loaded_model_json = json_file.read()

@@ -18,7 +18,7 @@ def load_data(name,mode):
         if name == 'parties_and_employment':
             out = pd.read_msgpack(data_path+'parties_and_employment')
         if name == 'tweet_sentiment':
-            out = pd.read_msgpack(data_path+'parties_and_employment')
+            out = pd.read_msgpack(data_path+'tweet_sentiment')
         if name == 'random_tweets':
             out = pd.read_msgpack(data_path+'random_tweets')
         

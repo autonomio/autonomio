@@ -1,63 +1,19 @@
 import time
-import warnings
 import numpy as np
 import spacy as sp
 import ascify as asc
 import pandas as pd
 
-from vectorize_text import *
-from plots import *
+from transform_data import transform_data
+from plots import accuracy
+from prediction import load_model
 
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
+import keras.backend as K
 
 import matplotlib.pyplot as plt
-
-warnings.filterwarnings("ignore")
-nlp = sp.load('en')
-
-def _transform_data(x_text,y_var,data,flatten): 
-    
-    if type(x_text) == list:
-        if type(x_text[0]) == int:
-            x = data.ix[:,x_text[0]:x_text[1]]
-        else:
-            x = data[x_text]
-        
-    else: 
-        x = vectorize_text(data[x_text])
-    
-    y = [data[y_var]]
-    
-    try:
-        
-        if len(y) == 1:
-
-            y = map(list, zip(*y))
-
-        if len(y) == len(x):
-
-            x1 = x   # we do this to retain the original y and x
-            y1 = y
-
-            df_x = pd.DataFrame(x1)
-            df_y = pd.DataFrame(y1)
-            
-            if flatten == 'mean':
-                df_y = pd.DataFrame(df_y[0] >= df_y[0].mean()).astype(int)
-            elif flatten == 'median':    
-                df_y = pd.DataFrame(df_y[0] >= df_y[0].median()).astype(int)
-            elif type(flatten) == float:
-                df_y = pd.DataFrame(df_y[0] >= df_y[0].quantile(flatten)).astype(int)
-            elif flatten == 'none':
-                df_y = pd.DataFrame(df_y).astype(int)
-    except:
-        
-        print "ERROR: something went wrong"
-        
-    return df_x,df_y
-
 
 def kuubio(X,Y,data,
             dims,
@@ -67,89 +23,64 @@ def kuubio(X,Y,data,
             layers,
             model,
             loss,
+            optimizer,
+            activation,
+            activation_out,
             save_model,
             neuron_first,
             neuron_last,
             batch_size,
             verbose):
-    
-    ind_var = Y
-    X,Y = _transform_data(X,Y,data,flatten)
-    
-    '''
-    NOTE:  1) the data has to be in float or something that
-              goes nicely in to 'float32'
-           
-           2) the data has to be in pandas dataframe 
-              with no column names (other than int)
-    '''
 
-    np.random.seed(7)
+    '''
     
-    X = X.astype('float32')
-    Y = Y.astype('float32')
+    IMPORTANT: to see the plots in jupyter remember to invoke: 
+
+                    %matplotlib inline
+
+    (could be used as stand-alone but we call it through commands)
+
+    INPUT:  X with one or more variables in float32 and Y with a single 
+            binary value. These can be easily produced through 
+            transform_data if you insist to bybass commands function.  
+
+    OUTOUT: Trains a model and outputs the training results with a plot
+            comparing train and test. The predictions are loaded on to 
+            a data object. 
+
+    ''' 
+
+    ind_var = Y   # this is used later for output 
+
+    X,Y = transform_data(X,Y,data,flatten,dims)
     
-    X = np.array(X)
-    Y = np.array(Y)
-    
-    X = X[:,0:dims]
+    np.random.seed()
+
     #Y = Y[:,8]
-    
-    if model != 'train':
-        model = _load_model(model)
+
+    if model != 'kuubio':
+        model = load_model(model)
     else:
-        model = Sequential()
-        
         if neuron_first == 'auto':
-            neuron_first = int(dims + (dims * .5))
-            
-            
-        if layers == 2:
+            neuron_first = int(dims + (dims * .05))
+        model = Sequential()
+        model.add(Dense(neuron_first, input_dim=dims, activation=activation))
+        model.add(Dropout(dropout))
 
-            layer_a = int(neuron_first / 1.5)
+        neuron_previous = neuron_first
+        
+        for i in range(layers-1):
 
-            model.add(Dense(neuron_first, input_dim=dims, activation='relu'))
+            neuron_count = (neuron_previous + neuron_last) / 2
+
+            model.add(Dense(neuron_count, activation=activation))
             model.add(Dropout(dropout))
-            model.add(Dense(neuron_last, activation='sigmoid'))
 
-        if layers == 3:
-
-            layer_a = int(neuron_first / 1.5)
-
-            model.add(Dense(neuron_first, input_dim=dims, activation='relu'))
-            model.add(Dropout(dropout))
-            model.add(Dense(layer_a, activation='relu'))
-            model.add(Dense(neuron_last, activation='sigmoid'))
-
-        if layers == 4:
-
-            layer_a = int(neuron_first / 1.5)
-            layer_b = int(layer_a / 1.5)
-
-            model.add(Dense(neuron_first, input_dim=dims, activation='relu'))
-            model.add(Dropout(dropout))
-            model.add(Dense(layer_a, activation='relu'))
-            model.add(Dropout(dropout))
-            model.add(Dense(layer_b, activation='relu'))
-            model.add(Dense(neuron_last, activation='sigmoid'))
-
-        if layers == 5:
-
-            layer_a = int(neuron_first / 1.5)
-            layer_b = int(layer_a / 1.5)
-            layer_c = int(layer_b / 1.5)
-
-            model.add(Dense(neuron_first, input_dim=dims, activation='relu'))
-            model.add(Dropout(dropout))
-            model.add(Dense(layer_a, activation='relu'))
-            model.add(Dropout(dropout))
-            model.add(Dense(layer_b, activation='relu'))
-            model.add(Dropout(dropout))
-            model.add(Dense(layer_c, activation='relu'))
-            model.add(Dense(neuron_last, activation='sigmoid'))
-
+            neuron_previous = neuron_count
+        
+        model.add(Dense(neuron_last, activation=activation_out))
         model.compile(loss=loss, 
-                      optimizer='adam', 
+                      optimizer=optimizer, 
                       metrics=['accuracy'])
 
         print(model.summary())

@@ -1,7 +1,9 @@
-from prediction import *
-from train_new import *
-from plots import *
-from load_data import *
+from prediction import make_prediction
+from train_new import kuubio
+from plots import scatterz
+from load_data import load_data
+from transform_data import transform_data
+
 import pandas as pd
 
 def train(X,Y,data,
@@ -10,13 +12,24 @@ def train(X,Y,data,
 			flatten='mean',
        		dropout=.2,
        		layers=3,
-       		model='train',
+       		model='kuubio',
        		loss='binary_crossentropy',
+       		optimizer='adam',
+       		activation='relu',
+       		activation_out='sigmoid',
        		save_model=False,
        		neuron_first='auto',
        		neuron_last=1,
        		batch_size=10,
        		verbose=0):
+
+    '''
+    NOTE:  1) the data has to be in float or something that
+              goes nicely in to 'float32'
+           
+           2) the data has to be in pandas dataframe 
+              with no column names (other than int)
+    '''
 
     train = kuubio(X,Y,data,
 					dims,
@@ -26,6 +39,9 @@ def train(X,Y,data,
 		       		layers,
 		       		model,
 		       		loss,
+		       		optimizer,
+		       		activation,
+		       		activation_out,
 		       		save_model,
 		       		neuron_first,
 		       		neuron_last,

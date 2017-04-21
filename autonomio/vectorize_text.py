@@ -1,5 +1,5 @@
 import spacy as sp
-from ascify import *
+from ascify import Ascify
 
 nlp = sp.load('en')
 
