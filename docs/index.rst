@@ -249,6 +249,12 @@ One of the most common errors you get working with Keras is related with your ou
 
 This means that your neuron_last does not match the number of categories in 'y'. Usually you would only see this with in cases where you have an output other than 1 or 0, or when you do have that but for some reason changed neuron_last to something else than 1 from train().
 
+You could have a very similar error message from Keras if your dims is not same as the number of features::
+
+    ValueError: Error when checking model input: expected dense_1_input to have shape (None, 300) but got array with shape (1000, 1)
+    
+NOTE: Your dims number must be exactly the same as the number of features in your mode ('x') except with series of text as an input where the default setting 300 is correct. 
+
 -----     
 LINKS
 -----
