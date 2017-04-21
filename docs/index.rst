@@ -243,7 +243,7 @@ The data command is provided for both convinience, and to give the user access t
 TROUBLESHOOTING
 ---------------
 
-One of the most common errors is related with your output layer::
+One of the most common errors you get working with Keras is related with your output layer::
 
     ValueError: Error when checking model target: expected dense_22 to have shape (None, 2) but got array with shape (1000, 
 
