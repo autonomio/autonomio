@@ -21,7 +21,7 @@ def y_transform(Y,data,flatten):
     elif flatten == 'median':    
         df_y = pd.DataFrame(df_y[0] >= df_y[0].median()).astype(int)
     elif type(flatten) == int:    
-        df_y = pd.DataFrame(df_y[0] >= quantile).astype(int)
+        df_y = pd.DataFrame(df_y[0] >= flatten).astype(int)
     elif type(flatten) == float:
         df_y = pd.DataFrame(df_y[0] >= df_y[0].quantile(flatten)).astype(int)
     

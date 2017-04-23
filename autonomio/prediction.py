@@ -8,7 +8,7 @@ from plots import distribution
 
 def load_model(saved_model,saved_model_weights):
     
-    json_file = open(saved_model, 'r')
+    json_file = open(saved_model + ".json", 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = model_from_json(loaded_model_json)
@@ -23,12 +23,11 @@ def make_prediction(X,data,name,saved_model):
     signals = data[X]
     name = data[name]
 
-    part_string = saved_model.replace('.json','')
-    saved_model_weights = part_string + '.h5'
+    saved_model_weights = saved_model + '.h5'
 
     l=[]
     i=0
-    loaded_model = _load_model(saved_model,saved_model_weights)
+    loaded_model = load_model(saved_model,saved_model_weights)
     np.set_printoptions(suppress=True)
     
     try: 
