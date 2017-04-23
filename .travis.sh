@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python -m spacy.en.download
+sudo python -m spacy.en.download
