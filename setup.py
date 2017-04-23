@@ -68,6 +68,10 @@ def check_dependencies():
         import spacy
     except ImportError:
         install_requires.append('spacy')
+    try:
+        import h5py
+    except ImportError:
+        install_requires.append('h5py')    
 
     return install_requires
 
