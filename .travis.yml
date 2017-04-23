@@ -23,4 +23,4 @@ install:
 
 # command to run tests
 script: 
-  - "python ./.test_script.py"
+  - "python ./test_script.py"
