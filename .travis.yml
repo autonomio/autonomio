@@ -22,4 +22,5 @@ install:
   - "./.travis.sh"
 
 # command to run tests
-script: test_script.py
+script: 
+  - "python ./.test_script.py"
