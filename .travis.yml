@@ -28,6 +28,7 @@ install:
 script: 
   - "python ./test_script.py"
   - "coverage run --source=autonomio setup.py test"
+  - "coverage run -m autonomio.commands.data random_tweets"
 
 after_success:
   coveralls
