@@ -8,4 +8,4 @@ tr = train(1,'neg',tweets,dims=1)
 tr = train([1,5],'neg',tweets,dims=4)
 
 # run train and save model
-te = test('text',tweets,handle,'model.json')
+te = test('text',tweets,'handle','model.json')
