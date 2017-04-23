@@ -1,4 +1,10 @@
-pandas
 numpy
-keras
+pandas
+spacy
 tensorflow
+keras
+matplotlib
+seaborn
+mpld3
+jupyter
+
