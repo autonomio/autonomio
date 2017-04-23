@@ -1,6 +1,7 @@
 <img src="./docs/autonomio_logo_new.png"  width="250">
 
-[![Build Status](https://travis-ci.org/botlabio/autonomio.svg?branch=master)](https://travis-ci.org/botlabio/autonomio)
+[![Build Status](https://travis-ci.org/botlabio/autonomio.svg?branch=master)](https://travis-ci.org/botlabio/autonomio)  [![Coverage Status](https://coveralls.io/repos/github/botlabio/autonomio/badge.svg?branch=master)](https://coveralls.io/github/botlabio/autonomio?branch=master)
+
 
 Autonomio provides a very high level abstraction layer for rapidly testing research ideas and instantly creating neural network based decision making models. Autonomio is built on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. 
 
