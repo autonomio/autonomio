@@ -1,10 +1,25 @@
+# install system package
+before_install:
+  - sudo apt-get -q update -y
+  - sudo apt-get -q install python-tk -y
+  - sudo apt-get -q install build-essential -y 
+  - sudo apt-get -q install libssl-dev -y
+  - sudo apt-get -q install libcurl4-gnutls-dev 
+  - sudo apt-get -q install libexpat1-dev 
+  - sudo apt-get -q install gettext 
+  - sudo apt-get -q install unzip -y
+  - sudo apt-get install python-dev -y
+
+# pick languages
 language: python
 python:
   - "2.6"
   - "2.7"
+
 # command to install dependencies
 install: 
   - "pip install -r requirements.txt"
   - "sudo python -m spacy download en"
+
 # command to run tests
 script: test_script.py
