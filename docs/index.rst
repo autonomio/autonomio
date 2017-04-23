@@ -2,6 +2,10 @@
 Autonomio v.0.1.2 User Manual
 =============================
 
+.. image:: https://travis-ci.org/botlabio/autonomio.svg?branch=master
+    :target: https://travis-ci.org/botlabio/autonomio
+
+
 This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
 Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
