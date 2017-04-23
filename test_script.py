@@ -1,4 +1,4 @@
-from autonomio.commands import data, train
+from autonomio.commands import data, train, test
 
 # get the data
 tweets = data('random_tweets')
