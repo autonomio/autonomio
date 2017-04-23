@@ -1,4 +1,7 @@
 # install system package
+dist: trusty
+sudo: required
+
 before_install:
   - sudo apt-get -q update -y
   - sudo apt-get -q install python-tk -y
