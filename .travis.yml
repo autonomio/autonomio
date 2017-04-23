@@ -34,8 +34,8 @@ before_script: # configure a headless display to test plot generation
 
 # command to run tests
 script: 
-  - "python ./test_script.py"
-  - "coverage run --source=autonomio setup.py test"
+  # - "python ./test_script.py"
+  - "coverage run --source=autonomio ./test_script.py"
   #- "coverage run -m autonomio.commands.data random_twitter"
 
 after_success:
