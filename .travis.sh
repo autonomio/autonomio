@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo python -m spacy download en
-
 sudo pip install --upgrade pip
 sudo pip install numpy --upgrade
 sudo pip install pandas --upgrade 
