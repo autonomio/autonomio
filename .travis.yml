@@ -17,10 +17,15 @@ python:
   - "3.5"
 
 # command to install dependencies
-install: 
+install:
   - "pip install -r requirements.txt"
+  - "pip install coveralls"
   - "./.travis.sh"
 
 # command to run tests
 script: 
   - "python ./test_script.py"
+  - "coverage run --source=autonomio setup.py test"
+
+after_success:
+  coveralls
