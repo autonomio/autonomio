@@ -7,4 +7,3 @@ matplotlib
 seaborn
 mpld3
 jupyter
-
