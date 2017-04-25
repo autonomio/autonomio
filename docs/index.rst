@@ -65,16 +65,20 @@ Using this example and NLTK's sentiment analyzer as an input for the ground trut
 
     train('text','neg',data('random_tweets'))
     
-There are multiple ways you can input 'x' with single input:
+There are multiple ways you can input 'x' with single input::
 
     train('text','neg',data('random_tweets')) # a single column where data is string
+    
     train(5,'neg',data('random_tweets')) # a single column by index
+    
     train(['quality_score'],'neg',data('random_tweets')) # a single column by label 
     
-And few more ways where you input a list for 'x':
+And few more ways where you input a list for 'x'::
 
     train([1,5],'neg',data('random_tweets')) # a range of colum indicies
+    
     train(['quality_score','reach_score'],'neg',data('random_tweets')) # column labels
+    
     train([1,2,4,6,18],'neg',data('random_tweets')) # a list of column indicies
 
 A slightly more involving example may include changing the number of epochs::
