@@ -1,5 +1,5 @@
 # install system package
-dist: trusty
+dist: xenial
 sudo: required
 
 before_install:
