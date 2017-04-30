@@ -60,6 +60,8 @@ def kuubio(X,Y,data,
 
     if model != 'kuubio':
         model = load_model(model)
+        history = ''  # this is no good and have to be dealt with in another way
+
     else:
         if neuron_first == 'auto':
             neuron_first = int(dims + (dims * .05))
@@ -129,4 +131,4 @@ def kuubio(X,Y,data,
         # round predictions
         rounded = [round(x[0]) for x in predictions]
     
-    return rounded
+    return rounded, history

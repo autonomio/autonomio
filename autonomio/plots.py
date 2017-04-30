@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import mpld3
 import seaborn as sns
@@ -26,9 +28,12 @@ def accuracy(data):
     ax2.set_title('loss')
     ax2.set_xlabel('epoch')
 
-    fig.set_size_inches(12,3)
+    plt.ylim((0,1))
 
+    fig.set_size_inches(20,5)
+    fig.savefig('train.png',dpi=300,bbox_inches='tight')
     fig.show() 
+    
 
 def scatterz(x,y,data,labels,xscale='linear',yscale='linear',n=250):
 
