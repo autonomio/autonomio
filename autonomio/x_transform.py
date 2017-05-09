@@ -30,7 +30,7 @@ def x_transform(X,data):
 
     # for a single column label which contains string values     
     if type(X) == str:
-        if type(data[X][0:1][0]) == str:
+        if type(data[X][0]) == str:
             x = vectorize_text(data[X])
             status = 'ok'
         else: 
