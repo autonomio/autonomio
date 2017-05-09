@@ -11,6 +11,7 @@ before_install:
   - sudo apt-get -q install libexpat1-dev 
   - sudo apt-get -q install gettext 
   - sudo apt-get -q install unzip -y
+  - sudo apt-get -q install libc6 -y
   - sudo apt-get install python-dev -y
 
 # pick languages
