@@ -75,7 +75,11 @@ def check_dependencies():
     try:
         import mpld3
     except ImportError:
-        install_requires.append('mpld3') 
+        install_requires.append('mpld3')
+    try:
+        import seaborn
+    except ImportError:
+        install_requires.append('seaborn') 
 
     return install_requires
 
