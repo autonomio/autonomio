@@ -71,7 +71,11 @@ def check_dependencies():
     try:
         import h5py
     except ImportError:
-        install_requires.append('h5py')    
+        install_requires.append('h5py')
+    try:
+        import mpld3
+    except ImportError:
+        install_requires.append('mpld3') 
 
     return install_requires
 
