@@ -24,6 +24,15 @@ To load a dataset::
 
     data()
 
+------------
+INSTALLATION
+------------ 
+
+At the moment, the simplest way is to install with pip from the repo directly.
+
+For installing the **development version** (latest):: 
+
+    pip install git+https://github.com/autonomio/core-module.git
 
 -----------
 DATA INPUTS
