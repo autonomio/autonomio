@@ -7,6 +7,14 @@ Autonomio provides a very high level abstraction layer for rapidly testing resea
 
 This document focus on a high-level overview of Autonomio's capabilities. If you're looking for the User Manual, you may want to look [read the docs](http://autonomio.readthedocs.io/en/latest/) instead.
 
+## Getting Started 
+
+At the moment, the simplest way is to install with pip from the repo directly.
+
+For installing the **development version** (latest): 
+
+    pip install git+https://github.com/autonomio/core-module.git
+
 ## Key Features
 
 - intuitive single-command neural network training
