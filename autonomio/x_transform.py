@@ -25,7 +25,7 @@ def x_transform(X,data):
 
     # for an integer as column name (int)
     if type(X) == int:
-        x = data[[X]]
+        x = data.iloc[0:,X]
         status = 'ok'
 
     # for a single column label which contains string values     
