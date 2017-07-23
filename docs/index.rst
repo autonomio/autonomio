@@ -2,11 +2,12 @@
 Autonomio v.0.1.2 User Manual
 =============================
 
-.. image:: https://travis-ci.org/botlabio/autonomio.svg?branch=master
-    :target: https://travis-ci.org/botlabio/autonomio
+.. image:: https://travis-ci.org/autonomio/core-module.svg?branch=master
+    :target: https://travis-ci.org/autonomio/core-module
 
-.. image:: https://coveralls.io/repos/github/botlabio/autonomio/badge.svg?branch=master
-    :target: https://coveralls.io/github/botlabio/autonomio?branch=master
+.. image:: https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master
+    :target: https://coveralls.io/github/autonomio/core-module?branch=master
+
 
 This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
