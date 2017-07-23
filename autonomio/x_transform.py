@@ -14,7 +14,7 @@ def x_transform(X,data):
     if type(X) == list:
         if len(X) > 2:
             if type(X[0]) == int:
-                x = data[X]
+                x = data.iloc[:,[X]]
                 status = 'ok'
 
     # for multiple column labels
@@ -25,7 +25,7 @@ def x_transform(X,data):
 
     # for an integer as column name (int)
     if type(X) == int:
-        x = data.iloc[0:,X]
+        x = data.iloc[:,X]
         status = 'ok'
 
     # for a single column label which contains string values     
