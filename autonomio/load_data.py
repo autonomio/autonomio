@@ -1,9 +1,7 @@
 import pandas as pd
 import pkg_resources
 
-data_path = pkg_resources.resource_filename('autonomio', 'data/')
-data_path = str(data_path)
-
+data_path = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
 
 def load_data(name,mode):
 
