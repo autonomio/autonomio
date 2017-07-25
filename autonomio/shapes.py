@@ -54,8 +54,15 @@ def shapes( layers,
 
         n = layers / 2
 
-        for i in range(n):
-            neuron_count.append(neuron_max)
+        if (layers % 2 == 0):
+
+            for i in range(n):
+                neuron_count.append(neuron_max)
+
+        elif (layers % 2 == 1):
+
+            for i in range(n + 1):
+                neuron_count.append(neuron_max)
 
         for i in range(n):
             neuron_count.append((neuron_previous + neuron_last) / 2)
@@ -70,19 +77,26 @@ def shapes( layers,
 
         n = layers / 2
 
-        for i in range(n - 1):
-            neuron_count.append(int(m.ceil(
-                float(neuron_max) * ((float(layers) + i) / 2) / float(layers))))
+        if (layers % 2 == 0):
 
-        neuron_count.append(neuron_max)
+            for i in range(n - 1):
+                neuron_count.append(int(m.ceil(
+                    float(neuron_max) * ((float(layers) + i) / 2) / float(layers))) - 1)
+            neuron_count.append(neuron_max)
+
+        else:
+
+            for i in range(n):
+                neuron_count.append(int(m.ceil(
+                    float(neuron_max) * ((float(layers) + i) / 2) / float(layers))) - 1)
+            for i in range(1):
+                neuron_count.append(neuron_max)
 
         for i in range(n):
             neuron_count.append((neuron_previous + neuron_last) / 2)
             neuron_previous = neuron_count[i + n]
 
     if shape == 'hexagon':
-
-        print "change2"
 
         neuron_count.append(1)
 
@@ -155,3 +169,4 @@ def shapes( layers,
     print neuron_count
 
     return neuron_count
+
