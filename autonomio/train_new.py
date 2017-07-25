@@ -3,10 +3,12 @@ import numpy as np
 import spacy as sp
 import ascify as asc
 import pandas as pd
+import math
 
 from transform_data import transform_data
 from plots import accuracy
 from prediction import load_model
+from shapes import shapes
 
 from keras.models import Sequential
 from keras.layers import Dense
@@ -27,10 +29,11 @@ def kuubio(X,Y,data,
             activation,
             activation_out,
             save_model,
-            neuron_first,
+            neuron_max,
             neuron_last,
             batch_size,
-            verbose):
+            verbose,
+            shape):
 
     '''
     
@@ -58,28 +61,34 @@ def kuubio(X,Y,data,
 
     #Y = Y[:,8]
 
+    if layers == 1:
+        shape = 'funnel'
+
     if model != 'kuubio':
         model = load_model(model)
         history = ''  # this is no good and have to be dealt with in another way
 
     else:
-        if neuron_first == 'auto':
-            neuron_first = int(dims + (dims * .05))
+        if neuron_max == 'auto':
+            neuron_max = int(dims + (dims * 0.2))
+
+        print neuron_max
+
+        neuron_count=[]
+        neuron_count = shapes(  layers, 
+                                shape, 
+                                neuron_max,
+                                neuron_last, 
+                                dropout)
+
         model = Sequential()
-        model.add(Dense(neuron_first, input_dim=dims, activation=activation))
+        model.add(Dense(neuron_count[0], input_dim=dims, activation=activation))
         model.add(Dropout(dropout))
 
-        neuron_previous = neuron_first
-        
-        for i in range(layers-1):
-
-            neuron_count = (neuron_previous + neuron_last) / 2
-
-            model.add(Dense(neuron_count, activation=activation))
+        for i in range(layers - 1):
+            model.add(Dense(neuron_count[i+1], activation=activation))
             model.add(Dropout(dropout))
 
-            neuron_previous = neuron_count
-        
         model.add(Dense(neuron_last, activation=activation_out))
         model.compile(loss=loss, 
                       optimizer=optimizer, 
@@ -87,7 +96,7 @@ def kuubio(X,Y,data,
 
         print(model.summary())
         print ""
-        network_scale = len(X) * epoch * layers * neuron_first 
+        network_scale = len(X) * epoch * layers * neuron_max
         print "network scale index : " + str(network_scale)
 
         if verbose == 0:
@@ -95,7 +104,10 @@ def kuubio(X,Y,data,
                 print "This could take a while. Why not check back in a moment?"
 
         time.sleep(0.2)
-        history = model.fit(X, Y, validation_split=0.33, epochs=epoch, verbose=verbose, batch_size=batch_size)
+        history = model.fit(X, Y,   validation_split=0.33, 
+                                    epochs=epoch, 
+                                    verbose=verbose, 
+                                    batch_size=batch_size)
         scores = model.evaluate(X, Y)
 
         #print(history.history.keys())
@@ -112,7 +124,7 @@ def kuubio(X,Y,data,
         print "features : " + str(dims)
         print "layers : " + str(layers)
         print "dropout : " + str(dropout)
-        print "1st layer neurons : " + str(neuron_first)
+        print "1st layer neurons : " + str(neuron_max)
         print "flatten : " + str(flatten)
         print "batch_size : " + str(batch_size) 
 
