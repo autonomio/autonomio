@@ -18,10 +18,11 @@ def train(X,Y,data,
        		activation='relu',
        		activation_out='sigmoid',
        		save_model=False,
-       		neuron_first='auto',
+       		neuron_max='auto',
        		neuron_last=1,
        		batch_size=10,
-       		verbose=0):
+       		verbose=0,
+          	shape='funnel'):
 
     '''
     NOTE:  1) the data has to be in float or something that
@@ -43,10 +44,11 @@ def train(X,Y,data,
 		       		activation,
 		       		activation_out,
 		       		save_model,
-		       		neuron_first,
+		       		neuron_max,
 		       		neuron_last,
 		       		batch_size,
-		       		verbose)
+		       		verbose,
+              			shape)
 
     return train
 
@@ -91,3 +93,4 @@ def data(name,mode='default'):
 	out = load_data(name,mode)
 
 	return out
+
