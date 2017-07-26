@@ -10,7 +10,7 @@ def shapes( layers,
     neuron_count = []
     l = []
 
-    if shape == 'funnel' or shape == 'stairs' and neuron_max - 2 * layers <= 0:
+    if shape == 'funnel':
 
         neuron_count.append(neuron_max)
 
@@ -154,19 +154,28 @@ def shapes( layers,
 
         neuron_count.append(neuron_max)
 
-    if shape == 'stairs' and neuron_max - 2 * layers > 0:
+    if shape == 'stairs':
 
-        if (layers % 2 == 1):
-            neuron_count.append(neuron_max)
-
-        n = layers / 2
-
-        for i in range(n):
-            for j in range(2):
+        if (layers >= 5):
+            if (layers % 2 == 1):
                 neuron_count.append(neuron_max)
-            neuron_max = neuron_max - 2
 
-    print neuron_count
+            else:
+                for i in range(2):
+                    neuron_count.append(neuron_max)
+
+            n = layers / 2
+
+            for i in range(n):
+                if neuron_previous >=3 :
+                    neuron_previous -= 2
+                for j in range(2):
+                    neuron_count.append(neuron_previous)
+
+        else:
+            for i in range(layers):
+                neuron_count.append(neuron_previous)
+                neuron_previous -= 1
 
     return neuron_count
 
