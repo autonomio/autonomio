@@ -22,6 +22,13 @@ def shapes( layers,
 
         neuron_count.append(1)
 
+        a = neuron_max * 2 - 1 
+        k = 0
+
+        if a < layers:
+            k = layers - a
+            layers = layers - k
+
         if (layers % 2) == 0:
 
             n = (layers - 2)/2  #number of layers before or after middle layer
@@ -49,6 +56,8 @@ def shapes( layers,
             for i in range(n):
                 neuron_count.append(l[i])
 
+        if k != 0:
+            neuron_count.append(1)
 
     if shape == 'long_funnel':
 
@@ -176,6 +185,8 @@ def shapes( layers,
             for i in range(layers):
                 neuron_count.append(neuron_previous)
                 neuron_previous -= 1
+
+    print neuron_count
 
     return neuron_count
 
