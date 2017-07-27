@@ -1,3 +1,4 @@
+from random import shuffle
 import time
 import numpy as np
 import spacy as sp
@@ -9,6 +10,8 @@ from transform_data import transform_data
 from plots import accuracy
 from prediction import load_model
 from shapes import shapes
+from double_check import check
+from validator import validate
 
 from keras.models import Sequential
 from keras.layers import Dense
@@ -33,7 +36,9 @@ def kuubio(X,Y,data,
             neuron_last,
             batch_size,
             verbose,
-            shape):
+            shape,
+            double_check,
+            validation):
 
     '''
     
@@ -56,6 +61,26 @@ def kuubio(X,Y,data,
     ind_var = Y   # this is used later for output 
 
     X,Y = transform_data(X,Y,data,flatten,dims)
+
+    #shuffling and separating the data
+    if validation != False:
+
+        shuffle(X)
+
+        if validation != True:
+            n = len(X) * validation
+            n = int(n)
+
+        if validation == True:
+            n = len(X) * .5
+            n = int(n)
+
+        X_validate = X[n:]
+        Y_validate = Y[n:]
+        X = X[:n]
+        Y = Y[:n]
+
+        save_model = 'saved_model'
     
     np.random.seed()
 
@@ -69,6 +94,7 @@ def kuubio(X,Y,data,
         history = ''  # this is no good and have to be dealt with in another way
 
     else:
+
         if neuron_max == 'auto':
             neuron_max = int(dims + (dims * 0.2))
 
@@ -108,12 +134,16 @@ def kuubio(X,Y,data,
                                     epochs=epoch, 
                                     verbose=verbose, 
                                     batch_size=batch_size)
-        scores = model.evaluate(X, Y)
 
-        #print(history.history.keys())
+        scores = model.evaluate(X, Y, verbose=verbose)
+
+        print(history.history.keys())
 
         print ""
-        print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+
+        if double_check == True or validation != False:
+            print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+
         print ""
         print "TRIAL PARAMETERS"
         print "----------------"
@@ -142,5 +172,32 @@ def kuubio(X,Y,data,
         predictions = model.predict(X)
         # round predictions
         rounded = [round(x[0]) for x in predictions]
+
+        #printing result for double check
+        if double_check == True:
+
+            p = check(Y, rounded)
+
+            print ""
+
+            print ("keras accuracy: %.2f%%" % (scores[1]*100))
+            print ("double check: %.2f%%" % (p*100))
+
+        #printing result for validation
+        if validation != False:
+
+            train_scores, test_scores, val_acc = validate(   X,Y, 
+                                                                X_validate, 
+                                                                Y_validate,
+                                                                loss,
+                                                                optimizer,
+                                                                verbose)
+
+            print ""
+            print   ("train accuracy: %.2f%%" % (train_scores[1]*100))
+            print   ("      loss: %.2f%%" % (train_scores[0]*100))
+            print   ("test accuracy: %.2f%%" % (test_scores[1]*100)) 
+            print   ("     loss: %.2f%%" % (test_scores[0]*100))
+            print   ("validation accuracy: %.2f%%" % (val_acc*100))
     
-    return rounded, history
+    return 
