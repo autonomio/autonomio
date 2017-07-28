@@ -23,8 +23,8 @@ def train(X,Y,data,
        		batch_size=10,
        		verbose=0,
           	shape='funnel',
-          	double_check=False,
-          	validation=False):
+          	validation=False,
+          	double_check=False):
 
     '''
     NOTE:  1) the data has to be in float or something that
