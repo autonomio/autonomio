@@ -22,8 +22,8 @@ def train(X,Y,data,
        		neuron_last=1,
        		batch_size=10,
        		verbose=0,
-          	shape='funnel'
-          	double_check=False
+          	shape='funnel',
+          	double_check=False,
           	validation=False):
 
     '''
