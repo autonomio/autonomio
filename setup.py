@@ -28,7 +28,7 @@ MAINTAINER = 'Mikko Kotila'
 MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://botlab.io'
 LICENSE = 'MIT'
-DOWNLOAD_URL = 'https://github.com/botlabio/autonomio/'
+DOWNLOAD_URL = 'https://github.com/autonomio/core-module/'
 VERSION = '0.1.2.dev'
 
 try:
