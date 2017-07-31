@@ -26,7 +26,7 @@ Autonomio is proven to deal with hard classification problems at close to
 DISTNAME = 'autonomio'
 MAINTAINER = 'Mikko Kotila'
 MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
-URL = 'http://botlab.io'
+URL = 'http://autonom.io'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/autonomio/core-module/'
 VERSION = '0.1.2.dev'
