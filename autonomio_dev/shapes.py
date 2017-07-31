@@ -63,8 +63,6 @@ def shapes( layers,
             for i in range(k):
                 neuron_count.append(1)
 
-        print(len(neuron_count))
-
     if shape == 'long_funnel':
 
         n = layers / 2
