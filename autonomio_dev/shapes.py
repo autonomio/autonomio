@@ -34,10 +34,10 @@ def shapes( layers,
 
         if (val % 2) == 0:
 
-            n = (val - 2)/2  #number of layers before or after middle layer
+            n = (val - 2) / 2  #number of layers before or after middle layer
 
             for i in range(n):
-                neuron_count.append(int(neuron_max * (i+1) * 2/val))
+                neuron_count.append(int(neuron_max * (i+1) * 2 / val))
 
             l = neuron_count[::-1]
             neuron_count.append(neuron_max)
@@ -182,7 +182,7 @@ def shapes( layers,
             n = layers / 2
 
             for i in range(n):
-                if neuron_previous >=3 :
+                if neuron_previous >= 3 :
                     neuron_previous -= 2
                 for j in range(2):
                     neuron_count.append(neuron_previous)

@@ -100,7 +100,7 @@ def kuubio(X,Y,data,
 
         print neuron_max
 
-        neuron_count=[]
+        neuron_count = []
         neuron_count = shapes(  layers, 
                                 shape, 
                                 neuron_max,
