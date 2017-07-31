@@ -98,7 +98,7 @@ def kuubio(X,Y,data,
         if neuron_max == 'auto':
             neuron_max = int(dims + (dims * 0.2))
 
-        print neuron_max
+        #print neuron_max
 
         neuron_count = []
         neuron_count = shapes(  layers, 
@@ -137,7 +137,7 @@ def kuubio(X,Y,data,
 
         scores = model.evaluate(X, Y, verbose=verbose)
 
-        print(history.history.keys())
+        #print(history.history.keys())
 
         print ""
 

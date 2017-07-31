@@ -22,7 +22,9 @@ def train(X,Y,data,
        		neuron_last=1,
        		batch_size=10,
        		verbose=0,
-          	shape='funnel'):
+          shape='funnel',
+          double_check=False,
+          validation=False):
 
     '''
     NOTE:  1) the data has to be in float or something that
@@ -48,7 +50,9 @@ def train(X,Y,data,
 		       		neuron_last,
 		       		batch_size,
 		       		verbose,
-              			shape)
+        			shape,
+              double_check,
+              validation)
 
     return train
 
