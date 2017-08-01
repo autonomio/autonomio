@@ -1,24 +1,39 @@
 import numpy as np
 import pandas as pd
+from random import shuffle
 
 from keras.models import model_from_json
 
-def validate(	X, Y, 
-				X_validate, 
-				Y_validate, 
-				loss, 
+from transform_data import transform_data
+from prediction import make_prediction, load_model
+
+def validate(	Y,
+				data,
+				validation,
+				loss,
 				optimizer,
-				verbose):
+				verbose,
+				save_model,
+				flatten,
+				dims):
 
+	model, X = load_model(save_model)
+	X,Y = transform_data(X,Y,data,flatten,dims)
 
-	json_file = open('saved_model.json', 'r')
-	loaded_model = json_file.read()
-	json_file.close()
+	shuffle(X)
 
-	model = model_from_json(loaded_model)
-	model.load_weights('saved_model.h5')
+	if validation != True:
+		n = len(X) * validation
+		n = int(n)
 
-	print "Model is loaded"
+	if validation == True:
+		n = len(X) * .5
+		n = int(n)
+
+	X_validate = X[n:]
+	Y_validate = Y[n:]
+	X = X[:n]
+	Y = Y[:n]
 
 	a = len(X)
 	b = len(X_validate)
@@ -40,7 +55,7 @@ def validate(	X, Y,
 	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
 	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
     
-	predictions = model.predict(X_validate)
+	predictions = make_prediction(data, save_model, dims, validation)
 	rounded = [round(x[0]) for x in predictions]
 
 	df1 = pd.DataFrame(rounded)

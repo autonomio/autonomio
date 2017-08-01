@@ -1,4 +1,3 @@
-from random import shuffle
 import time
 import numpy as np
 import spacy as sp
@@ -59,13 +58,12 @@ def kuubio(X,Y,data,
     ''' 
 
     ind_var = Y   # this is used later for output 
+    X_num, Y_num = X, Y
 
     X,Y = transform_data(X,Y,data,flatten,dims)
 
     #shuffling and separating the data
     if validation != False:
-
-        shuffle(X)
 
         if validation != True:
             n = len(X) * validation
@@ -75,8 +73,6 @@ def kuubio(X,Y,data,
             n = len(X) * .5
             n = int(n)
 
-        X_validate = X[n:]
-        Y_validate = Y[n:]
         X = X[:n]
         Y = Y[:n]
 
@@ -165,8 +161,17 @@ def kuubio(X,Y,data,
             model_json = model.to_json()
             with open(save_model+".json", "w") as json_file:
                 json_file.write(model_json)
+
             model.save_weights(save_model+".h5")
             print("Model" + " " + save_model + " " + "have been saved.")
+
+            k = ""
+            
+            f = open(save_model+".x", "w+")
+            for x in X_num:
+                k = k+str(x)+" "
+            f.write(k)
+            f.close()
 
         # calculate predictions
         predictions = model.predict(X)
@@ -186,12 +191,15 @@ def kuubio(X,Y,data,
         #printing result for validation
         if validation != False:
 
-            train_scores, test_scores, val_acc = validate(   X,Y, 
-                                                                X_validate, 
-                                                                Y_validate,
-                                                                loss,
-                                                                optimizer,
-                                                                verbose)
+            train_scores, test_scores, val_acc = validate(  Y_num, 
+                                                            data,
+                                                            validation,
+                                                            loss,
+                                                            optimizer,
+                                                            verbose,
+                                                            save_model,
+                                                            flatten,
+                                                            dims)
 
             print ""
             print   ("train accuracy: %.2f%%" % (train_scores[1]*100))
