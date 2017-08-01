@@ -4,6 +4,5 @@ spacy
 tensorflow
 keras
 matplotlib
-seaborn
 mpld3
 h5py

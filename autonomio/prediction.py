@@ -1,10 +1,8 @@
-import seaborn as sns
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
 from vectorize_text import vectorize_text
-from plots import distribution
 from x_transform import x_transform
 
 def load_model(saved_model):
@@ -61,8 +59,7 @@ def make_prediction(data, saved_model, dims, validation=False):
     out = pd.DataFrame(l)
     out.columns = ['value']
     out = out.sort_values('value',ascending=False)
-    
-    distribution(out.value)
+
     print out.head(10)
     print ""
     print out.tail(10)
