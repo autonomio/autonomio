@@ -2,16 +2,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import mpld3
-import seaborn as sns
 
 plt.style.use('bmh')
 
-def distribution(data):
-
-    plt.figure(figsize=(14, 4))
-    plt.xlim(-0.005,1.0)
-    sns.kdeplot(data,legend=False)
-    sns.despine(right=False)
 
 def accuracy(data):
 
