@@ -18,7 +18,7 @@ def validate(	Y,
 				dims):
 
 	model, X = load_model(save_model)
-	X,Y = transform_data(X,Y,data,flatten,dims)
+	X,Y = transform_data(data,flatten,dims, X, Y)
 
 	shuffle(X)
 
@@ -55,7 +55,7 @@ def validate(	Y,
 	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
 	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
     
-	predictions = make_prediction(data, save_model, dims, validation)
+	predictions = make_prediction(data, save_model, dims, flatten, validation)
 	rounded = [round(x[0]) for x in predictions]
 
 	df1 = pd.DataFrame(rounded)

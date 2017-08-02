@@ -60,7 +60,7 @@ def kuubio(X,Y,data,
     ind_var = Y   # this is used later for output 
     X_num, Y_num = X, Y
 
-    X,Y = transform_data(X,Y,data,flatten,dims)
+    X,Y = transform_data(data,flatten,dims,X,Y)
 
     #shuffling and separating the data
     if validation != False:
