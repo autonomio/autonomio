@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
 from vectorize_text import vectorize_text
-from x_transform import x_transform
+from transform_data import transform_data
 
 def load_model(saved_model):
     
@@ -22,16 +22,11 @@ def load_model(saved_model):
     
     return loaded_model, X
 
-def make_prediction(data, saved_model, dims, validation=False):
+def make_prediction(data, saved_model, dims, flatten, validation=False):
 
     loaded_model, X = load_model(saved_model)
 
-    x = x_transform(X, data)
-    df_x = pd.DataFrame(x)
-
-    X = df_x.astype('float32')
-    X = np.array(X)
-    signals = X[:,0:dims]
+    signals = transform_data(data, flatten, dims, X)
 
     if validation != False:
         if validation == True:
