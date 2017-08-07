@@ -17,18 +17,68 @@ def load_model(saved_model):
 
     f = open(saved_model+".x", 'r')
     X = f.read()
-    X = map(int, X.split())
+    try:
+        X = map(int, X.split())
+    except ValueError:
+        print ""
+
     f.close()
     
     return loaded_model, X
 
-def make_prediction(data, saved_model, dims, flatten, validation=False):
+def make_prediction(data, saved_model,  dims=300, 
+                                        flatten='mean', 
+                                        name=False, 
+                                        validation=False):
 
     loaded_model, X = load_model(saved_model)
 
-    signals = transform_data(data, flatten, dims, X)
+    if type(X) == str:
+        signals = data[X]
+    elif type(X) == list:
+        signals = transform_data(data, flatten, dims, X)
+    
+    if validation == False:
 
-    if validation != False:
+        name = data[name]
+
+        np.set_printoptions(suppress=True)
+
+        try: 
+            if signals.shape[1] < 300:
+                signals = pd.DataFrame(vectorize_text(signals))
+        except:
+        
+            if type(signals) == list or len(signals.shape) > 1:
+
+                signals = signals.ix[:,:300][:].values
+                predict = loaded_model.predict(signals)
+
+            else:
+
+                signals = pd.DataFrame(vectorize_text(signals))
+                predict = loaded_model.predict(signals.values)
+        
+        l = []
+        i = 0
+
+        for pred in predict:
+                                          
+            l.append([pred[0],name[i:i+1].values[0]])
+            i+=1
+            
+        out = pd.DataFrame(l)
+        out.columns = ['value','name']
+        out = out.sort_values('value',ascending=False)
+        
+        print out.head(10)
+        print ""
+        print out.tail(10)
+        
+        return out
+
+    else:
+
         if validation == True:
             n = len(signals) * .5
         else:
@@ -38,26 +88,7 @@ def make_prediction(data, saved_model, dims, flatten, validation=False):
 
         signals = signals[n:]
 
-    np.set_printoptions(suppress=True)
+        predict = loaded_model.predict(signals)
 
-    predict = loaded_model.predict(signals)
-    
-      
-    l = []
-    i = 0
+        return predict
 
-    for pred in predict:
-                                      
-        l.append([pred[0]])
-        i+=1
-
-    out = pd.DataFrame(l)
-    out.columns = ['value']
-    out = out.sort_values('value',ascending=False)
-
-    print out.head(10)
-    print ""
-    print out.tail(10)
-    
-    
-    return predict
