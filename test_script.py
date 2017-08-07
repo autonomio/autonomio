@@ -26,4 +26,4 @@ tr = train(1,'quality_score',temp,dims=1,flatten='mean')
 
 # model saving and loading
 tr = train('text','neg',temp,save_model='test_model')
-te = test('text',temp,'handle','test_model')
+te = test(temp,'test_model', labels='handle')

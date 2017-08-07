@@ -137,7 +137,7 @@ def kuubio(X,Y,data,
 
         print ""
 
-        if double_check == True or validation != False:
+        if double_check == False or validation == False:
             print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
         print ""
@@ -168,8 +168,13 @@ def kuubio(X,Y,data,
             k = ""
             
             f = open(save_model+".x", "w+")
-            for x in X_num:
-                k = k+str(x)+" "
+            
+            if type(X_num) == list:
+                for x in X_num:
+                    k = k+str(x)+" "
+            else:
+                k = X_num
+
             f.write(k)
             f.close()
 

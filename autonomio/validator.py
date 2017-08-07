@@ -55,7 +55,11 @@ def validate(	Y,
 	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
 	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
     
-	predictions = make_prediction(data, save_model, dims, flatten, validation)
+	print validation
+
+	predictions = make_prediction(data, save_model, dims=dims, 
+													flatten=flatten, 
+													validation=validation)
 	rounded = [round(x[0]) for x in predictions]
 
 	df1 = pd.DataFrame(rounded)
