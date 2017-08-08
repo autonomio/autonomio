@@ -40,7 +40,7 @@ l = [	'funnel',
 for i in l:
 
     if i in (l[0:3]): #funnel, brick, triangle
-        tr = train(1, 'neg', temp, dims=1, shape=i)
+        tr = train(1, 'neg', temp, dims=1, shape='funnel', double_check=True)
 
     elif i in (l[3:4]): #only rhombus
         tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=1, layers=8)
