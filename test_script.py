@@ -43,15 +43,15 @@ tr = train(1, 'neg', temp, dims=1, validation=.6)
 for i in l:
 
     if i in (l[0:3]): #funnel, brick, triangle
-        tr = train(1, 'neg', temp, dims=1, double_check=True)
+        tr = train(1, 'neg', temp, dims=1, shape=i, double_check=True)
 
     elif i in (l[3:4]): #only rhombus
         tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=1, layers=8)
         tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=9, layers=4)
         
 	if i in (l[5:6]): #long_funnel, diamond
-		tr = train(1, 'neg', temp, dims=1, shape=i, layers=6, validation=True)
-		tr = train(1, 'neg', temp, dims=1, shape=i, layers=5, validation=.6)
+		tr = train(1, 'neg', temp, dims=1, shape=i, layers=6)
+		tr = train(1, 'neg', temp, dims=1, shape=i, layers=5)
         
     elif i in (l[6:8]): #hexagon, stairs
     	tr = train(1, 'neg', temp, dims=1, shape=i, layers=4)
