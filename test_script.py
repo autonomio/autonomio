@@ -1,5 +1,9 @@
 from autonomio.commands import data, train, test
+from autonomio.transform_data import transform_data
+from autonomio.load_data import load_data
+
 import pandas as pd
+import numpy as np
 
 # datasets
 temp = data('tweet_sentiment')
@@ -11,6 +15,22 @@ temp = data('programmatic_ad_fraud')
 # create dataset for rest of the tests
 temp = data('random_tweets')
 temp = temp.head(100)
+
+temp.to_msgpack('test_data.msgpack')
+data('test_data.msgpack','file')
+
+temp.to_json('test_data.json')
+data('test_data.json','file')
+
+temp2 = np.array(temp)
+temp2 = temp2[:,2:4]
+temp2 = pd.DataFrame(temp2)
+
+temp2.to_csv('test_data.csv')
+data('test_data.csv','file')
+
+X = transform_data(temp, dims=1, flatten='none')
+Y = transform_data(temp, dims=1, flatten='none', Y='neg')
 
 # x variable input modes
 tr = train(1,'neg',temp,dims=1)
@@ -26,4 +46,36 @@ tr = train(1,'quality_score',temp,dims=1,flatten='mean')
 
 # model saving and loading
 tr = train('text','neg',temp,save_model='test_model')
-te = test('text',temp,'handle','test_model')
+te = test(temp,'test_model', labels='handle')
+
+l = [	'funnel', 
+        'brick',
+        'triangle',
+        'rhombus', 
+        'long_funnel',  
+        'diamond', 
+        'hexagon',  
+        'stairs']
+
+#for validation
+tr = train(1, 'neg', temp, dims=1, layers=1, validation=True)
+tr = train(1, 'neg', temp, dims=1, validation=.6)
+
+for i in l:
+
+    if i in (l[0:3]): #funnel, brick, triangle
+        tr = train(1, 'neg', temp, dims=1, shape=i, double_check=True)
+
+    elif i in (l[3:4]): #only rhombus
+        tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=1, layers=8)
+        tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=9, layers=4)
+        
+	if i in (l[4:6]): #long_funnel, diamond
+		tr = train(1, 'neg', temp, dims=1, shape=i, layers=6)
+		tr = train(1, 'neg', temp, dims=1, shape=i, layers=5)
+        
+    elif i in (l[6:8]): #hexagon, stairs
+    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=4)
+    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=6)
+    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=7)
+    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=8) 

@@ -7,7 +7,11 @@ from y_transform import y_transform
 
 warnings.filterwarnings("ignore")
 
-def transform_data(X,Y,data,flatten,dims):
+def transform_data( data,
+                    flatten,
+                    dims,
+                    X=False,
+                    Y=False):
 
     '''
     (to be used through model functions)
@@ -18,24 +22,39 @@ def transform_data(X,Y,data,flatten,dims):
 
     OUTOUT: 
 
-    ''' 
+    '''  
+    if Y == False:
+        if X == False:
+            print("Not input nor output data was inserted")
+        else:
+            X = X_transform(X, data, dims)
+            return X
+    else:
+        if X == False:
+            Y = Y_transform(Y, data, flatten)
+            return Y
+        else:
+            X = X_transform(X, data, dims)
+            Y = Y_transform(Y, data, flatten)
+            return X, Y
 
-    ## Vectorize text if X is text. 
+def X_transform(X, data, dims):
 
     x = x_transform(X,data)
     df_x = pd.DataFrame(x)
 
-    ## Prepare Y 
+    X = df_x.astype('float32')
+    X = np.array(X)
+    X = X[:,0:dims]
+
+    return X
+
+def Y_transform(Y, data, flatten):
 
     y = y_transform(Y,data,flatten)
     df_y = pd.DataFrame(y)
 
-    ## final formatting for the neural net
-
-    X = df_x.astype('float32')
     Y = df_y.astype('float32')
-    X = np.array(X)
     Y = np.array(Y)
-    X = X[:,0:dims]
-        
-    return X, Y
+
+    return Y
