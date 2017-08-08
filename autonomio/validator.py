@@ -18,6 +18,7 @@ def validate(	Y,
 				dims):
 
 	model, X = load_model(save_model)
+
 	X,Y = transform_data(data,flatten,dims, X, Y)
 
 	shuffle(X)

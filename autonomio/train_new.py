@@ -176,6 +176,8 @@ def kuubio(X,Y,data,
             if type(X_num) == list:
                 for x in X_num:
                     k = k+str(x)+" "
+            elif type(X_num) == int:
+                k = str(X_num)
             else:
                 k = X_num
 
