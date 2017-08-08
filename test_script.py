@@ -37,6 +37,9 @@ l = [	'funnel',
         'hexagon',  
         'stairs']
 
+tr = train(1, 'neg', temp, dims=1, layers=1, validation=True)
+tr = train(1, 'neg', temp, dims=1, validation=.6)
+
 for i in l:
 
     if i in (l[0:3]): #funnel, brick, triangle
