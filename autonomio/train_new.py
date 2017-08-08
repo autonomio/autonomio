@@ -92,8 +92,11 @@ def kuubio(X,Y,data,
 
     else:
 
-        if neuron_max == 'auto':
+        if neuron_max == 'auto' and dims >= 4:
             neuron_max = int(dims + (dims * 0.2))
+
+        elif neuron_max == 'auto':
+            neuron_max = 4
 
         #print neuron_max
 
