@@ -1,4 +1,5 @@
 from autonomio.commands import data, train, test
+from autonomio.transform_data import transform_data
 import pandas as pd
 
 # datasets
@@ -11,6 +12,9 @@ temp = data('programmatic_ad_fraud')
 # create dataset for rest of the tests
 temp = data('random_tweets')
 temp = temp.head(100)
+
+X = transform_data(temp, dims=1, flatten='none')
+Y = transform_data(temp, dims=1, flatten='none', Y='neg')
 
 # x variable input modes
 tr = train(1,'neg',temp,dims=1)
@@ -50,7 +54,7 @@ for i in l:
         tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=1, layers=8)
         tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=9, layers=4)
         
-	if i in (l[5:6]): #long_funnel, diamond
+	if i in (l[4:6]): #long_funnel, diamond
 		tr = train(1, 'neg', temp, dims=1, shape=i, layers=6)
 		tr = train(1, 'neg', temp, dims=1, shape=i, layers=5)
         
