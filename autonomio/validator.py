@@ -54,8 +54,6 @@ def validate(	Y,
 	#getting scores and predictions
 	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
 	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
-    
-	print validation
 
 	predictions = make_prediction(data, save_model, dims=dims, 
 													flatten=flatten, 
