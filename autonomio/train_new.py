@@ -76,7 +76,8 @@ def kuubio(X,Y,data,
         X = X[:n]
         Y = Y[:n]
 
-        save_model = 'saved_model'
+        if save_model == False:
+            save_model = 'saved_model'
     
     np.random.seed()
 

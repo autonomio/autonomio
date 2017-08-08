@@ -31,64 +31,52 @@ def make_prediction(data, saved_model,  dims=300,
                                         name=False, 
                                         validation=False):
 
-    loaded_model, X = load_model(saved_model)
+	loaded_model, X = load_model(saved_model)
 
-    if type(X) == str:
-        signals = data[X]
-    elif type(X) == list:
-        signals = transform_data(data, flatten, dims, X)
-    
-    if validation == False:
+	signals = transform_data(data, flatten, dims, X)
 
-        name = data[name]
+	if validation == False:
 
-        np.set_printoptions(suppress=True)
+		print "reach"
 
-        try: 
-            if signals.shape[1] < 300:
-                signals = pd.DataFrame(vectorize_text(signals))
-        except:
+		predict = loaded_model.predict(signals)
+
+		if name != False:
+			name = data[name]
+
+			l = []
+			i = 0
+
+			for x in predict:
+				l.append([x[0], name[i:i+1].values[0]])
+				i += 1
+
+			predict = pd.DataFrame(l)
+			predict.columns = ['Value', 'Name']
+
+		else:
+			predict = pd.DataFrame(predict)
+
+		predict = predict.sort_values('Value', ascending=False)
+
+		print predict.head(10)
+		print ""
+		print predict.tail(10)
         
-            if type(signals) == list or len(signals.shape) > 1:
+		return predict
 
-                signals = signals.ix[:,:300][:].values
-                predict = loaded_model.predict(signals)
+	if validation != False:
 
-            else:
+		if validation == True:
+		    n = len(signals) * .5
+		else:
+		    n = len(signals) * validation
 
-                signals = pd.DataFrame(vectorize_text(signals))
-                predict = loaded_model.predict(signals.values)
-        
-        l = []
-        i = 0
+		n = int(n)
 
-        for pred in predict:
-                                          
-            l.append([pred[0],name[i:i+1].values[0]])
-            i+=1
-            
-        out = pd.DataFrame(l)
-        out.columns = ['value','name']
-        out = out.sort_values('value',ascending=False)
-        
-        print out.head(10)
-        print ""
-        print out.tail(10)
-        
-        return out
+		signals = signals[n:]
 
-    else:
+		predictions = loaded_model.predict(signals)
 
-        if validation == True:
-            n = len(signals) * .5
-        else:
-            n = len(signals) * validation
-        
-        n = int(n)
-
-        signals = signals[n:]
-
-        predict = loaded_model.predict(signals)
-
-        return predict
+		return predictions
 

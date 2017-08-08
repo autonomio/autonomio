@@ -93,21 +93,23 @@ def shapes( layers,
         if (layers % 2 == 0):
 
             for i in range(n - 1):
-                neuron_count.append(int(m.ceil(
-                    float(neuron_max) * ((float(layers) + i) / 2) / float(layers))) - 1)
+                neuron_count.append(int(m.ceil(neuron_max * layers + i) / 2.0) / (layers - 1))
             neuron_count.append(neuron_max)
 
         else:
 
+            print n
+
             for i in range(n):
-                neuron_count.append(int(m.ceil(
-                    float(neuron_max) * ((float(layers) + i) / 2) / float(layers))) - 1)
+                neuron_count.append(int(m.ceil(neuron_max * layers + i) / 2.0) / (layers - 1))
             for i in range(1):
                 neuron_count.append(neuron_max)
 
         for i in range(n):
             neuron_count.append((neuron_previous + neuron_last) / 2)
             neuron_previous = neuron_count[i + n]
+
+        print neuron_count
 
     if shape == 'hexagon':
 
