@@ -1,6 +1,9 @@
 from autonomio.commands import data, train, test
 from autonomio.transform_data import transform_data
+from autonomio.load_data import load_data
+
 import pandas as pd
+import numpy as np
 
 # datasets
 temp = data('tweet_sentiment')
@@ -12,6 +15,19 @@ temp = data('programmatic_ad_fraud')
 # create dataset for rest of the tests
 temp = data('random_tweets')
 temp = temp.head(100)
+
+temp.to_msgpack('test_data.msgpack')
+data('test_data.msgpack','file')
+
+temp.to_json('test_data.json')
+data('test_data.json','file')
+
+temp2 = np.array(temp)
+temp2 = temp2[:,2:4]
+temp2 = pd.DataFrame(temp2)
+
+temp2.to_csv('test_data.csv')
+data('test_data.csv','file')
 
 X = transform_data(temp, dims=1, flatten='none')
 Y = transform_data(temp, dims=1, flatten='none', Y='neg')
