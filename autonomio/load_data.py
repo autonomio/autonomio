@@ -31,18 +31,15 @@ def load_data(name,mode):
             except:
                 out = pd.read_csv(name,error_bad_lines=False)
         
-        if name.endswith('.msg'):
+        elif name.endswith('.msgpack'):
             out = pd.read_msgpack(name)
         
-        if name.endswith('.json'):
+        elif name.endswith('.json'):
             out = pd.read_json(name)
-        
-        if name.endswith('.xls'):
-            out = pd.read_excel(name)
         
         else: 
 
             out = ''
-            print "MAYBE UNSUPPORTED? only csv, json, xls, and msgpack"
+            print "MAYBE UNSUPPORTED? only csv, json, and msgpack"
             
         return out
