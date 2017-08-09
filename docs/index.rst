@@ -9,9 +9,9 @@ Autonomio v.0.1.2 User Manual
     :target: https://coveralls.io/github/autonomio/core-module?branch=master
 
 
-This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
+This document covers in detail functionality of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
-Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
+Autonomio is very easy to use and it's highly recommended to memorize the namespace which is just 3 commands and less than 30 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
 
 To train (and save) model::
 
@@ -35,19 +35,25 @@ For installing the **development version** (latest)::
 
     pip install git+https://github.com/autonomio/core-module.git
 
+------------------------
+TYPES OF NEURAL NETWORKS
+------------------------
+
+Currently Autonomio is focused on providing a very high level abstraction layer to training of 'dense' neural networks, and then using the trained models to make predictions in any environment that you see fit. Dense layers are suited for a wide range of data science problems.
+
 -----------
 DATA INPUTS
 -----------
 
-The expected input dataformat is Pandas dataframe. Deep learning is most useful in solving classification problems, and for that we are providing two modes 'binary' and 'categorical'. 
+The expected input dataformat is a Pandas dataframe. Generally speaking, deep learning is at its strongest in solving classification problems, where the outcome variable is either binary categorical (0 or 1) or multi categorical. It's recommended to convert continuous and ranged variables to categoricals first. 
 
 BINARY (default)
 ---------------
 
-- X can be text, integer 
-- Y can be an integer 
+- X can be text, int, or floating point 
+- Y can be an int, or floating point
 
-The default settings are optimized for making a 1 or 0 prediction and for example in the case of predicting sentiment from tweets, Autonomio gives 85% accuracy out-of-the-box for classifying tweets that rank in the most negative 20% according to NLTK Vader sentiment analysis. 
+The default settings are optimized for making a 1 or 0 prediction and for example in the case of predicting sentiment from tweets, Autonomio gives 85% accuracy without any parameter setting for classifying tweets that rank in the most negative 20% according to NLTK Vader sentiment analysis. 
 
 
 CATEGORICAL
@@ -56,10 +62,9 @@ CATEGORICAL
 - X can be text, integer 
 - Y can be an integer or text
 - output layer neurons must match number of categories
-- change activation_out
+- change activation_out to something that works with categoricals
 
 It's not a good idea to have too many categories, maybe 10 is pushing it in most cases. 
-
 
 -----
 TRAIN
