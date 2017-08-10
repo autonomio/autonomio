@@ -58,6 +58,6 @@ We're using [Coveralls](https://coveralls.io) for code coverage testing, and eve
 
 https://coveralls.io/github/autonomio/core-module
 
-#### 1.5. Contributing Something Else
+#### 1.4. Contributing Something Else
 
 Last but not least, if there is something you want to do what was not covered in the above sections, please share more by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
