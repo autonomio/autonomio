@@ -20,6 +20,7 @@ import keras.backend as K
 import matplotlib.pyplot as plt
 
 def kuubio(X,Y,data,
+            dims,
             epoch,
             flatten,
             dropout,

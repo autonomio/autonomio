@@ -29,7 +29,8 @@ def load_model(saved_model):
 
 	return loaded_model, X
 
-def make_prediction(data, saved_model,	flatten='mean', 
+def make_prediction(data, saved_model,  dims=300, 
+                                        flatten='mean', 
                                         name=False, 
                                         validation=False):
 
