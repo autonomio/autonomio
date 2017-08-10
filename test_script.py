@@ -30,7 +30,9 @@ temp2.to_csv('test_data.csv')
 data('test_data.csv','file')
 
 X = transform_data(temp, flatten='none')
+X = transform_data(temp, flatten='none', X=1)
 Y = transform_data(temp, flatten='none', Y='neg')
+X, Y = transform_data(temp, flatten='none', X=1, Y='neg')
 
 # x variable input modes
 tr = train(1,'neg',temp)

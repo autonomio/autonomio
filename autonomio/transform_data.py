@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 
 def transform_data( data,
                     flatten,
-                    dims,
+                    dims=False,
                     X=False,
                     Y=False):
 
@@ -23,6 +23,14 @@ def transform_data( data,
     OUTOUT: 
 
     '''  
+
+    if dims == False:
+        if type(X) != list:
+            temp = []
+            temp.append(X)
+
+        dims = len(temp)
+
     if Y == False:
         if X == False:
             print("Not input nor output data was inserted")
