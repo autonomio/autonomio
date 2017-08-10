@@ -5,6 +5,7 @@ First I want to thank you A LOT for considering / taking the effort to contribut
 To make sure that you're on the same page, for a a high level overview of the scope, see [Autonomio website](http://autonom.io) or for a a detailed overview of the current functionality, see [Autonomio documentation](http://autonomio.readthedocs.io).
 
 # Table of contents
+
 1. [Ways to Contribute](#ways-to-contribute)
 
     1.1. [Code](#code)
@@ -18,6 +19,14 @@ To make sure that you're on the same page, for a a high level overview of the sc
     1.5. [Documentation](#documentation)
     
     1.6. [Examples](#examples)
+
+2. [Important Precautions for Code Contributions](#precautions)
+
+    2.1. [Planning](#code)
+    
+    2.2. [Testing](#ideas)
+
+3. [Reviewing Pull Requests](#review)
 
 ## 1. Ways to contribute <a name="ways-to-contribute"></a>
 
@@ -93,3 +102,38 @@ To contribute to the Manual, you have two options:
 ### 1.6. Contributing Examples  <a name="examples"></a>
 
 One of the most useful ways to contribute is when you use Autononomio for an actual project / challenge, and then write a blog post about your experience with code examples. 
+
+## 2. Important Precautions for Code Contributions <a name="precautions"></a>
+
+### 2.1. Planning the Change <a name="planning"></a>
+
+Before even thinking about making any changes to actual code:
+
+1) Define what is happening now (what needs to be changed)
+2) Define what is happening differently (once the code is changed) 
+3) Use text search to find which files / functions are affected 
+4) Make sure that you understand what each function is doing in relation to the change
+
+### 2.2. Testing the Change <a name="testing"></a>
+
+Never ever, under any circumstances, commit code that is not thoroughly tested:  
+
+1) Run through the code changes and ask yourself if it makes sense 
+2) Create a clean environment and install from your fork:
+
+    pip install git+http://your-fork-repo-address.git
+
+3) Perform all the commands where your changes are involved and note them down
+4) Change the test_script.py in the repo root with the commands from step 3
+5) Make sure that code coverage is not becoming lower
+6) Make sure that Travis build is passed 
+
+In terms of code coverage, 100% coverage for your changes (coverage does not drop at all) should be the case always. If you can't do that, then at least explain the possible caveats you've made in your commit details and also in the comments section of the pull request you are making. 
+
+Once you've gone through all these steps, take a short break, come back and ask yourself the question: 
+
+"WHAT COULD GO WRONG?"
+
+### 3. Reviewing Pull Requests <a name="review"></a>
+
+If you've been assigned as a reviewer of a given pull request, unless you've been explicitly asked to do so, **DON'T MERGE** just approve the review and share in the comments what you think. If you don't have any comments, just confirm with a comment that you don't have any. 
