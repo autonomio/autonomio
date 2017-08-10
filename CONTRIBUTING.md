@@ -6,10 +6,15 @@ To make sure that you're on the same page, for a a high level overview of the sc
 
 # Table of contents
 1. [Ways to Contribute](#ways-to-contribute)
+
     1.1. [Code](#code)
+    
     1.2. [Ideas](#ideas)
+    
     1.3. [Testing](#testing)
+    
     1.4. [Something Else](#something)
+    
     1.5. [Documentation](#documentation)
 
 ## 1. Ways to contribute <a name="ways-to-contribute"></a>
