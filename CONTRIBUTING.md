@@ -5,33 +5,20 @@ First I want to thank you A LOT for considering / taking the effort to contribut
 To make sure that you're on the same page, for a a high level overview of the scope, see [Autonomio website](http://autonom.io) or for a a detailed overview of the current functionality, see [Autonomio documentation](http://autonomio.readthedocs.io).
 
 # Table of contents
-1. [Introduction](#one)
-2. [Some paragraph](#paragraph1)
-    1. [Sub paragraph](#subparagraph1)
-3. [Another paragraph](#paragraph2)
+1. [Ways to Contribute](#ways-to-contribute)
+    1.1. [Code](#code)
+    1.2. [Ideas](#ideas)
+    1.3. [Testing](#testing)
+    1.4. [Something Else](#something)
+    1.5. [Documentation](#documentation)
 
-## This is the introduction <a name="introduction"></a>
-Some introduction text, formatted in heading 2 style
-
-## Some paragraph <a name="paragraph1"></a>
-The first paragraph text
-
-### Sub paragraph <a name="subparagraph1"></a>
-This is a sub paragraph, formatted in heading 3 style
-
-## Another paragraph <a name="paragraph2"></a>
-The second paragraph text
-
-
-
-
-## 1. Ways to contribute <a name="one"></a>
+## 1. Ways to contribute <a name="ways-to-contribute"></a>
 
 There are several ways programmers, data scientists and others can contribute to Autonomio. 
 
-#### 1.1. Contributing Code 
+#### 1.1. Contributing Code <a name="code"></a>
 
-##### 1.1.1. Contribute to Open Issues
+##### 1.1.1. Contribute to Open Issues 
 
 It will be great if you can contribute some code to Autonomio. To do this, the best way is to: 
 
@@ -53,13 +40,13 @@ What we really try to avoid, is being this guy...
 
 Same as above, but start by [creating a new issue](https://github.com/autonomio/core-module/issues/new) to open a discussion on the idea you have for contribution.
 
-### 1.2. Contributing Ideas 
+### 1.2. Contributing Ideas  <a name="ideas"></a>
 
 In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
 
 <img src="https://mrwweb.com/wp-content/uploads/2012/05/dilbertMay72012-600x186.gif">
 
-### 1.3. Contributing Testing 
+### 1.3. Contributing Testing  <a name="testing"></a>
 
 In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new). 
 
@@ -80,12 +67,12 @@ We're using [Coveralls](https://coveralls.io) for code coverage testing, and eve
 1) Follow the instructions in section 1.1 and 1.3.1
 2) Use your own fork to see how the results improve in comparison to [current Master](https://coveralls.io/github/autonomio/core-module)
 
-### 1.4. Contributing Something Else
+### 1.4. Contributing Something Else  <a name="something"></a>
 
 Last but not least, if there is something you want to do what was not covered in the above sections, please share more by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
 
 
-### 1.5. Contributing to Manual / Documentation 
+### 1.5. Contributing to Manual / Documentation  <a name="documentation"></a>
 
 We're using [Readthedocs](http://readthedocs.io) for documentation. See the latest [Autonomio documentation build](http://autonomio.readthedocs.io) for a reference of current status. The goal is to have comprehensive documentation, enough so that 100% of the actual practical capability is covered in terms of clear instructions. The documentation is automatically built from changes to [docs/index.rst](https://github.com/autonomio/core-module/tree/master/docs).
 
