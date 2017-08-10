@@ -35,9 +35,7 @@ def make_prediction(data, saved_model,	flatten='mean',
 
 	loaded_model, X = load_model(saved_model)
 
-	dims = len(X)
-
-	signals = transform_data(data, flatten, dims, X)
+	signals = transform_data(data, flatten, X)
 
 	if validation == False:
 

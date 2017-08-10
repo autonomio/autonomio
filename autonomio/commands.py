@@ -63,7 +63,8 @@ def test(data, saved_model, flatten='mean', labels=False):
            2) call the model by its name
     '''
 
-    test = make_prediction(data, saved_model, name=labels, flatten=flatten)
+    test = make_prediction(data, saved_model, name=labels, 
+                                              flatten=flatten)
 
     return test
 

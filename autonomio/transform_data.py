@@ -9,7 +9,6 @@ warnings.filterwarnings("ignore")
 
 def transform_data( data,
                     flatten,
-                    dims=False,
                     X=False,
                     Y=False):
 
@@ -23,41 +22,32 @@ def transform_data( data,
     OUTOUT: 
 
     '''  
-
-    if dims == False:
-        if type(X) != list:
-            temp = []
-            temp.append(X)
-
-        dims = len(temp)
-
     if Y == False:
         if X == False:
             print("Not input nor output data was inserted")
         else:
-            X = X_transform(X, data, dims)
+            X = X_data(X, data)
             return X
     else:
         if X == False:
-            Y = Y_transform(Y, data, flatten)
+            Y = Y_data(Y, data, flatten)
             return Y
         else:
-            X = X_transform(X, data, dims)
-            Y = Y_transform(Y, data, flatten)
+            X = X_data(X, data)
+            Y = Y_data(Y, data, flatten)
             return X, Y
 
-def X_transform(X, data, dims):
+def X_data(X, data):
 
     x = x_transform(X,data)
-    df_x = pd.DataFrame(x)
+    x = pd.DataFrame(x)
 
-    X = df_x.astype('float32')
+    X = x.astype('float32')
     X = np.array(X)
-    X = X[:,0:dims]
 
     return X
 
-def Y_transform(Y, data, flatten):
+def Y_data(Y, data, flatten):
 
     y = y_transform(Y,data,flatten)
     df_y = pd.DataFrame(y)

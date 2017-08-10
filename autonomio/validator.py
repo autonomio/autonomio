@@ -14,14 +14,13 @@ def validate(	Y,
 				optimizer,
 				verbose,
 				save_model,
-				flatten,
-				dims):
+				flatten):
 
 	model, X = load_model(save_model)
 
-	X,Y = transform_data(data,flatten,dims, X, Y)
+	X,Y = transform_data(data,flatten, X, Y)
 
-	#shuffle(X)
+	shuffle(X)
 
 	if validation != True:
 		n = len(X) * validation
@@ -56,8 +55,7 @@ def validate(	Y,
 	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
 	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
 
-	predictions = make_prediction(data, save_model, dims=dims, 
-													flatten=flatten, 
+	predictions = make_prediction(data, save_model,	flatten=flatten, 
 													validation=validation)
 	rounded = [round(x[0]) for x in predictions]
 
