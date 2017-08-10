@@ -62,8 +62,9 @@ def kuubio(X,Y,data,
     if type(X) != list:
     	temp = []
     	temp.append(X)
-
-    dims = len(temp)
+    	dims = len(temp)
+    else:
+    	dims = len(X)
 
     print dims
 
