@@ -20,7 +20,6 @@ import keras.backend as K
 import matplotlib.pyplot as plt
 
 def kuubio(X,Y,data,
-            dims,
             epoch,
             flatten,
             dropout,
@@ -60,7 +59,12 @@ def kuubio(X,Y,data,
     ind_var = Y   # this is used later for output 
     X_num, Y_num = X, Y
 
-    X,Y = transform_data(data,flatten,dims,X,Y)
+    X,Y = transform_data(data,flatten,X,Y)
+
+    try:
+    	dims = X.shape[1]
+    except IndexError:
+    	dims = X_num
 
     #shuffling and separating the data
     if validation != False:
@@ -157,6 +161,8 @@ def kuubio(X,Y,data,
         print "1st layer neurons : " + str(neuron_max)
         print "flatten : " + str(flatten)
         print "batch_size : " + str(batch_size) 
+        print "shape : " + shape
+        print ""
 
         accuracy(history)
 
@@ -209,8 +215,7 @@ def kuubio(X,Y,data,
                                                             optimizer,
                                                             verbose,
                                                             save_model,
-                                                            flatten,
-                                                            dims)
+                                                            flatten)
 
             print ""
             print   ("train accuracy: %.2f%%" % (train_scores[1]*100))

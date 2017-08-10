@@ -20,7 +20,7 @@ def load_model(saved_model):
 	try:
 	    X = map(int, X.split())
 	except ValueError:
-		print ""
+		X = X.split()
 
 	f.close()
 
@@ -29,14 +29,13 @@ def load_model(saved_model):
 
 	return loaded_model, X
 
-def make_prediction(data, saved_model,  dims=300, 
-                                        flatten='mean', 
+def make_prediction(data, saved_model,	flatten='mean', 
                                         name=False, 
                                         validation=False):
 
 	loaded_model, X = load_model(saved_model)
 
-	signals = transform_data(data, flatten, dims, X)
+	signals = transform_data(data, flatten, X)
 
 	if validation == False:
 
