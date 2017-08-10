@@ -66,6 +66,11 @@ Last but not least, if there is something you want to do what was not covered in
 
 ### 1.5. Contributing to Manual / Documentation 
 
-We're using [Readthedocs](http://readthedocs.io) for documentation. See the latest [Autonomio documentation build](http://autonomio.readthedocs.io) for a reference of current status. The goal is to have comprehensive documentation, enough so that 100% of the actual practical capability is covered in terms of clear instructions. 
+We're using [Readthedocs](http://readthedocs.io) for documentation. See the latest [Autonomio documentation build](http://autonomio.readthedocs.io) for a reference of current status. The goal is to have comprehensive documentation, enough so that 100% of the actual practical capability is covered in terms of clear instructions. The documentation is automatically built from changes to [docs/index.rst](https://github.com/autonomio/core-module/tree/master/docs).
 
-<img src="https://stevemiles70.files.wordpress.com/2015/05/dilbertontechnicaldoumentation.png">
+To contribute to the Manual, you have two options: 
+
+- The pro way: follow the steps in section 1.1
+- A simpler way: follow the steps in section 1.4
+
+<img src="https://stevemiles70.files.wordpress.com/2015/05/dilbertontechnicaldoumentation.png" width="600px">
