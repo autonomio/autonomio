@@ -21,7 +21,7 @@ def validate(	Y,
 
 	X,Y = transform_data(data,flatten,dims, X, Y)
 
-	#shuffle(X)
+	shuffle(X)
 
 	if validation != True:
 		n = len(X) * validation

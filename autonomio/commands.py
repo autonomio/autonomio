@@ -7,6 +7,7 @@ from transform_data import transform_data
 import pandas as pd
 
 def train(X,Y,data,
+			dims=300,
 			epoch=5,
 			flatten='mean',
        		dropout=.2,
@@ -34,6 +35,7 @@ def train(X,Y,data,
     '''
 
     train = kuubio(X,Y,data,
+					dims,
 					epoch,
 					flatten,
 		       		dropout,
@@ -55,7 +57,7 @@ def train(X,Y,data,
     return train
 
     
-def test(data, saved_model, flatten='mean', labels=False):
+def test(data, saved_model, dims=300, flatten='mean', labels=False):
 
     '''
     NOTE:  1) remember to use the same 'x' as with training
@@ -63,7 +65,10 @@ def test(data, saved_model, flatten='mean', labels=False):
            2) call the model by its name
     '''
 
-    test = make_prediction(data, saved_model, name=labels, flatten=flatten)
+    test = make_prediction(data, saved_model, name=labels, 
+                                              dims=dims, 
+                                              flatten=flatten
+                                              )
 
     return test
 
