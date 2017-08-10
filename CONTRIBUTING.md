@@ -4,7 +4,28 @@ First I want to thank you A LOT for considering / taking the effort to contribut
 
 To make sure that you're on the same page, for a a high level overview of the scope, see [Autonomio website](http://autonom.io) or for a a detailed overview of the current functionality, see [Autonomio documentation](http://autonomio.readthedocs.io).
 
-## 1. Ways to contribute
+# Table of contents
+1. [Introduction](#one)
+2. [Some paragraph](#paragraph1)
+    1. [Sub paragraph](#subparagraph1)
+3. [Another paragraph](#paragraph2)
+
+## This is the introduction <a name="introduction"></a>
+Some introduction text, formatted in heading 2 style
+
+## Some paragraph <a name="paragraph1"></a>
+The first paragraph text
+
+### Sub paragraph <a name="subparagraph1"></a>
+This is a sub paragraph, formatted in heading 3 style
+
+## Another paragraph <a name="paragraph2"></a>
+The second paragraph text
+
+
+
+
+## 1. Ways to contribute <a name="one"></a>
 
 There are several ways programmers, data scientists and others can contribute to Autonomio. 
 
