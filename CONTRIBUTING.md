@@ -43,3 +43,5 @@ In case you don't want to contribute code, but have a feature request or some ot
 In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
 
 ### 1.4. Contributing Something Else
+
+Last but not least, if there is something you want to do what was not covered in the above sections, please share more by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
