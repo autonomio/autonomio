@@ -29,20 +29,21 @@ temp2 = pd.DataFrame(temp2)
 temp2.to_csv('test_data.csv')
 data('test_data.csv','file')
 
-X = transform_data(temp, dims=1, flatten='none')
-Y = transform_data(temp, dims=1, flatten='none', Y='neg')
+X = transform_data(temp, flatten='none')
+X = transform_data(temp, flatten='none', X=1)
+Y = transform_data(temp, flatten='none', Y='neg')
+X, Y = transform_data(temp, flatten='none', X=1, Y='neg')
 
 # x variable input modes
-tr = train(1,'neg',temp,dims=1)
-tr = train([1,5],'neg',temp,dims=4)
-tr = train(['reach_score','influence_score'],'neg',temp,dims=2)
-tr = train([1,2,3,4,5],'neg',temp,dims=5)
+tr = train(1,'neg',temp)
+tr = train([1,5],'neg',temp)
+tr = train([1,2,3,4,5],'neg',temp)
 
 # y variable flattening mode
-tr = train(1,'quality_score',temp,dims=1,flatten='median')
-tr = train(1,'quality_score',temp,dims=1,flatten=6)
-tr = train(1,'quality_score',temp,dims=1,flatten=.5)
-tr = train(1,'quality_score',temp,dims=1,flatten='mean')
+tr = train(1,'quality_score',temp,flatten='median')
+tr = train(1,'quality_score',temp,flatten=6)
+tr = train(1,'quality_score',temp,flatten=.5)
+tr = train(1,'quality_score',temp,flatten='mean')
 
 # model saving and loading
 tr = train('text','neg',temp,save_model='test_model')
@@ -58,24 +59,27 @@ l = [	'funnel',
         'stairs']
 
 #for validation
-tr = train(1, 'neg', temp, dims=1, layers=1, validation=True)
-tr = train(1, 'neg', temp, dims=1, validation=.6)
+tr = train(1, 'neg', temp, layers=1, validation=True)
+tr = train(1, 'neg', temp, validation=.6)
+
+tr = train(['reach_score','influence_score'],'neg',temp,save_model='strings')
+te = test(temp,'strings', labels='handle')
 
 for i in l:
 
     if i in (l[0:3]): #funnel, brick, triangle
-        tr = train(1, 'neg', temp, dims=1, shape=i, double_check=True)
+        tr = train(1, 'neg', temp, shape=i, double_check=True)
 
     elif i in (l[3:4]): #only rhombus
-        tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=1, layers=8)
-        tr = train(1, 'neg', temp, dims=1, shape=i, neuron_max=9, layers=4)
+        tr = train(1, 'neg', temp, shape=i, neuron_max=1, layers=8)
+        tr = train(1, 'neg', temp, shape=i, neuron_max=9, layers=4)
         
 	if i in (l[4:6]): #long_funnel, diamond
-		tr = train(1, 'neg', temp, dims=1, shape=i, layers=6)
-		tr = train(1, 'neg', temp, dims=1, shape=i, layers=5)
+		tr = train(1, 'neg', temp, shape=i, layers=6)
+		tr = train(1, 'neg', temp, shape=i, layers=5)
         
     elif i in (l[6:8]): #hexagon, stairs
-    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=4)
-    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=6)
-    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=7)
-    	tr = train(1, 'neg', temp, dims=1, shape=i, layers=8) 
+    	tr = train(1, 'neg', temp, shape=i, layers=4)
+    	tr = train(1, 'neg', temp, shape=i, layers=6)
+    	tr = train(1, 'neg', temp, shape=i, layers=7)
+    	tr = train(1, 'neg', temp, shape=i, layers=8) 
