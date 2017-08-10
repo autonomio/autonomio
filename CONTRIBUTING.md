@@ -16,6 +16,8 @@ To make sure that you're on the same page, for a a high level overview of the sc
     1.4. [Something Else](#something)
     
     1.5. [Documentation](#documentation)
+    
+    1.6. [Examples](#examples)
 
 ## 1. Ways to contribute <a name="ways-to-contribute"></a>
 
@@ -87,3 +89,7 @@ To contribute to the Manual, you have two options:
 - A simpler way: follow the steps in section 1.4
 
 <img src="https://stevemiles70.files.wordpress.com/2015/05/dilbertontechnicaldoumentation.png" width="600px">
+
+### 1.6. Contributing Examples  <a name="examples"></a>
+
+One of the most useful ways to contribute is when you use Autononomio for an actual project / challenge, and then write a blog post about your experience with code examples. 
