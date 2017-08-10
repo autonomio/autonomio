@@ -37,7 +37,6 @@ X, Y = transform_data(temp, flatten='none', X=1, Y='neg')
 # x variable input modes
 tr = train(1,'neg',temp)
 tr = train([1,5],'neg',temp)
-tr = train(['reach_score','influence_score'],'neg',temp)
 tr = train([1,2,3,4,5],'neg',temp)
 
 # y variable flattening mode
@@ -62,6 +61,9 @@ l = [	'funnel',
 #for validation
 tr = train(1, 'neg', temp, layers=1, validation=True)
 tr = train(1, 'neg', temp, validation=.6)
+
+tr = train(['reach_score','influence_score'],'neg',temp,save_model='strings')
+te = test(temp,'strings', labels='handle')
 
 for i in l:
 
