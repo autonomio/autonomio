@@ -40,8 +40,22 @@ In case you don't want to contribute code, but have a feature request or some ot
 
 #### 1.3. Contributing Testing 
 
-In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
+In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new). Testing comes in two forms: 
 
-### 1.4. Contributing Something Else
+##### 1.3.1 actual testing
+
+Just use Autonomio for any open challenge you are working on. Or pick one from [Kaggle](https://www.kaggle.com/competitions).
+
+1) Work with Autonomion in data science challenges
+2) Try a lot of different things
+3) [Report issues](https://github.com/autonomio/core-module/issues/new) as you may find them
+
+##### 1.3.2 improving code coverage
+
+We're using [Coveralls](https://coveralls.io) for code coverage testing, and even the smallest contributions to this end help a great deal. We want to make sure that people can have confid
+
+https://coveralls.io/github/autonomio/core-module
+
+#### 1.5. Contributing Something Else
 
 Last but not least, if there is something you want to do what was not covered in the above sections, please share more by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
