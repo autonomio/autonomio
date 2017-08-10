@@ -28,23 +28,23 @@ What we really try to avoid, is being this guy...
 
 <img src="https://s-media-cache-ak0.pinimg.com/originals/83/f7/8e/83f78e62feb95acc85d000aaf6350d23.jpg" alt="Drawing" width="300px"/>
 
-##### 1.1.2. Contribute to a New Idea 
+#### 1.1.2. Contribute to a New Idea 
 
 Same as above, but start by [creating a new issue](https://github.com/autonomio/core-module/issues/new) to open a discussion on the idea you have for contribution.
 
-#### 1.2. Contributing Ideas 
+### 1.2. Contributing Ideas 
 
 In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
 
 <img src="https://mrwweb.com/wp-content/uploads/2012/05/dilbertMay72012-600x186.gif">
 
-#### 1.3. Contributing Testing 
+### 1.3. Contributing Testing 
 
 In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new). 
 
 **Testing comes in two forms:** 
 
-##### 1.3.1 actual testing
+#### 1.3.1 actual testing
 
 Just use Autonomio for any open challenge you are working on. Or pick one from [Kaggle](https://www.kaggle.com/competitions).
 
@@ -52,13 +52,20 @@ Just use Autonomio for any open challenge you are working on. Or pick one from [
 2) Try a lot of different things
 3) [Report issues](https://github.com/autonomio/core-module/issues/new) as you may find them
 
-##### 1.3.2 improving code coverage
+#### 1.3.2 improving code coverage
 
 We're using [Coveralls](https://coveralls.io) for code coverage testing, and even the smallest contributions to this end help a great deal. 
 
 1) Follow the instructions in section 1.1 and 1.3.1
 2) Use your own fork to see how the results improve in comparison to [current Master](https://coveralls.io/github/autonomio/core-module)
 
-#### 1.4. Contributing Something Else
+### 1.4. Contributing Something Else
 
 Last but not least, if there is something you want to do what was not covered in the above sections, please share more by [creating a new issue](https://github.com/autonomio/core-module/issues/new).
+
+
+### 1.5. Contributing to Manual / Documentation 
+
+We're using [Readthedocs](http://readthedocs.io) for documentation. See the latest [Autonomio documentation build](http://autonomio.readthedocs.io) for a reference of current status. The goal is to have comprehensive documentation, enough so that 100% of the actual practical capability is covered in terms of clear instructions. 
+
+<img src="https://stevemiles70.files.wordpress.com/2015/05/dilbertontechnicaldoumentation.png">
