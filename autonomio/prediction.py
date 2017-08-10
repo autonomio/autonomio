@@ -20,7 +20,7 @@ def load_model(saved_model):
 	try:
 	    X = map(int, X.split())
 	except ValueError:
-		print ""
+		X = X.split()
 
 	f.close()
 
