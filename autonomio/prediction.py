@@ -29,12 +29,13 @@ def load_model(saved_model):
 
 	return loaded_model, X
 
-def make_prediction(data, saved_model,  dims=300, 
-                                        flatten='mean', 
+def make_prediction(data, saved_model,	flatten='mean', 
                                         name=False, 
                                         validation=False):
 
 	loaded_model, X = load_model(saved_model)
+
+	dims = len(X)
 
 	signals = transform_data(data, flatten, dims, X)
 

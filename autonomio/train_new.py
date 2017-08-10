@@ -20,7 +20,6 @@ import keras.backend as K
 import matplotlib.pyplot as plt
 
 def kuubio(X,Y,data,
-            dims,
             epoch,
             flatten,
             dropout,
@@ -59,6 +58,7 @@ def kuubio(X,Y,data,
 
     ind_var = Y   # this is used later for output 
     X_num, Y_num = X, Y
+    dims = len(X)
 
     X,Y = transform_data(data,flatten,dims,X,Y)
 
@@ -72,6 +72,9 @@ def kuubio(X,Y,data,
         if validation == True:
             n = len(X) * .5
             n = int(n)
+
+        X_validate = X[n:]
+        Y_validate = Y[n:]
 
         X = X[:n]
         Y = Y[:n]
@@ -202,7 +205,7 @@ def kuubio(X,Y,data,
         #printing result for validation
         if validation != False:
 
-            train_scores, test_scores, val_acc = validate(  Y_num, 
+            train_scores, test_scores, val_acc = validate(  X, Y,
                                                             data,
                                                             validation,
                                                             loss,
