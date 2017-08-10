@@ -54,9 +54,10 @@ Just use Autonomio for any open challenge you are working on. Or pick one from [
 
 ##### 1.3.2 improving code coverage
 
-We're using [Coveralls](https://coveralls.io) for code coverage testing, and even the smallest contributions to this end help a great deal. We want to make sure that people can have confid
+We're using [Coveralls](https://coveralls.io) for code coverage testing, and even the smallest contributions to this end help a great deal. 
 
-https://coveralls.io/github/autonomio/core-module
+1) Follow the instructions in section 1.1 and 1.3.1
+2) Use your own fork to see how the results improve in comparison to [current Master](https://coveralls.io/github/autonomio/core-module)
 
 #### 1.4. Contributing Something Else
 
