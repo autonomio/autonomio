@@ -58,7 +58,14 @@ def kuubio(X,Y,data,
 
     ind_var = Y   # this is used later for output 
     X_num, Y_num = X, Y
-    dims = len(X)
+
+    if type(X) != list:
+    	temp = []
+    	temp.append(X)
+
+    dims = len(temp)
+
+    print dims
 
     X,Y = transform_data(data,flatten,dims,X,Y)
 
