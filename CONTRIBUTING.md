@@ -40,7 +40,9 @@ In case you don't want to contribute code, but have a feature request or some ot
 
 #### 1.3. Contributing Testing 
 
-In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new). Testing comes in two forms: 
+In case you don't want to contribute code, but have a feature request or some other idea, that is a great contribution as well and will be much appreciated. You can do it by [creating a new issue](https://github.com/autonomio/core-module/issues/new). 
+
+**Testing comes in two forms:** 
 
 ##### 1.3.1 actual testing
 
