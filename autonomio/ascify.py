@@ -69,3 +69,5 @@ class Ascify:
             out = self._stringify_iter()
         
         return out
+
+## OUTPUT: a list with strings

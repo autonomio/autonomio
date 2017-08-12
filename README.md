@@ -1,6 +1,7 @@
 <img src="./docs/autonomio_logo_new.png"  width="250">
 
-[![Build Status](https://travis-ci.org/autonomio/core-module.svg?branch=master)](https://travis-ci.org/autonomio/core-module)  [![Coverage Status](https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master)](https://coveralls.io/github/autonomio/core-module?branch=master)
+[![Build Status](https://travis-ci.org/autonomio/core-module.svg?branch=master)](https://travis-ci.org/autonomio/core-module)  [![Coverage Status](https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master)](https://coveralls.io/github/autonomio/core-module?branch=master) [![Dependency Status](https://gemnasium.com/badges/github.com/mikkokotila/core-module.svg)](https://gemnasium.com/github.com/mikkokotila/core-module)
+
 
 
 
