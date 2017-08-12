@@ -60,7 +60,12 @@ def kuubio(X,Y,data,
     ind_var = Y   # this is used later for output 
     X_num, Y_num = X, Y
 
-    X,Y = transform_data(data,flatten,dims,X,Y)
+    X,Y = transform_data(data,flatten,X,Y)
+
+    try:
+    	dims = X.shape[1]
+    except IndexError:
+    	dims = X_num
 
     #shuffling and separating the data
     if validation != False:
@@ -120,14 +125,11 @@ def kuubio(X,Y,data,
                       optimizer=optimizer, 
                       metrics=['accuracy'])
 
-        print(model.summary())
-        print ""
-        network_scale = len(X) * epoch * layers * neuron_max
-        print "network scale index : " + str(network_scale)
-
-        if verbose == 0:
-            if network_scale > 3000000000:
-                print "This could take a while. Why not check back in a moment?"
+        if verbose != 0:
+            print(model.summary())
+            print ""
+            network_scale = len(X) * epoch * layers * neuron_max
+            print "network scale index : " + str(network_scale)
 
         time.sleep(0.2)
         history = model.fit(X, Y,   validation_split=0.33, 
@@ -157,6 +159,8 @@ def kuubio(X,Y,data,
         print "1st layer neurons : " + str(neuron_max)
         print "flatten : " + str(flatten)
         print "batch_size : " + str(batch_size) 
+        print "shape : " + shape
+        print ""
 
         accuracy(history)
 
@@ -209,8 +213,7 @@ def kuubio(X,Y,data,
                                                             optimizer,
                                                             verbose,
                                                             save_model,
-                                                            flatten,
-                                                            dims)
+                                                            flatten)
 
             print ""
             print   ("train accuracy: %.2f%%" % (train_scores[1]*100))
