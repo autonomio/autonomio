@@ -83,6 +83,8 @@ if __name__ == "__main__":
 
     install_requires = check_dependencies()
 
+    python -m spacy download en
+
     setup(name=DISTNAME,
         author=MAINTAINER,
         author_email=MAINTAINER_EMAIL,
