@@ -107,4 +107,4 @@ if __name__ == "__main__":
                      'Operating System :: MacOS'],
 )
 
-python -m spacy download en
+os.system("python -m spacy download en")
