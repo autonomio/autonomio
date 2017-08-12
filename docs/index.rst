@@ -9,6 +9,10 @@ Autonomio v.0.1.2 User Manual
     :target: https://coveralls.io/github/autonomio/core-module?branch=master
 
 
+.. image:: https://gemnasium.com/badges/github.com/mikkokotila/core-module.svg
+    :target: https://gemnasium.com/github.com/mikkokotila/core-module
+
+
 This document covers in detail functionality of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
 Autonomio is very easy to use and it's highly recommended to memorize the namespace which is just 3 commands and less than 30 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
