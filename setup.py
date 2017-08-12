@@ -4,7 +4,7 @@
 import os
 os.environ["MPLCONFIGDIR"] = "."
 
-DESCRIPTION = "Autonomio: deep learning based "
+DESCRIPTION = "Autonomio deep learning workbench "
 LONG_DESCRIPTION = """\
 Autonomio provides a very high-level abstraction layer on top of Keras,
 using Tensorflow as a backend and spaCy for word vectorization.  
@@ -19,8 +19,6 @@ using Tensorflow as a backend and spaCy for word vectorization.
 For most use cases succesfully running a state-of-the-art AI works 
 out of the box in less than 60 seconds to first trained model. 
 
-Autonomio is proven to deal with hard classification problems at close to 
-100% accuracy across a range of test s 
 """
 
 DISTNAME = 'autonomio'
@@ -29,7 +27,7 @@ MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://autonom.io'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/autonomio/core-module/'
-VERSION = '0.1.2.dev'
+VERSION = '0.3.1.dev'
 
 try:
     from setuptools import setup
@@ -38,6 +36,7 @@ except ImportError:
     from distutils.core import setup
 
 def check_dependencies():
+    
     install_requires = []
 
     try:
@@ -83,8 +82,6 @@ if __name__ == "__main__":
 
     install_requires = check_dependencies()
 
-    python -m spacy download en
-
     setup(name=DISTNAME,
         author=MAINTAINER,
         author_email=MAINTAINER_EMAIL,
@@ -109,3 +106,5 @@ if __name__ == "__main__":
                      'Operating System :: Unix',
                      'Operating System :: MacOS'],
 )
+
+python -m spacy download en
