@@ -125,14 +125,11 @@ def kuubio(X,Y,data,
                       optimizer=optimizer, 
                       metrics=['accuracy'])
 
-        print(model.summary())
-        print ""
-        network_scale = len(X) * epoch * layers * neuron_max
-        print "network scale index : " + str(network_scale)
-
-        if verbose == 0:
-            if network_scale > 3000000000:
-                print "This could take a while. Why not check back in a moment?"
+        if verbose != 0:
+            print(model.summary())
+            print ""
+            network_scale = len(X) * epoch * layers * neuron_max
+            print "network scale index : " + str(network_scale)
 
         time.sleep(0.2)
         history = model.fit(X, Y,   validation_split=0.33, 

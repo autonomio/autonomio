@@ -1,15 +1,19 @@
 import spacy as sp
 from ascify import Ascify
 
-nlp = sp.load('en')
-
-def vectorize_text(data):
+def vectorize_text(data,language='en'):
     
+    nlp = sp.load(language)
+
     '''
-    OUTPUT:       a list of lists with the word vectors in lists
+
+    INPUT: a SERIES with string values
+
+    OUTPUT: a list of lists with the word vectors in lists
     
     USE EXAMPLE:  vectors = vectorize_text(list_with_strings)
 
+    
     ''' 
 
     try:
@@ -32,5 +36,6 @@ def vectorize_text(data):
 
     except:
 
-        print "from command line try: python -m spacy download en"
-        return 'ERROR: spacy parser did not load'
+        print "ERROR: from command line try: python -m spacy download en"
+
+## Returns a list with 300 columns when succesful
