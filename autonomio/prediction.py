@@ -16,25 +16,33 @@ def load_model(saved_model):
 	print("Loaded model from disk")
 
 	f = open(saved_model+".x", 'r')
-	X = f.read()
-	try:
-	    X = map(int, X.split())
-	except ValueError:
-		X = X.split()
+	temp = f.read()
+	temp = temp.split(",")
 
 	f.close()
+
+	try:
+	    X = map(int, temp[0].split())
+	except ValueError:
+		X = temp[0].split()
+
+	try:
+		flatten = int(temp[1])
+	except ValueError:
+		flatten = temp[1]
+
+	Y_unique = int(temp[2])
 
 	if type(X) == list and len(X) == 1:
 		X = X[0]
 
-	return loaded_model, X
+	return loaded_model, X, flatten, Y_unique
 
-def make_prediction(data, saved_model,  dims=300, 
-                                        flatten='mean', 
-                                        name=False, 
+def make_prediction(data, saved_model,  name=False, 
                                         validation=False):
 
-	loaded_model, X = load_model(saved_model)
+	loaded_model, X, flatten, Y_unique = load_model(saved_model)
+
 
 	signals = transform_data(data, flatten, X)
 
@@ -58,12 +66,25 @@ def make_prediction(data, saved_model,  dims=300,
 		else:
 			predict = pd.DataFrame(predict)
 
-		predict = predict.sort_values('Value', ascending=False)
+		if Y_unique == 2 or Y_unique == 1:
+			for i in range(len(signals)):
+				predict.Value[i] = predict.Value[i] >= .5
+
+			predict.Value.astype(int)
+
+		check = []
+		for i in range(len(predict)):
+			check.append(round(predict.Value[i], 2))
+
+		predict = predict.sort_values('Value', ascending=False)	
 
 		print predict.head(10)
 		print ""
 		print predict.tail(10)
-        
+
+		if len(set(check)) == 1:
+			print "\n NB! All predictions have the same value \n"
+
 		return predict
 
 	if validation != False:
@@ -77,7 +98,18 @@ def make_prediction(data, saved_model,  dims=300,
 
 		signals = signals[n:]
 
-		predictions = loaded_model.predict(signals)
+		predict = loaded_model.predict(signals)
 
-		return predictions
+		if Y_unique == 2 or Y_unique == 1:
+			for i in range(len(signals)):
+				predict[i] = predict[i] >= .5
+
+		check = []
+		for i in range(len(predict)):
+			check.append(round(predict[i], 2))
+
+		if len(set(check)) == 1:
+			print "\n NB! All predictions have the same value \n"
+
+		return predict
 

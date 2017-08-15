@@ -188,6 +188,8 @@ def kuubio(X,Y,data,
             else:
                 k = X_num
 
+            k = k+","+str(flatten)+","+str(len(np.unique(Y)))
+
             f.write(k)
             f.close()
 
@@ -215,8 +217,7 @@ def kuubio(X,Y,data,
                                                             loss,
                                                             optimizer,
                                                             verbose,
-                                                            save_model,
-                                                            flatten)
+                                                            save_model)
 
             print ""
             print   ("train accuracy: %.2f%%" % (train_scores[1]*100))

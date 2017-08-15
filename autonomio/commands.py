@@ -57,7 +57,7 @@ def train(X,Y,data,
     return train
 
     
-def test(data, saved_model, dims=300, flatten='mean', labels=False):
+def test(data, saved_model, labels=False):
 
     '''
     NOTE:  1) remember to use the same 'x' as with training
@@ -65,7 +65,10 @@ def test(data, saved_model, dims=300, flatten='mean', labels=False):
            2) call the model by its name
     '''
 
-    test = make_prediction(data, saved_model, name=labels, flatten=flatten)
+    test = make_prediction(data, saved_model, name=labels)
+
+    #data = pd.merge(test, data, left_on='name', right_on=labels)
+    #plot = scatterz('value', y_scatter, data, 'name')
 
     return test
 

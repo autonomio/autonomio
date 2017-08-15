@@ -13,10 +13,9 @@ def validate(	Y,
 				loss,
 				optimizer,
 				verbose,
-				save_model,
-				flatten):
+				save_model):
 
-	model, X = load_model(save_model)
+	model, X, flatten, Y_unique = load_model(save_model)
 
 	X,Y = transform_data(data,flatten, X, Y)
 
@@ -55,8 +54,7 @@ def validate(	Y,
 	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
 	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
 
-	predictions = make_prediction(data, save_model,	flatten=flatten, 
-													validation=validation)
+	predictions = make_prediction(data, save_model, validation=validation)
 	rounded = [round(x[0]) for x in predictions]
 
 	df1 = pd.DataFrame(rounded)
