@@ -4,6 +4,7 @@ from col_name_generator import col_name_generator
 
 data_path = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
 
+
 def load_data(name, mode, sep, delimiter, header):
 
     try:
@@ -61,4 +62,4 @@ def load_data(name, mode, sep, delimiter, header):
         print("ERROR: you've probably tried to use 'name' which is wrong. Or if you're trying to load from file, forgot to set mode to 'file' first.\n")
         print("USE: data('dataset_name') or data('filename.csv',mode='file')")
 
-## Returns a Pandas dataframe 
+## Returns a Pandas dataframe

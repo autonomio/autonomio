@@ -8,7 +8,8 @@ from y_transform import y_transform
 
 warnings.filterwarnings("ignore")
 
-def transform_data( data,
+
+def transform_data(data,
                     flatten,
                     X=False,
                     Y=False):

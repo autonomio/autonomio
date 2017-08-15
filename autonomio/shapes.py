@@ -1,5 +1,6 @@
 import math as m
 
+
 def shapes( layers, 
             shape, 
             neuron_max,

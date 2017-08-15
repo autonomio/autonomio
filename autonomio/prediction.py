@@ -6,6 +6,7 @@ from keras.models import model_from_json
 from vectorize_text import vectorize_text
 from transform_data import transform_data
 
+
 def load_model(saved_model):
 
 	json_file = open(saved_model + ".json", 'r')
@@ -30,7 +31,7 @@ def load_model(saved_model):
 
 	return loaded_model, X
 
-def make_prediction(data, saved_model,  dims=300, 
+def make_prediction(data, saved_model, dims=300, 
                                         flatten='mean', 
                                         name=False, 
                                         validation=False):
@@ -81,4 +82,3 @@ def make_prediction(data, saved_model,  dims=300,
 		predictions = loaded_model.predict(signals)
 
 		return predictions
-

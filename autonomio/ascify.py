@@ -1,5 +1,6 @@
 import string
 
+
 class Ascify:
 
     '''

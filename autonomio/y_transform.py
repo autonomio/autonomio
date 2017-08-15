@@ -1,7 +1,8 @@
 import pandas as pd
 from keras.utils import np_utils
 
-def y_transform(Y,data,flatten='mean'):
+
+def y_transform(Y, data, flatten='mean'):
 
     df_y = data[Y]
 

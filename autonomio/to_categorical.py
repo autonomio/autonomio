@@ -3,6 +3,7 @@ import pandas as pd
 from vectorize_text import vectorize_text
 from nan_handler import nan_dropper, nan_filler
 
+
 def labels_to_ints(data, y, max_categories, starts_with_col, treshold, first_fill_cols, fill_with):
     
     if max_categories == 'auto':

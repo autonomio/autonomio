@@ -75,3 +75,4 @@ def validate(	Y,
 	p = x / len(rounded)
 
 	return train_scores, test_scores, p
+

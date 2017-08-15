@@ -19,6 +19,7 @@ from shapes import shapes
 from double_check import check
 from validator import validate
 
+
 def kuubio(X,Y,data,
             dims,
             epoch,

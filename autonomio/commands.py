@@ -7,6 +7,7 @@ from to_categorical import labels_to_ints
 
 import pandas as pd
 
+
 def train(X,Y,data,
       dims=300,
       epoch=5,

@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def nan_finder(data):
 
     '''

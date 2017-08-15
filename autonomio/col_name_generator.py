@@ -1,6 +1,7 @@
 from string import ascii_lowercase
 import itertools
 
+
 def col_name_generator(data):
 
     limit = data.shape[1]
