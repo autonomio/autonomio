@@ -16,24 +16,30 @@ def load_model(saved_model):
 	print("Loaded model from disk")
 
 	f = open(saved_model+".x", 'r')
-	X = f.read()
+	temp = f.read()
+	temp = temp.split(",")
+
 	try:
-	    X = map(int, X.split())
+	    X = map(int, temp[0].split())
 	except ValueError:
-		X = X.split()
+		X = temp[0].split()
+
+	try:
+		flatten = int(temp[1])
+	except ValueError:
+		flatten = temp[1]
 
 	f.close()
 
 	if type(X) == list and len(X) == 1:
 		X = X[0]
 
-	return loaded_model, X
+	return loaded_model, X, flatten
 
-def make_prediction(data, saved_model,	flatten='mean', 
-                                        name=False, 
+def make_prediction(data, saved_model,  name=False, 
                                         validation=False):
 
-	loaded_model, X = load_model(saved_model)
+	loaded_model, X, flatten = load_model(saved_model)
 
 	signals = transform_data(data, flatten, X)
 

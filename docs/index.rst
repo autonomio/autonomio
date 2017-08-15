@@ -9,9 +9,9 @@ Autonomio v.0.1.2 User Manual
     :target: https://coveralls.io/github/autonomio/core-module?branch=master
 
 
-This document covers in detail every function of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
+This document covers in detail functionality of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
 
-Autonomio is very easy to use and it's highly recommended to memorize the namespace which is less just 3 commands and less than 20 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
+Autonomio is very easy to use and it's highly recommended to memorize the namespace which is just 3 commands and less than 30 arguments combined. Yet you have an infinite number of network configurations available. To have 100% control over Autonomio's powerful features, you just have to know three commands. 
 
 To train (and save) model::
 
@@ -35,19 +35,25 @@ For installing the **development version** (latest)::
 
     pip install git+https://github.com/autonomio/core-module.git
 
+------------------------
+TYPES OF NEURAL NETWORKS
+------------------------
+
+Currently Autonomio is focused on providing a very high level abstraction layer to training of 'dense' neural networks, and then using the trained models to make predictions in any environment that you see fit. Dense layers are suited for a wide range of data science problems.
+
 -----------
 DATA INPUTS
 -----------
 
-The expected input dataformat is Pandas dataframe. Deep learning is most useful in solving classification problems, and for that we are providing two modes 'binary' and 'categorical'. 
+The expected input dataformat is a Pandas dataframe. Generally speaking, deep learning is at its strongest in solving classification problems, where the outcome variable is either binary categorical (0 or 1) or multi categorical. It's recommended to convert continuous and ranged variables to categoricals first. 
 
 BINARY (default)
 ---------------
 
-- X can be text, integer 
-- Y can be an integer 
+- X can be text, int, or floating point 
+- Y can be an int, or floating point
 
-The default settings are optimized for making a 1 or 0 prediction and for example in the case of predicting sentiment from tweets, Autonomio gives 85% accuracy out-of-the-box for classifying tweets that rank in the most negative 20% according to NLTK Vader sentiment analysis. 
+The default settings are optimized for making a 1 or 0 prediction and for example in the case of predicting sentiment from tweets, Autonomio gives 85% accuracy without any parameter setting for classifying tweets that rank in the most negative 20% according to NLTK Vader sentiment analysis. 
 
 
 CATEGORICAL
@@ -56,10 +62,9 @@ CATEGORICAL
 - X can be text, integer 
 - Y can be an integer or text
 - output layer neurons must match number of categories
-- change activation_out
+- change activation_out to something that works with categoricals
 
 It's not a good idea to have too many categories, maybe 10 is pushing it in most cases. 
-
 
 -----
 TRAIN
@@ -129,11 +134,29 @@ By default verbosity from Keras is at mimimum, and you may want the live mode fo
 
     train('text','neg',data('random_tweets'),epoch=20,flatten=.3,verbose=1)
 
+You can add the shape in the model(the way how layers are distributed)::
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,verbose=1, shape='brick')
+
+To validate the result to check the test accuracy you may use the validation::
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,validation=True)
+
+The True for validation puts the half of the data to be trained, the other - tested.
+
+You can also define which part of the data will be validated::
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,validation=.4)
+
+To be sure about the results which you have got you can use double check::
+
+    train('text','neg',data('random_tweets'),epoch=20,flatten=.3,double_check=True)
+
 
 TRAIN ARGUMENTS
 ---------------
 
-Even though it's possible to use Autonomio mostly with few arguments, there are a total 11 arguments that can be used to improving model accuracy::
+Even though it's possible to use Autonomio mostly with few arguments, there are a total 13 arguments that can be used to improving model accuracy::
 
     def train(X,Y,data,
                 dims=300,
@@ -147,7 +170,10 @@ Even though it's possible to use Autonomio mostly with few arguments, there are 
                 neuron_first='auto',
                 neuron_last=1,
                 batch_size=10,
-                verbose=0):
+                verbose=0,
+                shape='funnel',
+                double_check=False,
+                validation=False):
 
 +-------------------+-------------------------+-------------------------+
 |                   |                         |                         |
@@ -181,9 +207,245 @@ Even though it's possible to use Autonomio mostly with few arguments, there are 
 +-------------------+-------------------------+-------------------------+
 | verbose           | 0,1,2                   | 0                       |
 +-------------------+-------------------------+-------------------------+
+| shape             | string                  | 'funnel'                |
++-------------------+-------------------------+-------------------------+
+| double_check      | True or False           | False                   |
++-------------------+-------------------------+-------------------------+
+| validation        | True,False,float(0 to 1)| False                   |
++-------------------+-------------------------+-------------------------+
+
+------
+SHAPES
+------
 
 
-Note that the network shape is roughly an upside-down pyramind. To change this you would want to change the code in train_new.py.
+Shapes function takes as input number of layers, maximum value of neurons and the name of a shape.
+As an output it gives a list of neurons in order according to its shape.
+
+
+Funnel
+------
+
+Funnel is the shape, which is set by default. It roughly looks like an upside-dowm pyramind, so that the first layer is defined as neuron_max, and the next layers are sligtly decreased compared to previous ones.::
+
+
+ +			  +
+  \          /
+   \        /
+    \      /
+     \    /
+      |  |
+
+
+As funnel shape is set by default, we do not need to input anything to use it.
+
+Example input.::
+
+
+tr = train(1,'neg',temp,layers=5,neuron_max=10)
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [10, 5, 3, 2, 1]
+
+
+Long Funnel
+-----------
+
+Long Funnel shape can be applied by defining shape as 'long_funnel'. First half of the layers have the value of neuron_max, and then they have the shape similar to Funnel shape - decreasing to the last layer.::
+
+
+ +			+
+ |          |
+ |          |
+ |          |
+  \        /
+   \      /
+    \    /
+     |  |
+
+
+Example input.::
+
+
+tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='long_funnel')
+
+
+Output list of neurons(excluding ounput layer).::
+
+
+neuron_count = [10, 10, 10, 5, 3, 2]
+
+
+Rhombus
+-------
+
+Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 1 and the next layers slightly increase till the middle one which equals to the value of neuron_max. Next layers are the previous ones goin in the reversed order. ::
+
+     +   +
+     /   \
+    /     \
+   /       \
+  /         \
+  \         /
+   \       /
+    \     /
+     \   /
+     |   |
+
+
+Example input. ::
+
+
+tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='rhombus')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [1, 6, 10, 6, 1]
+
+
+Diamond
+-------
+
+Defining shape as 'diamond' we will obtain the shape of the 'opened rhombus', where everything is similar to the Rhombus shape, but layers start from the larger number instead of 1. ::
+
+    +     +
+   /       \
+  /         \
+  \         /
+   \       /
+    \     /
+     \   /
+     |   |
+
+
+Example input. ::
+
+
+tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='diamond')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [6, 6, 10, 5, 3, 2]
+
+
+Hexagon
+-------
+
+
+Hexagon, which we get by calling 'hexagon' for shape, starts with 1 as the first layer and increases till the neuron_max value. Then some next layers will have maximum value untill it starts to decrease till the last layer. ::
+
+     +  +
+    /    \
+   /      \
+  /        \
+ |          |
+ |          |
+ |          |
+  \        /
+   \      /
+    \    /
+     |  |
+
+
+Example input. ::
+
+
+tr = train(1,'neg',temp,layers=7,neuron_max=10,shape='hexagon')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [1, 3, 5, 10, 10, 5, 3]
+
+
+Brick
+-----
+
+
+All the layers have neuron_max value. Called by shape='brick'. ::
+
+
+   +			 +
+   |             |
+   |             |
+   |             |
+   |             |
+    ----     ----
+        |   |
+
+
+Example input. ::
+
+
+tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='brick')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [10, 10, 10, 10, 10]
+
+
+Triangle
+--------
+
+This shape, which is called by defining shape as 'triangle' starts with 1 and increases till the last input layer, which is neuron_max. ::
+
+
+         +  +
+        /    \
+       /      \
+      /        \
+     /          \
+    /            \
+    ----      ----
+        |    |
+
+
+Example input. ::
+
+
+tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='triangle')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [1, 2, 3, 5, 10]
+
+
+Stairs
+------
+
+You can apply it defining shape as 'stairs'. If number of layers more than four, then each two layers will have the same value, then it decreases.If the number of layers is smaller than four, then the value decreases every single layer. ::
+
+   +                      +
+   |                      |
+    ---                ---
+       |             |
+        ---       ---
+           |     |
+
+
+Example input. ::
+
+
+tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='stairs')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+neuron_count = [10, 10, 8, 8, 6, 6]
+
 
 ----
 TEST
@@ -270,6 +532,15 @@ The data command is provided for both convinience, and to give the user access t
 +-------------------+-------------------------+-------------------------+
 | mode              | string ('file')         | NA                      |
 +-------------------+-------------------------+-------------------------+
+
+
+----------
+VALIDATION
+----------
+
+
+
+
 
 ---------------
 TROUBLESHOOTING
