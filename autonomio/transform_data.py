@@ -1,13 +1,15 @@
 import warnings
 import pandas as pd
 import numpy as np
+
 from vectorize_text import vectorize_text
 from x_transform import x_transform
 from y_transform import y_transform
 
 warnings.filterwarnings("ignore")
 
-def transform_data( data,
+
+def transform_data(data,
                     flatten,
                     X=False,
                     Y=False):

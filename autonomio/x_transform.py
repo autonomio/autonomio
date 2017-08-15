@@ -1,7 +1,8 @@
 import pandas as pd
 from vectorize_text import vectorize_text
 
-def x_transform(X,data):
+
+def x_transform(X, data):
 
     # for a range of columns (two ints)
     if type(X) == list:
@@ -45,3 +46,4 @@ def x_transform(X,data):
     except: 
         print "ERROR: please check your X input if it's int, list of ints, list of labels or label."
         return False
+

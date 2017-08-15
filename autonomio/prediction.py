@@ -2,8 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
+
 from vectorize_text import vectorize_text
 from transform_data import transform_data
+
 
 def load_model(saved_model):
 
@@ -29,7 +31,7 @@ def load_model(saved_model):
 
 	return loaded_model, X
 
-def make_prediction(data, saved_model,  dims=300, 
+def make_prediction(data, saved_model, dims=300, 
                                         flatten='mean', 
                                         name=False, 
                                         validation=False):
@@ -60,9 +62,9 @@ def make_prediction(data, saved_model,  dims=300,
 
 		predict = predict.sort_values('Value', ascending=False)
 
-		print predict.head(10)
-		print ""
-		print predict.tail(10)
+		print(predict.head(10))
+		print('--------------')
+		print(predict.tail(10))
         
 		return predict
 
@@ -80,4 +82,3 @@ def make_prediction(data, saved_model,  dims=300,
 		predictions = loaded_model.predict(signals)
 
 		return predictions
-

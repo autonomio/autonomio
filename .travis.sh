@@ -9,3 +9,5 @@ sudo pip install keras --upgrade -q
 sudo pip install matplotlib --upgrade -q
 sudo pip install seaborn --upgrade -q
 sudo pip install mpld3 --upgrade -q
+sudo pip install h5py --upgrade -q
+sudo pip install jinja2 --upgrade -q

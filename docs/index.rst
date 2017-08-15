@@ -1,5 +1,5 @@
 =============================
-Autonomio v.0.1.2 User Manual
+Autonomio v.0.3.2 User Manual
 =============================
 
 .. image:: https://travis-ci.org/autonomio/core-module.svg?branch=master

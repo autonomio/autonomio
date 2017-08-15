@@ -1,5 +1,6 @@
 import math as m
 
+
 def shapes( layers, 
             shape, 
             neuron_max,
@@ -194,3 +195,4 @@ def shapes( layers,
 
     return neuron_count
 
+## Returns a List

@@ -1,7 +1,8 @@
 import spacy as sp
 from ascify import Ascify
 
-def vectorize_text(data,language='en'):
+
+def vectorize_text(data, language='en'):
     
     nlp = sp.load(language)
 
@@ -39,3 +40,4 @@ def vectorize_text(data,language='en'):
         print "ERROR: from command line try: python -m spacy download en"
 
 ## Returns a list with 300 columns when succesful
+

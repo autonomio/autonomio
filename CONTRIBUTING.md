@@ -2,9 +2,8 @@
 
 First I want to thank you A LOT for considering / taking the effort to contribute code to Autonomio. Below you will find some simple and mostly obvious guidelines on how to do it in the most valuable way.
 
-To make sure that you're on the same page, for a a high level overview of the scope, see [Autonomio website](http://autonom.io) or for a a detailed overview of the current functionality, see [Autonomio documentation](http://autonomio.readthedocs.io).
+To make sure that you're on the same page (with rest of the commnity), for a a high level overview of the scope, see [Autonomio website](http://autonom.io) or for a a detailed overview of the current functionality, see [Autonomio documentation](http://autonomio.readthedocs.io).
 
-# Table of contents
 
 1. [Ways to Contribute](#ways-to-contribute)
 
@@ -26,7 +25,10 @@ To make sure that you're on the same page, for a a high level overview of the sc
     
     2.2. [Testing](#ideas)
 
+    2.3. [Documentation](#docs_for_review)
+
 3. [Reviewing Pull Requests](#review)
+
 
 ## 1. Ways to contribute <a name="ways-to-contribute"></a>
 
@@ -134,6 +136,28 @@ Once you've gone through all these steps, take a short break, come back and ask 
 
 "WHAT COULD GO WRONG?"
 
+### 2.3. Documentation standards <a name="docs_for_review"></a>
+
+Because Autonomio is to sombased on creating a very high level abstraction, and a lot of "magic" takes place without the user knowing about it, it's very important that we are elaborate in our documentation. This needs to take place to the extent that users like the one who made the following comment are happy: 
+
+> Strong documentation and tutorials, with an emphasis on data prep. Don't abstract things at the cost of understanding what is going on behind the hood. I want to know how it all works, and what is being done to my data - I just don't want to have to code every step.
+
+This is the kind of situation we are trying to create; a lot of mundane but hard or time consuming to do things are taken care of on behalf of the user, but if the user so desires, he or she can get a full (and clear!) picture of what's being done. 
+
+In order to pass code review (required for merging pull requests), together with your code in the same pull request you must provide the following updates to the documentation [docs/index.rst](https://github.com/mikkokotila/core-module/blob/master/docs/index.rst). 
+
+1) What does it do (a high level overview) 
+  1.1) some use examples
+2) What data input is requires
+  2.1) some use examples 
+3) What it outputs 
+4) What parameters are there (a high level overview)
+  4.1) What options each parameter has
+  4.2) What is the function of each parameter option
+
+In short summary, the goal is that the user can completely understand 100% of the functioning of the features. If something is done so that the user can’t see it when they are running the commands, we have to explain exactly and thoroughly what kind of automations are taking place. 
+
 ### 3. Reviewing Pull Requests <a name="review"></a>
 
-If you've been assigned as a reviewer of a given pull request, unless you've been explicitly asked to do so, **DON'T MERGE** just approve the review and share in the comments what you think. If you don't have any comments, just confirm with a comment that you don't have any. 
+If you've been assigned as a reviewer of a given pull request, unless you've been explicitly asked to do so, **DON'T MERGE** just approve the review and share in the comments what you think. If you don't have any comments, just confirm with a comment that you don't have any. While this is kind of obvious, don't start reviewing before you can see all the tests have passed ;) 
+
