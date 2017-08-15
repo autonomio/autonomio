@@ -83,10 +83,6 @@ def kuubio(X,Y,data,
 
         if save_model == False:
             save_model = 'saved_model'
-    
-    np.random.seed()
-
-    #Y = Y[:,8]
 
     if layers == 1:
         shape = 'funnel'
@@ -102,8 +98,6 @@ def kuubio(X,Y,data,
 
         elif neuron_max == 'auto':
             neuron_max = 4
-
-        #print neuron_max
 
         neuron_count = []
         neuron_count = shapes(  layers, 
@@ -126,10 +120,9 @@ def kuubio(X,Y,data,
                       metrics=['accuracy'])
 
         if verbose != 0:
-            print(model.summary())
-            print ""
+            print(model.summary() + '\n')
             network_scale = len(X) * epoch * layers * neuron_max
-            print "network scale index : " + str(network_scale)
+            print("network scale index : " + str(network_scale) + '\n')
 
         time.sleep(0.2)
         history = model.fit(X, Y,   validation_split=0.33, 
@@ -139,28 +132,21 @@ def kuubio(X,Y,data,
 
         scores = model.evaluate(X, Y, verbose=verbose)
 
-        #print(history.history.keys())
-
-        print ""
-
         if double_check == False or validation == False:
             print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
-        print ""
-        print "TRIAL PARAMETERS"
+        print "\n TRIAL PARAMETERS"
         print "----------------"
-        print "indepedent variable : " + ind_var
+        print "indepedent variable : " + str(ind_var)
         print "n= : " + str(len(X))
-
-        print "epochs : " + str(epoch)
+        print "\n epochs : " + str(epoch)
         print "features : " + str(dims)
         print "layers : " + str(layers)
         print "dropout : " + str(dropout)
         print "1st layer neurons : " + str(neuron_max)
         print "flatten : " + str(flatten)
         print "batch_size : " + str(batch_size) 
-        print "shape : " + shape
-        print ""
+        print "shape : " + shape + '\n'
 
         accuracy(history)
 
@@ -215,11 +201,12 @@ def kuubio(X,Y,data,
                                                             save_model,
                                                             flatten)
 
-            print ""
-            print   ("train accuracy: %.2f%%" % (train_scores[1]*100))
+            print   ("\n train accuracy: %.2f%%" % (train_scores[1]*100))
             print   ("      loss: %.2f%%" % (train_scores[0]*100))
             print   ("test accuracy: %.2f%%" % (test_scores[1]*100)) 
             print   ("     loss: %.2f%%" % (test_scores[0]*100))
             print   ("validation accuracy: %.2f%%" % (val_acc*100))
     
     return 
+
+## Returns output on the screen

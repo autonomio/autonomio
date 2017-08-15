@@ -3,7 +3,7 @@ from train_new import kuubio
 from plots import scatterz
 from load_data import load_data
 from transform_data import transform_data
-from to_categorical import labels_to_int
+from to_categorical import labels_to_ints
 
 import pandas as pd
 
@@ -181,14 +181,14 @@ def test(data, saved_model, dims=300, flatten='mean', labels=False):
     return test
 
 
-def wrangler(df, y, max_categories='auto', starts_with_col='none'):
+def wrangler(df, y, max_categories='auto', starts_with_col='none',treshold=.9,first_fill_cols=None,fill_with=0):
 
-    out = labels_to_int(df, y, max_categories, starts_with_col)
+    out = labels_to_ints(df, y, max_categories, starts_with_col,treshold,first_fill_cols,fill_with)
 
     return out 
 
 
-def data(name, mode='default'):
+def data(name, mode, sep=',', delimiter=None, header='infer'):
 
     '''
 
@@ -216,6 +216,6 @@ def data(name, mode='default'):
     
     ''' 
 
-    out = load_data(name, mode)
+    out = load_data(name, mode, sep, delimiter, header)
     
     return out

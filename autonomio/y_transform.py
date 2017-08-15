@@ -22,7 +22,8 @@ def y_transform(Y,data,flatten='mean'):
     elif type(flatten) == float:
         df_y = pd.DataFrame(df_y >= df_y.quantile(flatten))
 
-    # below is for case where 
+    # below is for case where the y-feature is converted in 
+    # to a categorical, either if it's a number or string. 
 
     elif flatten == 'cat_string':
         df_y = pd.Categorical(df_y)

@@ -194,3 +194,4 @@ def shapes( layers,
 
     return neuron_count
 
+## Returns a List

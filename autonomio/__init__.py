@@ -8,5 +8,8 @@ from transform_data import transform_data, X_data, Y_data
 from x_transform import x_transform
 from y_transform import y_transform
 from shapes import shapes
+from to_categorical import labels_to_ints
+from col_name_generator import col_name_generator
+from nan_handler import nan_finder, nan_dropper, nan_filler
 
-__version__ = "0.1.2"
+__version__ = "0.3.2"

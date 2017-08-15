@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 #
-# Copyright (C) 2015-2017 Botlab  
+# Copyright (C) 2014-2017 Mikko Kotila
+
 import os
 os.environ["MPLCONFIGDIR"] = "."
 
@@ -27,7 +28,7 @@ MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://autonom.io'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/autonomio/core-module/'
-VERSION = '0.3.1.dev'
+VERSION = '0.3.2.dev'
 
 try:
     from setuptools import setup
@@ -43,10 +44,6 @@ def check_dependencies():
         import numpy
     except ImportError:
         install_requires.append('numpy')
-    try:
-        import scipy
-    except ImportError:
-        install_requires.append('scipy')
     try:
         import matplotlib
     except ImportError:
@@ -75,6 +72,10 @@ def check_dependencies():
         import mpld3
     except ImportError:
         install_requires.append('mpld3')
+    try:
+        import jinja2
+    except ImportError:
+        install_requires.append('jinja2')
 
     return install_requires
 
