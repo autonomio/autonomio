@@ -1,17 +1,12 @@
 from prediction import make_prediction
 from train_new import kuubio
-from plots import scatterz
 from load_data import load_data
-from transform_data import transform_data
 from to_categorical import labels_to_ints
 
-import pandas as pd
 
-
-def train(X,Y,data,
-      dims=300,
-      epoch=5,
-      flatten='mean',
+def train(X, Y, data, dims=300,
+          epoch=5,
+          flatten='mean',
           dropout=.2,
           layers=3,
           model='kuubio',
@@ -28,19 +23,19 @@ def train(X,Y,data,
           double_check=False,
           validation=False):
 
-    '''
-    
-    NOTE: If you want to see the training / test plots, remember to do: 
+    '''The command for training a new model.
+
+       NOTE: If you want to see the training / test plots, remember to do:
 
           %matplotlib inline
 
-    INPUT: the data ingestion is very flexibile. You can 
-           Input text (also unicode), labels, and things will 
+    INPUT: the data ingestion is very flexibile. You can
+           Input text (also unicode), labels, and things will
            work. No transformation needed outside of Autonomio.
 
             See more details below.
 
-    PARAMETERS: 
+    PARAMETERS:
 
     X =     The input can be indicated in several ways:
 
@@ -56,75 +51,80 @@ def train(X,Y,data,
             'string'  = raw text or category labels*
 
             * use commands.utils wrangler() to convert in to
-            process your data first! 
+            process your data first!
 
     Y =     This can be in multiple dtype:
 
             'int'     = any integer values
             'float'   = any float value
-            'string'  = category labels 
+            'string'  = category labels
 
             See more related to prediction variable below
-            in 'flatten section'. 
+            in 'flatten section'.
 
-    data =  A pandas dataframe where you have at least one 
-            column for 'x' depedent variable (predictor) and 
+    data =  A pandas dataframe where you have at least one
+            column for 'x' depedent variable (predictor) and
             one column for 'y' indepedent variable (prediction).
 
-    dims =  this is selected automatically and is not needed. 
+    dims =  this is selected automatically and is not needed.
             NOTE: this needs to be same as x features
 
     epoch = how many epocs will be run for training. More epochs
-            will take more time. 
+            will take more time.
 
     flatten = For transforming y (outcome) variable. For example if
               the y input is continuous but prediction is binary, then
-              a flattening of some sort should be used. 
+              a flattening of some sort should be used.
 
               OPTIONS:  'mean','median','mode', int, float, 'cat_string',
                         'cat_numeric', and 'none'
 
-    dropout = The fraction of learning that will be "forgotten" on each each 
-              learning event. 
+    dropout = The fraction of learning that will be "forgotten" on each each
+              learning event.
 
     layers = The number of dense layers the model will have. Note that each
-             dense layer is followed by a dropout layer. 
+             dense layer is followed by a dropout layer.
 
-    model = This is currently not in use. Later we add LSTM and some other model
-            options, then it will be activated. 
+    model = This is currently not in use. Later we add LSTM and some other
+            model options, then it will be activated.
 
-    loss = The loss to be used with the model. All the Keras losses all available
-            https://keras.io/losses/
+    loss = The loss to be used with the model. All the Keras losses all
+           available https://keras.io/losses/
 
-    optimizer = The optimizer to use with the model. All the Keras optimizers are 
-                all available > https://keras.io/optimizers/
+    optimizer = The optimizer to use with the model. All the Keras optimizers
+                are all available > https://keras.io/optimizers/
 
-    
-    activation = Activation for the hidden layers (non-output) and all the Keras 
-                 optimizers are all available > https://keras.io/optimizers/
+    activation = Activation for the hidden layers (non-output) and all the
+                 Keras optimizers are all available >
+                 https://keras.io/optimizers/
 
-    activation_out = Same as 'activation' (above), but for the output layer only.
+    activation_out = Same as 'activation' (above), but for the
+                     output layer only.
 
-    save_model =  An option to save the model configuration, weights and parameters. 
-                  
-                  OPTIONS:  default is 'False', if 'True' model will be saved with 
-                            default name ('model') and if string, then the model name
+    save_model =  An option to save the model configuration, weights
+                  and parameters.
+
+                  OPTIONS:  default is 'False', if 'True' model
+                            will be saved with default name ('model')
+                            and if string, then the model name
                             will be the string value e.g. 'titanic'.
 
-    neuron_max = The maximum number of neurons on any layer. 
+    neuron_max = The maximum number of neurons on any layer.
 
-    neuron_last = How many neurons there are in the last layer. 
-  
-    batch_size = Changes the number of samples that are propagated through the network 
-                 at one given point in time. The smaller the batch_size, the longer the 
-                 training will take. 
+    neuron_last = How many neurons there are in the last layer.
 
-    verbose = This is set to '0' by default. The other options are '1' and '2' and will
-              change the amount of information you are getting. 
+    batch_size = Changes the number of samples that are propagated
+                 through the network at one given point in time.
+                 The smaller the batch_size, the longer the training
+                 will take.
+
+    verbose = This is set to '0' by default. The other options are
+              '1' and '2' and will change the amount of information
+              you are getting.
 
 
-    shape = Used for automatically creating a network shape. Currently there are
-            8 options available. 
+    shape = Used for automatically creating a network shape. Currently
+            there are 8 options available.
 
             'funnel'
             'rhombus'
@@ -135,43 +135,46 @@ def train(X,Y,data,
             'triangle'
             'stairs'
 
-    double_check = Makes a 'manual' check of the results provided by Keras backend
-                   and compares the two. This is good when you have doubt with the results. 
+    double_check = Makes a 'manual' check of the results provided by
+                   Keras backend and compares the two. This is good
+                   when you have doubt with the results.
 
-    validation = Validates in a more robust way than usual train/test split by initially splitting
-                 the dataset in half, where the first half becomes train and test, and then the second
-                 half becomes validation data set. 
+    validation = Validates in a more robust way than usual train/test split
+                 by initially splitting the dataset in half, where the first
+                 half becomes train and test, and then the second half becomes
+                 validation data set.
 
-                 OPTIONS: default is 'false', with 'true' 50% of data is separated for validation.
-
+                 OPTIONS: default is 'false', with 'true' 50% of data is
+                          separated for validation.
     '''
 
-    train = kuubio(X,Y,data,
-          dims,
-          epoch,
-          flatten,
-              dropout,
-              layers,
-              model,
-              loss,
-              optimizer,
-              activation,
-              activation_out,
-              save_model,
-              neuron_max,
-              neuron_last,
-              batch_size,
-              verbose,
-              shape,
-              double_check,
-              validation)
+    train = kuubio(X, Y, data,
+                   dims,
+                   epoch,
+                   flatten,
+                   dropout,
+                   layers,
+                   model,
+                   loss,
+                   optimizer,
+                   activation,
+                   activation_out,
+                   save_model,
+                   neuron_max,
+                   neuron_last,
+                   batch_size,
+                   verbose,
+                   shape,
+                   double_check,
+                   validation)
 
     return train
 
-    
+
 def test(data, saved_model, dims=300, flatten='mean', labels=False):
 
-    '''
+    ''' Function for making predictions on a saved model.
+
     NOTE:  1) remember to use the same 'x' as with training
 
            2) call the model by its name
@@ -182,41 +185,47 @@ def test(data, saved_model, dims=300, flatten='mean', labels=False):
     return test
 
 
-def wrangler(df, y, max_categories='auto', starts_with_col='none',treshold=.9,first_fill_cols=None,fill_with=0):
+def wrangler(df, y,
+             max_categories='auto',
+             starts_with_col='none',
+             treshold=.9,
+             first_fill_cols=None,
+             fill_with=0):
 
-    out = labels_to_ints(df, y, max_categories, starts_with_col,treshold,first_fill_cols,fill_with)
+    out = labels_to_ints(df, y, max_categories, starts_with_col,
+                         treshold, first_fill_cols, fill_with)
 
-    return out 
+    return out
 
 
 def data(name, mode='default', sep=',', delimiter=None, header='infer'):
 
-    '''
+    '''Function for loading one of the Autonomio dataset.
 
-    OPTIONS: Either set mode to 'file' or use name without mode parameter. 
+    OPTIONS: Either set mode to 'file' or use name without mode parameter.
 
-    FILENAMES: 
+    FILENAMES:
 
     'election_in_twitter'
      Dataset consisting of 10 minute samples of 80 million tweets.
 
      'tweet_sentiment'
      Dataset with tweet text classified for sentiment using NLTK Vader.
-    
+
     'sites_category_and_vec'
      4,000 sites with word vectors and 5 categories.
-    
+
     'programmatic_ad_fraud'
      Data from both buy and sell side and over 10 other sources.
-    
+
     'parties_and_employment'
      9 years of monthly poll and unemployment numbers.
-    
-    'random_tweets'        
+
+    'random_tweets'
      20,000 tweets main intended for.
-    
-    ''' 
+
+    '''
 
     out = load_data(name, mode, sep, delimiter, header)
-    
+
     return out
