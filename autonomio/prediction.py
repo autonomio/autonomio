@@ -38,7 +38,6 @@ def load_model(saved_model):
 
 	return loaded_model, X, flatten, Y_unique
 
-
 def make_prediction(data, saved_model,  name=False, 
                                         validation=False):
 

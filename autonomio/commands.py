@@ -57,9 +57,7 @@ def train(X,Y,data,
     return train
 
     
-
 def test(data, saved_model, labels=False):
-
 
     '''
     NOTE:  1) remember to use the same 'x' as with training
@@ -68,6 +66,9 @@ def test(data, saved_model, labels=False):
     '''
 
     test = make_prediction(data, saved_model, name=labels)
+
+    #data = pd.merge(test, data, left_on='name', right_on=labels)
+    #plot = scatterz('value', y_scatter, data, 'name')
 
     return test
 
