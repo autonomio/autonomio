@@ -1,84 +1,85 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+
 from keras.models import model_from_json
 
-from vectorize_text import vectorize_text
 from transform_data import transform_data
 
 
 def load_model(saved_model):
 
-	json_file = open(saved_model + ".json", 'r')
-	loaded_model_json = json_file.read()
-	json_file.close()
-	loaded_model = model_from_json(loaded_model_json)
-	# load weights into new model
-	loaded_model.load_weights(saved_model + '.h5')
-	print("Loaded model from disk")
+    json_file = open(saved_model + ".json", 'r')
+    loaded_model_json = json_file.read()
+    json_file.close()
+    loaded_model = model_from_json(loaded_model_json)
+    # load weights into new model
+    loaded_model.load_weights(saved_model + '.h5')
+    print("Loaded model from disk")
 
-	f = open(saved_model+".x", 'r')
-	X = f.read()
-	try:
-	    X = map(int, X.split())
-	except ValueError:
-		X = X.split()
+    f = open(saved_model+".x", 'r')
+    X = f.read()
+    try:
+        X = map(int, X.split())
+    except ValueError:
+        X = X.split()
 
-	f.close()
+    f.close()
 
-	if type(X) == list and len(X) == 1:
-		X = X[0]
+    if type(X) == list and len(X) == 1:
+        X = X[0]
 
-	return loaded_model, X
+    return loaded_model, X
 
-def make_prediction(data, saved_model, dims=300, 
-                                        flatten='mean', 
-                                        name=False, 
-                                        validation=False):
 
-	loaded_model, X = load_model(saved_model)
+def make_prediction(data,
+                    saved_model,
+                    dims=300,
+                    flatten='mean',
+                    name=False,
+                    validation=False):
 
-	signals = transform_data(data, flatten, X)
+    loaded_model, X = load_model(saved_model)
 
-	if validation == False:
+    signals = transform_data(data, flatten, X)
 
-		predict = loaded_model.predict(signals)
+    if validation is False:
 
-		if name != False:
-			name = data[name]
+        predict = loaded_model.predict(signals)
 
-			l = []
-			i = 0
+        if name is not False:
+            name = data[name]
 
-			for x in predict:
-				l.append([x[0], name[i:i+1].values[0]])
-				i += 1
+            l = []
+            i = 0
 
-			predict = pd.DataFrame(l)
-			predict.columns = ['Value', 'Name']
+            for x in predict:
+                l.append([x[0], name[i:i+1].values[0]])
+                i += 1
 
-		else:
-			predict = pd.DataFrame(predict)
+            predict = pd.DataFrame(l)
+            predict.columns = ['Value', 'Name']
 
-		predict = predict.sort_values('Value', ascending=False)
+        else:
+            predict = pd.DataFrame(predict)
 
-		print(predict.head(10))
-		print('--------------')
-		print(predict.tail(10))
-        
-		return predict
+        predict = predict.sort_values('Value', ascending=False)
 
-	if validation != False:
+        print(predict.head(10))
+        print('--------------')
+        print(predict.tail(10))
 
-		if validation == True:
-		    n = len(signals) * .5
-		else:
-		    n = len(signals) * validation
+        return predict
 
-		n = int(n)
+    if validation is not False:
 
-		signals = signals[n:]
+        if validation is True:
+            n = len(signals) * .5
+        else:
+            n = len(signals) * validation
 
-		predictions = loaded_model.predict(signals)
+        n = int(n)
 
-		return predictions
+        signals = signals[n:]
+
+        predictions = loaded_model.predict(signals)
+
+        return predictions
