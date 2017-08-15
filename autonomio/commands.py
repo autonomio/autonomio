@@ -57,7 +57,9 @@ def train(X,Y,data,
     return train
 
     
+
 def test(data, saved_model, labels=False):
+
 
     '''
     NOTE:  1) remember to use the same 'x' as with training

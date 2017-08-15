@@ -219,6 +219,7 @@ SHAPES
 ------
 
 
+
 Shapes function takes as input number of layers, maximum value of neurons and the name of a shape.
 As an output it gives a list of neurons in order according to its shape.
 
@@ -229,12 +230,14 @@ Funnel
 Funnel is the shape, which is set by default. It roughly looks like an upside-dowm pyramind, so that the first layer is defined as neuron_max, and the next layers are sligtly decreased compared to previous ones.::
 
 
- +			  +
+
+ +			      +
   \          /
    \        /
     \      /
      \    /
       |  |
+
 
 
 As funnel shape is set by default, we do not need to input anything to use it.
@@ -257,7 +260,8 @@ Long Funnel
 Long Funnel shape can be applied by defining shape as 'long_funnel'. First half of the layers have the value of neuron_max, and then they have the shape similar to Funnel shape - decreasing to the last layer.::
 
 
- +			+
+
+ +			    +
  |          |
  |          |
  |          |
@@ -265,6 +269,7 @@ Long Funnel shape can be applied by defining shape as 'long_funnel'. First half 
    \      /
     \    /
      |  |
+
 
 
 Example input.::
@@ -284,6 +289,7 @@ Rhombus
 
 Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 1 and the next layers slightly increase till the middle one which equals to the value of neuron_max. Next layers are the previous ones goin in the reversed order. ::
 
+
      +   +
      /   \
     /     \
@@ -294,6 +300,7 @@ Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 
     \     /
      \   /
      |   |
+
 
 
 Example input. ::
@@ -313,6 +320,7 @@ Diamond
 
 Defining shape as 'diamond' we will obtain the shape of the 'opened rhombus', where everything is similar to the Rhombus shape, but layers start from the larger number instead of 1. ::
 
+
     +     +
    /       \
   /         \
@@ -321,6 +329,7 @@ Defining shape as 'diamond' we will obtain the shape of the 'opened rhombus', wh
     \     /
      \   /
      |   |
+
 
 
 Example input. ::
