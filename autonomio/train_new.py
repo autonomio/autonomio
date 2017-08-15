@@ -184,6 +184,6 @@ def trainer(X, Y, data,
             print("loss: %.2f%%" % (test_scores[0]*100))
             print("validation accuracy: %.2f%%" % (val_acc*100))
 
-    return ex1, ex2
+    return
 
 # Returns output on the screen
