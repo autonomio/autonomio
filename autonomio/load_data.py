@@ -50,10 +50,10 @@ def load_data(name, mode, sep, delimiter, header):
 
             # Convert number column names to alphabets
 
-            if name.endswith('.csv') or name.endswith('.txt') and header == None:
-
+            if name.endswith('.csv') and header is None:
                 out = col_name_generator(out)
-
+            elif name.endswith('.csv') and header is None:
+                out = col_name_generator(out)
             return out
 
     except UnboundLocalError:

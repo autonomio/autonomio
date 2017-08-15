@@ -76,6 +76,10 @@ def check_dependencies():
         import jinja2
     except ImportError:
         install_requires.append('jinja2')
+    try:
+        import iPython
+    except ImportError:
+        install_requires.append('iPython')
 
     return install_requires
 

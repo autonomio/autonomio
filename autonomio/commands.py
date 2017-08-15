@@ -1,5 +1,5 @@
 from prediction import make_prediction
-from train_new import kuubio
+from train_new import trainer
 from load_data import load_data
 from to_categorical import labels_to_ints
 
@@ -9,7 +9,6 @@ def train(X, Y, data, dims=300,
           flatten='mean',
           dropout=.2,
           layers=3,
-          model='kuubio',
           loss='binary_crossentropy',
           optimizer='adam',
           activation='relu',
@@ -148,30 +147,29 @@ def train(X, Y, data, dims=300,
                           separated for validation.
     '''
 
-    train = kuubio(X, Y, data,
-                   dims,
-                   epoch,
-                   flatten,
-                   dropout,
-                   layers,
-                   model,
-                   loss,
-                   optimizer,
-                   activation,
-                   activation_out,
-                   save_model,
-                   neuron_max,
-                   neuron_last,
-                   batch_size,
-                   verbose,
-                   shape,
-                   double_check,
-                   validation)
+    out = trainer(X, Y, data,
+                  dims,
+                  epoch,
+                  flatten,
+                  dropout,
+                  layers,
+                  loss,
+                  optimizer,
+                  activation,
+                  activation_out,
+                  save_model,
+                  neuron_max,
+                  neuron_last,
+                  batch_size,
+                  verbose,
+                  shape,
+                  double_check,
+                  validation)
 
-    return train
+    return out
 
 
-def test(data, saved_model, dims=300, flatten='mean', labels=False):
+def predictor(data, saved_model, dims=300, flatten='mean', labels=False):
 
     ''' Function for making predictions on a saved model.
 
@@ -180,9 +178,9 @@ def test(data, saved_model, dims=300, flatten='mean', labels=False):
            2) call the model by its name
     '''
 
-    test = make_prediction(data, saved_model, name=labels, flatten=flatten)
+    pred = make_prediction(data, saved_model, name=labels, flatten=flatten)
 
-    return test
+    return pred
 
 
 def wrangler(df, y,
