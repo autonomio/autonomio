@@ -61,7 +61,8 @@ def make_prediction(data, saved_model,  dims=300,
 
 		predict = predict.sort_values('Value', ascending=False)
 
-		print(predict.head(10) + '\n')
+		print(predict.head(10))
+		print('--------------')
 		print(predict.tail(10))
         
 		return predict
