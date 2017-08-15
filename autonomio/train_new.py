@@ -5,19 +5,19 @@ import ascify as asc
 import pandas as pd
 import math
 
-from transform_data import transform_data
-from plots import accuracy
-from prediction import load_model
-from shapes import shapes
-from double_check import check
-from validator import validate
-
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
 import keras.backend as K
 
 import matplotlib.pyplot as plt
+
+from transform_data import transform_data
+from plots import accuracy
+from prediction import load_model
+from shapes import shapes
+from double_check import check
+from validator import validate
 
 def kuubio(X,Y,data,
             dims,

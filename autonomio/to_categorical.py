@@ -1,4 +1,5 @@
 import pandas as pd
+
 from vectorize_text import vectorize_text
 from nan_handler import nan_dropper, nan_filler
 

@@ -188,7 +188,7 @@ def wrangler(df, y, max_categories='auto', starts_with_col='none',treshold=.9,fi
     return out 
 
 
-def data(name, mode, sep=',', delimiter=None, header='infer'):
+def data(name, mode='default', sep=',', delimiter=None, header='infer'):
 
     '''
 

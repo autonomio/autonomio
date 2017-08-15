@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
+
 from vectorize_text import vectorize_text
 from transform_data import transform_data
 
