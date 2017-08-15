@@ -15,7 +15,7 @@ def validate(	Y,
 				verbose,
 				save_model):
 
-	model, X, flatten = load_model(save_model)
+	model, X, flatten, Y_unique = load_model(save_model)
 
 	X,Y = transform_data(data,flatten, X, Y)
 
