@@ -62,128 +62,126 @@ def trainer(X, Y, data,
     except IndexError:
         dims = X_num
 
-    # shuffling and separating the data
-    if validation is not False:
-
-        if validation is not True:
-            n = len(X) * validation
-            n = int(n)
-
-        if validation is True:
-            n = len(X) * .5
-            n = int(n)
-
-        X = X[:n]
-        Y = Y[:n]
-
-        if save_model is False:
-            save_model = 'saved_model'
-
     if layers == 1:
         shape = 'funnel'
 
-    else:
+    if neuron_max == 'auto' and dims >= 4:
+        neuron_max = int(dims + (dims * 0.2))
 
-        if neuron_max == 'auto' and dims >= 4:
-            neuron_max = int(dims + (dims * 0.2))
+    elif neuron_max == 'auto':
+        neuron_max = 4
 
-        elif neuron_max == 'auto':
-            neuron_max = 4
+    neuron_count = []
+    neuron_count = shapes(layers,
+                          shape,
+                          neuron_max,
+                          neuron_last,
+                          dropout)
 
-        neuron_count = []
-        neuron_count = shapes(layers,
-                              shape,
-                              neuron_max,
-                              neuron_last,
-                              dropout)
+    model = mlp(neuron_count,
+                dims,
+                activation,
+                loss,
+                optimizer,
+                dropout,
+                layers,
+                neuron_last,
+                activation_out)
 
-        model = Sequential()
-        model.add(Dense(neuron_count[0],
-                        input_dim=dims,
-                        activation=activation))
-        model.add(Dropout(dropout))
+    network_scale = len(X) * epoch * layers * neuron_max
 
-        for i in range(layers - 1):
-            model.add(Dense(neuron_count[i+1], activation=activation))
-            model.add(Dropout(dropout))
+    if verbose >= 1:
+        time.sleep(0.1)
 
-        model.add(Dense(neuron_last, activation=activation_out))
-        model.compile(loss=loss,
-                      optimizer=optimizer,
-                      metrics=['accuracy'])
+    history = model.fit(X, Y, validation_split=0.33,
+                        epochs=epoch,
+                        verbose=verbose,
+                        batch_size=batch_size)
 
-        network_scale = len(X) * epoch * layers * neuron_max
+    # train / test results
+    ex2 = pd.DataFrame({
+                    'train_acc': history.history['acc'],
+                    'train_loss': history.history['loss'],
+                    'test_acc': history.history['val_acc'],
+                    'test_loss': history.history['val_loss']})
 
-        time.sleep(0.2)
-        history = model.fit(X, Y, validation_split=0.33,
-                            epochs=epoch,
-                            verbose=verbose,
-                            batch_size=batch_size)
+    accuracy(history)
 
-        scores = model.evaluate(X, Y, verbose=verbose)
+    scores = model.evaluate(X, Y, verbose=verbose)
 
-        if double_check is False or validation is False:
-            print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+    if double_check is False or validation is False:
+        print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
-        # model parameters
-        ex1 = pd.Series({
-                         'ind_var': ind_var,
-                         'y_transform': flatten,
-                         'n=': len(X),
-                         'features': dims,
-                         'epochs': epoch,
-                         'layers': layers,
-                         'dropout': dropout,
-                         'batch_size': batch_size,
-                         'shape': shape,
-                         'max_neurons': neuron_max,
-                         'network_scale': network_scale})
+    # calculate and round predictions
+    predictions = model.predict(X)
+    rounded = [round(x[0]) for x in predictions]
 
-        # train / test results
-        ex2 = pd.DataFrame({
-                        'train_acc': history.history['acc'],
-                        'train_loss': history.history['loss'],
-                        'test_acc': history.history['val_acc'],
-                        'test_loss': history.history['val_loss']})
+    if double_check is True:
+            check(Y, rounded, scores)
 
-        display(pd.DataFrame(ex1).transpose())
+    if save_model is False and validation is not False:
+        save_model = 'saved_model'
 
-        accuracy(history)
+    if save_model is not False:
+        save_model_as(X_num, data.columns, model, save_model)
 
-        if save_model is not False:
+    # shuffling and separating the data
+    if validation is not False:
+        X, Y, save_model = validate(Y_num,
+                                    data,
+                                    validation,
+                                    loss,
+                                    optimizer,
+                                    verbose,
+                                    save_model,
+                                    flatten)
 
-            save_model_as(X_num, model, save_model)
+    # model parameters
+    ex1 = pd.Series({
+                     'ind_var': ind_var,
+                     'y_transform': flatten,
+                     'n=': len(X),
+                     'features': dims,
+                     'epochs': epoch,
+                     'layers': layers,
+                     'dropout': dropout,
+                     'batch_size': batch_size,
+                     'shape': shape,
+                     'max_neurons': neuron_max,
+                     'network_scale': network_scale})
 
-        # calculate and round predictions
-        predictions = model.predict(X)
-        rounded = [round(x[0]) for x in predictions]
+    
 
-        # printing result for double check
-        if double_check is True:
+    display(pd.DataFrame(ex1).transpose())
 
-            p = check(Y, rounded)
-
-            print ("keras accuracy: %.2f%%" % (scores[1]*100))
-            print ("double check: %.2f%%" % (p*100))
-
-        # printing result for validation
-        if validation is not False:
-
-            train_scores, test_scores, val_acc = validate(Y_num,
-                                                          data,
-                                                          validation,
-                                                          loss,
-                                                          optimizer,
-                                                          verbose,
-                                                          save_model,
-                                                          flatten)
-
-            print("\n train accuracy: %.2f%%" % (train_scores[1]*100))
-            print("loss: %.2f%%" % (train_scores[0]*100))
-            print("test accuracy: %.2f%%" % (test_scores[1]*100))
-            print("loss: %.2f%%" % (test_scores[0]*100))
-            print("validation accuracy: %.2f%%" % (val_acc*100))
+    # printing result for double check
 
     return
 
-# Returns output on the screen
+
+def mlp(neuron_count,
+        dims,
+        activation,
+        loss,
+        optimizer,
+        dropout,
+        layers,
+        neuron_last,
+        activation_out):
+
+    model = Sequential()
+    model.add(Dense(neuron_count[0],
+                    input_dim=dims,
+                    activation=activation))
+    model.add(Dropout(dropout))
+
+    for i in range(layers - 1):
+        model.add(Dense(neuron_count[i+1], activation=activation))
+        model.add(Dropout(dropout))
+
+    model.add(Dense(neuron_last, activation=activation_out))
+    model.compile(loss=loss,
+                  optimizer=optimizer,
+                  metrics=['accuracy'])
+
+    return model

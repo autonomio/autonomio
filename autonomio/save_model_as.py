@@ -1,4 +1,5 @@
-def save_model_as(X_num, model, save_model):
+def save_model_as(X_num, columns, model, save_model):
+
 
     model_json = model.to_json()
     with open(save_model+".json", "w") as json_file:
@@ -11,11 +12,18 @@ def save_model_as(X_num, model, save_model):
 
     f = open(save_model+".x", "w+")
 
-    if type(X_num) == list:
-        for x in X_num:
-            k = k+str(x)+" "
+
+    if type(X_num) is list:
+        if type(X_num[0]) is int:
+            for x in X_num:
+                k = k+columns[x]+" "
+        elif type(X_num[0]) is str:
+            for x in X_num:
+                k = k+str(x)+" "
+
     elif type(X_num) == int:
         k = str(X_num)
+        
     else:
         k = X_num
 

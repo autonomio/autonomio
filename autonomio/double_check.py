@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def check(Y, rounded):
+def check(Y, rounded, scores):
 
     df1 = pd.DataFrame(rounded)
     df2 = pd.DataFrame(Y)
@@ -21,4 +21,7 @@ def check(Y, rounded):
 
     p = x / a
 
-    return p
+    print ("keras accuracy: %.2f%%" % (scores[1]*100))
+    print ("double check: %.2f%%" % (p*100))
+
+    return
