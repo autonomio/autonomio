@@ -2,74 +2,67 @@ import numpy as np
 import pandas as pd
 from random import shuffle
 
-from keras.models import model_from_json
-
 from transform_data import transform_data
 from prediction import make_prediction, load_model
 
-def validate(	Y,
-				data,
-				validation,
-				loss,
-				optimizer,
-				verbose,
-				save_model):
 
-	model, X, flatten, Y_unique = load_model(save_model)
+def validate(Y, data, validation, loss, optimizer, verbose, save_model,
+             flatten):
 
-	X,Y = transform_data(data,flatten, X, Y)
+    model, X = load_model(save_model)
 
-	shuffle(X)
+    X, Y = transform_data(data, flatten, X, Y)
 
-	if validation != True:
-		n = len(X) * validation
-		n = int(n)
+    shuffle(X)
 
-	if validation == True:
-		n = len(X) * .5
-		n = int(n)
+    if validation is not True:
+        n = len(X) * validation
+        n = int(n)
 
-	X_validate = X[n:]
-	Y_validate = Y[n:]
-	X = X[:n]
-	Y = Y[:n]
+    if validation is True:
+        n = len(X) * .5
+        n = int(n)
 
-	a = len(X)
-	b = len(X_validate)
+    X_validate = X[n:]
+    Y_validate = Y[n:]
+    X = X[:n]
+    Y = Y[:n]
 
-	#separating data for train 67% and test 33%
-	s = int(round(.67 * a))
+    a = len(X)
+    b = len(X_validate)
 
-	X_train = X[:s]
-	Y_train = Y[:s]
+    # separating data for train 67% and test 33%
+    s = int(round(.67 * a))
 
-	X_test = X[s:]
-	Y_test = Y[s:]
+    X_train = X[:s]
+    Y_train = Y[:s]
 
-	model.compile(  loss=loss, 
-                	optimizer=optimizer, 
-                    metrics=['accuracy'])
+    X_test = X[s:]
+    Y_test = Y[s:]
 
-	#getting scores and predictions
-	train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
-	test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
+    model.compile(loss=loss, optimizer=optimizer, metrics=['accuracy'])
 
-	predictions = make_prediction(data, save_model, validation=validation)
-	rounded = [round(x[0]) for x in predictions]
+    # getting scores and predictions
+    train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
+    test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
 
-	df1 = pd.DataFrame(rounded)
-	df2 = pd.DataFrame(Y_validate)
+    predictions = make_prediction(data, save_model,	flatten=flatten,
+                                  validation=validation)
+    rounded = [round(x[0]) for x in predictions]
 
-	#0 or 1 if the prediction mathes with output
-	l = np.array(df1 == df2)
-	l = l.astype(int)
+    df1 = pd.DataFrame(rounded)
+    df2 = pd.DataFrame(Y_validate)
 
-	x = 0
+    # 0 or 1 if the prediction mathes with output
+    l = np.array(df1 == df2)
+    l = l.astype(int)
 
-	for i in range(b):
-		if l[i] == 1:
-			x += 1.0
+    x = 0
 
-	p = x / len(rounded)
+    for i in range(b):
+        if l[i] == 1:
+            x += 1.0
 
-	return train_scores, test_scores, p
+    p = x / len(rounded)
+
+    return train_scores, test_scores, p

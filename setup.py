@@ -1,10 +1,11 @@
 #! /usr/bin/env python
 #
-# Copyright (C) 2015-2017 Botlab  
+# Copyright (C) 2014-2017 Mikko Kotila
+
 import os
 os.environ["MPLCONFIGDIR"] = "."
 
-DESCRIPTION = "Autonomio: deep learning based "
+DESCRIPTION = "Autonomio deep learning workbench "
 LONG_DESCRIPTION = """\
 Autonomio provides a very high-level abstraction layer on top of Keras,
 using Tensorflow as a backend and spaCy for word vectorization.  
@@ -19,8 +20,6 @@ using Tensorflow as a backend and spaCy for word vectorization.
 For most use cases succesfully running a state-of-the-art AI works 
 out of the box in less than 60 seconds to first trained model. 
 
-Autonomio is proven to deal with hard classification problems at close to 
-100% accuracy across a range of test s 
 """
 
 DISTNAME = 'autonomio'
@@ -29,7 +28,7 @@ MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://autonom.io'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/autonomio/core-module/'
-VERSION = '0.1.2.dev'
+VERSION = '0.3.2.dev'
 
 try:
     from setuptools import setup
@@ -38,16 +37,13 @@ except ImportError:
     from distutils.core import setup
 
 def check_dependencies():
+    
     install_requires = []
 
     try:
         import numpy
     except ImportError:
         install_requires.append('numpy')
-    try:
-        import scipy
-    except ImportError:
-        install_requires.append('scipy')
     try:
         import matplotlib
     except ImportError:
@@ -76,6 +72,14 @@ def check_dependencies():
         import mpld3
     except ImportError:
         install_requires.append('mpld3')
+    try:
+        import jinja2
+    except ImportError:
+        install_requires.append('jinja2')
+    try:
+        import iPython
+    except ImportError:
+        install_requires.append('iPython')
 
     return install_requires
 
@@ -107,3 +111,5 @@ if __name__ == "__main__":
                      'Operating System :: Unix',
                      'Operating System :: MacOS'],
 )
+
+os.system("python -m spacy download en")
