@@ -1,13 +1,13 @@
 #!/bin/bash
 
-sudo pip install --upgrade pip
-sudo pip install numpy --upgrade
-sudo pip install pandas --upgrade 
-sudo pip install spacy --upgrade
-sudo pip install tensorflow --upgrade
-sudo pip install keras --upgrade 
-sudo pip install matplotlib --upgrade
-sudo pip install seaborn --upgrade 
-sudo pip install mpld3 --upgrade
-
-sudo python -m spacy download en
+sudo pip install --upgrade pip -q
+sudo pip install numpy --upgrade -q
+sudo pip install pandas --upgrade -q
+sudo pip install spacy --upgrade -q
+sudo pip install tensorflow --upgrade -q
+sudo pip install keras --upgrade -q
+sudo pip install matplotlib --upgrade -q
+sudo pip install seaborn --upgrade -q
+sudo pip install mpld3 --upgrade -q
+sudo pip install h5py --upgrade -q
+sudo pip install jinja2 --upgrade -q
