@@ -230,8 +230,7 @@ Funnel
 Funnel is the shape, which is set by default. It roughly looks like an upside-dowm pyramind, so that the first layer is defined as neuron_max, and the next layers are sligtly decreased compared to previous ones.::
 
 
-
- +			  +
+  +          +
   \          /
    \        /
     \      /
