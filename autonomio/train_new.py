@@ -151,8 +151,8 @@ def trainer(X, Y, data,
         accuracy(history)
 
         if save_model is not False:
-
             save_model_as(X_num, data.columns, model, save_model)
+            
 
         # calculate and round predictions
         predictions = model.predict(X)

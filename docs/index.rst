@@ -1,5 +1,5 @@
 =============================
-Autonomio v.0.1.2 User Manual
+Autonomio v.0.3.2 User Manual
 =============================
 
 .. image:: https://travis-ci.org/autonomio/core-module.svg?branch=master
@@ -7,6 +7,10 @@ Autonomio v.0.1.2 User Manual
 
 .. image:: https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master
     :target: https://coveralls.io/github/autonomio/core-module?branch=master
+
+
+.. image:: https://gemnasium.com/badges/github.com/mikkokotila/core-module.svg
+    :target: https://gemnasium.com/github.com/mikkokotila/core-module
 
 
 This document covers in detail functionality of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
