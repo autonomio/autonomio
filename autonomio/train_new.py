@@ -10,7 +10,8 @@ from IPython.display import display
 from transform_data import transform_data
 from plots import accuracy
 from shapes import shapes
-from double_check import check
+from 
+import check
 from validator import validate
 from save_model_as import save_model_as
 
