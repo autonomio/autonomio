@@ -3,16 +3,16 @@ dist: trusty
 sudo: required
 
 before_install:
-  - sudo apt-get -q update -y
-  - sudo apt-get -q install python-tk -y
-  - sudo apt-get -q install build-essential -y 
-  - sudo apt-get -q install libssl-dev -y
-  - sudo apt-get -q install libcurl4-gnutls-dev 
-  - sudo apt-get -q install libexpat1-dev 
-  - sudo apt-get -q install gettext 
-  - sudo apt-get -q install unzip -y
-  - sudo apt-get -q install libc6 -y
-  - sudo apt-get install python-dev -y
+  - sudo apt-get -qq update -y
+  - sudo apt-get -qq install python-tk -y
+  - sudo apt-get -qq install build-essential -y 
+  - sudo apt-get -qq install libssl-dev -y
+  - sudo apt-get -qq install libcurl4-gnutls-dev 
+  - sudo apt-get -qq install libexpat1-dev 
+  - sudo apt-get -qq install gettext 
+  - sudo apt-get -qq install unzip -y
+  - sudo apt-get -qq install libc6 -y
+  - sudo apt-get -qq install python-dev -y
 
 # pick languages
 language: python
@@ -21,10 +21,10 @@ python:
 
 # command to install dependencies
 install:
-  - "pip install -r requirements.txt"
+  - "pip -qq install -r requirements.txt"
   - "python setup.py install"
-  - "pip install coveralls"
-  - "pip install jinja2"
+  - "pip -qq install coveralls"
+  - "pip -qq install jinja2"
   - "./.travis.sh"
   - "python -m spacy download en" 
 
