@@ -22,7 +22,7 @@ python:
 # command to install dependencies
 install:
   - "pip -qq install -r requirements.txt"
-  - "python -qq setup.py install"
+  - "python setup.py install"
   - "pip -qq install coveralls"
   - "pip -qq install jinja2"
   - "./.travis.sh"
