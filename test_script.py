@@ -1,4 +1,4 @@
-from autonomio.commands import data, train, test
+from autonomio.commands import data, train, predictor
 from autonomio.transform_data import transform_data
 from autonomio.load_data import load_data
 
@@ -47,7 +47,7 @@ tr = train(1,'quality_score',temp,flatten='mean')
 
 # model saving and loading
 tr = train('text','neg',temp,save_model='test_model')
-te = test(temp,'test_model', labels='handle')
+te = predictor(temp,'test_model', labels='handle')
 
 l = [	'funnel', 
         'brick',
@@ -63,7 +63,7 @@ tr = train(1, 'neg', temp, layers=1, validation=True)
 tr = train(1, 'neg', temp, validation=.6)
 
 tr = train(['reach_score','influence_score'],'neg',temp,save_model='strings')
-te = test(temp,'strings', labels='handle')
+te = predictor(temp,'strings', labels='handle')
 
 for i in l:
 
