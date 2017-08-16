@@ -38,9 +38,10 @@ def labels_to_ints(data, y, max_categories, starts_with_col, treshold, first_fil
                     
             else:
                 data = data.drop(col,axis=1)
-    temp_y = data[y]
-    data = data.drop(y, axis=1)
-    data.insert(0, y, temp_y)
+    if y is not 'none':
+        temp_y = data[y]
+        data = data.drop(y, axis=1)
+        data.insert(0, y, temp_y)
 
     rows_before = len(data)
     rows_after = len(data)
