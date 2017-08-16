@@ -169,7 +169,7 @@ def train(X, Y, data, dims=300,
     return out
 
 
-def predictor(data, saved_model, dims=300, flatten='mean', labels=False):
+def predictor(data, saved_model, flatten='mean', labels=False):
 
     ''' Function for making predictions on a saved model.
 
@@ -183,7 +183,8 @@ def predictor(data, saved_model, dims=300, flatten='mean', labels=False):
     return pred
 
 
-def wrangler(df, y,
+def wrangler(df, 
+             y='none',
              max_categories='auto',
              starts_with_col='none',
              treshold=.9,
