@@ -231,7 +231,7 @@ Funnel is the shape, which is set by default. It roughly looks like an upside-do
 
 
 
- +			      +
+ +			  +
   \          /
    \        /
     \      /
@@ -245,13 +245,13 @@ As funnel shape is set by default, we do not need to input anything to use it.
 Example input.::
 
 
-tr = train(1,'neg',temp,layers=5,neuron_max=10)
+    tr = train(1,'neg',temp,layers=5,neuron_max=10)
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [10, 5, 3, 2, 1]
+    neuron_count = [10, 5, 3, 2, 1]
 
 
 Long Funnel
@@ -261,7 +261,7 @@ Long Funnel shape can be applied by defining shape as 'long_funnel'. First half 
 
 
 
- +			    +
+ +			+
  |          |
  |          |
  |          |
@@ -275,13 +275,13 @@ Long Funnel shape can be applied by defining shape as 'long_funnel'. First half 
 Example input.::
 
 
-tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='long_funnel')
+    tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='long_funnel')
 
 
 Output list of neurons(excluding ounput layer).::
 
 
-neuron_count = [10, 10, 10, 5, 3, 2]
+    neuron_count = [10, 10, 10, 5, 3, 2]
 
 
 Rhombus
@@ -306,13 +306,13 @@ Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 
 Example input. ::
 
 
-tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='rhombus')
+    tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='rhombus')
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [1, 6, 10, 6, 1]
+    neuron_count = [1, 6, 10, 6, 1]
 
 
 Diamond
@@ -335,13 +335,13 @@ Defining shape as 'diamond' we will obtain the shape of the 'opened rhombus', wh
 Example input. ::
 
 
-tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='diamond')
+    tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='diamond')
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [6, 6, 10, 5, 3, 2]
+    neuron_count = [6, 6, 10, 5, 3, 2]
 
 
 Hexagon
@@ -366,13 +366,13 @@ Hexagon, which we get by calling 'hexagon' for shape, starts with 1 as the first
 Example input. ::
 
 
-tr = train(1,'neg',temp,layers=7,neuron_max=10,shape='hexagon')
+    tr = train(1,'neg',temp,layers=7,neuron_max=10,shape='hexagon')
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [1, 3, 5, 10, 10, 5, 3]
+    neuron_count = [1, 3, 5, 10, 10, 5, 3]
 
 
 Brick
@@ -394,13 +394,13 @@ All the layers have neuron_max value. Called by shape='brick'. ::
 Example input. ::
 
 
-tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='brick')
+    tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='brick')
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [10, 10, 10, 10, 10]
+    neuron_count = [10, 10, 10, 10, 10]
 
 
 Triangle
@@ -422,13 +422,13 @@ This shape, which is called by defining shape as 'triangle' starts with 1 and in
 Example input. ::
 
 
-tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='triangle')
+    tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='triangle')
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [1, 2, 3, 5, 10]
+    neuron_count = [1, 2, 3, 5, 10]
 
 
 Stairs
@@ -447,13 +447,13 @@ You can apply it defining shape as 'stairs'. If number of layers more than four,
 Example input. ::
 
 
-tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='stairs')
+    tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='stairs')
 
 
 Output list of neurons(excluding ounput layer). ::
 
 
-neuron_count = [10, 10, 8, 8, 6, 6]
+    neuron_count = [10, 10, 8, 8, 6, 6]
 
 
 ----
