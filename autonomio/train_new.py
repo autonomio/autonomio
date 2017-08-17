@@ -14,27 +14,10 @@ from double_check import check
 from validator import validate
 from save_model_as import save_model_as
 from mlp_model import mlp
+from regression import regression
 
 
-def trainer(X, Y, data,
-            dims,
-            epoch,
-            flatten,
-            dropout,
-            layers,
-            loss,
-            optimizer,
-            activation,
-            activation_out,
-            save_model,
-            neuron_max,
-            neuron_last,
-            batch_size,
-            verbose,
-            shape,
-            double_check,
-            validation,
-            parameters):
+def trainer(X, Y, data, para):
 
     '''
 
@@ -57,39 +40,35 @@ def trainer(X, Y, data,
     ind_var = Y   # this is used later for output
     X_num, Y_num = X, Y
 
-    X, Y = transform_data(data, flatten, X, Y)
+    X, Y = transform_data(data, para['flatten'], X, Y)
 
-    parameters['X'] = X
-    parameters['Y'] = Y
+    para['X'] = X
+    para['Y'] = Y
 
     try:
         dims = X.shape[1]
     except IndexError:
         dims = X_num
 
-    parameters['dims'] = dims
+    para['dims'] = dims
 
-    if layers == 1:
-        shape = 'funnel'
+    if para['layers'] == 1:
+        para['shape'] = 'funnel'
 
-    if neuron_max == 'auto' and dims >= 4:
-        neuron_max = int(dims + (dims * 0.2))
+    if para['neuron_max'] == 'auto' and dims >= 4:
+        para['neuron_max'] = int(dims + (dims * 0.2))
 
-    elif neuron_max == 'auto':
-        neuron_max = 4
+    elif para['neuron_max'] == 'auto':
+        para['neuron_max'] = 4
 
-    neuron_count = []
-    neuron_count = shapes(layers,
-                          shape,
-                          neuron_max,
-                          neuron_last,
-                          dropout)
+    para['neuron_count'] = shapes(para)
 
-    parameters['neuron_count'] = neuron_count
+    if para['model'] is 'mlp':
+        model, history = mlp(para)
+    if para['model'] is 'regression':
+        model, history = regression(X, Y, para['epoch'], para['reg_mode'])
 
-    model, history = mlp(parameters)
-
-    network_scale = len(X) * epoch * layers * neuron_max
+    network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
 
     # train / test results
     ex2 = pd.DataFrame({
@@ -100,47 +79,43 @@ def trainer(X, Y, data,
 
     accuracy(ex2)
 
-    scores = model.evaluate(X, Y, verbose=verbose)
+    scores = model.evaluate(X, Y, verbose=para['verbose'])
 
-    if double_check is False or validation is False:
+    validation = para['validation']
+    save_model = para['save_model']
+
+    if para['double_check'] is False or para['validation'] is False:
         print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
     # calculate and round predictions
     predictions = model.predict(X)
     rounded = [round(x[0]) for x in predictions]
 
-    if double_check is True:
+    if para['double_check'] is True:
             check(Y, rounded, scores)
 
-    if save_model is False and validation is not False:
-        save_model = 'saved_model'
+    if para['save_model'] is False and para['validation'] is not False:
+        para['save_model'] = 'saved_model'
 
-    if save_model is not False:
-        save_model_as(X_num, data.columns, model, save_model)
+    if para['save_model'] is not False:
+        save_model_as(X_num, data.columns, model, para['save_model'])
 
     # shuffling and separating the data
-    if validation is not False:
-        X, Y, save_model = validate(Y_num,
-                                    data,
-                                    validation,
-                                    loss,
-                                    optimizer,
-                                    verbose,
-                                    save_model,
-                                    flatten)
+    if para['validation'] is not False:
+        X, Y = validate(Y_num, data, para)
 
     # model parameters
     ex1 = pd.Series({
                      'ind_var': ind_var,
-                     'y_transform': flatten,
+                     'y_transform': para['flatten'],
                      'n=': len(X),
-                     'features': dims,
-                     'epochs': epoch,
-                     'layers': layers,
-                     'dropout': dropout,
-                     'batch_size': batch_size,
-                     'shape': shape,
-                     'max_neurons': neuron_max,
+                     'features': para['dims'],
+                     'epochs': para['epoch'],
+                     'layers': para['layers'],
+                     'dropout': para['dropout'],
+                     'batch_size': para['batch_size'],
+                     'shape': para['shape'],
+                     'max_neurons': para['neuron_max'],
                      'network_scale': network_scale})
 
     

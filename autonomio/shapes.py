@@ -1,11 +1,13 @@
 import math as m
 
 
-def shapes(layers,
-           shape,
-           neuron_max,
-           neuron_last,
-           dropout):
+def shapes(para):
+
+    layers = para['layers']
+    shape = para['shape']
+    neuron_max = para['neuron_max']
+    neuron_last = para['neuron_last']
+    dropout = para['dropout']
 
     neuron_previous = neuron_max
     neuron_count = []

@@ -20,7 +20,9 @@ def train(X, Y, data, dims=300,
           verbose=0,
           shape='funnel',
           double_check=False,
-          validation=False):
+          validation=False,
+          model='mlp',
+          reg_mode='linear'):
 
     '''The command for training a new model.
 
@@ -156,27 +158,18 @@ def train(X, Y, data, dims=300,
                   'layers': layers,
                   'neuron_last': neuron_last,
                   'activation_out': activation_out,
-                  'verbose': verbose}
+                  'verbose': verbose,
+                  'flatten': flatten,
+                  'save_model': save_model,
+                  'shape': shape,
+                  'double_check': double_check,
+                  'validation': validation,
+                  'neuron_max': neuron_max,
+                  'model': model,
+                  'reg_mode': reg_mode
+                  }
 
-    out = trainer(X, Y, data,
-                  dims,
-                  epoch,
-                  flatten,
-                  dropout,
-                  layers,
-                  loss,
-                  optimizer,
-                  activation,
-                  activation_out,
-                  save_model,
-                  neuron_max,
-                  neuron_last,
-                  batch_size,
-                  verbose,
-                  shape,
-                  double_check,
-                  validation,
-                  parameters)
+    out = trainer(X, Y, data, parameters)
 
     return out
 

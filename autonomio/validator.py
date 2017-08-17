@@ -6,26 +6,27 @@ from transform_data import transform_data
 from prediction import make_prediction, load_model
 
 
-def validate(Y, data, validation, loss, optimizer, verbose, save_model,
-             flatten):
+def validate(Y, data, para):
 
-    model, X = load_model(save_model)
+    model, X = load_model(para['save_model'])
 
-    X, Y = transform_data(data, flatten, X, Y)
+    X, Y = transform_data(data, para['flatten'], X, Y)
 
     shuffle(X)
 
-    X_val, Y_val, X, Y = val_separation(validation, X, Y)
+    X_val, Y_val, X, Y = val_separation(para['validation'], X, Y)
     X_train, Y_train, X_test, Y_test = separation(X, Y, X_val)
 
-    model.compile(loss=loss, optimizer=optimizer, metrics=['accuracy'])
+    model.compile(loss=para['loss'], 
+                  optimizer=para['optimizer'], 
+                  metrics=['accuracy'])
 
     # getting scores and predictions
     train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
     test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
 
-    predictions = make_prediction(data, save_model,	flatten=flatten,
-                                  validation=validation)
+    predictions = make_prediction(data, para['save_model'],	flatten=para['flatten'],
+                                  validation=para['validation'])
     rounded = [round(x[0]) for x in predictions]
 
     df1 = pd.DataFrame(rounded)
@@ -33,7 +34,7 @@ def validate(Y, data, validation, loss, optimizer, verbose, save_model,
 
     printing(df1, df2, X_val, rounded, test_scores, train_scores)
 
-    return X, Y, save_model
+    return X, Y
 
 def val_separation(validation, X, Y):
 
