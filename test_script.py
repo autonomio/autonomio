@@ -36,8 +36,8 @@ X, Y = transform_data(temp, flatten='none', X=1, Y='neg')
 
 # x variable input modes
 tr = train(1,'neg',temp,model='regression')
-tr = train([1,5],'neg',temp,model='regression',mode='logistic')
-tr = train([1,2,3,4,5],'neg',temp,model='regression',mode='regularized')
+tr = train([1,5],'neg',temp,model='regression',reg_mode='logistic')
+tr = train([1,2,3,4,5],'neg',temp,model='regression',reg_mode='regularized')
 
 # y variable flattening mode
 tr = train(1,'quality_score',temp,flatten='median')
