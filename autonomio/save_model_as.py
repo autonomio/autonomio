@@ -1,4 +1,4 @@
-def save_model_as(X_num, columns, model, save_model):
+def save_model_as(X, columns, model, save_model):
 
     model_json = model.to_json()
     with open(save_model+".json", "w") as json_file:
@@ -7,21 +7,48 @@ def save_model_as(X_num, columns, model, save_model):
     model.save_weights(save_model+".h5")
     print("Model" + " " + save_model + " " + "have been saved.")
 
-    k = ""
+    temp = ""
 
     f = open(save_model+".x", "w+")
 
-    if type(X_num) is list:
-        if type(X_num[0]) is int:
-            for x in X_num:
-                k = k+columns[x]+" "
-        elif type(X_num[0]) is str:
-            for x in X_num:
-                k = k+str(x)+" "
-    elif type(X_num) == int:
-        k = str(X_num)
-    else:
-        k = X_num
+    # for a range of columns (two ints)
+    if type(X) == list:
+        if len(X) == 2:
+            if type(X[0]) == int:
+               
+                for i in range(X[0],X[1]):
+                    try:
+                        temp += columns[i] + " "
+                    except:
+                        pass
 
-    f.write(k)
+    # for multiple column index
+    if type(X) == list:
+        if len(X) > 2:
+            if type(X[0]) == int:
+
+                for i in X:
+                    temp += columns[i] + " "
+
+
+    # for multiple column labels
+    if type(X) == list:
+        if type(X[0]) == str:
+
+            for i in X:
+                temp += i+" "
+
+    temp = temp[:-1]
+
+    # for an integer as column name (int)
+    if type(X) == int:
+
+        temp = columns[X]
+
+    # for a single column label which contains string values
+    if type(X) == str:
+        
+        temp = X
+
+    f.write(temp)
     f.close()

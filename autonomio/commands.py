@@ -2,6 +2,7 @@ from prediction import make_prediction
 from train_new import trainer
 from load_data import load_data
 from to_categorical import labels_to_ints
+from plots import scatterz
 
 
 def train(X, Y, data, dims=300,
@@ -174,7 +175,12 @@ def train(X, Y, data, dims=300,
     return out
 
 
-def predictor(data, saved_model, flatten='mean', labels=False):
+def predictor(data,
+              saved_model,
+              flatten='mean',
+              labels=False,
+              x_plot=False,
+              y_plot=False,):
 
     ''' Function for making predictions on a saved model.
 
@@ -183,7 +189,13 @@ def predictor(data, saved_model, flatten='mean', labels=False):
            2) call the model by its name
     '''
 
-    pred = make_prediction(data, saved_model, name=labels, flatten=flatten)
+    pred = make_prediction(data, saved_model, label=labels, flatten=flatten)
+
+    if x_plot is not False and y_plot is not False and labels is not False:
+        scatterz(x_plot, y_plot, data, labels)
+
+    if x_plot is not False or y_plot is not False:
+        print("Please, define both x and y for plots for rendering")
 
     return pred
 
