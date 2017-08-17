@@ -147,6 +147,17 @@ def train(X, Y, data, dims=300,
                           separated for validation.
     '''
 
+    parameters = {'epoch': epoch,
+                  'batch_size': batch_size,
+                  'activation': activation,
+                  'loss': loss,
+                  'optimizer': optimizer,
+                  'dropout': dropout,
+                  'layers': layers,
+                  'neuron_last': neuron_last,
+                  'activation_out': activation_out,
+                  'verbose': verbose}
+
     out = trainer(X, Y, data,
                   dims,
                   epoch,
@@ -164,7 +175,8 @@ def train(X, Y, data, dims=300,
                   verbose,
                   shape,
                   double_check,
-                  validation)
+                  validation,
+                  parameters)
 
     return out
 

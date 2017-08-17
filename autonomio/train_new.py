@@ -13,6 +13,7 @@ from shapes import shapes
 from double_check import check
 from validator import validate
 from save_model_as import save_model_as
+from mlp_model import mlp
 
 
 def trainer(X, Y, data,
@@ -32,7 +33,8 @@ def trainer(X, Y, data,
             verbose,
             shape,
             double_check,
-            validation):
+            validation,
+            parameters):
 
     '''
 
@@ -57,10 +59,15 @@ def trainer(X, Y, data,
 
     X, Y = transform_data(data, flatten, X, Y)
 
+    parameters['X'] = X
+    parameters['Y'] = Y
+
     try:
         dims = X.shape[1]
     except IndexError:
         dims = X_num
+
+    parameters['dims'] = dims
 
     if layers == 1:
         shape = 'funnel'
@@ -78,25 +85,11 @@ def trainer(X, Y, data,
                           neuron_last,
                           dropout)
 
-    model = mlp(neuron_count,
-                dims,
-                activation,
-                loss,
-                optimizer,
-                dropout,
-                layers,
-                neuron_last,
-                activation_out)
+    parameters['neuron_count'] = neuron_count
+
+    model, history = mlp(parameters)
 
     network_scale = len(X) * epoch * layers * neuron_max
-
-    if verbose >= 1:
-        time.sleep(0.1)
-
-    history = model.fit(X, Y, validation_split=0.33,
-                        epochs=epoch,
-                        verbose=verbose,
-                        batch_size=batch_size)
 
     # train / test results
     ex2 = pd.DataFrame({
@@ -105,7 +98,7 @@ def trainer(X, Y, data,
                     'test_acc': history.history['val_acc'],
                     'test_loss': history.history['val_loss']})
 
-    accuracy(history)
+    accuracy(ex2)
 
     scores = model.evaluate(X, Y, verbose=verbose)
 
@@ -157,31 +150,3 @@ def trainer(X, Y, data,
     # printing result for double check
 
     return
-
-
-def mlp(neuron_count,
-        dims,
-        activation,
-        loss,
-        optimizer,
-        dropout,
-        layers,
-        neuron_last,
-        activation_out):
-
-    model = Sequential()
-    model.add(Dense(neuron_count[0],
-                    input_dim=dims,
-                    activation=activation))
-    model.add(Dropout(dropout))
-
-    for i in range(layers - 1):
-        model.add(Dense(neuron_count[i+1], activation=activation))
-        model.add(Dropout(dropout))
-
-    model.add(Dense(neuron_last, activation=activation_out))
-    model.compile(loss=loss,
-                  optimizer=optimizer,
-                  metrics=['accuracy'])
-
-    return model
