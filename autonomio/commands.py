@@ -178,7 +178,7 @@ def train(X, Y, data, dims=300,
 def predictor(data,
               saved_model,
               flatten='mean',
-              label=False,
+              labels=False,
               x_plot=False,
               y_plot=False,):
 
@@ -191,8 +191,8 @@ def predictor(data,
 
     pred = make_prediction(data, saved_model, label=labels, flatten=flatten)
 
-    if x_plot is not False and y_plot is not False and label is not False:
-        scatterz(x_plot, y_plot, data, label)
+    if x_plot is not False and y_plot is not False and labels is not False:
+        scatterz(x_plot, y_plot, data, labels)
 
     if x_plot is not False or y_plot is not False:
         print("Please, define both x and y for plots for rendering")
