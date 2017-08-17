@@ -2,12 +2,13 @@ import pandas as pd
 
 from transform_data import transform_data
 from load_model import load_model
+from plots import scatterz
 
 
 def make_prediction(data,
                     saved_model,
                     flatten='mean',
-                    name=False,
+                    label=False,
                     validation=False):
 
     loaded_model, X = load_model(saved_model)
@@ -18,14 +19,14 @@ def make_prediction(data,
 
         predict = loaded_model.predict(signals)
 
-        if name is not False:
-            name = data[name]
+        if label is not False:
+            label = data[label]
 
             l = []
             i = 0
 
             for x in predict:
-                l.append([x[0], name[i:i+1].values[0]])
+                l.append([x[0], label[i:i+1].values[0]])
                 i += 1
 
             predict = pd.DataFrame(l)
@@ -33,7 +34,8 @@ def make_prediction(data,
 
         else:
             predict = pd.DataFrame(predict)
-
+            predict.columns = ['Value']
+            
         predict = predict.sort_values('Value', ascending=False)
 
         print(predict.head(10))

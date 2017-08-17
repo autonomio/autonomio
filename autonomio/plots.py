@@ -66,7 +66,7 @@ def scatterz(x, y, data, labels, xscale='linear', yscale='linear', n=250):
 
         plt.xscale("log")
 
-    labels = [' {0}'.format(i + str(' ')) for i in data[labels]]
+    labels = [' {0}'.format(i + str(' ')) for i in data[labels].astype(str)]
     tooltip = mpld3.plugins.PointLabelTooltip(scatter, labels=labels)
     mpld3.plugins.connect(fig, tooltip)
 
