@@ -10,10 +10,10 @@ def accuracy(data):
 
     fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
 
-    ax1.plot(data.history['acc'])
-    ax1.plot(data.history['val_acc'])
-    ax2.plot(data.history['loss'])
-    ax2.plot(data.history['val_loss'])
+    ax1.plot(data['train_acc'])
+    ax1.plot(data['test_acc'])
+    ax2.plot(data['train_loss'])
+    ax2.plot(data['test_loss'])
 
     ax1.set_title('accuracy')
     ax1.set_xlabel('epoch')
