@@ -22,8 +22,8 @@ def validate(Y, data, para):
                   metrics=['accuracy'])
 
     # getting scores and predictions
-    train_scores = model.evaluate(X_train, Y_train, verbose=verbose)
-    test_scores = model.evaluate(X_test, Y_test, verbose=verbose)
+    train_scores = model.evaluate(X_train, Y_train, verbose=para['verbose'])
+    test_scores = model.evaluate(X_test, Y_test, verbose=para['verbose'])
 
     predictions = make_prediction(data, para['save_model'],	flatten=para['flatten'],
                                   validation=para['validation'])
