@@ -41,9 +41,6 @@ def trainer(X, Y, data, para):
 
     X, Y = transform_data(data, para['flatten'], X, Y)
 
-    para['X'] = X
-    para['Y'] = Y
-
     try:
         dims = X.shape[1]
     except IndexError:
@@ -63,7 +60,7 @@ def trainer(X, Y, data, para):
     para['neuron_count'] = shapes(para)
 
     if para['model'] is 'mlp':
-        model, history = mlp(para)
+        model, history = mlp(X, Y, para)
     if para['model'] is 'regression':
         model, history = regression(X, Y, para['epoch'], para['reg_mode'])
 
