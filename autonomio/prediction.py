@@ -6,7 +6,6 @@ from load_model import load_model
 
 def make_prediction(data,
                     saved_model,
-                    dims=300,
                     flatten='mean',
                     name=False,
                     validation=False):

@@ -35,9 +35,9 @@ Y = transform_data(temp, flatten='none', Y='neg')
 X, Y = transform_data(temp, flatten='none', X=1, Y='neg')
 
 # x variable input modes
-tr = train(1,'neg',temp)
-tr = train([1,5],'neg',temp)
-tr = train([1,2,3,4,5],'neg',temp)
+tr = train(1,'neg',temp,model='regression')
+tr = train([1,5],'neg',temp,model='regression',reg_mode='logistic')
+tr = train([1,2,3,4,5],'neg',temp,model='regression',reg_mode='regularized')
 
 # y variable flattening mode
 tr = train(1,'quality_score',temp,flatten='median')
@@ -49,14 +49,14 @@ tr = train(1,'quality_score',temp,flatten='mean')
 tr = train('text','neg',temp,save_model='test_model')
 te = predictor(temp,'test_model', labels='handle')
 
-l = [	'funnel', 
-        'brick',
-        'triangle',
-        'rhombus', 
-        'long_funnel',  
-        'diamond', 
-        'hexagon',  
-        'stairs']
+l = ['funnel', 
+     'brick',
+     'triangle',
+     'rhombus', 
+     'long_funnel',  
+     'diamond', 
+     'hexagon',  
+     'stairs']
 
 #for validation
 tr = train(1, 'neg', temp, layers=1, validation=True)
