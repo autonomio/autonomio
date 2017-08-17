@@ -33,7 +33,8 @@ def make_prediction(data,
 
         else:
             predict = pd.DataFrame(predict)
-
+            predict.columns = ['Value']
+            
         predict = predict.sort_values('Value', ascending=False)
 
         print(predict.head(10))

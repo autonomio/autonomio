@@ -1,4 +1,3 @@
-import time
 import pandas as pd
 
 from keras.models import Sequential
