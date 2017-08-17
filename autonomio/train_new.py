@@ -1,228 +1,123 @@
-import time
-import numpy as np
-import spacy as sp
-import ascify as asc
 import pandas as pd
-import math
-
-from transform_data import transform_data
-from plots import accuracy
-from prediction import load_model
-from shapes import shapes
-from double_check import check
-from validator import validate
 
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
-import keras.backend as K
 
-import matplotlib.pyplot as plt
+from IPython.display import display
 
-def kuubio(X,Y,data,
-            dims,
-            epoch,
-            flatten,
-            dropout,
-            layers,
-            model,
-            loss,
-            optimizer,
-            activation,
-            activation_out,
-            save_model,
-            neuron_max,
-            neuron_last,
-            batch_size,
-            verbose,
-            shape,
-            double_check,
-            validation):
+from transform_data import transform_data
+from plots import accuracy
+from shapes import shapes
+from double_check import check
+from validator import validate
+from save_model_as import save_model_as
+from mlp_model import mlp
+from regression import regression
+
+
+def trainer(X, Y, data, para):
 
     '''
-    
-    IMPORTANT: to see the plots in jupyter remember to invoke: 
+
+    IMPORTANT: to see the plots in jupyter remember to invoke:
 
                     %matplotlib inline
 
     (could be used as stand-alone but we call it through commands)
 
-    INPUT:  X with one or more variables in float32 and Y with a single 
-            binary value. These can be easily produced through 
-            transform_data if you insist to bybass commands function.  
+    INPUT:  X with one or more variables in float32 and Y with a single
+            binary value. These can be easily produced through
+            transform_data if you insist to bybass commands function.
 
     OUTOUT: Trains a model and outputs the training results with a plot
-            comparing train and test. The predictions are loaded on to 
-            a data object. 
+            comparing train and test. The predictions are loaded on to
+            a data object.
 
-    ''' 
+    '''
 
-    ind_var = Y   # this is used later for output 
+    ind_var = Y   # this is used later for output
     X_num, Y_num = X, Y
 
-    X,Y = transform_data(data,flatten,X,Y)
+    X, Y = transform_data(data, para['flatten'], X, Y)
 
     try:
-    	dims = X.shape[1]
+        dims = X.shape[1]
     except IndexError:
-    	dims = X_num
+        dims = X_num
 
-    #shuffling and separating the data
-    if validation != False:
+    para['dims'] = dims
 
-        if validation != True:
-            n = len(X) * validation
-            n = int(n)
+    if para['layers'] == 1:
+        para['shape'] = 'funnel'
 
-        if validation == True:
-            n = len(X) * .5
-            n = int(n)
+    if para['neuron_max'] == 'auto' and dims >= 4:
+        para['neuron_max'] = int(dims + (dims * 0.2))
 
-        X = X[:n]
-        Y = Y[:n]
+    elif para['neuron_max'] == 'auto':
+        para['neuron_max'] = 4
 
-        if save_model == False:
-            save_model = 'saved_model'
+    para['neuron_count'] = shapes(para)
+
+    if para['model'] is 'mlp':
+        model, history = mlp(X, Y, para)
+    if para['model'] is 'regression':
+        model, history = regression(X, Y, para['epoch'], para['reg_mode'])
+
+    network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
+
+    # train / test results
+    ex2 = pd.DataFrame({
+                    'train_acc': history.history['acc'],
+                    'train_loss': history.history['loss'],
+                    'test_acc': history.history['val_acc'],
+                    'test_loss': history.history['val_loss']})
+
+    accuracy(ex2)
+
+    scores = model.evaluate(X, Y, verbose=para['verbose'])
+
+    validation = para['validation']
+    save_model = para['save_model']
+
+    if para['double_check'] is False or para['validation'] is False:
+        print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+
+    # calculate and round predictions
+    predictions = model.predict(X)
+    rounded = [round(x[0]) for x in predictions]
+
+    if para['double_check'] is True:
+            check(Y, rounded, scores)
+
+    if para['save_model'] is False and para['validation'] is not False:
+        para['save_model'] = 'saved_model'
+
+    if para['save_model'] is not False:
+        save_model_as(X_num, data.columns, model, para['save_model'])
+
+    # shuffling and separating the data
+    if para['validation'] is not False:
+        X, Y = validate(Y_num, data, para)
+
+    # model parameters
+    ex1 = pd.Series({
+                     'ind_var': ind_var,
+                     'y_transform': para['flatten'],
+                     'n=': len(X),
+                     'features': para['dims'],
+                     'epochs': para['epoch'],
+                     'layers': para['layers'],
+                     'dropout': para['dropout'],
+                     'batch_size': para['batch_size'],
+                     'shape': para['shape'],
+                     'max_neurons': para['neuron_max'],
+                     'network_scale': network_scale})
+
     
-    np.random.seed()
 
-    #Y = Y[:,8]
+    display(pd.DataFrame(ex1).transpose())
 
-    if layers == 1:
-        shape = 'funnel'
+    # printing result for double check
 
-    if model != 'kuubio':
-        model = load_model(model)
-        history = ''  # this is no good and have to be dealt with in another way
-
-    else:
-
-        if neuron_max == 'auto' and dims >= 4:
-            neuron_max = int(dims + (dims * 0.2))
-
-        elif neuron_max == 'auto':
-            neuron_max = 4
-
-        #print neuron_max
-
-        neuron_count = []
-        neuron_count = shapes(  layers, 
-                                shape, 
-                                neuron_max,
-                                neuron_last, 
-                                dropout)
-
-        model = Sequential()
-        model.add(Dense(neuron_count[0], input_dim=dims, activation=activation))
-        model.add(Dropout(dropout))
-
-        for i in range(layers - 1):
-            model.add(Dense(neuron_count[i+1], activation=activation))
-            model.add(Dropout(dropout))
-
-        model.add(Dense(neuron_last, activation=activation_out))
-        model.compile(loss=loss, 
-                      optimizer=optimizer, 
-                      metrics=['accuracy'])
-
-        print(model.summary())
-        print ""
-        network_scale = len(X) * epoch * layers * neuron_max
-        print "network scale index : " + str(network_scale)
-
-        if verbose == 0:
-            if network_scale > 3000000000:
-                print "This could take a while. Why not check back in a moment?"
-
-        time.sleep(0.2)
-        history = model.fit(X, Y,   validation_split=0.33, 
-                                    epochs=epoch, 
-                                    verbose=verbose, 
-                                    batch_size=batch_size)
-
-        scores = model.evaluate(X, Y, verbose=verbose)
-
-        #print(history.history.keys())
-
-        print ""
-
-        if double_check == False or validation == False:
-            print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
-
-        print ""
-        print "TRIAL PARAMETERS"
-        print "----------------"
-        print "indepedent variable : " + ind_var
-        print "n= : " + str(len(X))
-
-        print "epochs : " + str(epoch)
-        print "features : " + str(dims)
-        print "layers : " + str(layers)
-        print "dropout : " + str(dropout)
-        print "1st layer neurons : " + str(neuron_max)
-        print "flatten : " + str(flatten)
-        print "batch_size : " + str(batch_size) 
-        print "shape : " + shape
-        print ""
-
-        accuracy(history)
-
-        if save_model != False:
-
-            model_json = model.to_json()
-            with open(save_model+".json", "w") as json_file:
-                json_file.write(model_json)
-
-            model.save_weights(save_model+".h5")
-            print("Model" + " " + save_model + " " + "have been saved.")
-
-            k = ""
-            
-            f = open(save_model+".x", "w+")
-            
-            if type(X_num) == list:
-                for x in X_num:
-                    k = k+str(x)+" "
-            elif type(X_num) == int:
-                k = str(X_num)
-            else:
-                k = X_num
-
-            f.write(k)
-            f.close()
-
-        # calculate predictions
-        predictions = model.predict(X)
-        # round predictions
-        rounded = [round(x[0]) for x in predictions]
-
-        #printing result for double check
-        if double_check == True:
-
-            p = check(Y, rounded)
-
-            print ""
-
-            print ("keras accuracy: %.2f%%" % (scores[1]*100))
-            print ("double check: %.2f%%" % (p*100))
-
-        #printing result for validation
-        if validation != False:
-
-            train_scores, test_scores, val_acc = validate(  Y_num, 
-                                                            data,
-                                                            validation,
-                                                            loss,
-                                                            optimizer,
-                                                            verbose,
-                                                            save_model,
-                                                            flatten)
-
-            print ""
-            print   ("train accuracy: %.2f%%" % (train_scores[1]*100))
-            print   ("      loss: %.2f%%" % (train_scores[0]*100))
-            print   ("test accuracy: %.2f%%" % (test_scores[1]*100)) 
-            print   ("     loss: %.2f%%" % (test_scores[0]*100))
-            print   ("validation accuracy: %.2f%%" % (val_acc*100))
-    
-    return 
+    return

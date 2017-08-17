@@ -1,42 +1,42 @@
 import pandas as pd
-from keras.utils import np_utils
 
-def y_transform(Y,data,flatten):
 
-    y = [data[Y]]
+def y_transform(Y, data, flatten='mean'):
 
-    if len(y) == 1:
+    df_y = data[Y]
 
-        y = map(list, zip(*y))
-    
-    df_y = pd.DataFrame(y)
+    # if user input 'int' then function will be "greater than value"
+    # if user input 'float' then function will be IQR range
 
-        # if user input 'int' then function will be "greater than value"
-        # if user input 'float' then function will be IQR range 
+    # below is for case where prediction is true or false
+    # but the y-feature is in different format (e.g continuous)
 
-    
-    # deals with 'y' inputs for non-categorical model 
     if flatten == 'mean':
-        df_y = pd.DataFrame(df_y[0] >= df_y[0].mean()).astype(int)
-    elif flatten == 'median':    
-        df_y = pd.DataFrame(df_y[0] >= df_y[0].median()).astype(int)
-    elif type(flatten) == int:    
-        df_y = pd.DataFrame(df_y[0] >= flatten).astype(int)
+        df_y = pd.DataFrame(df_y >= df_y.mean())
+    elif flatten == 'median':
+        df_y = pd.DataFrame(df_y >= df_y.median())
+    elif flatten == 'mode':
+        df_y = pd.DataFrame(df_y >= df_y.mode()[0])
+    elif type(flatten) == int:
+        df_y = pd.DataFrame(df_y >= flatten)
     elif type(flatten) == float:
-        df_y = pd.DataFrame(df_y[0] >= df_y[0].quantile(flatten)).astype(int)
-    
-    # deals with 'y' input for categorical variable
-    elif flatten == 'categorical':
+        df_y = pd.DataFrame(df_y >= df_y.quantile(flatten))
 
-        if type((y[1][0])) == unicode or type((y[1][0])) == str:
+    # below is for case where the y-feature is converted in
+    # to a categorical, either if it's a number or string.
 
-            df_y = pd.Categorical(pd.DataFrame(df_y)[0])
-            df_y = pd.DataFrame(pd.Series(df_y).cat.codes)
+    elif flatten == 'cat_string':
+        df_y = pd.Categorical(df_y)
+        df_y = pd.DataFrame(pd.Series(df_y).cat.codes)
 
-        df_y = np_utils.to_categorical(df_y)
-        df_y = pd.DataFrame(df_y)
+    elif flatten == 'cat_numeric':
+        df_y = pd.qcut(df_y, 5, duplicates='drop')
+        df_y = pd.DataFrame(pd.Series(df_y).cat.codes)
+
+    # for cases when y-feature is already in the format
+    # where the prediction output will be.
 
     elif flatten == 'none':
-        df_y = pd.DataFrame(df_y).astype(int)
+        df_y = pd.DataFrame(df_y)
 
     return df_y

@@ -1,23 +1,27 @@
 import numpy as np
 import pandas as pd
 
-def check(Y, rounded):
 
-	df1 = pd.DataFrame(rounded)
-	df2 = pd.DataFrame(Y)
+def check(Y, rounded, scores):
 
-	#0 or 1 if prediction mathes the output
-	f = df1 == df2
-	f.astype(int)
-	f = np.array(f)
+    df1 = pd.DataFrame(rounded)
+    df2 = pd.DataFrame(Y)
 
-	x = 0
-	a = len(f)
+    # 0 or 1 if prediction mathes the output
+    f = df1 == df2
+    f.astype(int)
+    f = np.array(f)
 
-	for i in range(a):
-	    if f[i] == 1:
-	        x += 1.0
+    x = 0
+    a = len(f)
 
-	p = x / a
+    for i in range(a):
+        if f[i] == 1:
+            x += 1.0
 
-	return p
+    p = x / a
+
+    print ("keras accuracy: %.2f%%" % (scores[1]*100))
+    print ("double check: %.2f%%" % (p*100))
+
+    return
