@@ -23,6 +23,4 @@ def load_model(saved_model):
     if type(X) == list and len(X) == 1:
         X = X[0]
 
-    print X
-
     return loaded_model, X

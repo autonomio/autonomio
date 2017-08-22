@@ -1,7 +1,7 @@
 from prediction import make_prediction
 from train_new import trainer
 from load_data import load_data
-from to_categorical import labels_to_ints
+from wrangler import labels_to_ints
 from plots import scatterz
 
 
@@ -180,7 +180,7 @@ def predictor(data,
               flatten='mean',
               labels=False,
               x_plot=False,
-              y_plot=False,):
+              y_plot=False):
 
     ''' Function for making predictions on a saved model.
 
@@ -206,10 +206,12 @@ def wrangler(df,
              starts_with_col='none',
              treshold=.9,
              first_fill_cols=None,
-             fill_with=0):
+             fill_with=0,
+             to_string=None,
+             vectorize=None):
 
     out = labels_to_ints(df, y, max_categories, starts_with_col,
-                         treshold, first_fill_cols, fill_with)
+                         treshold, first_fill_cols, fill_with, to_string, vectorize)
 
     return out
 
