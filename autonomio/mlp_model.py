@@ -24,9 +24,7 @@ def mlp(X, Y, para):
     if para['verbose'] >= 1:
         time.sleep(0.1)
 
-    print type(X), len(X), len(Y), type(Y)
-
-    out = model.fit(X, Y, validation_split=0.33,
+    out = model.fit(X, Y, validation_split=para['validation_split'],
                         epochs=para['epoch'],
                         verbose=para['verbose'],
                         batch_size=para['batch_size'])
