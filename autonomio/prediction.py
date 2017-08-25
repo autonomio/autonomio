@@ -7,23 +7,11 @@ from plots import scatterz
 
 def make_prediction(data,
                     saved_model,
-                    label=False,
-                    validation=False):
+                    label=False):
 
     loaded_model, X, flatten = load_model(saved_model)
 
     signals = transform_data(data, flatten, X)
-
-    if validation is False:
-        out = predict(loaded_model, signals, data, label)
-
-    if validation is not False:
-        out = validate(loaded_model, signals, validation)
-        
-    return out
-
-
-def predict(loaded_model, signals, data, label):
 
     prediction = loaded_model.predict(signals)
 
@@ -49,21 +37,5 @@ def predict(loaded_model, signals, data, label):
     print(prediction.head(10))
     print('--------------')
     print(prediction.tail(10))
-
-    return prediction
-
-
-def validate(loaded_model, signals, validation):
-
-    if validation is True:
-        n = len(signals) * .5
-    else:
-        n = len(signals) * validation
-
-    n = int(n)
-
-    signals = signals[n:]
-
-    prediction = loaded_model.predict(signals)
-
+        
     return prediction
