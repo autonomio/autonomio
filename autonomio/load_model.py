@@ -12,15 +12,21 @@ def load_model(saved_model):
     print("Loaded model from disk")
 
     f = open(saved_model+".x", 'r')
-    X = f.read()
+    temp = f.read()
     try:
-        X = map(int, X.split())
+        X = map(int, temp.split()[:-1])
     except ValueError:
-        X = X.split()
+        X = temp.split()[:-1]
+
+    try:
+        flatten = float(temp.split()[-1])
+
+    except ValueError:
+        flatten = temp.split()[-1]
 
     f.close()
 
     if type(X) == list and len(X) == 1:
         X = X[0]
 
-    return loaded_model, X
+    return loaded_model, X, flatten

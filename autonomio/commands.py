@@ -5,7 +5,7 @@ from wrangler import labels_to_ints
 from plots import scatterz
 
 
-def train(X, Y, data, dims=300,
+def train(X, Y, data,
           epoch=5,
           flatten='mean',
           dropout=.2,
@@ -177,7 +177,6 @@ def train(X, Y, data, dims=300,
 
 def predictor(data,
               saved_model,
-              flatten='mean',
               labels=False,
               x_plot=False,
               y_plot=False):
@@ -189,7 +188,7 @@ def predictor(data,
            2) call the model by its name
     '''
 
-    pred = make_prediction(data, saved_model, label=labels, flatten=flatten)
+    pred = make_prediction(data, saved_model, label=labels)
 
     if x_plot is not False and y_plot is not False and labels is not False:
         scatterz(x_plot, y_plot, data, labels)
