@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+import datetime
 
 from vectorize_text import vectorize_text
 from nan_handler import nan_dropper, nan_filler
@@ -20,6 +22,13 @@ def labels_to_ints(data,
         max_categories = len(data) + 1
     elif type(max_categories) == int:
         max_categories = max_categories
+
+    #skipping columns with datetime type
+    for col in data.columns:
+        temp = isinstance(data[col][0], datetime.date)
+
+        if temp is True:
+            data = data.drop(col, axis=1)
     
     cols_before = data.shape[1]
     rows_before = len(data)
@@ -40,24 +49,33 @@ def labels_to_ints(data,
 
     if vectorize is not None:
 
-        vect_len = len(vectorize)
-
         temp_vect = pd.DataFrame()
 
-        for i in range(vect_len):
-
+        if type(vectorize) is str:
             temp_list = []
-
-            temp_list = vectorize_text(data[vectorize[i]])
+            vect_len = 1
+            temp_list = vectorize_text(data[vectorize])
 
             #transpose list of the vectors
-
-            temp_list = map(list, zip(*temp_list))
-
+            temp_list = list(np.transpose(temp_list))
         
             for j in range(len(temp_list)):
-                col = 'v'+str(i+1)+"_"+str(j+1)
+                col = 'v'+"1_"+str(j+1)
                 temp_vect[col] = temp_list[j]
+
+        if type(vectorize) is list:
+            vect_len = len(vectorize)
+
+            for i in range(vect_len):
+                temp_list = []
+                temp_list = vectorize_text(data[vectorize[i]])
+
+                #transpose list of the vectors
+                temp_list = list(np.transpose(temp_list))
+            
+                for j in range(len(temp_list)):
+                    col = 'v'+str(i+1)+"_"+str(j+1)
+                    temp_vect[col] = temp_list[j]
 
         data = data.drop(vectorize, axis=1)
 
@@ -99,6 +117,9 @@ def labels_to_ints(data,
 
     rows_after = len(data)
     cols_after = data.shape[1]
+
+    if vectorize is not None:
+        cols_after = data.shape[1] - 300 * vect_len
     
     print(str(rows_before - rows_after) + " out of " + str(rows_before) + " rows dropped")
     print(str(cols_before - cols_after) + " out of " + str(cols_before) + " columns dropped")
