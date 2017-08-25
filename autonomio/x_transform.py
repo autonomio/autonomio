@@ -20,7 +20,7 @@ def x_transform(X, data):
     # for multiple column labels
     if type(X) == list:
         if type(X[0]) == str:
-            x = data.loc[0:, X]
+            x = data.loc[:, X]
             status = 'ok'
 
     # for an integer as column name (int)
@@ -30,7 +30,7 @@ def x_transform(X, data):
 
     # for a single column label which contains string values
     if type(X) == str:
-        if type(data[X][0]) == str:
+        if type(data[X][0]) == str or type(data[X][0]) == unicode:
             x = vectorize_text(data[X])
             status = 'ok'
         else:

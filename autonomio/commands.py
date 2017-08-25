@@ -1,11 +1,11 @@
 from prediction import make_prediction
 from train_new import trainer
 from load_data import load_data
-from to_categorical import labels_to_ints
+from wrangler import labels_to_ints
 from plots import scatterz
 
 
-def train(X, Y, data, dims=300,
+def train(X, Y, data,
           epoch=5,
           flatten='mean',
           dropout=.2,
@@ -177,10 +177,9 @@ def train(X, Y, data, dims=300,
 
 def predictor(data,
               saved_model,
-              flatten='mean',
               labels=False,
               x_plot=False,
-              y_plot=False,):
+              y_plot=False):
 
     ''' Function for making predictions on a saved model.
 
@@ -189,7 +188,7 @@ def predictor(data,
            2) call the model by its name
     '''
 
-    pred = make_prediction(data, saved_model, label=labels, flatten=flatten)
+    pred = make_prediction(data, saved_model, label=labels)
 
     if x_plot is not False and y_plot is not False and labels is not False:
         scatterz(x_plot, y_plot, data, labels)
@@ -206,10 +205,12 @@ def wrangler(df,
              starts_with_col='none',
              treshold=.9,
              first_fill_cols=None,
-             fill_with=0):
+             fill_with=0,
+             to_string=None,
+             vectorize=None):
 
     out = labels_to_ints(df, y, max_categories, starts_with_col,
-                         treshold, first_fill_cols, fill_with)
+                         treshold, first_fill_cols, fill_with, to_string, vectorize)
 
     return out
 

@@ -7,12 +7,11 @@ def shapes(para):
     shape = para['shape']
     neuron_max = para['neuron_max']
     neuron_last = para['neuron_last']
-    dropout = para['dropout']
 
     neuron_previous = neuron_max
     neuron_count = []
     l = []
-
+    
     if shape == 'funnel':
 
         neuron_count.append(neuron_max)

@@ -10,7 +10,7 @@ from transform_data import transform_data
 from plots import accuracy
 from shapes import shapes
 from double_check import check
-from validator import validate
+from validator import validate, separate
 from save_model_as import save_model_as
 from mlp_model import mlp
 from regression import regression
@@ -39,7 +39,12 @@ def trainer(X, Y, data, para):
     ind_var = Y   # this is used later for output
     X_num, Y_num = X, Y
 
+    data = data.sample(frac=1)
+
     X, Y = transform_data(data, para['flatten'], X, Y)
+
+    if para['validation'] is not False:
+        X, Y, X_val, Y_val = separate(X, Y, para['validation'])
 
     try:
         dims = X.shape[1]
@@ -94,11 +99,11 @@ def trainer(X, Y, data, para):
         para['save_model'] = 'saved_model'
 
     if para['save_model'] is not False:
-        save_model_as(X_num, data.columns, model, para['save_model'])
+        save_model_as(X_num, data.columns, model, para['save_model'], para['flatten'])
 
     # shuffling and separating the data
     if para['validation'] is not False:
-        X, Y = validate(Y_num, data, para)
+        validate(X_val, Y_val, para['save_model'])
 
     # model parameters
     ex1 = pd.Series({
