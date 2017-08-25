@@ -35,7 +35,7 @@ data('test_data.csv','file')
 
 temp1 = wrangler(df=temp,y='neg', vectorize='text')
 temp1 = wrangler(df=temp,max_categories='max',to_string='text',first_fill_cols='url',starts_with_col='location')
-temp1 = wrangler(df=temp,max_categories=42, vectorize=['text', 'usex_tweets'])
+temp1 = wrangler(df=temp,max_categories=42, vectorize=['text', 'user_tweets'])
 
 X = transform_data(temp, flatten='none')
 X = transform_data(temp, flatten='none', X=1)
