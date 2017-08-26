@@ -24,7 +24,8 @@ def train(X, Y, data,
           double_check=False,
           validation=False,
           model='mlp',
-          reg_mode='linear'):
+          reg_mode='linear',
+          hyperscan='False'):
 
     '''The command for training a new model.
 
@@ -149,6 +150,12 @@ def train(X, Y, data,
 
                  OPTIONS: default is 'false', with 'true' 50% of data is
                           separated for validation.
+
+    model = Switch for choosing which kind of model is being used. The options
+            are 'mlp' for multi layer perceptor and 'regression' for regression.
+
+    optimizer = Enables a mode where an optimizer function can be run for
+                hyperparameter optimization purpose.
     '''
 
     parameters = {'epoch': epoch,
@@ -169,7 +176,8 @@ def train(X, Y, data,
                   'validation': validation,
                   'neuron_max': neuron_max,
                   'model': model,
-                  'reg_mode': reg_mode
+                  'reg_mode': reg_mode,
+                  'hyperscan': hyperscan
                   }
 
     out = trainer(X, Y, data, parameters)
@@ -201,7 +209,7 @@ def predictor(data,
     return pred
 
 
-def wrangler(df, 
+def wrangler(df,
              y='none',
              max_categories='auto',
              starts_with_col='none',

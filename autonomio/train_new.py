@@ -1,9 +1,5 @@
 import pandas as pd
 
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-
 from IPython.display import display
 
 from transform_data import transform_data
@@ -78,15 +74,11 @@ def trainer(X, Y, data, para):
                     'test_acc': history.history['val_acc'],
                     'test_loss': history.history['val_loss']})
 
-    accuracy(ex2)
-
     scores = model.evaluate(X, Y, verbose=para['verbose'])
 
-    validation = para['validation']
-    save_model = para['save_model']
-
     if para['double_check'] is False or para['validation'] is False:
-        print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+        if para['hyperscan'] is False:
+            print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
     # calculate and round predictions
     predictions = model.predict(X)
@@ -119,10 +111,18 @@ def trainer(X, Y, data, para):
                      'max_neurons': para['neuron_max'],
                      'network_scale': network_scale})
 
-    
+    if para['hyperscan'] is True:
 
-    display(pd.DataFrame(ex1).transpose())
+        ex3 = pd.Series({
+                        'optimizer': para['optimizer'],
+                        'activation': para['activation'],
+                        'activation_out': para['activation_out'],
+                        'loss': para['loss'],
+                        })
 
-    # printing result for double check
+        return ex1, ex2, ex3
 
-    return
+    else:
+        display(pd.DataFrame(ex1).transpose())
+        accuracy(ex2)
+        return
