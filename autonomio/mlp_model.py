@@ -4,6 +4,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
 
+
 def mlp(X, Y, para):
 
     model = Sequential()
@@ -25,8 +26,8 @@ def mlp(X, Y, para):
         time.sleep(0.1)
 
     out = model.fit(X, Y, validation_split=para['validation_split'],
-                        epochs=para['epoch'],
-                        verbose=para['verbose'],
-                        batch_size=para['batch_size'])
+                    epochs=para['epoch'],
+                    verbose=para['verbose'],
+                    batch_size=para['batch_size'])
 
     return model, out
