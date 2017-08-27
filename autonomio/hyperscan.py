@@ -24,6 +24,7 @@ def hyperscan(x,
               shapes='auto',
               check=False):
 
+
     '''
     mode = 'auto' will scan through all
            'selective' will scan through selected
