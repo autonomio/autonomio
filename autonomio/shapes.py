@@ -111,8 +111,6 @@ def shapes(para):
             neuron_count.append((neuron_previous + neuron_last) / 2)
             neuron_previous = neuron_count[i + n]
 
-        print neuron_count
-
     if shape == 'hexagon':
 
         neuron_count.append(1)
