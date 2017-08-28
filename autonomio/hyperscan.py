@@ -44,7 +44,6 @@ def hyperscan(x,
         optimizers = load_parameters('optimizers')
         activations = load_parameters('activations')
         losses = load_parameters('binary_losses')
-        print "reachs"
 
     else:
         if losses is 'auto':

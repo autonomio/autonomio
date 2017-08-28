@@ -13,7 +13,7 @@ temp = data('election_in_twitter')
 temp = data('sites_category_and_vec')
 temp = data('parties_and_employment')
 temp = data('programmatic_ad_fraud')
-temp = col_name_generator(temp)
+temp = col_name_generator(pd.DataFrame([1, 2]))
 
 # create dataset for rest of the tests
 temp = data('random_tweets')
