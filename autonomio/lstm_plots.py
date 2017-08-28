@@ -11,7 +11,6 @@ def lstm_plot(predicted_data, true_data, prediction_len=None):
     ax = fig.add_subplot(111)
     ax.plot(true_data, label='True Data')
     plt.tick_params(axis='both', which='major', pad=15)
-    plt.title('Overlay (fig.1) & Histogram (fig.2)', fontsize=23, y=1.09, color="gray")
 
     plt.plot(predicted_data, label='Prediction')
     plt.legend()
