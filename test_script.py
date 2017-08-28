@@ -13,7 +13,6 @@ temp = data('election_in_twitter')
 temp = data('sites_category_and_vec')
 temp = data('parties_and_employment')
 temp = data('programmatic_ad_fraud')
-temp = data('kaggle_titanic_train')
 temp = col_name_generator(temp)
 
 # create dataset for rest of the tests
@@ -94,3 +93,27 @@ for i in l:
 
 scatterz('influence_score', 'neg', temp, labels='handle')
 scatterz('influence_score', 'neg', temp,labels='handle',yscale='log',xscale='log')
+
+#check for a good result
+temp = data('kaggle_titanic_train')
+
+df = wrangler(temp,y='Survived',
+                   first_fill_cols='Cabin',
+                   starts_with_col='Cabin',
+                   treshold=.8)
+
+x = train([2,3,4,5,6,7,8,9],'Survived',df,
+                        flatten='none',
+                        epoch=150,
+                        dropout=0,
+                        batch_size=12,
+                        loss='logcosh',
+                        activation='elu',
+                        layers=6,
+                        shape='brick',
+                        hyperscan=True)
+
+p = x[1][-10:]['train_acc'].mean()
+if p < .8:
+	print 'bad result for titanic data'
+	1/0

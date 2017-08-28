@@ -21,9 +21,7 @@ def hyperscan(x,
               losses='auto',
               optimizers='auto',
               activations='auto',
-              shapes='auto',
-              check=False):
-
+              shapes='auto'):
 
     '''
     mode = 'auto' will scan through all
@@ -46,6 +44,7 @@ def hyperscan(x,
         optimizers = load_parameters('optimizers')
         activations = load_parameters('activations')
         losses = load_parameters('binary_losses')
+        print "reachs"
 
     else:
         if losses is 'auto':
@@ -81,9 +80,6 @@ def hyperscan(x,
             batch_sizes = [batch_sizes]
         elif type(batch_sizes) is list:
             batch_sizes = range(batch_sizes[0], batch_sizes[1], batch_sizes_step)
-
-    if check == True:
-      return
 
     a = len(losses)
     b = len(shapes)
