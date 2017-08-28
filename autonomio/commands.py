@@ -1,13 +1,14 @@
 from prediction import make_prediction
 from train_new import trainer
 from load_data import load_data
-from to_categorical import labels_to_ints
+from wrangler import labels_to_ints
 from plots import scatterz
 
 
-def train(X, Y, data, dims=300,
+def train(X, Y, data,
           epoch=5,
           flatten='mean',
+          validation_split=.33,
           dropout=.2,
           layers=3,
           loss='binary_crossentropy',
@@ -23,7 +24,8 @@ def train(X, Y, data, dims=300,
           double_check=False,
           validation=False,
           model='mlp',
-          reg_mode='linear'):
+          reg_mode='linear',
+          hyperscan='False'):
 
     '''The command for training a new model.
 
@@ -148,11 +150,18 @@ def train(X, Y, data, dims=300,
 
                  OPTIONS: default is 'false', with 'true' 50% of data is
                           separated for validation.
+
+    model = Switch for choosing which kind of model is being used. The options
+            are 'mlp' for multi layer perceptor and 'regression' for regression.
+
+    optimizer = Enables a mode where an optimizer function can be run for
+                hyperparameter optimization purpose.
     '''
 
     parameters = {'epoch': epoch,
                   'batch_size': batch_size,
                   'activation': activation,
+                  'validation_split': validation_split,
                   'loss': loss,
                   'optimizer': optimizer,
                   'dropout': dropout,
@@ -167,7 +176,8 @@ def train(X, Y, data, dims=300,
                   'validation': validation,
                   'neuron_max': neuron_max,
                   'model': model,
-                  'reg_mode': reg_mode
+                  'reg_mode': reg_mode,
+                  'hyperscan': hyperscan
                   }
 
     out = trainer(X, Y, data, parameters)
@@ -177,10 +187,9 @@ def train(X, Y, data, dims=300,
 
 def predictor(data,
               saved_model,
-              flatten='mean',
               labels=False,
               x_plot=False,
-              y_plot=False,):
+              y_plot=False):
 
     ''' Function for making predictions on a saved model.
 
@@ -189,7 +198,7 @@ def predictor(data,
            2) call the model by its name
     '''
 
-    pred = make_prediction(data, saved_model, label=labels, flatten=flatten)
+    pred = make_prediction(data, saved_model, label=labels)
 
     if x_plot is not False and y_plot is not False and labels is not False:
         scatterz(x_plot, y_plot, data, labels)
@@ -200,16 +209,18 @@ def predictor(data,
     return pred
 
 
-def wrangler(df, 
+def wrangler(df,
              y='none',
              max_categories='auto',
              starts_with_col='none',
              treshold=.9,
              first_fill_cols=None,
-             fill_with=0):
+             fill_with=0,
+             to_string=None,
+             vectorize=None):
 
     out = labels_to_ints(df, y, max_categories, starts_with_col,
-                         treshold, first_fill_cols, fill_with)
+                         treshold, first_fill_cols, fill_with, to_string, vectorize)
 
     return out
 

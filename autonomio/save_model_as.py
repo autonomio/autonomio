@@ -1,4 +1,4 @@
-def save_model_as(X, columns, model, save_model):
+def save_model_as(X, columns, model, save_model, flatten):
 
     model_json = model.to_json()
     with open(save_model+".json", "w") as json_file:
@@ -49,6 +49,8 @@ def save_model_as(X, columns, model, save_model):
     if type(X) == str:
         
         temp = X
+
+    temp += " "+str(flatten)
 
     f.write(temp)
     f.close()
