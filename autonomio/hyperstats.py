@@ -12,6 +12,8 @@ def hyper_descriptive(data, tiers, metric, mode='median', ascending=False):
     ascending = default is 'False' (can also be True)
     '''
 
+    data[metric] = data[metric].astype(float)
+    
     if type(tiers) is str:
         cols = [tiers, metric]
         tiers = [tiers]
