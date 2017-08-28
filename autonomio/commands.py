@@ -25,7 +25,9 @@ def train(X, Y, data,
           validation=False,
           model='mlp',
           reg_mode='linear',
-          hyperscan='False'):
+          hyperscan='False',
+          w_regularizer='auto',
+          w_reg_values=[0,0]):
 
     '''The command for training a new model.
 
@@ -154,8 +156,14 @@ def train(X, Y, data,
     model = Switch for choosing which kind of model is being used. The options
             are 'mlp' for multi layer perceptor and 'regression' for regression.
 
-    optimizer = Enables a mode where an optimizer function can be run for
+    hyperscan = Enables a mode where an hyperscan function can be run for
                 hyperparameter optimization purpose.
+
+    w_regularizer = Adds a weight regularizer to a model. 'Auto' mode adds 
+                    regularizer to the last layer. Options are the string with
+                    number of layers starting from 0.
+
+    w_reg_value = String with two values for l1 and l2.
     '''
 
     parameters = {'epoch': epoch,
@@ -177,7 +185,9 @@ def train(X, Y, data,
                   'neuron_max': neuron_max,
                   'model': model,
                   'reg_mode': reg_mode,
-                  'hyperscan': hyperscan
+                  'hyperscan': hyperscan,
+                  'w_regularizer': w_regularizer,
+                  'w_reg_values': w_reg_values
                   }
 
     out = trainer(X, Y, data, parameters)
