@@ -3,10 +3,6 @@ from autonomio.transform_data import transform_data
 from autonomio.load_data import load_data
 from autonomio.col_name_generator import col_name_generator
 from autonomio.plots import scatterz
-from autonomio.hyperstats import hyper_descriptive
-from autonomio.hyperparameters import load_parameters
-from autonomio.hyperscan import hyperscan
-
 
 import pandas as pd
 import numpy as np
@@ -17,6 +13,7 @@ temp = data('election_in_twitter')
 temp = data('sites_category_and_vec')
 temp = data('parties_and_employment')
 temp = data('programmatic_ad_fraud')
+temp = data('kaggle_titanic_train')
 temp = col_name_generator(temp)
 
 # create dataset for rest of the tests
@@ -97,52 +94,3 @@ for i in l:
 
 scatterz('influence_score', 'neg', temp, labels='handle')
 scatterz('influence_score', 'neg', temp,labels='handle',yscale='log',xscale='log')
-
-temp = data('kaggle_titanic_train')
-
-df = wrangler(temp,y='Survived',
-                   first_fill_cols='Cabin',
-                   starts_with_col='Cabin',
-                   treshold=.8)
-
-x = train([2,3,4,5,6,7,8,9],'Survived',df,
-                        flatten='none',
-                        epoch=155,
-                        dropout=0,
-                        batch_size=12,
-                        loss='logcosh',
-                        activation='elu',
-                        layers=6,
-                        shape='brick',
-                        hyperscan=True)
-
-p = x[1][-10:]['train_acc'].mean()
-
-if p < .8:
-    1/0
-
-hyperscan('user_followers','neg',df,check=True)
-hyperscan('user_followers','neg',df,epochs=2,scan_mode='selective',check=True)
-hyperscan('user_followers','neg',df,
-          scan_mode='selective',
-          layers=[5,6],
-          batch_sizes=[5,7],
-          check=True)
-
-hyperscan('user_followers','neg',df,
-          epochs=2,
-          scan_mode='selective',
-          layers=3,
-          batch_sizes=5,
-          shapes='funnel',
-          optimizers='Adam',
-          activations='elu',
-          losses='logcosh')
-
-modes = ['mean','median','std','min','max']
-for x in modes:
-    hyper_descriptive(df, 'neg','pos',mode=x)
-
-hyper_descriptive(df, ['neg','neu'],'pos')
-
-load_parameters('categorical_losses')
