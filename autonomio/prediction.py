@@ -1,9 +1,7 @@
 import pandas as pd
 
-from transform_data import transform_data
+from transform.transform_data import transform_data
 from load_model import load_model
-from plots import scatterz
-
 
 def make_prediction(data,
                     saved_model,
