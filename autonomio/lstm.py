@@ -60,13 +60,13 @@ def lstm(data,
 
     out = pd.Series({'pred_std': temp.predicted.std(),
                      'actual_std': temp.actual.std(),
-                     'diff_std': round(temp.actual.std() / temp.predicted.std(), 3),
+                     'diff_std': round(temp.actual.std() / temp.predicted.std(), 3) -1,
                      'pred_max': temp.predicted.max(),
                      'actual_max': temp.actual.max(),
-                     'diff_max': round(temp.actual.max() / temp.predicted.max(), 3),
+                     'diff_max': round(temp.actual.max() / temp.predicted.max(), 3) -1,
                      'pred_min': temp.predicted.min(),
                      'actual_min': temp.actual.min(),
-                     'diff_min': round(temp.actual.min() / temp.predicted.min(), 3)})
+                     'diff_min': round(temp.actual.min() / temp.predicted.min(), 3) -1})
 
     #print("Median prediction error: %.2f%%" % ((temp.predicted / temp.actual * 100).median() - 100))
 
