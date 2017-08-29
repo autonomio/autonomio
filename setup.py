@@ -104,6 +104,7 @@ if __name__ == "__main__":
                   'autonomio.transform',
                   'autonomio.utils',
                   'autonomio.models'],
+
         classifiers=[
                      'Intended Audience :: Science/Research',
                      'Programming Language :: Python :: 2.7',
