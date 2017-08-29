@@ -8,7 +8,7 @@ from shapes import shapes
 from double_check import check
 from validator import validate, separate
 from save_model_as import save_model_as
-from mlp_model import mlp
+from mlp import mlp
 from regression import regression
 
 

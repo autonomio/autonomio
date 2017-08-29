@@ -1,8 +1,8 @@
 from prediction import make_prediction
-from train_new import trainer
+from train import trainer
 from load_data import load_data
 from wrangler import labels_to_ints
-from plots import scatterz
+from .plots import scatterz
 
 
 def train(X, Y, data,
