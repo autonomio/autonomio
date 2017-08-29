@@ -1,8 +1,8 @@
 from autonomio.commands import data, train, predictor, wrangler
-from autonomio.transform_data import transform_data
+from autonomio.transform.transform_data import transform_data
 from autonomio.load_data import load_data
-from autonomio.col_name_generator import col_name_generator
-from autonomio.plots import scatterz
+from autonomio.transform.col_name_generator import col_name_generator
+from autonomio.plots.scatterz import scatterz
 
 import pandas as pd
 import numpy as np

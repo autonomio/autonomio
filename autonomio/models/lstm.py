@@ -7,8 +7,8 @@ from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential
 
-from lstm_transform_data import _lstm_load_data
-from lstm_plots import histplot, lstm_plot
+from ..transform.lstm_transform_data import _lstm_load_data
+from ..plots.lstm_plots import histplot, lstm_plot
 
 def lstm(data,
          epochs=1,

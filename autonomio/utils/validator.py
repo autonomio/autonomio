@@ -1,9 +1,8 @@
 import numpy as np
 import pandas as pd
-from random import shuffle
 
-from transform_data import transform_data
-from prediction import make_prediction, load_model
+from ..transform.transform_data import transform_data
+from ..prediction import make_prediction, load_model
 
 
 def validate(X, Y, saved_model):

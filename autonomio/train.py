@@ -2,14 +2,14 @@ import pandas as pd
 
 from IPython.display import display
 
-from transform_data import transform_data
-from plots import accuracy
-from shapes import shapes
-from double_check import check
-from validator import validate, separate
+from transform.transform_data import transform_data
+from plots.plots import accuracy
+from utils.shapes import shapes
+from utils.double_check import check
+from utils.validator import validate, separate
 from save_model_as import save_model_as
-from mlp import mlp
-from regression import regression
+from models.mlp import mlp
+from models.regression import regression
 
 
 def trainer(X, Y, data, para):
