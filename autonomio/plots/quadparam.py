@@ -34,10 +34,13 @@ def quadparam(data, x, y, size, color, title='auto'):
     s_label = size
     c_label = color
 
-    size = data[size]/data[size]/data[size]/data[size]**11
+    temp = data[size]
+    temp *= (500 / temp.max())
+    s = temp
+
     color = data[color]**data[color]
 
-    plt.scatter(data[x], data[y], cmap='coolwarm', s=size, c=color)
+    plt.scatter(data[x], data[y], edgecolors='black', cmap='coolwarm', s=s, c=color)
     plt.tick_params(axis='both', which='major', pad=15)
 
     plt.title(title, fontsize=23, y=1.09, color="gray")
