@@ -100,8 +100,6 @@ def shapes(para):
 
         else:
 
-            print n
-
             for i in range(n):
                 neuron_count.append(int(m.ceil(neuron_max * layers + i) / 2.0) / (layers - 1))
             for i in range(1):

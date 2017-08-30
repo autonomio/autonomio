@@ -3,9 +3,10 @@ from train import trainer
 from load_data import load_data
 from transform.wrangler import labels_to_ints
 from plots.scatterz import scatterz
+from models.lstm import lstm
 
 
-def train(X, Y, data,
+def train(X=None, Y=None, data=None,
           epoch=5,
           flatten='mean',
           validation_split=.33,
@@ -24,6 +25,10 @@ def train(X, Y, data,
           double_check=False,
           validation=False,
           model='mlp',
+          seq_len=50,
+          prediction_len='auto',
+          dense_neurons=100,
+          normalize_window=True,
           reg_mode='linear',
           hyperscan='False',
           w_regularizer='auto',
@@ -187,12 +192,32 @@ def train(X, Y, data,
                   'reg_mode': reg_mode,
                   'hyperscan': hyperscan,
                   'w_regularizer': w_regularizer,
-                  'w_reg_values': w_reg_values
+                  'w_reg_values': w_reg_values,
+                  'prediction_len': prediction_len,
+                  'seq_len': seq_len,
+                  'dense_neurons': dense_neurons,
+                  'normalize_window': normalize_window
                   }
 
-    out = trainer(X, Y, data, parameters)
+    if model is 'lstm':
+      if data is None:
+        print 'Please input data to use lstm model'
+        return
 
-    return out
+      lstm(data, parameters)
+
+      return
+
+    else:
+      if X is None:
+        if Y is None:
+          if data is None:
+            print 'X, Y or data is missing'
+            return
+            
+      out = trainer(X, Y, data, parameters)
+
+      return out
 
 
 def predictor(data,
@@ -217,6 +242,30 @@ def predictor(data,
         print("Please, define both x and y for plots for rendering")
 
     return pred
+
+def hyperscan(x,
+              y,
+              data,
+              epochs=10,
+              flatten='none',
+              dropout=0,
+              batch_sizes=15,
+              batch_sizes_step=1,
+              layers=5,
+              layers_step=1,
+              activation_out='sigmoid',
+              neuron_max='auto',
+              scan_mode='auto',
+              losses='auto',
+              optimizers='auto',
+              activations='auto',
+              shapes='auto'):
+    
+    from hyperscan import hyperscan
+
+    df = hyperscan(x,y,data,epochs,flatten,dropout,batch_sizes,batch_sizes_step,
+                   layers,layers_step,activation_out,neuron_max,scan_mode,losses,
+                   optimizers,activations,shapes)
 
 
 def wrangler(df,
