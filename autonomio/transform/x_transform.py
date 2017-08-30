@@ -30,7 +30,9 @@ def x_transform(X, data):
 
     # for a single column label which contains string values
     if type(X) == str:
-        if type(data[X][0]) == str or type(data[X][0]) == unicode:
+
+        first_index = data.index.values[0]
+        if type(data[X][first_index]) == str or type(data[X][first_index]) == unicode:
             x = vectorize_text(data[X])
             status = 'ok'
         else:

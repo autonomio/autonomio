@@ -164,7 +164,7 @@ def train(X=None, Y=None, data=None,
     hyperscan = Enables a mode where an hyperscan function can be run for
                 hyperparameter optimization purpose.
 
-    w_regularizer = Adds a weight regularizer to a model. 'Auto' mode adds 
+    w_regularizer = Adds a weight regularizer to a model. 'Auto' mode adds
                     regularizer to the last layer. Options are the string with
                     number of layers starting from 0.
 
@@ -204,7 +204,7 @@ def train(X=None, Y=None, data=None,
         print 'Please input data to use lstm model'
         return
 
-      lstm(data, parameters)
+      lstm(X, parameters)
 
       return
 
@@ -214,7 +214,7 @@ def train(X=None, Y=None, data=None,
           if data is None:
             print 'X, Y or data is missing'
             return
-            
+
       out = trainer(X, Y, data, parameters)
 
       return out
@@ -260,12 +260,15 @@ def hyperscan(x,
               optimizers='auto',
               activations='auto',
               shapes='auto'):
-    
+
     from hyperscan import hyperscan
 
-    df = hyperscan(x,y,data,epochs,flatten,dropout,batch_sizes,batch_sizes_step,
-                   layers,layers_step,activation_out,neuron_max,scan_mode,losses,
-                   optimizers,activations,shapes)
+    df = hyperscan(x, y, data, epochs, flatten, dropout, batch_sizes,
+                   batch_sizes_step, layers, layers_step, activation_out,
+                   neuron_max, scan_mode, losses, optimizers,
+                   activations, shapes)
+
+    return df
 
 
 def wrangler(df,
@@ -278,8 +281,9 @@ def wrangler(df,
              to_string=None,
              vectorize=None):
 
-    out = labels_to_ints(df, y, max_categories, starts_with_col,
-                         treshold, first_fill_cols, fill_with, to_string, vectorize)
+    out = labels_to_ints(df, y, max_categories,
+                         starts_with_col, treshold, first_fill_cols,
+                         fill_with, to_string, vectorize)
 
     return out
 
