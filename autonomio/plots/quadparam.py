@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')  # this needs to be here exceptionslly
 import matplotlib.pyplot as plt
