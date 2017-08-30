@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 plt.style.use('bmh')
 
-
 def quadparam(data, x, y, size, color, title='auto'):
 
     '''
@@ -34,7 +33,7 @@ def quadparam(data, x, y, size, color, title='auto'):
     s_label = size
     c_label = color
 
-    temp = data[size]
+    temp = np.array(data[size].astype(float))
     temp *= (500 / temp.max())
     s = temp
 
