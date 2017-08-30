@@ -8,20 +8,20 @@ from commands import train
 def hyperscan(x,
               y,
               data,
-              epochs=10,
-              flatten='none',
-              dropout=0,
-              batch_sizes=15,
-              batch_sizes_step=1,
-              layers=5,
-              layers_step=1,
-              activation_out='sigmoid',
-              neuron_max='auto',
-              scan_mode='auto',
-              losses='auto',
-              optimizers='auto',
-              activations='auto',
-              shapes='auto'):
+              epochs,
+              flatten,
+              dropout,
+              batch_sizes,
+              batch_sizes_step,
+              layers,
+              layers_step,
+              activation_out,
+              neuron_max,
+              scan_mode,
+              losses,
+              optimizers,
+              activations,
+              shapes):
 
     '''
     mode = 'auto' will scan through all
@@ -36,7 +36,8 @@ def hyperscan(x,
            or a list for multiple parameters.
     '''
 
-    df = pd.DataFrame()
+    #df = pd.DataFrame()
+    temp_list = []
 
     if scan_mode is not 'selective':
 
@@ -119,8 +120,8 @@ def hyperscan(x,
                                          shape=shape)
 
                             out = _data_prep(temp)
-
-                            df = df.append(out)
+                          
+                            temp_list.append(out)
 
                             if counter == 1:
 
@@ -130,31 +131,61 @@ def hyperscan(x,
                                 finish_estimate = finish_estimate.strftime('%H:%M')
                                 print("Estimated finish: %s" % finish_estimate)
 
+    df  = pd.DataFrame(temp_list)
+    df.columns = ['train_acc','train_acc_mean','train_acc_min','train_acc_max','train_acc_std',
+                  'train_loss','train_loss_mean','train_loss_min','train_loss_max','train_loss_std',
+                  'test_acc','test_acc_mean','test_acc_min','test_acc_max','test_acc_std',
+                  'test_loss','test_loss_mean','test_loss_min','test_loss_max','test_loss_std',
+                  'shape','activation','activation_out','loss','optimizer','epochs',
+                  'layers','features','dropout','batch_size','max_neurons','network_scale']
+
     return df
 
 
-def _data_prep(x):
+def _data_prep(data):
 
     '''
     Prepares the data for appending to dataframe round by round.
 
     '''
 
-    temp = x[0]
+    a = data[1][-10:]['train_acc'].median()
+    b = data[1][-10:]['train_acc'].mean()
+    c = data[1]['train_acc'].min()
+    d = data[1]['train_acc'].max()
+    e = data[1][-10:]['train_acc'].std()
 
-    temp['train_acc'] = x[1][-10:]['train_acc'].median()
-    temp['train_acc_std'] = x[1][-10:]['train_acc'].std()
-    temp['train_loss'] = x[1][-10:]['train_loss'].median()
-    temp['train_loss_std'] = x[1][-10:]['train_loss'].std()
-    temp['test_acc'] = x[1][-10:]['test_acc'].median()
-    temp['test_acc_std'] = x[1][-10:]['test_acc'].std()
-    temp['test_loss'] = x[1][-10:]['test_loss'].median()
-    temp['test_loss_std'] = x[1][-10:]['test_loss'].std()
-    temp['activation'] = x[2]['activation']
-    temp['activation_out'] = x[2]['activation_out']
-    temp['loss'] = x[2]['loss']
-    temp['optimizer'] = x[2]['optimizer']
-    temp = pd.DataFrame(temp).transpose()
-    temp = temp.drop(['ind_var', 'y_transform'], axis=1)
+    f = data[1][-10:]['train_loss'].median()
+    g = data[1][-10:]['train_loss'].mean()
+    h = data[1]['train_loss'].min()
+    i = data[1]['train_loss'].max()
+    j = data[1][-10:]['train_loss'].std()
 
-    return temp
+    k = data[1][-10:]['test_acc'].median()
+    l = data[1][-10:]['test_acc'].mean()
+    m = data[1]['test_acc'].min()
+    n = data[1]['test_acc'].max()
+    o = data[1][-10:]['test_acc'].std()
+
+    p = data[1][-10:]['test_loss'].median()
+    q = data[1][-10:]['test_loss'].mean()
+    r = data[1]['test_loss'].min()
+    s = data[1]['test_loss'].max()
+    t = data[1][-10:]['test_loss'].std()
+
+    u = data[0]['shape']
+    v = data[2]['activation']
+    w = data[2]['activation_out']
+    x = data[2]['loss']
+    y = data[2]['optimizer']
+    z = data[0]['epochs']
+    aa = data[0]['layers']
+    ab = data[0]['features']
+    ac = data[0]['dropout']
+    ad = data[0]['batch_size']
+    ae = data[0]['max_neurons']
+    af = data[0]['network_scale']
+
+    out = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,ab,ac,ad,ae,af]
+
+    return out

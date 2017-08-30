@@ -10,21 +10,16 @@ from keras.models import Sequential
 from ..transform.lstm_transform_data import _lstm_load_data
 from ..plots.lstm_plots import histplot, lstm_plot
 
-def lstm(data,
-         epochs=1,
-         seq_len=50,
-         prediction_len='auto',
-         normalize_window=True,
-         batch_size=512,
-         dense_neurons=100,
-         verbose=1):
+def lstm(data,param):
 
-    if prediction_len is 'auto':
-        prediction_len = seq_len
+    if param['prediction_len'] is 'auto':
+        param['prediction_len'] = param['seq_len']
 
-    X_train, y_train, X_test, y_test = _lstm_load_data(data, seq_len, normalize_window)
+    X_train, y_train, X_test, y_test = _lstm_load_data(data,
+                                                       param['seq_len'],
+                                                       param['normalize_window'])
 
-    dimensions = [1, seq_len, dense_neurons, 1]
+    dimensions = [1, param['seq_len'], param['dense_neurons'], 1]
 
     model = Sequential()
 
@@ -45,13 +40,12 @@ def lstm(data,
 
     model.compile(loss="mse", optimizer="rmsprop")
 
-    model.fit(
-        X_train,
-        y_train,
-        batch_size=batch_size,
-        nb_epoch=epochs,
-        validation_split=0.05,
-        verbose=verbose)
+    history = model.fit(X_train,
+                        y_train,
+                        batch_size=param['batch_size'],
+                        nb_epoch=param['epoch'],
+                        validation_split=0.05,
+                        verbose=param['verbose'])
 
     predicted = model.predict(X_test)
     predicted = np.reshape(predicted, (predicted.size,))
