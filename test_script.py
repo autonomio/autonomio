@@ -11,7 +11,6 @@ import numpy as np
 temp = data('tweet_sentiment')
 temp = data('election_in_twitter')
 temp = data('sites_category_and_vec')
-temp = data('parties_and_employment')
 temp = data('programmatic_ad_fraud')
 temp = col_name_generator(pd.DataFrame([1, 2]))
 
@@ -117,3 +116,8 @@ p = x[1][-10:]['train_acc'].mean()
 if p < .8:
 	print 'bad result for titanic data'
 	1/0
+
+temp = data('parties_and_employment')
+#test for lstm model
+train(data=temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
+train(data=temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
