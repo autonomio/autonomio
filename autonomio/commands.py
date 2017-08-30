@@ -200,7 +200,7 @@ def train(X=None, Y=None, data=None,
                   }
 
     if model is 'lstm':
-      if data is None:
+      if X is None:
         print 'Please input data to use lstm model'
         return
 
