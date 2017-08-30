@@ -79,16 +79,16 @@ for i in l:
     elif i in (l[3:4]): #only rhombus
         tr = train(1, 'neg', temp, shape=i, neuron_max=1, layers=8)
         tr = train(1, 'neg', temp, shape=i, neuron_max=9, layers=4)
-        
+
     if i in (l[4:6]): #long_funnel, diamond
         tr = train(1, 'neg', temp, shape=i, layers=6)
         tr = train(1, 'neg', temp, shape=i, layers=5)
-        
+
     elif i in (l[6:8]): #hexagon, stairs
         tr = train(1, 'neg', temp, shape=i, layers=4)
         tr = train(1, 'neg', temp, shape=i, layers=6)
         tr = train(1, 'neg', temp, shape=i, layers=7)
-        tr = train(1, 'neg', temp, shape=i, layers=8) 
+        tr = train(1, 'neg', temp, shape=i, layers=8)
 
 scatterz('influence_score', 'neg', temp, labels='handle')
 scatterz('influence_score', 'neg', temp,labels='handle',yscale='log',xscale='log')
@@ -119,5 +119,5 @@ if p < .8:
 
 temp = data('parties_and_employment')
 #test for lstm model
-train(data=temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
-train(data=temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
+train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
+train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
