@@ -67,14 +67,14 @@ def hyperscan(x,
             shapes = [shapes]
 
         if layers is 'auto':
-            layers = range([2, 15], layers_step)
+            layers = range(2, 15, layers_step)
         elif type(layers) is int:
             layers = [layers]
         elif type(layers) is list:
             layers = range(layers[0], layers[1], layers_step)
 
         if batch_sizes is 'auto':
-            batch_sizes = range([2, 15], batch_sizes_step)
+            batch_sizes = range(2, 15, batch_sizes_step)
         elif type(batch_sizes) is int:
             batch_sizes = [batch_sizes]
         elif type(batch_sizes) is list:
@@ -146,9 +146,13 @@ def hyperscan(x,
                                 backup_to_csv = _to_df(temp_list, column_list)
                                 backup_to_csv.to_csv('hyperscan.csv')
 
+                                print('tries left: %d' % no_of_tries - counter)
+
+
     df = _to_df(temp_list, column_list)
 
     return df
+
 
 def _to_df(data, cols):
 

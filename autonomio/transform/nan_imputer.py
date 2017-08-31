@@ -44,11 +44,10 @@ def nan_imputer(data, mode='mean_by_std'):
         hi = val
 
     c = len(data)
-    temp = np.array(data)
 
     for i in range(c):
 
-        if np.isnan(temp[i]) == True:
+        if np.isnan(data[i]) == True:
 
             l.append(random.randint(int(lo), int(hi)))
 
