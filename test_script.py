@@ -174,11 +174,10 @@ x = train([2,3,4,5,6,7,8,9],'Survived',df,
 quadparam(x[1], 'test_acc', 'test_loss', 'train_acc', 'train_loss')
 duaparam(x[1], 'test_acc', 80, 70)
 paramscatter(x[1], 'train_acc', limit = 5)
-paramscatter(x[1], 'train_acc', sort=False)
 paramagg(x[1])
 paramgrid(x[1], 'train_acc')
 
-x = train([2,3,4,5,6,7,8,9],'Survived',df,
+x2 = train([2,3,4,5,6,7,8,9],'Survived',df,
                         flatten='none',
                         epoch=3,
                         dropout=0,
@@ -189,12 +188,13 @@ x = train([2,3,4,5,6,7,8,9],'Survived',df,
                         shape='brick',
                         hyperscan=True)
 
+paramscatter(x2[1], 'train_acc', sort=False)
 paramgrid(x2[1], 'train_acc')
 
 p = x[1][-10:]['train_acc'].mean()
 if p < .8:
-	print 'bad result for titanic data'
-	1/0
+    print 'bad result for titanic data'
+    1/0
 
 temp = data('parties_and_employment')
 #test for lstm model
