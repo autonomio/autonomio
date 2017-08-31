@@ -2,7 +2,7 @@ from string import ascii_lowercase
 import itertools
 
 
-def col_name_generator(data):
+def col_name_generator(data, prefix='C'):
 
     '''Column Name Generator
 
@@ -22,7 +22,7 @@ def col_name_generator(data):
 
     for i in xrange(no_of_cols):
 
-        l.append(prefix+str(i))
+        l.append(prefix + str(i))
 
     data.columns = l
 
