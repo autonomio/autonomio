@@ -1,5 +1,5 @@
 =============================
-Autonomio v.0.1.2 User Manual
+Autonomio v.0.3.2 User Manual
 =============================
 
 .. image:: https://travis-ci.org/autonomio/core-module.svg?branch=master
@@ -7,6 +7,10 @@ Autonomio v.0.1.2 User Manual
 
 .. image:: https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master
     :target: https://coveralls.io/github/autonomio/core-module?branch=master
+
+
+.. image:: https://gemnasium.com/badges/github.com/mikkokotila/core-module.svg
+    :target: https://gemnasium.com/github.com/mikkokotila/core-module
 
 
 This document covers in detail functionality of Autonomio. If you're looking for a high level overview of the capabilities, you might find [Autonomio_Overview]_ more useful. 
@@ -219,12 +223,18 @@ SHAPES
 ------
 
 
+
+Shapes function takes as input number of layers, maximum value of neurons and the name of a shape.
+As an output it gives a list of neurons in order according to its shape.
+
+
 Funnel
 ------
 
 Funnel is the shape, which is set by default. It roughly looks like an upside-dowm pyramind, so that the first layer is defined as neuron_max, and the next layers are sligtly decreased compared to previous ones.::
 
 
+  +          +
   \          /
    \        /
     \      /
@@ -233,12 +243,28 @@ Funnel is the shape, which is set by default. It roughly looks like an upside-do
 
 
 
+As funnel shape is set by default, we do not need to input anything to use it.
+
+Example input.::
+
+
+    tr = train(1,'neg',temp,layers=5,neuron_max=10)
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [10, 5, 3, 2, 1]
+
+
 Long Funnel
 -----------
 
 Long Funnel shape can be applied by defining shape as 'long_funnel'. First half of the layers have the value of neuron_max, and then they have the shape similar to Funnel shape - decreasing to the last layer.::
 
 
+
+ +          +
  |          |
  |          |
  |          |
@@ -248,10 +274,24 @@ Long Funnel shape can be applied by defining shape as 'long_funnel'. First half 
      |  |
 
 
+
+Example input.::
+
+
+    tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='long_funnel')
+
+
+Output list of neurons(excluding ounput layer).::
+
+
+    neuron_count = [10, 10, 10, 5, 3, 2]
+
+
 Rhombus
 -------
 
-Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 1 and the next layers slightly increase till the middle one which equals to the value of neuron_max. Next layers are the previous ones goin in the reversed order.::
+Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 1 and the next layers slightly increase till the middle one which equals to the value of neuron_max. Next layers are the previous ones goin in the reversed order. ::
+
 
      +   +
      /   \
@@ -265,19 +305,46 @@ Rhobmus can be called by definind shape as 'rhombus'. The first layer equals to 
      |   |
 
 
+
+Example input. ::
+
+
+    tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='rhombus')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [1, 6, 10, 6, 1]
+
+
 Diamond
 -------
 
 Defining shape as 'diamond' we will obtain the shape of the 'opened rhombus', where everything is similar to the Rhombus shape, but layers start from the larger number instead of 1. ::
 
-    +     + 
+
+    +     +
    /       \
   /         \
-  \         /   
+  \         /
    \       /
     \     /
      \   /
      |   |
+
+
+
+Example input. ::
+
+
+    tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='diamond')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [6, 6, 10, 5, 3, 2]
 
 
 Hexagon
@@ -299,6 +366,18 @@ Hexagon, which we get by calling 'hexagon' for shape, starts with 1 as the first
      |  |
 
 
+Example input. ::
+
+
+    tr = train(1,'neg',temp,layers=7,neuron_max=10,shape='hexagon')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [1, 3, 5, 10, 10, 5, 3]
+
+
 Brick
 -----
 
@@ -306,6 +385,7 @@ Brick
 All the layers have neuron_max value. Called by shape='brick'. ::
 
 
+   +			 +
    |             |
    |             |
    |             |
@@ -314,20 +394,45 @@ All the layers have neuron_max value. Called by shape='brick'. ::
         |   |
 
 
+Example input. ::
+
+
+    tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='brick')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [10, 10, 10, 10, 10]
+
+
 Triangle
 --------
 
 This shape, which is called by defining shape as 'triangle' starts with 1 and increases till the last input layer, which is neuron_max. ::
 
 
-         + +
-        /   \
-       /     \
-      /       \
-     /         \
-    /           \  
+         +  +
+        /    \
+       /      \
+      /        \
+     /          \
+    /            \
     ----      ----
         |    |
+
+
+Example input. ::
+
+
+    tr = train(1,'neg',temp,layers=5,neuron_max=10,shape='triangle')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [1, 2, 3, 5, 10]
+
 
 Stairs
 ------
@@ -340,6 +445,18 @@ You can apply it defining shape as 'stairs'. If number of layers more than four,
        |             |
         ---       ---
            |     |
+
+
+Example input. ::
+
+
+    tr = train(1,'neg',temp,layers=6,neuron_max=10,shape='stairs')
+
+
+Output list of neurons(excluding ounput layer). ::
+
+
+    neuron_count = [10, 10, 8, 8, 6, 6]
 
 
 ----
@@ -427,6 +544,15 @@ The data command is provided for both convinience, and to give the user access t
 +-------------------+-------------------------+-------------------------+
 | mode              | string ('file')         | NA                      |
 +-------------------+-------------------------+-------------------------+
+
+
+----------
+VALIDATION
+----------
+
+
+
+
 
 ---------------
 TROUBLESHOOTING

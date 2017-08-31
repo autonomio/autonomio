@@ -6,3 +6,5 @@ keras
 matplotlib
 mpld3
 h5py
+jinja2
+iPython

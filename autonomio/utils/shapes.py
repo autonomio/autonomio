@@ -1,15 +1,17 @@
 import math as m
 
-def shapes( layers, 
-            shape, 
-            neuron_max,
-            neuron_last, 
-            dropout):
+
+def shapes(para):
+
+    layers = para['layers']
+    shape = para['shape']
+    neuron_max = para['neuron_max']
+    neuron_last = para['neuron_last']
 
     neuron_previous = neuron_max
     neuron_count = []
     l = []
-
+    
     if shape == 'funnel':
 
         neuron_count.append(neuron_max)
@@ -22,7 +24,7 @@ def shapes( layers,
 
         neuron_count.append(1)
 
-        a = neuron_max * 2 - 1 
+        a = neuron_max * 2 - 1
         k = 0
 
         if a < layers:
@@ -34,7 +36,7 @@ def shapes( layers,
 
         if (val % 2) == 0:
 
-            n = (val - 2) / 2  #number of layers before or after middle layer
+            n = (val - 2) / 2  # number of layers before or after middle layer
 
             for i in range(n):
                 neuron_count.append(int(neuron_max * (i+1) * 2 / val))
@@ -47,7 +49,7 @@ def shapes( layers,
 
         else:
 
-            n = (val - 1) / 2 
+            n = (val - 1) / 2
 
             for i in range(n - 1):
 
@@ -98,8 +100,6 @@ def shapes( layers,
 
         else:
 
-            print n
-
             for i in range(n):
                 neuron_count.append(int(m.ceil(neuron_max * layers + i) / 2.0) / (layers - 1))
             for i in range(1):
@@ -108,8 +108,6 @@ def shapes( layers,
         for i in range(n):
             neuron_count.append((neuron_previous + neuron_last) / 2)
             neuron_previous = neuron_count[i + n]
-
-        print neuron_count
 
     if shape == 'hexagon':
 
@@ -182,7 +180,7 @@ def shapes( layers,
             n = layers / 2
 
             for i in range(n):
-                if neuron_previous >= 3 :
+                if neuron_previous >= 3:
                     neuron_previous -= 2
                 for j in range(2):
                     neuron_count.append(neuron_previous)
@@ -194,3 +192,4 @@ def shapes( layers,
 
     return neuron_count
 
+# Returns a List
