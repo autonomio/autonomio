@@ -36,7 +36,6 @@ def hyperscan(x,
            or a list for multiple parameters.
     '''
 
-    #df = pd.DataFrame()
     temp_list = []
 
     if scan_mode is not 'selective':
@@ -94,6 +93,16 @@ def hyperscan(x,
     print("Total tries in this scan: %d" % no_of_tries)
     print("Scan started on: %s" % start_time.strftime('%H:%M'))
 
+    column_list = ['train_acc', 'train_acc_mean', 'train_acc_min',
+                   'train_acc_max', 'train_acc_std', 'train_loss',
+                   'train_loss_mean', 'train_loss_min', 'train_loss_max',
+                   'train_loss_std', 'test_acc', 'test_acc_mean',
+                   'test_acc_min', 'test_acc_max', 'test_acc_std', 'test_loss',
+                   'test_loss_mean', 'test_loss_min', 'test_loss_max',
+                   'test_loss_std', 'shape', 'activation', 'activation_out',
+                   'loss', 'optimizer', 'epochs', 'layers', 'features',
+                   'dropout', 'batch_size', 'max_neurons', 'network_scale']
+
     counter = 0
     for loss in losses:
         for activation in activations:
@@ -103,6 +112,7 @@ def hyperscan(x,
                         for batch_size in batch_sizes:
 
                             counter += 1
+
                             temp = train(x,
                                          y,
                                          data,
@@ -120,24 +130,38 @@ def hyperscan(x,
                                          shape=shape)
 
                             out = _data_prep(temp)
-                          
+
                             temp_list.append(out)
 
                             if counter == 1:
 
                                 try_time = dt.datetime.now()
                                 temp = (try_time - start_time) * no_of_tries
-                                finish_estimate = temp + start_time
-                                finish_estimate = finish_estimate.strftime('%H:%M')
-                                print("Estimated finish: %s" % finish_estimate)
+                                finish_est = temp + start_time
+                                finish_est = finish_est.strftime('%H:%M')
+                                print("Estimated finish: %s" % finish_est)
 
-    df  = pd.DataFrame(temp_list)
-    df.columns = ['train_acc','train_acc_mean','train_acc_min','train_acc_max','train_acc_std',
-                  'train_loss','train_loss_mean','train_loss_min','train_loss_max','train_loss_std',
-                  'test_acc','test_acc_mean','test_acc_min','test_acc_max','test_acc_std',
-                  'test_loss','test_loss_mean','test_loss_min','test_loss_max','test_loss_std',
-                  'shape','activation','activation_out','loss','optimizer','epochs',
-                  'layers','features','dropout','batch_size','max_neurons','network_scale']
+                            # creating a backup to a file every 50 tries
+                            if counter % 50 == 0:
+                                backup_to_csv = _to_df(temp_list, column_list)
+                                backup_to_csv.to_csv('hyperscan.csv')
+
+    df = _to_df(temp_list, column_list)
+
+    return df
+
+def _to_df(data, cols):
+
+    '''Dataframe maker
+
+    Takes the input of the scan and puts it in to
+    a dataframe. This is to avoid having to use
+    the same code twice.
+
+    '''
+
+    df = pd.DataFrame(data)
+    df.columns = cols
 
     return df
 
