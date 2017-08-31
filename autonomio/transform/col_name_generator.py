@@ -2,23 +2,28 @@ from string import ascii_lowercase
 import itertools
 
 
-def col_name_generator(data):
+def col_name_generator(data, prefix='C'):
 
-    limit = data.shape[1]
-    out = []
-    counter = 0
+    '''Column Name Generator
 
-    def iter_all_strings():
-        size = 1
-        while True:
-            for s in itertools.product(ascii_lowercase, repeat=size):
-                yield "".join(s)
-            size +=1
+    WHAT: A helper function that generates alphabetic
+    column names automatically.
 
-    for s in iter_all_strings():
-        out += s
-        counter += 1
-        if counter == limit :
-            data.columns = out
-            return data
-            break
+    HOW: col_name_generator(df)
+
+    INPUT: A pandas dataframe
+
+    OUTPUT: The input dataframe with alphabetical sequence
+    column names.
+
+    '''
+    no_of_cols = data.shape[1]
+    l = []
+
+    for i in xrange(no_of_cols):
+
+        l.append(prefix + str(i))
+
+    data.columns = l
+
+    return data

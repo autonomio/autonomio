@@ -1,8 +1,17 @@
-from autonomio.commands import data, train, predictor, wrangler
+from autonomio.commands import data, train, predictor, wrangle, hyperscan
 from autonomio.transform.transform_data import transform_data
 from autonomio.load_data import load_data
 from autonomio.transform.col_name_generator import col_name_generator
+from autonomio.transform.nan_imputer import nan_imputer
 from autonomio.plots.scatterz import scatterz
+from autonomio.hyperparameters import load_parameters
+from autonomio.hyperstats import hyper_descriptive
+from autonomio.transform.onehot_encoding import onehot
+from autonomio.plots.duaparam import duaparam
+from autonomio.plots.paramagg import paramagg
+from autonomio.plots.quadparam import quadparam
+from autonomio.plots.paramscatter import paramscatter
+from autonomio.plots.paramgrid import paramgrid
 
 import pandas as pd
 import numpy as np
@@ -11,6 +20,7 @@ import numpy as np
 temp = data('tweet_sentiment')
 temp = data('election_in_twitter')
 temp = data('sites_category_and_vec')
+temp = data('bitcoin_price')
 temp = data('programmatic_ad_fraud')
 temp = col_name_generator(pd.DataFrame([1, 2]))
 
@@ -28,8 +38,11 @@ temp2 = np.array(temp)
 temp2 = temp2[:,2:4]
 temp2 = pd.DataFrame(temp2)
 
+data('temp.x', 'file')
+
 temp2.to_csv('test_data.csv')
-data('test_data.csv','file')
+data('test_data.csv','file', header=None)
+data('test_data.csv')
 
 temp1 = wrangler(df=temp,y='neg', vectorize='text')
 temp1 = wrangler(df=temp,max_categories='max',to_string='text',first_fill_cols='url',starts_with_col='location')
@@ -62,6 +75,9 @@ tr = train(1, 'neg', temp, validation=.6)
 tr = train(['reach_score','influence_score'],'neg',temp,save_model='strings')
 te = predictor(temp,'strings',x_plot='influence_score',y_plot='user_followers',labels='handle')
 
+train()
+train(model='lstm')
+
 l = ['funnel',
      'brick',
      'triangle',
@@ -93,8 +109,51 @@ for i in l:
 scatterz('influence_score', 'neg', temp, labels='handle')
 scatterz('influence_score', 'neg', temp,labels='handle',yscale='log',xscale='log')
 
+hyperscan('user_followers', 'neg', temp.head(10), epochs=3,
+                                                  batch_sizes=[5,6],
+                                                  scan_mode='selective',
+                                                  losses='logcosh',
+                                                  optimizers='adam', 
+                                                  activations='elu')
+
+hyperscan('user_followers', 'neg', temp.head(10), epochs=3,
+                                                  layers=[5,6],
+                                                  scan_mode='selective',
+                                                  losses='logcosh',
+                                                  optimizers='adam',
+                                                  shapes='funnel')
+
+hyperscan('user_followers', 'neg', temp.head(10), epochs=3,
+                                                  scan_mode='selective',
+                                                  losses='logcosh',
+                                                  activations='elu',
+                                                  shapes='funnel')
+
+hyperscan('user_followers', 'neg', temp.head(10), epochs=3,
+                                                  scan_mode='selective',
+                                                  optimizers='adam', 
+                                                  activations='elu',
+                                                  shapes='funnel')
+
+load_parameters('categorical_losses')
+
 #check for a good result
 temp = data('kaggle_titanic_train')
+
+a = hyper_descriptive(temp, 'Age', 'SibSp')
+a = hyper_descriptive(temp, 'Age', 'SibSp', mode = 'mean')
+a = hyper_descriptive(temp, 'Age', 'SibSp', mode = 'std')
+a = hyper_descriptive(temp, 'Age', 'SibSp', mode = 'min')
+a = hyper_descriptive(temp, ['Age', 'Survived'], 'SibSp', mode = 'max')
+
+b = nan_imputer(temp.Age)
+b = nan_imputer(temp.Age, mode='mean')
+b = nan_imputer(temp.Age, mode='median')
+b = nan_imputer(temp.Age, mode='common')
+b = nan_imputer(temp.Age, mode='mode')
+
+l = temp.Parch.tolist()
+a = onehot(l)
 
 df = wrangler(temp,y='Survived',
                    first_fill_cols='Cabin',
@@ -112,6 +171,26 @@ x = train([2,3,4,5,6,7,8,9],'Survived',df,
                         shape='brick',
                         hyperscan=True)
 
+quadparam(x[1], 'test_acc', 'test_loss', 'train_acc', 'train_loss')
+duaparam(x[1], 'test_acc', 80, 70)
+paramscatter(x[1], 'train_acc', limit = 5)
+paramscatter(x[1], 'train_acc', sort=False)
+paramagg(x[1])
+paramgrid(x[1], 'train_acc')
+
+x = train([2,3,4,5,6,7,8,9],'Survived',df,
+                        flatten='none',
+                        epoch=3,
+                        dropout=0,
+                        batch_size=12,
+                        loss='logcosh',
+                        activation='elu',
+                        layers=6,
+                        shape='brick',
+                        hyperscan=True)
+
+paramgrid(x2[1], 'train_acc')
+
 p = x[1][-10:]['train_acc'].mean()
 if p < .8:
 	print 'bad result for titanic data'
@@ -119,5 +198,5 @@ if p < .8:
 
 temp = data('parties_and_employment')
 #test for lstm model
-train(data=temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
-train(data=temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
+train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
+train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
