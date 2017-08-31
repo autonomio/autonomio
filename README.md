@@ -1,6 +1,6 @@
 <img src="./docs/autonomio_logo_new.png"  width="250">
 
-[![Build Status](https://travis-ci.org/autonomio/core-module.svg?branch=master)](https://travis-ci.org/autonomio/core-module)  [![Coverage Status](https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master)](https://coveralls.io/github/autonomio/core-module?branch=master) [![Dependency Status](https://gemnasium.com/badges/github.com/mikkokotila/core-module.svg)](https://gemnasium.com/github.com/mikkokotila/core-module) [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+[![Build Status](https://travis-ci.org/autonomio/core-module.svg?branch=master)](https://travis-ci.org/autonomio/core-module)  [![Coverage Status](https://coveralls.io/repos/github/autonomio/core-module/badge.svg?branch=master)](https://coveralls.io/github/autonomio/core-module?branch=master) [![Dependency Status](https://gemnasium.com/badges/github.com/mikkokotila/core-module.svg)](https://gemnasium.com/github.com/mikkokotila/core-module) [![PEP8](https://img.shields.io/badge/code%20style-pep8-blue.svg)](https://www.python.org/dev/peps/pep-0008/)
 
 Autonomio provides a very high level abstraction layer for rapidly testing research ideas and instantly creating neural network based decision making models. Autonomio is built on top of Keras, using Tensorflow as a backend and spaCy for word vectorization. Autonomio brings deep learning and state-of-the-art linguistic processing accessible to anyone with basic computer skills. This document focus on an overview of Autonomio's capabilities.
 
@@ -8,7 +8,7 @@ If you want something higher level [visit the website](https://mikkokotila.githu
 
 If you're looking for the User Manual, you may want to look [at the docs](https://mikkokotila.github.io/slate/#introduction) instead.
 
-## Getting Started 
+## Getting Started
 
 The simplest way is to install with pip from the repo directly.
 
