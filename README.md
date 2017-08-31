@@ -72,12 +72,20 @@ Training an LSTM model is even simpler:
 
     predictor(data, saved_model_name)  
 
-### Slightly more involving use
+## Visualization
 
+### Standard Training Output
 
-## Standard training output
+![mlp and regression training result](http://i.imgur.com/5GSwiJu.png)
 
-![test result output](http://i.imgur.com/i4MkYmo.png)
+### LSTM Training output
+
+![lstm training output](http://i.imgur.com/gjpDCfm.png)
+
+### Hyperscan Output
+
+![4 dimensional hyperscan result](http://i.imgur.com/g4L25sm.png)
+
 
 ### Tested Systems
 
