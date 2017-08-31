@@ -3,6 +3,7 @@ import pandas as pd
 from transform.transform_data import transform_data
 from load_model import load_model
 
+
 def make_prediction(data,
                     saved_model,
                     label=False):
@@ -29,11 +30,11 @@ def make_prediction(data,
     else:
         prediction = pd.DataFrame(prediction)
         prediction.columns = ['Value']
-        
+
     prediction = prediction.sort_values('Value', ascending=False)
 
     print(prediction.head(10))
     print('--------------')
     print(prediction.tail(10))
-        
+
     return prediction
