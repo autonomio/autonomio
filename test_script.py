@@ -1,4 +1,4 @@
-from autonomio.commands import data, train, predictor, wrangle, hyperscan
+from autonomio.commands import data, train, predictor, wrangler, hyperscan
 from autonomio.transform.transform_data import transform_data
 from autonomio.load_data import load_data
 from autonomio.transform.col_name_generator import col_name_generator
