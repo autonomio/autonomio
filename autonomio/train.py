@@ -2,6 +2,8 @@ import pandas as pd
 
 from IPython.display import display
 
+from keras import backend as K
+
 from transform.transform_data import transform_data
 from plots.plots import accuracy
 from utils.shapes import shapes
@@ -33,7 +35,7 @@ def trainer(X, Y, data, para):
     '''
 
     ind_var = Y   # this is used later for output
-    X_num, Y_num = X, Y
+    X_num = X
 
     data = data.sample(frac=1)
 
@@ -91,7 +93,10 @@ def trainer(X, Y, data, para):
         para['save_model'] = 'saved_model'
 
     if para['save_model'] is not False:
-        save_model_as(X_num, data.columns, model, para['save_model'], para['flatten'])
+        save_model_as(X_num,
+                      data.columns,
+                      model, para['save_model'],
+                      para['flatten'])
 
     # shuffling and separating the data
     if para['validation'] is not False:
@@ -110,6 +115,9 @@ def trainer(X, Y, data, para):
                      'shape': para['shape'],
                      'max_neurons': para['neuron_max'],
                      'network_scale': network_scale})
+
+    # prevent Tensorflow memory leakage
+    K.clear_session()
 
     if para['hyperscan'] is True:
 

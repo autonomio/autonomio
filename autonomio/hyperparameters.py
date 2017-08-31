@@ -11,7 +11,7 @@ def load_parameters(parameters):
                          'cosine',
                          'mse',
                          'logcosh',
-                         'binarcy_crossentropy']
+                         'binary_crossentropy']
         return binary_losses
 
     if parameters is 'categorical_losses':

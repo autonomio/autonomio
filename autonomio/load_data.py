@@ -24,6 +24,8 @@ def load_data(name, mode, sep, delimiter, header):
                 out = pd.read_msgpack(data_path+'random_tweets')
             if name == 'kaggle_titanic_train':
                 out = pd.read_csv(data_path+'kaggle_titanic_train.csv')
+            if name == 'bitcoin_price':
+                out = pd.read_csv(data_path+'bitcoin_price.csv')
 
             return out
 
