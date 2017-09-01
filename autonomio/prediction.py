@@ -1,8 +1,10 @@
 import pandas as pd
 
 from transform.transform_data import transform_data
+from plots.plots import prediction_distribution
 from load_model import load_model
 
+from IPython.display import display
 
 def make_prediction(data,
                     saved_model,
@@ -33,8 +35,25 @@ def make_prediction(data,
 
     prediction = prediction.sort_values('Value', ascending=False)
 
-    print(prediction.head(10))
-    print('--------------')
-    print(prediction.tail(10))
+    out = pd.Series({
+
+        'a': len(prediction.Value),
+        'b': prediction.Value.median(),
+        'c': prediction.Value.mean(),
+        'd': prediction.Value.std(),
+        'e': prediction.Value.min(),
+        'f': prediction.Value.max(),
+    })
+
+    out = pd.DataFrame(out).transpose()
+    out.columns = ['predictions',
+                   'median_prediction',
+                   'mean_prediction',
+                   'std_prediction',
+                   'min_prediction',
+                   'max_prediction']
+
+    display(out)
+    prediction_distribution(prediction.Value, bins=100)
 
     return prediction

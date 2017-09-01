@@ -25,3 +25,13 @@ def accuracy(data):
     fig.set_size_inches(20, 5)
     fig.savefig('train.png', dpi=300, bbox_inches='tight')
     fig.show()
+
+
+def prediction_distribution(x, bins):
+
+    plt.figure(num=None, figsize=(16, 4), dpi=80, facecolor='w', edgecolor='k')
+    plt.hist(x, bins=bins, label='actual')
+    plt.grid(b=False)
+    plt.tick_params(axis='both', which='major', pad=15)
+    plt.legend()
+    plt.show()

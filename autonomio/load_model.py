@@ -9,7 +9,6 @@ def load_model(saved_model):
     loaded_model = model_from_json(loaded_model_json)
     # load weights into new model
     loaded_model.load_weights(saved_model + '.h5')
-    print("Loaded model from disk")
 
     f = open(saved_model+".x", 'r')
     temp = f.read()
