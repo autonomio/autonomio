@@ -164,7 +164,7 @@ b = nan_imputer(temp.Age, mode='median')
 b = nan_imputer(temp.Age, mode='common')
 b = nan_imputer(temp.Age, mode='mode')
 
-c = all_is_binary(df, 'Survived')
+c = all_is_binary(temp, 'Survived')
 
 l = temp.Parch.tolist()
 a = onehot(l)
