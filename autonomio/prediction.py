@@ -6,9 +6,6 @@ from autonomio.plots.scatterz import scatterz
 from autonomio.load_model import load_model
 
 from IPython.display import display
-import mpld3
-
-mpld3.enable_notebook()
 
 def make_prediction(data,
                     saved_model,

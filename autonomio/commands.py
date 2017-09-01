@@ -5,11 +5,6 @@ from transform.wrangler import labels_to_ints
 from plots.scatterz import scatterz
 from models.lstm import lstm
 
-import mpld3
-
-mpld3.enable_notebook()
-
-
 
 def train(X=None, Y=None, data=None,
           epoch=5,

@@ -3,7 +3,6 @@ matplotlib.use('Agg')  # this needs to be here exceptionslly
 import matplotlib.pyplot as plt
 import mpld3
 
-mpld3.enable_notebook()
 
 def scatterz(x, y, data, labels, xscale='linear', yscale='linear', n=250):
 
