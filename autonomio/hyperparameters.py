@@ -1,18 +1,18 @@
 def load_parameters(parameters):
 
     # losses
-    if parameters is 'binary_losses':
-        binary_losses = ['msle',
-                         'mape',
-                         'mae',
-                         'poisson',
-                         'hinge',
-                         'squared_hinge',
-                         'cosine',
-                         'mse',
-                         'logcosh',
-                         'binary_crossentropy']
-        return binary_losses
+    if parameters is 'losses':
+        losses = ['msle',
+                  'mape',
+                  'mae',
+                  'poisson',
+                  'hinge',
+                  'squared_hinge',
+                  'cosine',
+                  'mse',
+                  'logcosh',
+                  'binary_crossentropy']
+        return losses
 
     if parameters is 'categorical_losses':
         categorical_losses = ['categorical_hinge',
