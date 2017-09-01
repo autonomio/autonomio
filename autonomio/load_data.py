@@ -6,6 +6,12 @@ data_path = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets
 
 def load_data(name, mode, sep, delimiter, header):
 
+    '''Data Loader
+
+    WHAT: used for accessing datafiles that come with Autonomio, some unique
+    and some common.
+    '''
+
     try:
 
         if mode == 'default':

@@ -17,6 +17,7 @@ def col_name_generator(data, prefix='C'):
     column names.
 
     '''
+
     no_of_cols = data.shape[1]
     l = []
 

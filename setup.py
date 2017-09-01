@@ -8,17 +8,17 @@ os.environ["MPLCONFIGDIR"] = "."
 DESCRIPTION = "Autonomio deep learning workbench "
 LONG_DESCRIPTION = """\
 Autonomio provides a very high-level abstraction layer on top of Keras,
-using Tensorflow as a backend and spaCy for word vectorization.  
+using Tensorflow as a backend and spaCy for word vectorization.
 
 - single-command neural network training
-- training command accepts as little as 'x' and 'y' as inputs 
+- training command accepts as little as 'x' and 'y' as inputs
 - 'x' can be text, continues or categorial data
 - 15 optional configurations from a single command
 - seamlessly integrates word2vec with keras deep learning
 - interactive plots specifically designed for deep learning
 
-For most use cases succesfully running a state-of-the-art AI works 
-out of the box in less than 60 seconds to first trained model. 
+For most use cases succesfully running a state-of-the-art AI works
+out of the box in less than 60 seconds to first trained model.
 
 """
 
@@ -28,7 +28,7 @@ MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://autonom.io'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/autonomio/core-module/'
-VERSION = '0.3.2.dev'
+VERSION = '0.4'
 
 try:
     from setuptools import setup
@@ -37,7 +37,7 @@ except ImportError:
     from distutils.core import setup
 
 def check_dependencies():
-    
+
     install_requires = []
 
     try:

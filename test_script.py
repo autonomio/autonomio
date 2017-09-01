@@ -2,6 +2,7 @@ from autonomio.commands import data, train, predictor, wrangler, hyperscan
 from autonomio.transform.transform_data import transform_data
 from autonomio.transform.col_name_generator import col_name_generator
 from autonomio.transform.nan_imputer import nan_imputer
+from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.plots.scatterz import scatterz
 from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
