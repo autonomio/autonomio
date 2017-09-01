@@ -1,14 +1,12 @@
 import pandas as pd
 
-import sys
-sys.path.insert(0, '/Users/mikko/Documents/GitHub/core-module')
-
 from autonomio.transform.col_name_generator import col_name_generator
 from autonomio.transform.nan_imputer import nan_imputer
 from autonomio.transform.onehot_encoding import onehot
 from autonomio.transform.nan_handler import nan_filler
 
-def all_is_binary(data,y):
+
+def all_is_binary(data, y):
 
     '''Sohot DataFrame One Hot Encoding
 
@@ -44,13 +42,13 @@ def all_is_binary(data,y):
                     imputed = nan_imputer(data[col])
                     temp = _concat_df(imputed, temp)
                 else:
-                    filled = nan_filler(data,col,0)
+                    filled = nan_filler(data, col, 0)
                     labeled = pd.Categorical(filled).codes
                     temp = _concat_df(labeled, temp)
 
     temp = col_name_generator(temp)
     temp = temp.astype(int)
-    temp = pd.concat([ind_var, temp],axis=1)
+    temp = pd.concat([ind_var, temp], axis=1)
 
     return temp
 

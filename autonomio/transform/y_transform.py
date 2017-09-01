@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def y_transform(Y, data, flatten='mean'):
+def y_transform(Y, data, flatten):
 
     df_y = data[Y]
 
