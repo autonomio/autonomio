@@ -243,6 +243,7 @@ def predictor(data,
 
     return pred
 
+
 def hyperscan(x,
               y,
               data,
@@ -255,7 +256,6 @@ def hyperscan(x,
               layers_step=1,
               activation_out='sigmoid',
               neuron_max='auto',
-              scan_mode='auto',
               losses='auto',
               optimizers='auto',
               activations='auto',
@@ -265,7 +265,7 @@ def hyperscan(x,
 
     df = hyperscan(x, y, data, epochs, flatten, dropout, batch_sizes,
                    batch_sizes_step, layers, layers_step, activation_out,
-                   neuron_max, scan_mode, losses, optimizers,
+                   neuron_max, losses, optimizers,
                    activations, shapes)
 
     return df
