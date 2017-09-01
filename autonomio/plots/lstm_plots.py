@@ -19,9 +19,9 @@ def lstm_plot(predicted_data, true_data, prediction_len=None):
 
 def histplot(x, y, bins=50):
 
-    fig = plt.figure(num=None, figsize=(16, 4), dpi=80, facecolor='w', edgecolor='k')
-    plt.hist(y, bins=bins, label='actual');
-    plt.hist(x, bins=bins, label='prediction', alpha=.8);
+    plt.figure(num=None, figsize=(16, 4), dpi=80, facecolor='w', edgecolor='k')
+    plt.hist(y, bins=bins, label='actual')
+    plt.hist(x, bins=bins, label='prediction', alpha=.8)
     plt.grid(b=False)
     plt.tick_params(axis='both', which='major', pad=15)
     plt.legend()

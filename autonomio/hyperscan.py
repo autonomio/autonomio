@@ -38,14 +38,15 @@ def hyperscan(x,
 
     temp_list = []
 
-    if scan_mode is not 'selective':
+    if scan_mode is 'auto':
 
         shapes = load_parameters('shapes')
         optimizers = load_parameters('optimizers')
         activations = load_parameters('activations')
         losses = load_parameters('binary_losses')
 
-    else:
+    elif scan_mode is 'selective':
+
         if losses is 'auto':
             losses = load_parameters('binary_losses')
         elif type(losses) is str:
