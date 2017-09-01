@@ -1,5 +1,11 @@
 def save_model_as(X, columns, model, save_model, flatten):
 
+    '''Model Saver
+
+    WHAT: Saves a trained model so it can be loaded later
+    for predictions by predictor().
+    '''
+
     model_json = model.to_json()
     with open(save_model+".json", "w") as json_file:
         json_file.write(model_json)
@@ -15,7 +21,7 @@ def save_model_as(X, columns, model, save_model, flatten):
     if type(X) == list:
         if len(X) == 2:
             if type(X[0]) == int:
-               
+
                 for i in range(X[0],X[1]):
                     try:
                         temp += columns[i] + " "
@@ -47,7 +53,7 @@ def save_model_as(X, columns, model, save_model, flatten):
 
     # for a single column label which contains string values
     if type(X) == str:
-        
+
         temp = X
 
     temp += " "+str(flatten)
