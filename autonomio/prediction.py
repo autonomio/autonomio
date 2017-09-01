@@ -1,48 +1,44 @@
 import pandas as pd
 
-from transform.transform_data import transform_data
-from plots.plots import prediction_distribution
-from load_model import load_model
+from autonomio.transform.transform_data import transform_data
+from autonomio.plots.plots import prediction_distribution
+from autonomio.plots.scatterz import scatterz
+from autonomio.load_model import load_model
 
 from IPython.display import display
+import mpld3
+
+mpld3.enable_notebook()
 
 def make_prediction(data,
                     saved_model,
-                    label=False):
+                    label,
+                    interactive,
+                    interactive_x):
 
     loaded_model, X, flatten = load_model(saved_model)
-
     signals = transform_data(data, flatten, X)
-
     prediction = loaded_model.predict(signals)
 
-    if label is not False:
-        label = data[label]
-
-        l = []
-        i = 0
-
-        for x in prediction:
-            l.append([x[0], label[i:i+1].values[0]])
-            i += 1
-
-        prediction = pd.DataFrame(l)
-        prediction.columns = ['Value', 'Name']
+    if label is False:
+        prediction = pd.DataFrame(prediction)
+        prediction.columns = ['Prediction']
 
     else:
         prediction = pd.DataFrame(prediction)
-        prediction.columns = ['Value']
+        prediction[label] = data[label]
+        prediction.columns = ['Prediction', label]
 
-    prediction = prediction.sort_values('Value', ascending=False)
+    prediction = prediction.sort_values('Prediction', ascending=False)
 
     out = pd.Series({
 
-        'a': len(prediction.Value),
-        'b': prediction.Value.median(),
-        'c': prediction.Value.mean(),
-        'd': prediction.Value.std(),
-        'e': prediction.Value.min(),
-        'f': prediction.Value.max(),
+        'a': len(prediction.Prediction),
+        'b': prediction.Prediction.median(),
+        'c': prediction.Prediction.mean(),
+        'd': prediction.Prediction.std(),
+        'e': prediction.Prediction.min(),
+        'f': prediction.Prediction.max(),
     })
 
     out = pd.DataFrame(out).transpose()
@@ -54,6 +50,16 @@ def make_prediction(data,
                    'max_prediction']
 
     display(out)
-    prediction_distribution(prediction.Value, bins=100)
+    prediction_distribution(prediction.Prediction, bins=100)
 
-    return prediction
+    if interactive is True:
+
+        temp = pd.merge(prediction,
+                        data,
+                        left_on=label,
+                        right_on=label)
+        return temp
+
+    else:
+
+        return prediction

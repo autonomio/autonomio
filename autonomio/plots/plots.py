@@ -30,7 +30,7 @@ def accuracy(data):
 def prediction_distribution(x, bins):
 
     plt.figure(num=None, figsize=(16, 4), dpi=80, facecolor='w', edgecolor='k')
-    plt.hist(x, bins=bins, label='actual')
+    plt.hist(x, bins=bins, label='prediction')
     plt.grid(b=False)
     plt.tick_params(axis='both', which='major', pad=15)
     plt.legend()

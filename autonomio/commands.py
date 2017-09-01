@@ -5,6 +5,11 @@ from transform.wrangler import labels_to_ints
 from plots.scatterz import scatterz
 from models.lstm import lstm
 
+import mpld3
+
+mpld3.enable_notebook()
+
+
 
 def train(X=None, Y=None, data=None,
           epoch=5,
@@ -223,8 +228,8 @@ def train(X=None, Y=None, data=None,
 def predictor(data,
               saved_model,
               labels=False,
-              x_plot=False,
-              y_plot=False):
+              interactive=False,
+              interactive_x='none'):
 
     ''' Function for making predictions on a saved model.
 
@@ -233,13 +238,11 @@ def predictor(data,
            2) call the model by its name
     '''
 
-    pred = make_prediction(data, saved_model, label=labels)
-
-    if x_plot is not False and y_plot is not False and labels is not False:
-        scatterz(x_plot, y_plot, data, labels)
-
-    if x_plot is not False or y_plot is not False:
-        print("Please, define both x and y for plots for rendering")
+    pred = make_prediction(data,
+                           saved_model,
+                           label=labels,
+                           interactive=interactive,
+                           interactive_x=interactive_x)
 
     return pred
 
