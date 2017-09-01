@@ -2,10 +2,12 @@ from autonomio.commands import data, train, predictor, wrangler, hyperscan
 from autonomio.transform.transform_data import transform_data
 from autonomio.transform.col_name_generator import col_name_generator
 from autonomio.transform.nan_imputer import nan_imputer
+from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.plots.scatterz import scatterz
 from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
 from autonomio.transform.onehot_encoding import onehot
+from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
 from autonomio.plots.quadparam import quadparam
@@ -162,6 +164,8 @@ b = nan_imputer(temp.Age, mode='median')
 b = nan_imputer(temp.Age, mode='common')
 b = nan_imputer(temp.Age, mode='mode')
 
+c = all_is_binary(temp, 'Survived')
+
 l = temp.Parch.tolist()
 a = onehot(l)
 
@@ -200,6 +204,13 @@ x2 = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
 
 paramscatter(x2[1], 'train_acc', sort=False)
 paramgrid(x2[1], 'train_acc')
+
+temp2 = pd.DataFrame(['0', '0', '0'], columns=['0'])
+
+try:
+    paramgrid(temp2, '0')
+except:
+    pass
 
 p = x[1][-10:]['train_acc'].mean()
 if p < .8:
