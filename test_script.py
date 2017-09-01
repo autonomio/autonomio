@@ -7,6 +7,7 @@ from autonomio.plots.scatterz import scatterz
 from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
 from autonomio.transform.onehot_encoding import onehot
+from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
 from autonomio.plots.quadparam import quadparam
@@ -207,7 +208,7 @@ paramgrid(x2[1], 'train_acc')
 temp2 = pd.DataFrame(['0', '0', '0'], columns=['0'])
 
 try:
-    paramgrid(temp, '0')
+    paramgrid(temp2, '0')
 except:
     pass
 
