@@ -1,5 +1,12 @@
 def load_parameters(parameters):
 
+    '''Load hyperparameters
+
+    WHAT: a helper function for storing and accessing
+    all available hyperparameters.
+
+    '''
+
     # losses
     if parameters is 'losses':
         losses = ['msle',

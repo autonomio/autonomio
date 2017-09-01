@@ -13,6 +13,13 @@ def make_prediction(data,
                     interactive,
                     interactive_x):
 
+    '''Predictor
+
+    WHAT: Makes predictions on a given dataset based on a saved
+    model that have been previously trained with train().
+
+    '''
+
     loaded_model, X, flatten = load_model(saved_model)
     signals = transform_data(data, flatten, X)
     prediction = loaded_model.predict(signals)
