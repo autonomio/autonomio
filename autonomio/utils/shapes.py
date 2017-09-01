@@ -81,7 +81,7 @@ def shapes(para):
 
         for i in range(n):
             neuron_count.append((neuron_previous + neuron_last) / 2)
-            neuron_previous = neuron_count[-1]
+            neuron_previous = neuron_count[i + n]
 
     if shape == 'brick':
 
@@ -91,35 +91,23 @@ def shapes(para):
     if shape == 'diamond':
 
         n = layers / 2
-        neuron_first = int(.5 * neuron_max)
-        neuron_count.append(neuron_first)
-
-        
 
         if (layers % 2 == 0):
-            step = neuron_first/(n-1)
-            if step is 0:
-                step = 1
 
-            l = range(neuron_first, neuron_max, step)[0:n-2]
-            for x in l:
-                neuron_count.append(x)
-
-        if (layers % 2 == 1):
-            step = neuron_first/(n)
-            if step is 0:
-                step = 1
-
-            l = range(neuron_first, neuron_max, step)[0:n-1]
-            for x in l:
-                neuron_count.append(x)
-
-        while len(neuron_count) < n:
+            for i in range(n - 1):
+                neuron_count.append(int(m.ceil(neuron_max * layers + i) / 2.0) / (layers - 1))
             neuron_count.append(neuron_max)
+
+        else:
+
+            for i in range(n):
+                neuron_count.append(int(m.ceil(neuron_max * layers + i) / 2.0) / (layers - 1))
+            for i in range(1):
+                neuron_count.append(neuron_max)
 
         for i in range(n):
             neuron_count.append((neuron_previous + neuron_last) / 2)
-            neuron_previous = neuron_count[-1]
+            neuron_previous = neuron_count[i + n]
 
     if shape == 'hexagon':
 
@@ -201,10 +189,6 @@ def shapes(para):
             for i in range(layers):
                 neuron_count.append(neuron_previous)
                 neuron_previous -= 1
-
-    for i in range(len(neuron_count)):
-        if neuron_count[i] is 1:
-            neuron_count[i] = 2
 
     return neuron_count
 
