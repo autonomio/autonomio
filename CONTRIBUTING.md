@@ -29,6 +29,7 @@ To make sure that you're on the same page (with rest of the commnity), for a a h
 
 3. [Reviewing Pull Requests](#review)
 
+4. [Specific Guidelines for Github](#github)
 
 ## 1. Ways to contribute <a name="ways-to-contribute"></a>
 
@@ -49,7 +50,7 @@ There are several ways programmers, data scientists and others can contribute to
 
 **CODING STYLE GUIDELINES**
 
-We follow pep8. Because [reading docs](http://legacy.python.org/dev/peps/pep-0008/) and particulary [style guides](http://legacy.python.org/dev/peps/pep-0008/) more or less suck, we use Atom and the amazing Linter plugin so we don't have to. 
+We follow pep8. Because [reading docs](http://legacy.python.org/dev/peps/pep-0008/) and particulary [style guides](http://legacy.python.org/dev/peps/pep-0008/) more or less suck, we use Atom and the amazing Linter plugin so we don't have to.
 
 **MORE STYLE GUIDELINES**
 
@@ -199,3 +200,20 @@ In short summary, the goal is that the user can completely understand 100% of th
 ### 3. Reviewing Pull Requests <a name="review"></a>
 
 If you've been assigned as a reviewer of a given pull request, unless you've been explicitly asked to do so, **DON'T MERGE** just approve the review and share in the comments what you think. If you don't have any comments, just confirm with a comment that you don't have any. While this is kind of obvious, don't start reviewing before you can see all the tests have passed ;)
+
+### 4. General points on using Github  <a name="github"></a>
+
+1) First things first, make sure you understand [this](https://guides.github.com/introduction/flow/index.html) 100%
+2) Also make sure that you clearly understand everything that is said [here](https://blog.hartleybrody.com/git-small-teams/)
+3) Working on your local machine, only have one folder (the git remote)
+4) Load it as module with:
+
+    import sys
+    return sys.path.insert(0, '/home/autonomio/dev/core-module')
+
+5) Frequently fetch origin to make sure you get latest changes from other people
+6) Don’t work in separate forks, but in branches
+7) Keep commits as small as possible
+8) Make clear commit messages (explain what you actually are changing)
+
+For Mac users Github desktop is pretty fantastic. For Linux users the GUIs are not so fantastic. Atom looks like a good cross-platform option.
