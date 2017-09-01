@@ -86,7 +86,7 @@ te = predictor(temp,
                'strings',
                interactive=True,
                interactive_x='user_followers',
-               label='handle')
+               labels='handle')
 
 train()
 train(model='lstm')

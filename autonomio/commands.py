@@ -235,7 +235,7 @@ def predictor(data,
 
     pred = make_prediction(data,
                            saved_model,
-                           label=labels,
+                           labels=labels,
                            interactive=interactive,
                            interactive_x=interactive_x)
 
