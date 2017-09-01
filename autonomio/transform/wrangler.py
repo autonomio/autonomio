@@ -96,10 +96,10 @@ def labels_to_ints(data,
 
             # initiates conversion to labels based on first character
             elif starts_with_col is not 'none' and starts_with_col == col:
-                data[col] = _starts_with_output(data,col)
+                data[col] = _starts_with_output(data, col)
 
             else:
-                data = data.drop(col,axis=1)
+                data = data.drop(col, axis=1)
 
     if y is not 'none':
         temp_y = data[y]

@@ -21,7 +21,10 @@ def duaparam(data, column, val_1, val_2):
 
     '''
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6), sharex=True, sharey=True)
+    fig, (ax1, ax2) = plt.subplots(1, 2,
+                                   figsize=(12, 6),
+                                   sharex=True,
+                                   sharey=True)
 
     temp = data[data[column] == val_1]
     ax1.set_title(val_1)
@@ -39,8 +42,17 @@ def duaparam(data, column, val_1, val_2):
     ax2.legend(loc='upper right')
     ax2.tick_params(axis='both', which='major', pad=15)
 
-    fig.text(0.5, -0.02, 'loss', ha='center', va='center', size=17, color='grey')
-    fig.text(-0.02, 0.5, 'accuracy', ha='center', va='center', rotation='vertical', size=17, color='grey')
+    fig.text(0.5, -0.02, 'loss',
+             ha='center',
+             va='center',
+             size=17,
+             color='grey')
+    fig.text(-0.02, 0.5, 'accuracy',
+             ha='center',
+             va='center',
+             rotation='vertical',
+             size=17,
+             color='grey')
 
     plt.tight_layout()
     plt.show()

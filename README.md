@@ -22,7 +22,9 @@ Contributions are most welcome, read more [here](https://github.com/autonomio/co
 
 ## Examples
 
-- data transformation [link](https://nbviewer.jupyter.org/github/autonomio/core-module/blob/dev/notebooks/autonomio_data_preparation.ipynb)
+- capabilities overview [link](https://nbviewer.jupyter.org/github/autonomio/examples/blob/master/notebooks/autonomio_capabilities_overview.ipynb)
+- data transformation [link](https://nbviewer.jupyter.org/github/autonomio/examples/blob/master/notebooks/autonomio_data_preparation.ipynb)
+- hyperparameter search [link](https://nbviewer.jupyter.org/github/autonomio/examples/blob/master/notebooks/autonomio_hyperparameter_search.ipynb)
 
 *(more examples coming soon / dated 31st of July, 2017)*
 
