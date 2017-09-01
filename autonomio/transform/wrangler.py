@@ -36,6 +36,9 @@ def labels_to_ints(data,
     temp_string = pd.DataFrame()
 
     if to_string is not None:
+
+        if type(to_string) is str:
+            to_string = [to_string]
         for col in to_string:
             if col in data.columns:
                 temp_string[col] = data[col]
@@ -48,16 +51,7 @@ def labels_to_ints(data,
         temp_vect = pd.DataFrame()
 
         if type(vectorize) is str:
-            temp_list = []
-            vect_len = 1
-            temp_list = vectorize_text(data[vectorize])
-
-            # transpose list of the vectors
-            temp_list = list(np.transpose(temp_list))
-
-            for j in range(len(temp_list)):
-                col = 'v'+"1_"+str(j+1)
-                temp_vect[col] = temp_list[j]
+            vectorize = [vectorize]
 
         if type(vectorize) is list:
             vect_len = len(vectorize)

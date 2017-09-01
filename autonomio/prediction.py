@@ -18,7 +18,6 @@ def make_prediction(data,
     model that have been previously trained with train().
 
     '''
-
     loaded_model, X, flatten = load_model(saved_model)
     signals = transform_data(data, flatten, X)
     prediction = loaded_model.predict(signals)
