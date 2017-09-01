@@ -17,7 +17,6 @@ def hyperscan(x,
               layers_step,
               activation_out,
               neuron_max,
-              scan_mode,
               losses,
               optimizers,
               activations,
@@ -38,47 +37,39 @@ def hyperscan(x,
 
     temp_list = []
 
-    if scan_mode is not 'selective':
+    if losses is 'auto':
+        losses = load_parameters('losses')
+    elif type(losses) is str:
+        losses = [losses]
 
-        shapes = load_parameters('shapes')
-        optimizers = load_parameters('optimizers')
+    if activations is 'auto':
         activations = load_parameters('activations')
-        losses = load_parameters('binary_losses')
+    elif type(activations) is str:
+        activations = [activations]
 
-    else:
-        if losses is 'auto':
-            losses = load_parameters('binary_losses')
-        elif type(losses) is str:
-            losses = [losses]
+    if optimizers is 'auto':
+        optimizers = load_parameters('optimizers')
+    elif type(optimizers) is str:
+        optimizers = [optimizers]
 
-        if activations is 'auto':
-            activations = load_parameters('activations')
-        elif type(activations) is str:
-            activations = [activations]
+    if shapes is 'auto':
+        shapes = load_parameters('shapes')
+    elif type(shapes) is str:
+        shapes = [shapes]
 
-        if optimizers is 'auto':
-            optimizers = load_parameters('optimizers')
-        elif type(optimizers) is str:
-            optimizers = [optimizers]
+    if layers is 'auto':
+        layers = range(2, 15, layers_step)
+    elif type(layers) is int:
+        layers = [layers]
+    elif type(layers) is list:
+        layers = range(layers[0], layers[1], layers_step)
 
-        if shapes is 'auto':
-            shapes = load_parameters('shapes')
-        elif type(shapes) is str:
-            shapes = [shapes]
-
-        if layers is 'auto':
-            layers = range(2, 15, layers_step)
-        elif type(layers) is int:
-            layers = [layers]
-        elif type(layers) is list:
-            layers = range(layers[0], layers[1], layers_step)
-
-        if batch_sizes is 'auto':
-            batch_sizes = range(2, 15, batch_sizes_step)
-        elif type(batch_sizes) is int:
-            batch_sizes = [batch_sizes]
-        elif type(batch_sizes) is list:
-            batch_sizes = range(batch_sizes[0], batch_sizes[1], batch_sizes_step)
+    if batch_sizes is 'auto':
+        batch_sizes = range(2, 15, batch_sizes_step)
+    elif type(batch_sizes) is int:
+        batch_sizes = [batch_sizes]
+    elif type(batch_sizes) is list:
+        batch_sizes = range(batch_sizes[0], batch_sizes[1], batch_sizes_step)
 
     a = len(losses)
     b = len(shapes)
