@@ -43,12 +43,12 @@ def wrangler_main(data,
         data = data.drop(y, axis=1)
 
     # deal with possible datetime columns
-    data = datetime_detector(data, datetime_mode)
+    data, datetime_col_name = datetime_detector(data, datetime_mode)
 
     # in case retain, keep the column for later and drop it
     if datetime_mode is 'retain':
 
-        temp_datetime_col = data[data.datetime_col_name]
+        temp_datetime_col = data[datetime_col_name]
         temp_datetime_col = pd.DataFrame(temp_datetime_col)
         data = data.drop(data.datetime_col_name, axis=1)
 

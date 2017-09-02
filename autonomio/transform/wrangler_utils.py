@@ -66,14 +66,13 @@ def _datetime_handler(data, col, datetime_mode):
     if datetime_mode is 'drop':
         data = data.drop(col, axis=1)
 
-    if datetime_mode is 'sequence':
+    elif datetime_mode is 'sequence':
         data = data.sort_values(col)
         data[col] = range(len(data[col]))
 
-    if datetime_mode is 'retain':
-        data.datetime_col_name = col
+    datetime_col_name = col
 
-    return data
+    return data, datetime_col_name
 
 
 def vectorize_string_cols(data, vectorize):
