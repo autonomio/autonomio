@@ -2,7 +2,6 @@ from autonomio.commands import data, train, predictor, wrangler, hyperscan
 from autonomio.transform.transform_data import transform_data
 from autonomio.transform.col_name_generator import col_name_generator
 from autonomio.transform.nan_imputer import nan_imputer
-from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.plots.scatterz import scatterz
 from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
@@ -64,13 +63,14 @@ tr = train([1, 5], 'neg', temp, model='regression',
 tr = train([1, 2, 3, 4, 5], 'neg', temp,
            model='regression',
            reg_mode='regularized',
-           flatten='cat_numeric')
+           flatten='cat_numeric',
+           shape_plot=True)
 
 # y variable flattening mode
 tr = train(1, 'quality_score', temp, flatten='median')
 tr = train(1, 'quality_score', temp, flatten=6)
 tr = train(1, 'quality_score', temp, flatten=.5)
-tr = train(1, 'quality_score', temp, flatten='mean')
+tr = train(1, 'quality_score', temp, flatten='mean', shape_plot=True)
 
 # model saving and loading
 tr = train('text', 'neg', temp, save_model='test_model')
@@ -221,7 +221,12 @@ if p < .8:
 temp = data('parties_and_employment')
 # test for lstm model
 train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
-train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
+train(temp.MUU,
+      epoch=1,
+      batch_size=512,
+      model='lstm',
+      normalize_window=True,
+      shape_plot=True)
 
 max_rescale([0, 1, 2], to_int=True)
 max_rescale([0, 1, 2])
