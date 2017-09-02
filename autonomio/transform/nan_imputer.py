@@ -4,7 +4,7 @@ import random
 # filling the missing age values
 
 
-def nan_imputer(data, impute_mode):
+def nan_imputer(data, impute_mode='mean_by_std'):
 
     '''NaN Imputer
 
