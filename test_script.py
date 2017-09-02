@@ -171,10 +171,7 @@ c = all_is_binary(temp, 'Survived')
 l = temp.Parch.tolist()
 a = onehot(l)
 
-df = wrangler(temp, y='Survived',
-              first_fill_cols='Cabin',
-              starts_with_col='Cabin',
-              treshold=.8)
+#df = wrangler(temp, y='Survived',first_fill_cols='Cabin',starts_with_col='Cabin', treshold=.8)
 
 x = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
           flatten='none',
