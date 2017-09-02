@@ -101,7 +101,8 @@ l = ['funnel',
      'long_funnel',
      'diamond',
      'hexagon',
-     'stairs']
+     'stairs',
+     'pyramid']
 
 for i in l:
 
