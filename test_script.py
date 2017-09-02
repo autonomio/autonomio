@@ -45,10 +45,18 @@ temp2.to_csv('test_data.csv')
 data('test_data.csv', 'file', header=None)
 data('test_data.csv')
 
-temp1 = wrangler(data=temp, y='neg', vectorize='text')
-temp1 = wrangler(data=temp, max_categories='max', to_string='text',
-                 first_fill_cols='url', starts_with_col='location')
-temp1 = wrangler(data=temp, max_categories=42,
+temp1 = wrangler(data=temp,
+                 y='neg',
+                 vectorize='text')
+
+temp1 = wrangler(data=temp,
+                 max_categories='max',
+                 to_string='text',
+                 fill_columns='url',
+                 starts_with_col='location')
+
+temp1 = wrangler(data=temp,
+                 max_categories=42,
                  vectorize=['text', 'user_tweets'])
 
 X = transform_data(temp, flatten='none')
