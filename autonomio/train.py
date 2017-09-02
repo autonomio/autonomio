@@ -12,6 +12,8 @@ from utils.validator import validate, separate
 from save_model_as import save_model_as
 from models.mlp import mlp
 from models.regression import regression
+from plots.trainplot import trainplot
+from autonomio.plots.plots import prediction_distribution
 
 
 def trainer(X, Y, data, para):
@@ -116,21 +118,36 @@ def trainer(X, Y, data, para):
                      'max_neurons': para['neuron_max'],
                      'network_scale': network_scale})
 
+    ex3 = pd.Series({
+                    'optimizer': para['optimizer'],
+                    'activation': para['activation'],
+                    'activation_out': para['activation_out'],
+                    'loss': para['loss'],
+                    })
+
+    train_stats = [ex2['train_acc'].max(),
+                   ex2['train_acc'].min(),
+                   ex2[-10:]['train_acc'].median(),
+                   ex2[-10:]['train_acc'].mean(),
+                   ex2[-para['epoch']:]['train_acc'].values[0],
+                   ex2[-1:]['train_acc'].values[0]]
+
+    test_stats = [ex2['test_acc'].max(),
+                  ex2['test_acc'].min(),
+                  ex2[-10:]['test_acc'].median(),
+                  ex2[-10:]['test_acc'].mean(),
+                  ex2[-para['epoch']:]['test_acc'].values[0],
+                  ex2[-1:]['test_acc'].values[0]]
+
     # prevent Tensorflow memory leakage
     K.clear_session()
 
     if para['hyperscan'] is True:
-
-        ex3 = pd.Series({
-                        'optimizer': para['optimizer'],
-                        'activation': para['activation'],
-                        'activation_out': para['activation_out'],
-                        'loss': para['loss'],
-                        })
-
         return ex1, ex2, ex3
 
     else:
         display(pd.DataFrame(ex1).transpose())
+        trainplot(train_stats, test_stats)
         accuracy(ex2)
+        prediction_distribution(predictions, bins=100)
         return

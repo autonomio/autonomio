@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 plt.style.use('bmh')
 
+
 def quadparam(data, x, y, size, color, title='auto'):
 
     '''
