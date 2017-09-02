@@ -49,6 +49,7 @@ def wrangler_main(data,
     if datetime_mode is 'retain':
 
         temp_datetime_col = data[data.datetime_col_name]
+        temp_datetime_col = pd.DataFrame(temp_datetime_col)
         data = data.drop(data.datetime_col_name, axis=1)
 
     # in case of string label, keep the column for later
@@ -115,5 +116,5 @@ def wrangler_main(data,
 
     print("%d out of %d rows dropped" % (rows_total, rows_before))
     print("%d out of %d cols dropped" % (cols_total, cols_before))
-    
+
     return data
