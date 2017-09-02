@@ -161,10 +161,10 @@ a = hyper_descriptive(temp, 'Age', 'SibSp', mode='min')
 a = hyper_descriptive(temp, ['Age', 'Survived'], 'SibSp', mode='max')
 
 b = nan_imputer(temp.Age)
-b = nan_imputer(temp.Age, mode='mean')
-b = nan_imputer(temp.Age, mode='median')
-b = nan_imputer(temp.Age, mode='common')
-b = nan_imputer(temp.Age, mode='mode')
+b = nan_imputer(temp.Age, impute_mode='mean')
+b = nan_imputer(temp.Age, impute_mode='median')
+b = nan_imputer(temp.Age, impute_mode='common')
+b = nan_imputer(temp.Age, impute_mode='mode')
 
 c = all_is_binary(temp, 'Survived')
 
