@@ -1,10 +1,8 @@
 from prediction import make_prediction
 from train import trainer
 from load_data import load_data
-from transform.wrangler import labels_to_ints
+from transform.wrangler import wrangler_main
 from models.lstm import lstm
-
-import mpld3
 
 
 def train(X=None, Y=None, data=None,
@@ -279,9 +277,9 @@ def wrangler(df,
              to_string=None,
              vectorize=None):
 
-    out = labels_to_ints(df, y, max_categories,
-                         starts_with_col, treshold, first_fill_cols,
-                         fill_with, to_string, vectorize)
+    out = wrangler_main(df, y, max_categories,
+                        starts_with_col, treshold, first_fill_cols,
+                        fill_with, to_string, vectorize)
 
     return out
 

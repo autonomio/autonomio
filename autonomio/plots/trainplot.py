@@ -9,6 +9,12 @@ plt.style.use('bmh')
 
 def trainplot(train_vals, test_vals):
 
+    '''Train Metrics Plot
+
+    WHAT: an overview visualization for training results.
+
+    '''
+
     # creating the x-labels
     train_pos = np.array([1, 2, 3, 4, 5, 6]) * 2
     test_pos = train_pos + 0.55

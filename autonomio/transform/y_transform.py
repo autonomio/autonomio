@@ -3,6 +3,18 @@ import pandas as pd
 
 def y_transform(Y, data, flatten):
 
+    '''Outcome Variable Transformer
+
+    WHAT: Transforms the outcome variable to a format that
+    is according with the prediction target
+
+    OPTIONS: 'mean','median','mode',int (ge), string for
+    interquartile range for binary conversion. 'cat_string'
+    for converting strings in to categorical labels, and
+    'cat_int' for doing the same with integer values.
+
+    '''
+
     df_y = data[Y]
 
     # if user input 'int' then function will be "greater than value"
