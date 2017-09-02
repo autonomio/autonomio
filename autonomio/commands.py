@@ -2,7 +2,6 @@ from prediction import make_prediction
 from train import trainer
 from load_data import load_data
 from transform.wrangler import labels_to_ints
-from plots.scatterz import scatterz
 from models.lstm import lstm
 
 import mpld3
@@ -20,7 +19,6 @@ def train(X=None, Y=None, data=None,
           activation_out='sigmoid',
           save_model=False,
           neuron_max='auto',
-          neuron_last=1,
           batch_size=10,
           verbose=0,
           shape='funnel',
@@ -183,7 +181,6 @@ def train(X=None, Y=None, data=None,
                   'optimizer': optimizer,
                   'dropout': dropout,
                   'layers': layers,
-                  'neuron_last': neuron_last,
                   'activation_out': activation_out,
                   'verbose': verbose,
                   'flatten': flatten,
@@ -206,7 +203,7 @@ def train(X=None, Y=None, data=None,
 
     if model is 'lstm':
         if X is None:
-            print 'Please input data to use lstm model'
+            print('Please input data to use lstm model')
             return
         lstm(X, parameters)
         return
@@ -215,7 +212,7 @@ def train(X=None, Y=None, data=None,
         if X is None:
             if Y is None:
                 if data is None:
-                    print 'X, Y or data is missing'
+                    print('X, Y or data is missing')
                     return
 
     out = trainer(X, Y, data, parameters)

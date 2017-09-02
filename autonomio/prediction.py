@@ -23,14 +23,20 @@ def make_prediction(data,
     signals = transform_data(data, flatten, X)
     prediction = loaded_model.predict(signals)
 
-    if labels is False:
-        prediction = pd.DataFrame(prediction)
-        prediction.columns = ['Prediction']
+    l = []
+    l.append('Prediction')
 
-    else:
-        prediction = pd.DataFrame(prediction)
+    prediction = pd.DataFrame(prediction)
+
+    classes = len(prediction.columns) - 1
+
+    for i in range(classes):
+        l.append('Prediction_'+str(i+1))
+
+    prediction.columns = l
+
+    if type(labels) is str:
         prediction[labels] = data[labels]
-        prediction.columns = ['Prediction', labels]
 
     prediction = prediction.sort_values('Prediction', ascending=False)
 
