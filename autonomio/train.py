@@ -14,6 +14,7 @@ from models.mlp import mlp
 from models.regression import regression
 from plots.trainplot import trainplot
 from autonomio.plots.plots import prediction_distribution
+from autonomio.plots.shapeplot import shapeplot
 
 
 def trainer(X, Y, data, para):
@@ -147,6 +148,10 @@ def trainer(X, Y, data, para):
 
     else:
         display(pd.DataFrame(ex1).transpose())
+
+        if para['shape_plot'] is True:
+            shapeplot(para['neuron_count'], para['model'])
+
         trainplot(train_stats, test_stats)
         accuracy(ex2)
         prediction_distribution(predictions, bins=100)

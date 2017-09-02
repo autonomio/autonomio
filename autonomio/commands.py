@@ -34,7 +34,8 @@ def train(X=None, Y=None, data=None,
           reg_mode='linear',
           hyperscan='False',
           w_regularizer='auto',
-          w_reg_values=[0, 0]):
+          w_reg_values=[0, 0],
+          shape_plot=False):
 
     '''The command for training a new model.
 
@@ -199,7 +200,8 @@ def train(X=None, Y=None, data=None,
                   'prediction_len': prediction_len,
                   'seq_len': seq_len,
                   'dense_neurons': dense_neurons,
-                  'normalize_window': normalize_window
+                  'normalize_window': normalize_window,
+                  'shape_plot': shape_plot
                   }
 
     if model is 'lstm':

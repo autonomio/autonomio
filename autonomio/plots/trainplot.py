@@ -24,7 +24,7 @@ def trainplot(train_vals, test_vals):
     ax.bar(test_pos, test_vals, width=0.5, align='center', label='Test')
 
     plt.ylim((0, 1))
-    plt.tick_params(axis='both', labelsize=12, which='major', pad=10)
+    plt.tick_params(axis='both', labelsize=11, which='major', pad=10)
     plt.xticks(label_placeholder, labels)
     plt.grid(b=False)
     plt.legend(loc='upper right')

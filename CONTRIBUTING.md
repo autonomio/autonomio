@@ -215,5 +215,6 @@ If you've been assigned as a reviewer of a given pull request, unless you've bee
 6) Don’t work in separate forks, but in branches
 7) Keep commits as small as possible
 8) Make clear commit messages (explain what you actually are changing)
+9) Unless working on something completely new on a separate brach, never start new day without fetching origin
 
 For Mac users Github desktop is pretty fantastic. For Linux users the GUIs are not so fantastic. Atom looks like a good cross-platform option.
