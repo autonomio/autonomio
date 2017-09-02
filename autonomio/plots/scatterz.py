@@ -6,6 +6,18 @@ import mpld3
 
 def scatterz(x, y, data, labels, xscale='linear', yscale='linear', n=250):
 
+    '''Interactive Plot for Predictions
+
+    WHAT: an interactive plot for analyzing predicions.
+
+    HOW: scatterz('Fare','Prediction',titanic_preodictions,'Name')
+
+    INPUT: a pandas dataframe that comes from predictor(interactive=True)
+
+    OUTPUT: an interactive 3-dimensional plot.
+
+    '''
+
     fig, ax = plt.subplots(subplot_kw=dict(axisbg='#FFFFFF'), figsize=(10, 10))
     fig.set_size_inches(8, 8)
     data = data.head(n)

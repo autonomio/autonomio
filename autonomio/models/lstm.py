@@ -10,14 +10,29 @@ from keras.models import Sequential
 from ..transform.lstm_transform_data import _lstm_load_data
 from ..plots.lstm_plots import histplot, lstm_plot
 
-def lstm(data,param):
+
+def lstm(data, param):
+
+    '''LSTM Model
+
+    WHAT: An LSTM model function to be used through train().
+
+    HOW: lstm(x)
+
+    INPUT: 1-dimensional data in array, list or Series
+
+    OUTOUT: Trained model and plots for reviewing the accuracy.
+
+    '''
 
     if param['prediction_len'] is 'auto':
         param['prediction_len'] = param['seq_len']
 
-    X_train, y_train, X_test, y_test = _lstm_load_data(data,
-                                                       param['seq_len'],
-                                                       param['normalize_window'])
+    X_train, y_train, X_test, y_test = _lstm_load_data(
+                                                    data,
+                                                    param['seq_len'],
+                                                    param['normalize_window']
+                                                    )
 
     dimensions = [1, param['seq_len'], param['dense_neurons'], 1]
 
@@ -52,17 +67,16 @@ def lstm(data,param):
 
     temp = pd.DataFrame({'predicted': predicted, 'actual': y_test})
 
-    out = pd.Series({'pred_std': temp.predicted.std(),
-                     'actual_std': temp.actual.std(),
-                     'diff_std': round(temp.actual.std() / temp.predicted.std(), 3) -1,
-                     'pred_max': temp.predicted.max(),
-                     'actual_max': temp.actual.max(),
-                     'diff_max': round(temp.actual.max() / temp.predicted.max(), 3) -1,
-                     'pred_min': temp.predicted.min(),
-                     'actual_min': temp.actual.min(),
-                     'diff_min': round(temp.actual.min() / temp.predicted.min(), 3) -1})
-
-    #print("Median prediction error: %.2f%%" % ((temp.predicted / temp.actual * 100).median() - 100))
+    out = pd.Series({
+         'pred_std': temp.predicted.std(),
+         'actual_std': temp.actual.std(),
+         'diff_std': round(temp.actual.std() / temp.predicted.std(), 3) - 1,
+         'pred_max': temp.predicted.max(),
+         'actual_max': temp.actual.max(),
+         'diff_max': round(temp.actual.max() / temp.predicted.max(), 3) - 1,
+         'pred_min': temp.predicted.min(),
+         'actual_min': temp.actual.min(),
+         'diff_min': round(temp.actual.min() / temp.predicted.min(), 3) - 1})
 
     display(pd.DataFrame(out).transpose())
 

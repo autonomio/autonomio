@@ -4,7 +4,7 @@ import random
 # filling the missing age values
 
 
-def nan_imputer(data, mode='mean_by_std'):
+def nan_imputer(data, impute_mode='mean_by_std'):
 
     '''NaN Imputer
 
@@ -20,19 +20,19 @@ def nan_imputer(data, mode='mean_by_std'):
 
     l = []
 
-    if mode == 'mean':
+    if impute_mode == 'mean':
         val = data.mean()
 
-    if mode == 'median':
+    if impute_mode == 'median':
         val = data.median()
 
-    if mode == 'mode':
+    if impute_mode == 'mode':
         val = data.mode()
 
-    if mode == 'common':
+    if impute_mode == 'common':
         val = data.value_counts().index[0]
 
-    if mode == 'mean_by_std':
+    if impute_mode == 'mean_by_std':
         val = data.mean()
         std = data.std()
         lo = val - std
