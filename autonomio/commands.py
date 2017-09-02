@@ -161,7 +161,8 @@ def train(X=None, Y=None, data=None,
                           separated for validation.
 
     model = Switch for choosing which kind of model is being used. The options
-            are 'mlp' for multi layer perceptor and 'regression' for regression.
+            are 'mlp' for multi layer perceptor and 'regression' for
+            regression.
 
     hyperscan = Enables a mode where an hyperscan function can be run for
                 hyperparameter optimization purpose.

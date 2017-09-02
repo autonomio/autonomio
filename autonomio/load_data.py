@@ -42,7 +42,7 @@ def load_data(name, mode, sep, delimiter, header):
 
                 try:
                     out = pd.read_csv(name, sep, delimiter, header)
-                except:
+                except ParserError:
                     out = pd.read_csv(name, sep, delimiter, header,
                                       error_bad_lines=False)
 
