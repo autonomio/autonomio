@@ -6,15 +6,15 @@ from vectorize_text import vectorize_text
 from nan_handler import nan_dropper, nan_filler
 
 
-def wrangler(data,
-             y,
-             max_categories,
-             starts_with_col,
-             treshold,
-             first_fill_cols,
-             fill_with,
-             to_string,
-             vectorize):
+def wrangler_main(data,
+                  y,
+                  max_categories,
+                  starts_with_col,
+                  treshold,
+                  first_fill_cols,
+                  fill_with,
+                  to_string,
+                  vectorize):
 
     '''Wrangler Utility
 
