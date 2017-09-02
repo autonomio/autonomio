@@ -95,29 +95,29 @@ train()
 train(model='lstm')
 
 l = ['funnel',
+     'pyramid',
      'brick',
      'triangle',
      'rhombus',
      'long_funnel',
      'diamond',
      'hexagon',
-     'stairs',
-     'pyramid']
+     'stairs']
 
 for i in l:
 
-    if i in (l[0:3]):  # funnel, brick, triangle
-        tr = train(1, 'neg', temp, shape=i, double_check=True)
+    if i in (l[0:4]):  # funnel, brick, triangle, pyramid
+        tr = train(1, 'neg', temp, shape=i, double_check=True, layers=15)
 
-    elif i in (l[3:4]):  # only rhombus
+    elif i in (l[4:5]):  # only rhombus
         tr = train(1, 'neg', temp, shape=i, neuron_max=1, layers=8)
         tr = train(1, 'neg', temp, shape=i, neuron_max=9, layers=4)
 
-    if i in (l[4:6]):  # long_funnel, diamond
+    if i in (l[5:7]):  # long_funnel, diamond
         tr = train(1, 'neg', temp, shape=i, layers=6)
         tr = train(1, 'neg', temp, shape=i, layers=5)
 
-    elif i in (l[6:8]):  # hexagon, stairs
+    elif i in (l[7:9]):  # hexagon, stairs
         tr = train(1, 'neg', temp, shape=i, layers=4)
         tr = train(1, 'neg', temp, shape=i, layers=6)
         tr = train(1, 'neg', temp, shape=i, layers=7)
