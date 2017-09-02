@@ -7,7 +7,6 @@ from autonomio.plots.scatterz import scatterz
 from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
 from autonomio.transform.onehot_encoding import onehot
-from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.transform.rescale import max_rescale
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
@@ -160,10 +159,10 @@ a = hyper_descriptive(temp, 'Age', 'SibSp', mode='min')
 a = hyper_descriptive(temp, ['Age', 'Survived'], 'SibSp', mode='max')
 
 b = nan_imputer(temp.Age)
-b = nan_imputer(temp.Age, mode='mean')
-b = nan_imputer(temp.Age, mode='median')
-b = nan_imputer(temp.Age, mode='common')
-b = nan_imputer(temp.Age, mode='mode')
+b = nan_imputer(temp.Age, impute_mode='mean')
+b = nan_imputer(temp.Age, impute_mode='median')
+b = nan_imputer(temp.Age, impute_mode='common')
+b = nan_imputer(temp.Age, impute_mode='mode')
 
 c = all_is_binary(temp, 'Survived')
 
@@ -171,9 +170,9 @@ l = temp.Parch.tolist()
 a = onehot(l)
 
 df = wrangler(temp, y='Survived',
-              first_fill_cols='Cabin',
+              fill_columns='Cabin',
               starts_with_col='Cabin',
-              treshold=.8)
+              nan_treshold=.8)
 
 x = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
           flatten='none',

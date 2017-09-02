@@ -269,19 +269,35 @@ def hyperscan(x,
     return df
 
 
-def wrangler(df,
-             y='none',
-             max_categories='auto',
-             starts_with_col='none',
-             treshold=.9,
-             first_fill_cols=None,
-             fill_with=0,
+def wrangler(data,
+             y=None,
+             max_categories=None,
+             datetime_mode=None,
              to_string=None,
-             vectorize=None):
+             vectorize=None,
+             fill_columns=None,
+             fill_with=None,
+             impute_columns=None,
+             impute_mode='mean_by_std',
+             nan_treshold=.9,
+             starts_with_col=None,
+             col_that_contains=None,
+             col_contains_strings=None):
 
-    out = wrangler_main(df, y, max_categories,
-                        starts_with_col, treshold, first_fill_cols,
-                        fill_with, to_string, vectorize)
+    out = wrangler_main(data,
+                        y,
+                        max_categories,
+                        datetime_mode,
+                        to_string,
+                        vectorize,
+                        fill_columns,
+                        fill_with,
+                        impute_columns,
+                        impute_mode,
+                        nan_treshold,
+                        starts_with_col,
+                        col_that_contains,
+                        col_contains_strings)
 
     return out
 
