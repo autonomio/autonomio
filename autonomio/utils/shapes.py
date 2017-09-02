@@ -11,7 +11,7 @@ def shapes(para):
     neuron_previous = neuron_max
     neuron_count = []
     l = []
-    
+
     if shape == 'funnel':
 
         neuron_count.append(neuron_max)
@@ -189,6 +189,10 @@ def shapes(para):
             for i in range(layers):
                 neuron_count.append(neuron_previous)
                 neuron_previous -= 1
+
+    for i in range(len(neuron_count)):
+        if neuron_count[i] is 1:
+            neuron_count[i] = 2
 
     return neuron_count
 

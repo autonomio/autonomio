@@ -8,6 +8,7 @@ from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
 from autonomio.transform.onehot_encoding import onehot
 from autonomio.transform.sohot_encoding import all_is_binary
+from autonomio.transform.rescale import max_rescale
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
 from autonomio.plots.quadparam import quadparam
@@ -214,10 +215,13 @@ except:
 
 p = x[1][-10:]['train_acc'].mean()
 if p < .8:
-    print 'bad result for titanic data'
+    print('bad result for titanic data')
     1/0
 
 temp = data('parties_and_employment')
 # test for lstm model
 train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
 train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
+
+max_rescale([0, 1, 2], to_int=True)
+max_rescale([0, 1, 2])
