@@ -38,7 +38,7 @@ def nan_dropper(data, treshold=.9):
             data = data.drop(col, axis=1)
 
     data.dropna(inplace=True)
-    data = data.reset_index().drop('index', axis=1)
+    #data = data.reset_index().drop('index', axis=1)
 
     return data
 

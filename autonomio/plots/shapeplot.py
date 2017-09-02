@@ -7,7 +7,21 @@ from autonomio.transform.rescale import max_rescale
 
 plt.style.use('bmh')
 
+
 def shapeplot(shape, model='mlp'):
+
+    '''Network Topology Graph
+
+    WHAT: visualises the topology of a network together with
+    labels and neuron counts for each layer.
+
+    HOW: shapeplot(shape_object,model_name)
+
+    INPUT: Autonomio shape object from train() which is a list of ints.
+
+    OUTPUT: a graphical presentation of the shape of the network.
+
+    '''
 
     if model == 'mlp':
         layer_type = 'Dense'

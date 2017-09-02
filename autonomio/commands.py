@@ -1,11 +1,8 @@
 from prediction import make_prediction
 from train import trainer
 from load_data import load_data
-from transform.wrangler import labels_to_ints
-from plots.scatterz import scatterz
+from transform.wrangler import wrangler
 from models.lstm import lstm
-
-import mpld3
 
 
 def train(X=None, Y=None, data=None,

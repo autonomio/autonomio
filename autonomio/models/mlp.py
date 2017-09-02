@@ -8,6 +8,15 @@ from keras.regularizers import l1_l2
 
 def mlp(X, Y, para):
 
+    '''Multi Layer Perceptor Model
+
+    WHAT: A multi-layer perceptor neural network to be called through
+    the train() command.
+
+    See more info through train() docstring.
+
+    '''
+
     if para['w_regularizer'] is 'auto':
         para['w_regularizer'] = [para['layers']]
 
@@ -26,16 +35,18 @@ def mlp(X, Y, para):
 
         l1, l2 = check_w_reg(j, para['w_regularizer'], para['w_reg_values'])
 
-        model.add(Dense(para['neuron_count'][i+1], 
+        model.add(Dense(para['neuron_count'][i+1],
                         activation=para['activation'],
                         W_regularizer=l1_l2(l1=l1, l2=l2)))
         model.add(Dropout(para['dropout']))
 
         j += 1
 
-    l1, l2 = check_w_reg(para['layers'], para['w_regularizer'], para['w_reg_values'])
+    l1, l2 = check_w_reg(para['layers'],
+                         para['w_regularizer'],
+                         para['w_reg_values'])
 
-    model.add(Dense(para['neuron_last'], 
+    model.add(Dense(para['neuron_last'],
                     activation=para['activation_out'],
                     W_regularizer=l1_l2(l1=l1, l2=l2)))
     model.compile(loss=para['loss'],
@@ -52,7 +63,15 @@ def mlp(X, Y, para):
 
     return model, out
 
+
 def check_w_reg(x, w_reg, values):
+
+    '''Weight Regulizer Parameter Reader
+
+    WHAT: Reads the user input and makes it available for the
+    lstm() function.
+
+    '''
 
     if x in w_reg:
         l1 = values[0]

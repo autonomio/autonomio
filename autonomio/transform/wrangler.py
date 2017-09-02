@@ -6,15 +6,21 @@ from vectorize_text import vectorize_text
 from nan_handler import nan_dropper, nan_filler
 
 
-def labels_to_ints(data,
-                   y,
-                   max_categories,
-                   starts_with_col,
-                   treshold,
-                   first_fill_cols,
-                   fill_with,
-                   to_string,
-                   vectorize):
+def wrangler(data,
+             y,
+             max_categories,
+             starts_with_col,
+             treshold,
+             first_fill_cols,
+             fill_with,
+             to_string,
+             vectorize):
+
+    '''Wrangler Utility
+
+    WHAT: The main function for data transformation.
+
+    '''
 
     if max_categories == 'auto':
         max_categories = len(data) / 50
@@ -116,6 +122,7 @@ def labels_to_ints(data,
 
     return data
 
+
 def _category_starts_with(data, col):
 
     '''
@@ -136,6 +143,7 @@ def _category_starts_with(data, col):
             out += temp[0]
 
         return pd.DataFrame(pd.Series(out).unique()).reset_index()
+
 
 def _starts_with_output(data, col):
 

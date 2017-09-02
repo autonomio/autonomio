@@ -7,6 +7,19 @@ plt.style.use('bmh')
 
 def accuracy(data):
 
+    '''Training Accuracy Plot
+
+    WHAT: A plot for showing convergence between test and train for both
+    accuracy metric and loss.
+
+    HOW: accuracy(history)
+
+    INPUT: a pandas dataframe that is created from Keras history object.
+
+    OUTPUT: a pyplot line graph (x2) in a subplot.
+
+    '''
+
     fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
 
     ax1.plot(data['train_acc'])
@@ -28,6 +41,14 @@ def accuracy(data):
 
 
 def prediction_distribution(x, bins):
+
+    '''Training Accuracy Plot
+
+    WHAT: a plot for showing prediction distribution for train().
+
+    NOTE: this is used by both predictor() and train()
+
+    '''
 
     plt.figure(num=None, figsize=(16, 4), dpi=80, facecolor='w', edgecolor='k')
     plt.hist(x, bins=bins, label='prediction')
