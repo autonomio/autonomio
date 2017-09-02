@@ -29,7 +29,8 @@ def quadparam(data, x, y, size, color, title='auto'):
 
         title = x + ' & ' + y + ' correlation'
 
-    fig = plt.figure(num=None, figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+    fig = plt.figure(num=None, figsize=(8, 8), dpi=80, facecolor='w',
+                     edgecolor='k')
 
     s_label = size
     c_label = color
@@ -40,7 +41,8 @@ def quadparam(data, x, y, size, color, title='auto'):
 
     color = data[color]**data[color]
 
-    plt.scatter(data[x], data[y], edgecolors='black', cmap='coolwarm', s=s, c=color)
+    plt.scatter(data[x], data[y], edgecolors='black', cmap='coolwarm', s=s,
+                c=color)
     plt.tick_params(axis='both', which='major', pad=15)
 
     plt.title(title, fontsize=23, y=1.09, color="gray")

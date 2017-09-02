@@ -6,6 +6,7 @@ from autonomio.load_model import load_model
 
 from IPython.display import display
 
+
 def make_prediction(data,
                     saved_model,
                     labels,

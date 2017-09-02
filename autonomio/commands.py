@@ -34,7 +34,7 @@ def train(X=None, Y=None, data=None,
           reg_mode='linear',
           hyperscan='False',
           w_regularizer='auto',
-          w_reg_values=[0,0]):
+          w_reg_values=[0, 0]):
 
     '''The command for training a new model.
 
@@ -161,7 +161,8 @@ def train(X=None, Y=None, data=None,
                           separated for validation.
 
     model = Switch for choosing which kind of model is being used. The options
-            are 'mlp' for multi layer perceptor and 'regression' for regression.
+            are 'mlp' for multi layer perceptor and 'regression' for
+            regression.
 
     hyperscan = Enables a mode where an hyperscan function can be run for
                 hyperparameter optimization purpose.
@@ -202,24 +203,22 @@ def train(X=None, Y=None, data=None,
                   }
 
     if model is 'lstm':
-      if X is None:
-        print 'Please input data to use lstm model'
+        if X is None:
+            print 'Please input data to use lstm model'
+            return
+        lstm(X, parameters)
         return
 
-      lstm(X, parameters)
-
-      return
-
     else:
-      if X is None:
-        if Y is None:
-          if data is None:
-            print 'X, Y or data is missing'
-            return
+        if X is None:
+            if Y is None:
+                if data is None:
+                    print 'X, Y or data is missing'
+                    return
 
-      out = trainer(X, Y, data, parameters)
+    out = trainer(X, Y, data, parameters)
 
-      return out
+    return out
 
 
 def predictor(data,

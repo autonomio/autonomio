@@ -139,7 +139,6 @@ def hyperscan(x,
 
                                 print('tries left: %d' % no_of_tries - counter)
 
-
     df = _to_df(temp_list, column_list)
 
     return df
@@ -205,6 +204,7 @@ def _data_prep(data):
     ae = data[0]['max_neurons']
     af = data[0]['network_scale']
 
-    out = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,ab,ac,ad,ae,af]
+    out = [a, b, c, d, e, f, g, h, i, j, k, l, m, n,
+           o, p, q, r, s, t, u, v, w, x, y, z, aa, ab, ac, ad, ae, af]
 
     return out
