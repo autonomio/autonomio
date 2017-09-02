@@ -22,7 +22,7 @@ def save_model_as(X, columns, model, save_model, flatten):
         if len(X) == 2:
             if type(X[0]) == int:
 
-                for i in range(X[0],X[1]):
+                for i in range(X[0], X[1]):
                     try:
                         temp += columns[i] + " "
                     except:
