@@ -2,11 +2,11 @@ from autonomio.commands import data, train, predictor, wrangler, hyperscan
 from autonomio.transform.transform_data import transform_data
 from autonomio.transform.col_name_generator import col_name_generator
 from autonomio.transform.nan_imputer import nan_imputer
+from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.plots.scatterz import scatterz
 from autonomio.hyperparameters import load_parameters
 from autonomio.hyperstats import hyper_descriptive
 from autonomio.transform.onehot_encoding import onehot
-from autonomio.transform.sohot_encoding import all_is_binary
 from autonomio.transform.rescale import max_rescale
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
@@ -45,10 +45,18 @@ temp2.to_csv('test_data.csv')
 data('test_data.csv', 'file', header=None)
 data('test_data.csv')
 
-temp1 = wrangler(df=temp, y='neg', vectorize='text')
-temp1 = wrangler(df=temp, max_categories='max', to_string='text',
-                 first_fill_cols='url', starts_with_col='location')
-temp1 = wrangler(df=temp, max_categories=42,
+temp1 = wrangler(data=temp,
+                 y='neg',
+                 vectorize='text')
+
+temp1 = wrangler(data=temp,
+                 max_categories='max',
+                 to_string='text',
+                 fill_columns='url',
+                 starts_with_col='location')
+
+temp1 = wrangler(data=temp,
+                 max_categories=42,
                  vectorize=['text', 'user_tweets'])
 
 X = transform_data(temp, flatten='none')
@@ -63,14 +71,13 @@ tr = train([1, 5], 'neg', temp, model='regression',
 tr = train([1, 2, 3, 4, 5], 'neg', temp,
            model='regression',
            reg_mode='regularized',
-           flatten='cat_numeric',
-           shape_plot=True)
+           flatten='cat_numeric')
 
 # y variable flattening mode
 tr = train(1, 'quality_score', temp, flatten='median')
 tr = train(1, 'quality_score', temp, flatten=6)
 tr = train(1, 'quality_score', temp, flatten=.5)
-tr = train(1, 'quality_score', temp, flatten='mean', shape_plot=True)
+tr = train(1, 'quality_score', temp, flatten='mean')
 
 # model saving and loading
 tr = train('text', 'neg', temp, save_model='test_model')
@@ -95,7 +102,6 @@ train()
 train(model='lstm')
 
 l = ['funnel',
-     'pyramid',
      'brick',
      'triangle',
      'rhombus',
@@ -106,18 +112,18 @@ l = ['funnel',
 
 for i in l:
 
-    if i in (l[0:4]):  # funnel, brick, triangle, pyramid
-        tr = train(1, 'neg', temp, shape=i, double_check=True, layers=15)
+    if i in (l[0:3]):  # funnel, brick, triangle
+        tr = train(1, 'neg', temp, shape=i, double_check=True)
 
-    elif i in (l[4:5]):  # only rhombus
+    elif i in (l[3:4]):  # only rhombus
         tr = train(1, 'neg', temp, shape=i, neuron_max=1, layers=8)
         tr = train(1, 'neg', temp, shape=i, neuron_max=9, layers=4)
 
-    if i in (l[5:7]):  # long_funnel, diamond
+    if i in (l[4:6]):  # long_funnel, diamond
         tr = train(1, 'neg', temp, shape=i, layers=6)
         tr = train(1, 'neg', temp, shape=i, layers=5)
 
-    elif i in (l[7:9]):  # hexagon, stairs
+    elif i in (l[6:8]):  # hexagon, stairs
         tr = train(1, 'neg', temp, shape=i, layers=4)
         tr = train(1, 'neg', temp, shape=i, layers=6)
         tr = train(1, 'neg', temp, shape=i, layers=7)
@@ -171,9 +177,12 @@ c = all_is_binary(temp, 'Survived')
 l = temp.Parch.tolist()
 a = onehot(l)
 
-#df = wrangler(temp, y='Survived',first_fill_cols='Cabin',starts_with_col='Cabin', treshold=.8)
+df = wrangler(temp, y='Survived',
+              fill_columns='Cabin',
+              starts_with_col='Cabin',
+              nan_treshold=.8)
 
-x = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
+x = train([2, 3, 4, 5, 6, 7], 'Survived', df,
           flatten='none',
           epoch=150,
           dropout=0,
@@ -189,42 +198,26 @@ duaparam(x[1], 'test_acc', 80, 70)
 paramscatter(x[1], 'train_acc', limit=5)
 paramagg(x[1])
 paramgrid(x[1], 'train_acc')
-
-x2 = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
-           flatten='none',
-           epoch=3,
-           dropout=0,
-           batch_size=12,
-           loss='logcosh',
-           activation='elu',
-           layers=6,
-           shape='brick',
-           hyperscan=True)
-
-paramscatter(x2[1], 'train_acc', sort=False)
-paramgrid(x2[1], 'train_acc')
+# paramscatter(x[1], 'train_acc', sort=False)
+paramgrid(x[1], 'train_acc')
 
 temp2 = pd.DataFrame(['0', '0', '0'], columns=['0'])
 
+'''
 try:
     paramgrid(temp2, '0')
 except:
     pass
-
 p = x[1][-10:]['train_acc'].mean()
 if p < .8:
     print('bad result for titanic data')
     1/0
+'''
 
 temp = data('parties_and_employment')
 # test for lstm model
 train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=False)
-train(temp.MUU,
-      epoch=1,
-      batch_size=512,
-      model='lstm',
-      normalize_window=True,
-      shape_plot=True)
+train(temp.MUU, epoch=1, batch_size=512, model='lstm', normalize_window=True)
 
 max_rescale([0, 1, 2], to_int=True)
 max_rescale([0, 1, 2])
