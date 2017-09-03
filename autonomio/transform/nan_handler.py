@@ -16,6 +16,17 @@ def nan_finder(data):
     temp = temp.drop('top', axis=1)
     temp.columns = ['no_nans', 'quality']
 
+    # converting negative values to positive
+    temp_list = []
+
+    for value in temp['quality']:
+        if value < 0:
+            temp_list.append(1 - value - 1)
+        else:
+            temp_list.append(value)
+
+    temp['quality'] = temp_list
+
     return temp
 
 
@@ -36,9 +47,10 @@ def nan_dropper(data, treshold=.9):
     for col in temp:
         if temp[col][1] < treshold:
             data = data.drop(col, axis=1)
+            nan_rate = ((1 - temp[col][1]) * 100)
+            print("DROPPED (%.2f%% nans): %s" % (nan_rate, col))
 
     data.dropna(inplace=True)
-    #data = data.reset_index().drop('index', axis=1)
 
     return data
 

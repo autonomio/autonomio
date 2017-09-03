@@ -4,7 +4,7 @@ from autonomio.transform.datetime_handler import datetime_handler
 from autonomio.transform.wrangler_utils import vectorize_string_cols
 from autonomio.transform.wrangler_utils import filling_nans
 from autonomio.transform.wrangler_utils import imputing_nans
-from autonomio.transform.wrangler_utils import to_category_labels
+from autonomio.transform.category_labeling import to_category_labels
 
 from autonomio.transform.nan_handler import nan_dropper
 
@@ -32,20 +32,17 @@ def wrangler_main(data,
 
     # store the values for original shape
     rows_before = data.shape[0]
-    cols_before = data.shape[1]
 
     # set the value for maximum category label per feature
     max_categories = max_category(data, max_categories)
 
     # keep 'y' for later
     if y is not None:
-        temp_y_col = data[y]
+        temp_y_col = pd.DataFrame(data[y])
         data = data.drop(y, axis=1)
 
     # deal with possible datetime columns
     data = datetime_handler(data, datetime_mode)
-
-    # in case retain, keep the column for later and drop it
 
     # in case of string label, keep the column for later
     if to_string is not None:
@@ -66,12 +63,11 @@ def wrangler_main(data,
         data = nan_dropper(data, nan_treshold)
 
     # doing to categorical conversions
-    if starts_with_col is not None or col_that_contains is not None:
-        data = to_category_labels(data,
-                                  max_categories,
-                                  starts_with_col,
-                                  col_that_contains,
-                                  col_contains_strings)
+    data = to_category_labels(data,
+                              max_categories,
+                              starts_with_col,
+                              col_that_contains,
+                              col_contains_strings)
 
     # inserting / merging the missing columns back
 
@@ -82,29 +78,25 @@ def wrangler_main(data,
                         right_index=True)
 
     if to_string is not None:
+        data = data.drop(to_string, axis=1)
         data = pd.merge(temp_string_col,
                         data,
                         left_index=True,
                         right_index=True)
-
+    print data.isnull().sum().sum()
     # inserting y-feature as the first column
     if y is not None:
-        data = pd.concat([temp_y_col, data], axis=1)
-
+        data = pd.merge(temp_y_col, data, left_index=True, right_index=True)
+    print data.isnull().sum().sum()
     # printing the report for col / row dropping
     rows_after = len(data)
-    cols_after = data.shape[1]
-
+    print data.isnull().sum().sum()
     if vectorize is not None:
         if type(vectorize) is str:
             vectorize = [vectorize]
 
-        cols_after = data.shape[1] - 300 * len(vectorize)
-
     rows_total = rows_before - rows_after
-    cols_total = cols_before - cols_after
 
-    print("%d out of %d rows dropped" % (rows_total, rows_before))
-    print("%d out of %d cols dropped" % (cols_total, cols_before))
+    print("\n%d out of %d rows dropped" % (rows_total, rows_before))
 
     return data

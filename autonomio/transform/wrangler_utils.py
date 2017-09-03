@@ -28,6 +28,7 @@ def max_category(data, max_categories):
     '''
 
     # takes
+
     if max_categories == 'auto':
         max_categories = len(data) / 50
 
@@ -36,6 +37,9 @@ def max_category(data, max_categories):
 
     elif type(max_categories) == int:
         max_categories = max_categories
+
+    elif max_categories is None:
+        max_categories = len(data) + 1
 
     return max_categories
 
@@ -150,45 +154,3 @@ def string_contains_to_binary(data, col_that_contains, col_contains_strings):
         temp_contains = temp_contains.astype(float)
 
     return temp_contains
-
-
-def to_category_labels(data,
-                       max_categories,
-                       starts_with_col,
-                       col_that_contains,
-                       col_contains_strings):
-
-    datetime_cols = datetime_detector(data)
-
-    for col in data.columns:
-        if col not in datetime_cols:
-
-            # test if the column is already float or int
-            try:
-                data[col] = data[col].astype('float')
-
-            # if not, covert in to categorical labels or drop
-            except ValueError:
-                # contains a value
-                if col_that_contains == col:
-                    temp_contains = string_contains_to_binary(data,
-                                                              col_that_contains,
-                                                              col_contains_strings)
-
-                    data = data.drop(col_that_contains, axis=1)
-                    data = pd.concat([data, temp_contains], axis=1)
-
-                # initiates conversion to labels based on first character
-                elif starts_with_col == col:
-                    data[col] = starts_with_output(data, col)
-                    data[col] = pd.Categorical(data[col]).codes
-
-                # checks if the column meets the conversion treshold
-                elif len(data[col].unique()) < max_categories:
-                    data[col] = pd.Categorical(data[col]).codes
-
-                # otherwise drops the column
-                else:
-                    data = data.drop(col, axis=1)
-
-    return data

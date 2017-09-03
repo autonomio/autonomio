@@ -6,7 +6,7 @@ from models.lstm import lstm
 
 
 def train(X=None, Y=None, data=None,
-          epoch=5,
+          epoch=20,
           flatten='mean',
           validation_split=.33,
           dropout=.2,
@@ -32,7 +32,8 @@ def train(X=None, Y=None, data=None,
           hyperscan='False',
           w_regularizer='auto',
           w_reg_values=[0, 0],
-          shape_plot=False):
+          shape_plot=False,
+          randomize=False):
 
     '''The command for training a new model.
 
@@ -198,7 +199,8 @@ def train(X=None, Y=None, data=None,
                   'seq_len': seq_len,
                   'dense_neurons': dense_neurons,
                   'normalize_window': normalize_window,
-                  'shape_plot': shape_plot
+                  'shape_plot': shape_plot,
+                  'randomize': randomize
                   }
 
     if model is 'lstm':
