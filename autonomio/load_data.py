@@ -1,17 +1,24 @@
 import pandas as pd
 from transform.col_name_generator import col_name_generator
 
-url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
-data_path = url
 
-
-def load_data(name, mode, sep, delimiter, header):
+def load_data(name,
+              mode,
+              sep,
+              delimiter,
+              header,
+              error_bad_lines,
+              nrows):
 
     '''Data Loader
 
     WHAT: used for accessing datafiles that come with Autonomio, some unique
     and some common.
     '''
+
+
+    url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
+    data_path = url
 
     try:
 
@@ -40,11 +47,12 @@ def load_data(name, mode, sep, delimiter, header):
 
             if name.endswith('.csv') or name.endswith('.txt'):
 
-                try:
-                    out = pd.read_csv(name, sep, delimiter, header)
-                except ParserError:
-                    out = pd.read_csv(name, sep, delimiter, header,
-                                      error_bad_lines=False)
+                out = pd.read_csv(name,
+                                  sep=sep,
+                                  delimiter=delimiter,
+                                  header=header,
+                                  error_bad_lines=error_bad_lines,
+                                  nrows=nrows)
 
             elif name.endswith('.msgpack'):
                 out = pd.read_msgpack(name)
@@ -53,7 +61,6 @@ def load_data(name, mode, sep, delimiter, header):
                 out = pd.read_json(name)
 
             else:
-
                 out = ''
                 print("MAYBE UNSUPPORTED? only csv/txt, json, and msgpack")
 
