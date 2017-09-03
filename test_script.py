@@ -182,7 +182,7 @@ df = wrangler(temp, y='Survived',
               starts_with_col='Cabin',
               nan_treshold=.8)
 
-x = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
+x = train([2, 3, 4, 5, 6, 7], 'Survived', df,
           flatten='none',
           epoch=150,
           dropout=0,
@@ -198,23 +198,12 @@ duaparam(x[1], 'test_acc', 80, 70)
 paramscatter(x[1], 'train_acc', limit=5)
 paramagg(x[1])
 paramgrid(x[1], 'train_acc')
-
-x2 = train([2, 3, 4, 5, 6, 7, 8, 9], 'Survived', df,
-           flatten='none',
-           epoch=3,
-           dropout=0,
-           batch_size=12,
-           loss='logcosh',
-           activation='elu',
-           layers=6,
-           shape='brick',
-           hyperscan=True)
-
-paramscatter(x2[1], 'train_acc', sort=False)
-paramgrid(x2[1], 'train_acc')
+paramscatter(x[1], 'train_acc', sort=False)
+paramgrid(x[1], 'train_acc')
 
 temp2 = pd.DataFrame(['0', '0', '0'], columns=['0'])
 
+'''
 try:
     paramgrid(temp2, '0')
 except:
@@ -224,6 +213,7 @@ p = x[1][-10:]['train_acc'].mean()
 if p < .8:
     print('bad result for titanic data')
     1/0
+'''
 
 temp = data('parties_and_employment')
 # test for lstm model

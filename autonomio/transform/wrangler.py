@@ -1,6 +1,6 @@
 import pandas as pd
 from autonomio.transform.wrangler_utils import max_category
-from autonomio.transform.wrangler_utils import datetime_detector
+from autonomio.transform.datetime_handler import datetime_handler
 from autonomio.transform.wrangler_utils import vectorize_string_cols
 from autonomio.transform.wrangler_utils import filling_nans
 from autonomio.transform.wrangler_utils import imputing_nans
@@ -43,14 +43,9 @@ def wrangler_main(data,
         data = data.drop(y, axis=1)
 
     # deal with possible datetime columns
-    data, datetime_col_name = datetime_detector(data, datetime_mode)
+    data = datetime_handler(data, datetime_mode)
 
     # in case retain, keep the column for later and drop it
-    if datetime_mode is 'retain':
-
-        temp_datetime_col = data[datetime_col_name]
-        temp_datetime_col = pd.DataFrame(temp_datetime_col)
-        data = data.drop(data.datetime_col_name, axis=1)
 
     # in case of string label, keep the column for later
     if to_string is not None:
@@ -79,11 +74,6 @@ def wrangler_main(data,
                                   col_contains_strings)
 
     # inserting / merging the missing columns back
-    if datetime_mode is 'retain':
-        data = pd.merge(temp_datetime_col,
-                        data,
-                        left_index=True,
-                        right_index=True)
 
     if vectorize is not None:
         data = pd.merge(data,

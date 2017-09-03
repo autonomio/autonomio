@@ -1,10 +1,10 @@
-import datetime
 import pandas as pd
 import numpy as np
 
 from autonomio.transform.nan_handler import nan_filler
 from autonomio.transform.nan_imputer import nan_imputer
 from autonomio.transform.vectorize_text import vectorize_text
+from autonomio.transform.datetime_handler import datetime_detector
 
 
 def max_category(data, max_categories):
@@ -38,41 +38,6 @@ def max_category(data, max_categories):
         max_categories = max_categories
 
     return max_categories
-
-
-def datetime_detector(data, datetime_mode):
-
-    '''Datetime Handling
-
-    WHAT: Detects a datetime column and sends it to the
-    datetime_handler for processing based on the
-    datetime_mode setting.
-
-    OPTIONS: 'drop', 'sequence', and 'retain'
-
-    '''
-
-    for col in data.columns:
-        temp = isinstance(data[col][0], datetime.date)
-        if temp is True:
-
-            data = _datetime_handler(data, col, datetime_mode)
-
-    return data
-
-
-def _datetime_handler(data, col, datetime_mode):
-
-    if datetime_mode is 'drop':
-        data = data.drop(col, axis=1)
-
-    elif datetime_mode is 'sequence':
-        data = data.sort_values(col)
-        data[col] = range(len(data[col]))
-
-    datetime_col_name = col
-
-    return data, datetime_col_name
 
 
 def vectorize_string_cols(data, vectorize):
@@ -178,7 +143,7 @@ def string_contains_to_binary(data, col_that_contains, col_contains_strings):
     for col in col_that_contains:
         count = 0
         for string in col_contains_strings:
-            temp_contains = pd.concat([temp_contains, data[col].str.contains(string)],axis=1)
+            temp_contains = pd.concat([temp_contains, data[col].str.contains(string)], axis=1)
             count += 1
 
         temp_contains.columns = col_contains_strings
@@ -193,34 +158,37 @@ def to_category_labels(data,
                        col_that_contains,
                        col_contains_strings):
 
+    datetime_cols = datetime_detector(data)
+
     for col in data.columns:
+        if col not in datetime_cols:
 
-        # test if the column is already float or int
-        try:
-            data[col] = data[col].astype('float')
+            # test if the column is already float or int
+            try:
+                data[col] = data[col].astype('float')
 
-        # if not, covert in to categorical labels or drop
-        except ValueError:
-            # contains a value
-            if col_that_contains == col:
-                temp_contains = string_contains_to_binary(data,
-                                                          col_that_contains,
-                                                          col_contains_strings)
+            # if not, covert in to categorical labels or drop
+            except ValueError:
+                # contains a value
+                if col_that_contains == col:
+                    temp_contains = string_contains_to_binary(data,
+                                                              col_that_contains,
+                                                              col_contains_strings)
 
-                data = data.drop(col_that_contains, axis=1)
-                data = pd.concat([data, temp_contains], axis=1)
+                    data = data.drop(col_that_contains, axis=1)
+                    data = pd.concat([data, temp_contains], axis=1)
 
-            # initiates conversion to labels based on first character
-            elif starts_with_col == col:
-                data[col] = starts_with_output(data, col)
-                data[col] = pd.Categorical(data[col]).codes
+                # initiates conversion to labels based on first character
+                elif starts_with_col == col:
+                    data[col] = starts_with_output(data, col)
+                    data[col] = pd.Categorical(data[col]).codes
 
-            # checks if the column meets the conversion treshold
-            elif len(data[col].unique()) < max_categories:
-                data[col] = pd.Categorical(data[col]).codes
+                # checks if the column meets the conversion treshold
+                elif len(data[col].unique()) < max_categories:
+                    data[col] = pd.Categorical(data[col]).codes
 
-            # otherwise drops the column
-            else:
-                data = data.drop(col, axis=1)
+                # otherwise drops the column
+                else:
+                    data = data.drop(col, axis=1)
 
     return data

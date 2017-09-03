@@ -1,0 +1,128 @@
+#!/bin/bash
+
+while true; do
+
+    echo " "
+	echo "--------------------------------"
+    echo "-------- SANITY CHECK ----------"
+    echo "--------------------------------"
+    echo " "
+
+    read -p "Have you tested thoroughly? " yn
+    case $yn in
+    	[Yy]* ) echo "THOROUGH TESTING: passed";;
+        [Nn]* ) echo "Time to do it now then." ; exit;;
+		* ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+    read -p "Did make according changes to test_script.py? " yn
+    case $yn in
+    	[Yy]* ) echo "TEST SCRIPT REVIEW: passed";;
+        [Nn]* ) echo "Well, you know better than that." ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+    read -p "Are docstrings up-to-date? " yn
+    case $yn in
+    	[Yy]* ) echo "DOCSTRING UPDATE: passed";;
+        [Nn]* ) echo "Auch...come back when it's done." ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+    read -p "Are you in an python/conda environment? " yn
+    case $yn in
+        [Yy]* ) echo "DOCSTRING UPDATE: passed";;
+        [Nn]* ) echo "You know that's not the way to do it." ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+    read -p "Code is pep8? " yn
+    case $yn in
+        [Yy]* ) echo "PEP8 Check: passed ";;
+        [Nn]* ) echo "Some cleaning up to do I see." ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+ 
+    read -p "Ready for a local test then eh? " yn
+    case $yn in
+        [Yy]* ) echo -e "hello"; STATUS=$($?);;
+        [Nn]* ) echo "Not feeling confident yet, you know what to do ;)" ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+    if [ "$STATUS" == "0" ];
+    then 
+
+        echo "TESTSCRIPT ON LOCAL ENV: passed"
+        
+        prepare_for_commit
+
+    else 
+        echo " "
+        echo "KABOOM!!!"
+        echo " "
+        echo "Right...and this is what you were thinking of committing? Nice try."
+        echo " "
+        break
+    fi 
+
+
+prepare_for_commit(){
+
+    echo "DOCSTRING UPDATE: passed"
+
+
+    echo " "
+    echo "--------------------------------"
+    echo "-------- COMMIT SECTION --------"
+    echo "--------------------------------"
+    echo " "
+    echo "Amazing work, let's get ready to commit and push then! :) "
+
+    read -p "Did you fetch origin just now? " yn
+    case $yn in
+    	[Yy]* ) echo "RECENTLY UPDATED: passed";;
+        [Nn]* ) echo "Time to do it now then." ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+    read -p "Did you really think through everything that could wrong? " yn
+    case $yn in
+        [Yy]* ) echo "POINT OF NO RETURN: passed";;
+        [Nn]* ) echo "Think, and then rethink. Check and then doublecheck." ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+
+    read -p "Ready to commit then? " yn
+    case $yn in
+        [Yy]* ) echo "Let's do this! Committing now...";;
+        [Nn]* ) echo "That's right, better be safe than sorry" ; exit;;
+        * ) echo "Yes (y) or no (n) answers only."; break;;
+    esac
+
+
+
+}
+
+done
+
+remove_tempfiles(){
+
+    rm saved_model.h5
+    rm saved_model.json
+    rm saved_model.x
+    rm strings.h5
+    rm strings.json
+    rm strings.x
+    rm test_data.csv
+    rm test_data.json
+    rm test_data.msgpack
+    rm test_model.h5
+    rm test_model.json
+    rm test_model.x
+    rm train.png
+}
+
+
