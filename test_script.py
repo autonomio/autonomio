@@ -198,7 +198,7 @@ duaparam(x[1], 'test_acc', 80, 70)
 paramscatter(x[1], 'train_acc', limit=5)
 paramagg(x[1])
 paramgrid(x[1], 'train_acc')
-paramscatter(x[1], 'train_acc', sort=False)
+# paramscatter(x[1], 'train_acc', sort=False)
 paramgrid(x[1], 'train_acc')
 
 temp2 = pd.DataFrame(['0', '0', '0'], columns=['0'])

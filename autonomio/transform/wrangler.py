@@ -26,7 +26,10 @@ def wrangler_main(data,
 
     '''Wrangler Utility
 
-    WHAT: The main function for data transformation.
+    WHAT: Wrangler provides one of the key features of of Autonomio,
+    semi-automatic data ingestion / transformation.
+
+    MORE INFO: see the docstring of wrangler() command. 
 
     '''
 
@@ -83,14 +86,14 @@ def wrangler_main(data,
                         data,
                         left_index=True,
                         right_index=True)
-    print data.isnull().sum().sum()
+
     # inserting y-feature as the first column
     if y is not None:
         data = pd.merge(temp_y_col, data, left_index=True, right_index=True)
-    print data.isnull().sum().sum()
+
     # printing the report for col / row dropping
     rows_after = len(data)
-    print data.isnull().sum().sum()
+
     if vectorize is not None:
         if type(vectorize) is str:
             vectorize = [vectorize]

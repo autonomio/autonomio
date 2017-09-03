@@ -4,7 +4,6 @@ import numpy as np
 from autonomio.transform.nan_handler import nan_filler
 from autonomio.transform.nan_imputer import nan_imputer
 from autonomio.transform.vectorize_text import vectorize_text
-from autonomio.transform.datetime_handler import datetime_detector
 
 
 def max_category(data, max_categories):
@@ -138,6 +137,13 @@ def starts_with_output(data, col):
 
 
 def string_contains_to_binary(data, col_that_contains, col_contains_strings):
+
+    '''Convert String to Binary
+
+    WHAT: Deals with cases where string values are converted in to Binary based
+    on a value contained in the string.
+
+    '''
 
     temp_contains = pd.DataFrame()
 

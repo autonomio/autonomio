@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 while true; do
 
     echo " "
@@ -10,12 +12,12 @@ while true; do
 
     read -p "Have you tested thoroughly? " yn
     case $yn in
-    	[Yy]* ) echo "THOROUGH TESTING: passed";;
+    	[Yy]* ) echo "THOROUGH TESTING: passed"; echo " ";;
         [Nn]* ) echo "Time to do it now then." ; exit;;
 		* ) echo "Yes (y) or no (n) answers only."; break;;
     esac
 
-    read -p "Did make according changes to test_script.py? " yn
+    read -p "Did you make according changes to test_script.py? " yn
     case $yn in
     	[Yy]* ) echo "TEST SCRIPT REVIEW: passed";;
         [Nn]* ) echo "Well, you know better than that." ; exit;;
@@ -24,21 +26,21 @@ while true; do
 
     read -p "Are docstrings up-to-date? " yn
     case $yn in
-    	[Yy]* ) echo "DOCSTRING UPDATE: passed";;
+    	[Yy]* ) echo "DOCSTRING UPDATE: passed"; echo " ";;
         [Nn]* ) echo "Auch...come back when it's done." ; exit;;
         * ) echo "Yes (y) or no (n) answers only."; break;;
     esac
 
     read -p "Are you in an python/conda environment? " yn
     case $yn in
-        [Yy]* ) echo "DOCSTRING UPDATE: passed";;
+        [Yy]* ) echo "DOCSTRING UPDATE: passed"; echo " ";;
         [Nn]* ) echo "You know that's not the way to do it." ; exit;;
         * ) echo "Yes (y) or no (n) answers only."; break;;
     esac
 
     read -p "Code is pep8? " yn
     case $yn in
-        [Yy]* ) echo "PEP8 Check: passed ";;
+        [Yy]* ) echo "PEP8 Check: passed "; echo " ";;
         [Nn]* ) echo "Some cleaning up to do I see." ; exit;;
         * ) echo "Yes (y) or no (n) answers only."; break;;
     esac
@@ -46,7 +48,7 @@ while true; do
  
     read -p "Ready for a local test then eh? " yn
     case $yn in
-        [Yy]* ) echo -e "hello"; STATUS=$($?);;
+        [Yy]* ) python test_script.py; STATUS=($?); echo " ";;
         [Nn]* ) echo "Not feeling confident yet, you know what to do ;)" ; exit;;
         * ) echo "Yes (y) or no (n) answers only."; break;;
     esac
@@ -56,6 +58,7 @@ while true; do
 
         echo "TESTSCRIPT ON LOCAL ENV: passed"
         
+        remove_tempfiles
         prepare_for_commit
 
     else 
@@ -107,6 +110,11 @@ prepare_for_commit(){
 }
 
 done
+
+ready_to_commit(){
+
+}
+
 
 remove_tempfiles(){
 

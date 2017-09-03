@@ -11,6 +11,16 @@ def to_category_labels(data,
                        col_that_contains,
                        col_contains_strings):
 
+    '''Categorical Labeling
+
+    Typically called through the wrangler() function.
+
+    WHAT: takes in a dataframe and automatically and based on user input
+    transforms data ready for training or testing. Note that both train
+    and test data should be transformed with the same settings.
+
+    '''
+
     datetime_cols = datetime_detector(data)
 
     for col in data.columns:

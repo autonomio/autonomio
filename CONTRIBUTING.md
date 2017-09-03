@@ -94,6 +94,14 @@ What we really try to avoid, is being this guy...
 
 <img src="https://s-media-cache-ak0.pinimg.com/originals/83/f7/8e/83f78e62feb95acc85d000aaf6350d23.jpg" alt="Drawing" width="300px"/>
 
+**Committing Code**
+
+In the root of your local you will find a commit script, you can run it with:
+
+    ./commit
+
+Do this before committing as it ensures that basic sanity checks are done before commits. 
+
 #### 1.1.2. Contribute to a New Idea
 
 Same as above, but start by [creating a new issue](https://github.com/autonomio/core-module/issues/new) to open a discussion on the idea you have for contribution.
