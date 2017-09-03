@@ -32,7 +32,9 @@ def trainplot(train_vals, test_vals):
     plt.ylim((0, 1))
     plt.tick_params(axis='both', labelsize=11, which='major', pad=10)
     plt.xticks(label_placeholder, labels)
-    plt.grid(b=False)
+    # plt.grid(b=False)
+    ax.yaxis.grid(True)
+    ax.xaxis.grid(False)
     plt.legend(loc='upper right')
 
     plt.show()

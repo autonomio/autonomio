@@ -6,7 +6,7 @@ from models.lstm import lstm
 
 
 def train(X=None, Y=None, data=None,
-          epoch=5,
+          epoch=20,
           flatten='mean',
           validation_split=.33,
           dropout=.2,
@@ -31,7 +31,8 @@ def train(X=None, Y=None, data=None,
           hyperscan='False',
           w_regularizer='auto',
           w_reg_values=[0, 0],
-          shape_plot=False):
+          shape_plot=False,
+          randomize=False):
 
     '''The command for training a new model.
 
@@ -196,7 +197,8 @@ def train(X=None, Y=None, data=None,
                   'seq_len': seq_len,
                   'dense_neurons': dense_neurons,
                   'normalize_window': normalize_window,
-                  'shape_plot': shape_plot
+                  'shape_plot': shape_plot,
+                  'randomize': randomize
                   }
 
     if model is 'lstm':
@@ -267,19 +269,35 @@ def hyperscan(x,
     return df
 
 
-def wrangler(df,
-             y='none',
-             max_categories='auto',
-             starts_with_col='none',
-             treshold=.9,
-             first_fill_cols=None,
-             fill_with=0,
+def wrangler(data,
+             y=None,
+             max_categories=None,
+             datetime_mode='retain',
              to_string=None,
-             vectorize=None):
+             vectorize=None,
+             fill_columns=None,
+             fill_with=None,
+             impute_columns=None,
+             impute_mode='mean_by_std',
+             nan_treshold=.9,
+             starts_with_col=None,
+             col_that_contains=None,
+             col_contains_strings=None):
 
-    out = wrangler_main(df, y, max_categories,
-                        starts_with_col, treshold, first_fill_cols,
-                        fill_with, to_string, vectorize)
+    out = wrangler_main(data,
+                        y,
+                        max_categories,
+                        datetime_mode,
+                        to_string,
+                        vectorize,
+                        fill_columns,
+                        fill_with,
+                        impute_columns,
+                        impute_mode,
+                        nan_treshold,
+                        starts_with_col,
+                        col_that_contains,
+                        col_contains_strings)
 
     return out
 

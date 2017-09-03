@@ -41,7 +41,8 @@ def trainer(X, Y, data, para):
     ind_var = Y   # this is used later for output
     X_num = X
 
-    data = data.sample(frac=1)
+    if para['randomize'] is True:
+        data = data.sample(frac=1)
 
     X, Y = transform_data(data, para['flatten'], X, Y)
 
