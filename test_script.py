@@ -208,7 +208,6 @@ try:
     paramgrid(temp2, '0')
 except:
     pass
-
 p = x[1][-10:]['train_acc'].mean()
 if p < .8:
     print('bad result for titanic data')

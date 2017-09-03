@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 from IPython.display import display
 
@@ -52,6 +53,13 @@ def trainer(X, Y, data, para):
         dims = X.shape[1]
     except IndexError:
         dims = X_num
+
+    unique = np.unique(Y)
+
+    if len(unique) == 2:
+        para['neuron_last'] = 1
+    else:
+        para['neuron_last'] = len(unique)
 
     para['dims'] = dims
 
