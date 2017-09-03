@@ -304,7 +304,13 @@ def wrangler(data,
     return out
 
 
-def data(name, mode='default', sep=',', delimiter=None, header='infer'):
+def data(name,
+         mode='default',
+         sep=',',
+         delimiter=None,
+         header='infer',
+         error_bad_lines=False,
+         nrows=None):
 
     '''Function for loading one of the Autonomio dataset.
 
@@ -332,6 +338,6 @@ def data(name, mode='default', sep=',', delimiter=None, header='infer'):
 
     '''
 
-    out = load_data(name, mode, sep, delimiter, header)
+    out = load_data(name, mode, sep, delimiter, header, error_bad_lines, nrows)
 
     return out
