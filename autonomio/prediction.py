@@ -3,15 +3,16 @@ import pandas as pd
 from autonomio.transform.transform_data import transform_data
 from autonomio.plots.plots import prediction_distribution
 from autonomio.load_model import load_model
+from autonomio.transform.dataframe import df_merge
 
 from IPython.display import display
 
 
 def make_prediction(data,
-                    saved_model,
-                    labels,
-                    interactive,
-                    interactive_x):
+                     saved_model,
+                     labels,
+                     interactive,
+                     interactive_x):
 
     '''Predictor
 
@@ -19,24 +20,40 @@ def make_prediction(data,
     model that have been previously trained with train().
 
     '''
+    # storing label input string for later
+
+    label_str = labels
+
+    # loading model and transforming data
     loaded_model, X, flatten = load_model(saved_model)
-    signals = transform_data(data, flatten, X)
-    prediction = loaded_model.predict(signals)
-
-    l = []
-    l.append('Prediction')
-
+    temp_data = transform_data(data, flatten, X)
+    prediction = loaded_model.predict(temp_data)
     prediction = pd.DataFrame(prediction)
 
-    classes = len(prediction.columns) - 1
+    # detecting if multi-class predictions
+    pred_cols = prediction.shape[1]
 
-    for i in range(classes):
-        l.append('Prediction_'+str(i+1))
+    # handling multi-class prediction cases
+    col_labels = []
+    col_labels.append('Prediction')
 
-    prediction.columns = l
+    if pred_cols > 1:
 
-    if type(labels) is str:
-        prediction[labels] = data[labels]
+        for i in range(pred_cols-1):
+            col_labels.append('Prediction_' + str(i+1))
+
+    # adding labels to predictions
+    if labels is not False:
+
+        labels = pd.DataFrame(data[labels])
+        labels = labels.reset_index()
+        labels = labels.drop('index', axis=1)
+
+        col_labels.insert(0, label_str)
+
+        prediction = df_merge(labels, prediction)
+
+    prediction.columns = col_labels
 
     prediction = prediction.sort_values('Prediction', ascending=False)
 
@@ -65,8 +82,8 @@ def make_prediction(data,
 
         temp = pd.merge(prediction,
                         data,
-                        left_on=labels,
-                        right_on=labels)
+                        left_on=label_str,
+                        right_on=label_str)
         return temp
 
     else:

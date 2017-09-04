@@ -1,5 +1,8 @@
 import math
 import numpy as np
+import pandas as pd
+
+from autonomio.transform.dataframe import df_merge
 
 
 def max_rescale(values, scale=1, to_int=False):
@@ -30,3 +33,38 @@ def max_rescale(values, scale=1, to_int=False):
 
     else:
         return new_shape
+
+
+def mean_zero(data, retain=None):
+
+    '''Zero Mean Scalering
+
+    WHAT: normalize data in to scale of 1 where mean is 0
+    and standard deviation is 1.
+
+    HOW: mean_zero(df,'y_variable')
+
+    INPUT: dataframe where y is identified with column label.
+
+    OUTPUT: dataframe with normalized value
+
+    '''
+
+    # avoiding transformation of y, labels, etc
+    if retain is not None:
+        col_temp = pd.DataFrame(data[retain])
+        data = data.drop(retain, axis=1)
+
+    # storing the temp values
+    data_mean = data.mean(axis=0)
+    data_std = data.std(axis=0)
+
+    # transforming the data
+    data = data - data_mean
+    data = data / data_std
+
+    # putting retained cols as first columns
+    if retain is not None:
+        data = df_merge(col_temp, data)
+
+    return data

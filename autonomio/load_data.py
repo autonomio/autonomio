@@ -1,6 +1,9 @@
 import pandas as pd
 from transform.col_name_generator import col_name_generator
 
+url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
+data_path = url
+
 
 def load_data(name,
               mode,
@@ -15,10 +18,6 @@ def load_data(name,
     WHAT: used for accessing datafiles that come with Autonomio, some unique
     and some common.
     '''
-
-
-    url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
-    data_path = url
 
     try:
 
