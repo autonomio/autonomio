@@ -17,7 +17,7 @@ def load_model(saved_model):
     # load weights into new model
     loaded_model.load_weights(saved_model + '.h5')
 
-    f = open(saved_model+".x", 'r')
+    f = open(saved_model + ".x", 'r')
     temp = f.read()
     try:
         X = map(int, temp.split()[:-1])
