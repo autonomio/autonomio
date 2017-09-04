@@ -38,7 +38,7 @@ ready_for_commit(){
             * ) echo "Yes (y) or no (n) answers only."; break;;
         esac
 
-        read -p "Enter your commit message (without quotes): " message
+        read -p "Enter your commit message (without quotes): " MESSAGE
 
         git commit ./* -m "\"$MESSAGE\""
         git push
