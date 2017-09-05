@@ -1,4 +1,3 @@
-from ascify import Ascify as ascify
 from category_labeling import to_category_labels
 from col_name_generator import col_name_generator
 from column_handler import column_mover
