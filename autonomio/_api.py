@@ -1,8 +1,8 @@
-from prediction import make_prediction
-from train import trainer
-from load_data import load_data
-from transform.wrangler import wrangler_main
-from models.lstm import lstm
+from .commands.prediction import make_prediction
+from .commands.train import trainer
+from .commands.load_data import load_data
+from .commands.wrangler import wrangler_main
+from .models.lstm import lstm
 
 
 def train(X=None, Y=None, data=None,
@@ -259,7 +259,7 @@ def hyperscan(x,
               activations='auto',
               shapes='auto'):
 
-    from hyperscan import hyperscan
+    from autonomio.commands.hyperscan import hyperscan
 
     df = hyperscan(x, y, data, epochs, flatten, dropout, batch_sizes,
                    batch_sizes_step, layers, layers_step, activation_out,

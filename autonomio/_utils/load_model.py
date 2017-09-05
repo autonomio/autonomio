@@ -1,6 +1,3 @@
-from keras.models import model_from_json
-
-
 def load_model(saved_model):
 
     '''Load Model
@@ -9,6 +6,7 @@ def load_model(saved_model):
     prediction use by predictor().
 
     '''
+    from keras.models import model_from_json
 
     json_file = open(saved_model + ".json", 'r')
     loaded_model_json = json_file.read()

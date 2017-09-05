@@ -7,8 +7,8 @@ from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential
 
-from ..transform.lstm_transform_data import _lstm_load_data
-from ..plots.lstm_plots import histplot, lstm_plot
+from autonomio.transforms.lstm_transform_data import _lstm_load_data
+from autonomio.plots.lstm_plots import histplot, lstm_plot
 
 
 def lstm(data, param):

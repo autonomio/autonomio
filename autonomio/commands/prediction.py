@@ -1,18 +1,18 @@
 import pandas as pd
 
-from autonomio.transform.transform_data import transform_data
+from autonomio.transforms.transform_data import transform_data
 from autonomio.plots.plots import prediction_distribution
-from autonomio.load_model import load_model
-from autonomio.transform.dataframe import df_merge
+from autonomio._utils.load_model import load_model
+from autonomio.transforms.dataframe import df_merge
 
 from IPython.display import display
 
 
 def make_prediction(data,
-                     saved_model,
-                     labels,
-                     interactive,
-                     interactive_x):
+                    saved_model,
+                    labels,
+                    interactive,
+                    interactive_x):
 
     '''Predictor
 

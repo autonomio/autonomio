@@ -5,7 +5,7 @@ from ascify import Ascify
 def vectorize_text(data, language='en', ascifying=True):
 
     '''Text Vectorizer
-    
+
     INPUT: a SERIES with string values
 
     OUTPUT: a list of lists with the word vectors in lists

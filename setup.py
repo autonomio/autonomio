@@ -102,8 +102,9 @@ if __name__ == "__main__":
         packages=['autonomio',
                   'autonomio.plots',
                   'autonomio.transform',
-                  'autonomio.utils',
-                  'autonomio.models'],
+                  'autonomio._utils',
+                  'autonomio.models',
+                  'autonomio.commands'],
 
         classifiers=[
                      'Intended Audience :: Science/Research',
