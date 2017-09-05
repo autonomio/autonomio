@@ -1,4 +1,4 @@
-from autonomio._api import train, hyperscan, wrangler, data, predictor
+from autonomio.commands._wrapper import train, hyperscan, wrangler, data, predictor
 
 try:
 	del models
