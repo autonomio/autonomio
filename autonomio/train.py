@@ -107,8 +107,7 @@ def trainer(X, Y, data, para):
     if para['save_model'] is not False:
         save_model_as(X_num,
                       data.columns,
-                      model, para['save_model'],
-                      para['flatten'])
+                      model, para['save_model'])
 
     # shuffling and separating the data
     if para['validation'] is not False:
