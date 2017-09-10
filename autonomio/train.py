@@ -72,7 +72,11 @@ def trainer(X, Y, data, para):
     elif para['neuron_max'] == 'auto':
         para['neuron_max'] = 4
 
-    para['neuron_count'] = shapes(para)
+    if para['neuron_count'] is 'auto':
+        para['neuron_count'] = shapes(para)
+
+    if len(para['neuron_count']) is not para['layers']:
+        print("NB! Number of neurons should be equal to the number of layers")
 
     if para['model'] is 'mlp':
         model, history = mlp(X, Y, para)

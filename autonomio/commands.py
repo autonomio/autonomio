@@ -20,6 +20,7 @@ def train(X=None, Y=None, data=None,
           batch_size=10,
           verbose=0,
           shape='funnel',
+          neurons='auto',
           double_check=False,
           validation=False,
           model='mlp',
@@ -146,6 +147,10 @@ def train(X=None, Y=None, data=None,
             'triangle'
             'stairs'
 
+    neurons = list of neurons. By default it is automatically set according to
+              a chosen shape. Number of neurons must be the same as number of
+              layers.
+
     double_check = Makes a 'manual' check of the results provided by
                    Keras backend and compares the two. This is good
                    when you have doubt with the results.
@@ -185,6 +190,7 @@ def train(X=None, Y=None, data=None,
                   'flatten': flatten,
                   'save_model': save_model,
                   'shape': shape,
+                  'neuron_count': neurons,
                   'double_check': double_check,
                   'validation': validation,
                   'neuron_max': neuron_max,

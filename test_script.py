@@ -97,6 +97,11 @@ te = predictor(temp, 'test_model')
 tr = train(1, 'neg', temp, layers=1, validation=True)
 tr = train(1, 'neg', temp, validation=.6, shape_plot=True)
 
+try:
+    train(1, 'neg', temp, neurons=[1])
+except:
+    pass
+
 train(temp_employment.MUU,
       epoch=1,
       batch_size=512,
