@@ -51,7 +51,7 @@ def mlp(X, Y, para):
                     W_regularizer=l1_l2(l1=l1, l2=l2)))
     model.compile(loss=para['loss'],
                   optimizer=para['optimizer'],
-                  metrics=['accuracy'])
+                  metrics=para['metrics'])
 
     if para['verbose'] >= 1:
         time.sleep(0.1)

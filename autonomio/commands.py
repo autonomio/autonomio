@@ -15,6 +15,7 @@ def train(X=None, Y=None, data=None,
           optimizer='adam',
           activation='relu',
           activation_out='sigmoid',
+          metrics=['accuracy'],
           save_model=False,
           neuron_max='auto',
           batch_size=10,
@@ -113,6 +114,10 @@ def train(X=None, Y=None, data=None,
     activation_out = Same as 'activation' (above), but for the
                      output layer only.
 
+    metrics = list or string with metrics values. Can be used for mlp and
+              regression models. All the Keras metrics are available >
+              https://keras.io/metrics/
+
     save_model =  An option to save the model configuration, weights
                   and parameters.
 
@@ -204,7 +209,8 @@ def train(X=None, Y=None, data=None,
                   'dense_neurons': dense_neurons,
                   'normalize_window': normalize_window,
                   'shape_plot': shape_plot,
-                  'randomize': randomize
+                  'randomize': randomize,
+                  'metrics': metrics
                   }
 
     if model is 'lstm':

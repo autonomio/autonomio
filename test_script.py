@@ -89,7 +89,7 @@ tr = train([1, 2, 3, 4, 5], 'neg', temp,
 tr = train(1, 'quality_score', temp, flatten='median')
 tr = train(1, 'quality_score', temp, flatten=6)
 tr = train(1, 'quality_score', temp, flatten=.5)
-tr = train(1, 'quality_score', temp, flatten='mean')
+tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
 
 tr = train('text', 'neg', temp, save_model='test_model')
 te = predictor(temp, 'test_model')

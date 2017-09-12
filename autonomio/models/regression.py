@@ -5,7 +5,7 @@ from keras.layers import Dense
 from keras.regularizers import l1_l2
 
 
-def regression(X, Y, epochs, reg_mode):
+def regression(X, Y, epochs, reg_mode, metrics):
 
     '''Regression Models
 
@@ -20,12 +20,12 @@ def regression(X, Y, epochs, reg_mode):
 
     if reg_mode == 'linear':
         model.add(Dense(1, input_dim=x.shape[1]))
-        model.compile(optimizer='rmsprop', metrics=['accuracy'], loss='mse')
+        model.compile(optimizer='rmsprop', metrics=metrics, loss='mse')
 
     elif reg_mode == 'logistic':
         model.add(Dense(1, activation='sigmoid', input_dim=x.shape[1]))
         model.compile(optimizer='rmsprop',
-                      metrics=['accuracy'],
+                      metrics=metrics,
                       loss='binary_crossentropy')
 
     elif reg_mode == 'regularized':
@@ -36,7 +36,7 @@ def regression(X, Y, epochs, reg_mode):
                         input_dim=x.shape[1]))
 
         model.compile(optimizer='rmsprop',
-                      metrics=['accuracy'],
+                      metrics=metrics,
                       loss='binary_crossentropy')
 
     out = model.fit(x, y, nb_epoch=epochs, verbose=0, validation_split=.33)

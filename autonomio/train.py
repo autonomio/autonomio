@@ -78,19 +78,38 @@ def trainer(X, Y, data, para):
     if len(para['neuron_count']) is not para['layers']:
         print("NB! Number of neurons should be equal to the number of layers")
 
+    if type(para['metrics']) is not list:
+        para['metrics'] = [para['metrics']]
+
     if para['model'] is 'mlp':
         model, history = mlp(X, Y, para)
     if para['model'] is 'regression':
-        model, history = regression(X, Y, para['epoch'], para['reg_mode'])
+        model, history = regression(X, Y,
+                                    para['epoch'],
+                                    para['reg_mode'],
+                                    para['metrics'])
 
     network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
 
+    for key, val in history.history.iteritems():
+        if 'acc' in key:
+            if 'val' in key:
+                val_acc = key
+            else:
+                acc = key
+
+        if 'loss' in key:
+            if 'val' in key:
+                val_loss = key
+            else:
+                loss = key
+
     # train / test results
     ex2 = pd.DataFrame({
-                    'train_acc': history.history['acc'],
-                    'train_loss': history.history['loss'],
-                    'test_acc': history.history['val_acc'],
-                    'test_loss': history.history['val_loss']})
+                    'train_acc': history.history[acc],
+                    'train_loss': history.history[loss],
+                    'test_acc': history.history[val_acc],
+                    'test_loss': history.history[val_loss]})
 
     scores = model.evaluate(X, Y, verbose=para['verbose'])
 
