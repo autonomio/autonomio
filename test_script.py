@@ -84,11 +84,12 @@ tr = train([1, 5], 'neg', temp, model='regression',
 tr = train([1, 2, 3, 4, 5], 'neg', temp,
            model='regression',
            reg_mode='regularized',
-           flatten='cat_numeric')
+           flatten='cat_numeric',
+           learning_rate=0.1)
 
 tr = train(1, 'quality_score', temp, flatten='median')
 tr = train(1, 'quality_score', temp, flatten=6)
-tr = train(1, 'quality_score', temp, flatten=.5)
+tr = train(1, 'quality_score', temp, flatten=.5, learning_rate=0.1)
 tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
 
 tr = train('text', 'neg', temp, save_model='test_model')
@@ -106,7 +107,8 @@ train(temp_employment.MUU,
       epoch=1,
       batch_size=512,
       model='lstm',
-      normalize_window=False)
+      normalize_window=False,
+      learning_rate=0.1)
 train(temp_employment.MUU,
       epoch=1,
       batch_size=512,

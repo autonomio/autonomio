@@ -87,7 +87,8 @@ def trainer(X, Y, data, para):
         model, history = regression(X, Y,
                                     para['epoch'],
                                     para['reg_mode'],
-                                    para['metrics'])
+                                    para['metrics'],
+                                    para['lr'])
 
     network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
 

@@ -33,6 +33,7 @@ def train(X=None, Y=None, data=None,
           hyperscan='False',
           w_regularizer='auto',
           w_reg_values=[0, 0],
+          learning_rate='auto',
           shape_plot=False,
           randomize=False):
 
@@ -180,6 +181,8 @@ def train(X=None, Y=None, data=None,
                     number of layers starting from 0.
 
     w_reg_value = String with two values for l1 and l2.
+
+    learning_rate = float, which changes the learning rate for an optimizer.
     '''
 
     parameters = {'epoch': epoch,
@@ -210,7 +213,8 @@ def train(X=None, Y=None, data=None,
                   'normalize_window': normalize_window,
                   'shape_plot': shape_plot,
                   'randomize': randomize,
-                  'metrics': metrics
+                  'metrics': metrics,
+                  'lr': learning_rate
                   }
 
     if model is 'lstm':

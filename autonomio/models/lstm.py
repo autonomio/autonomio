@@ -6,6 +6,7 @@ from IPython.display import display
 from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential
+from keras.optimizers import RMSprop
 
 from ..transform.lstm_transform_data import _lstm_load_data
 from ..plots.lstm_plots import histplot, lstm_plot
@@ -27,6 +28,11 @@ def lstm(data, param):
 
     if param['prediction_len'] is 'auto':
         param['prediction_len'] = param['seq_len']
+
+    if param['lr'] is not 'auto':
+        optimizer = RMSprop(lr=param['lr'])
+    else:
+        optimizer = 'rmsprop'
 
     X_train, y_train, X_test, y_test = _lstm_load_data(
                                                     data,
@@ -53,7 +59,7 @@ def lstm(data, param):
         output_dim=dimensions[3]))
     model.add(Activation("linear"))
 
-    model.compile(loss="mse", optimizer="rmsprop")
+    model.compile(loss="mse", optimizer=optimizer)
 
     history = model.fit(X_train,
                         y_train,

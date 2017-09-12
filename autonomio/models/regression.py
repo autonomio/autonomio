@@ -3,9 +3,10 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.regularizers import l1_l2
+from keras.optimizers import RMSprop
 
 
-def regression(X, Y, epochs, reg_mode, metrics):
+def regression(X, Y, epochs, reg_mode, metrics, lr):
 
     '''Regression Models
 
@@ -16,15 +17,20 @@ def regression(X, Y, epochs, reg_mode, metrics):
 
     x, y = np.array(X), np.array(Y)
 
+    if lr is not 'auto':
+        optimizer = RMSprop(lr=lr)
+    else:
+        optimizer = 'rmsprop'
+
     model = Sequential()
 
     if reg_mode == 'linear':
         model.add(Dense(1, input_dim=x.shape[1]))
-        model.compile(optimizer='rmsprop', metrics=metrics, loss='mse')
+        model.compile(optimizer=optimizer, metrics=metrics, loss='mse')
 
     elif reg_mode == 'logistic':
         model.add(Dense(1, activation='sigmoid', input_dim=x.shape[1]))
-        model.compile(optimizer='rmsprop',
+        model.compile(optimizer=optimizer,
                       metrics=metrics,
                       loss='binary_crossentropy')
 
@@ -35,7 +41,7 @@ def regression(X, Y, epochs, reg_mode, metrics):
                         W_regularizer=reg,
                         input_dim=x.shape[1]))
 
-        model.compile(optimizer='rmsprop',
+        model.compile(optimizer=optimizer,
                       metrics=metrics,
                       loss='binary_crossentropy')
 

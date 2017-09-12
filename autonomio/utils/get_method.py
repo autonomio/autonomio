@@ -1,4 +1,4 @@
-def get_method_with_string(method_name, mode):
+def get_method(method_name, mode):
 
     '''
     Utility function that helps calling methods/functions
@@ -17,9 +17,6 @@ def get_method_with_string(method_name, mode):
         from keras.activations import *
     if mode is 'optimizers':
         from keras.optimizers import *
-
-
-def _get_method(method_name):
 
     possibles = globals().copy()
     possibles.update(locals())
