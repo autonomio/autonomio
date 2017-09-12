@@ -88,6 +88,8 @@ def trainer(X, Y, data, para):
 
     network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
 
+    val_acc = None
+    val_loss = None
     for key, val in history.history.iteritems():
         if 'acc' in key:
             if 'val' in key:
@@ -100,6 +102,11 @@ def trainer(X, Y, data, para):
                 val_loss = key
             else:
                 loss = key
+
+    if val_acc is None:
+        val_acc = acc
+    if val_loss is None:
+        val_loss = loss
 
     # train / test results
     ex2 = pd.DataFrame({
@@ -180,7 +187,7 @@ def trainer(X, Y, data, para):
         if para['shape_plot'] is True:
             shapeplot(para['neuron_count'], para['model'])
 
-        trainplot(train_stats, test_stats)
-        accuracy(ex2)
+        trainplot(train_stats, test_stats, para['validation_split'])
+        accuracy(ex2, para['validation_split'])
         prediction_distribution(predictions, bins=100)
         return
