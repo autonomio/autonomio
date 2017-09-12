@@ -84,11 +84,7 @@ def trainer(X, Y, data, para):
     if para['model'] is 'mlp':
         model, history = mlp(X, Y, para)
     if para['model'] is 'regression':
-        model, history = regression(X, Y,
-                                    para['epoch'],
-                                    para['reg_mode'],
-                                    para['metrics'],
-                                    para['lr'])
+        model, history = regression(X, Y, para)
 
     network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
 
