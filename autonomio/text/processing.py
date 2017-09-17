@@ -27,6 +27,19 @@ def text_to_blob(data, decoder='utf-8'):
     return blob
 
 
+def text_to_chars(data, decoder='utf-8'):
+
+    data = accept_string_as_iterable(data)
+    chars = u''
+    for text in data:
+        words = text.split()
+        for word in words:
+            for char in word:
+                chars += char.decode(decoder)
+
+    return chars
+
+
 def word_filtering(data,
                    output=list,
                    min_len=3,

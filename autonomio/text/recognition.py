@@ -1,6 +1,20 @@
 import spacy as sp
 
 
+def ngrams(data, ngram=3):
+
+    '''Ngrammer
+
+    WHAT: takes in list or string values and converts them
+    in to ngrams.
+
+    '''
+
+    out = zip(*[data[i:] for i in range(ngram)])
+
+    return out
+
+
 def entity_recognition(word):
 
     '''Entity Recognition
