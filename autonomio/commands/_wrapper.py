@@ -1,8 +1,8 @@
-from prediction import make_prediction
-from train import trainer
-from load_data import load_data
-from transform.wrangler import wrangler_main
-from models.lstm import lstm
+from .prediction import make_prediction
+from .train import trainer
+from .load_data import load_data
+from .wrangler import wrangler_main
+from autonomio.models.lstm import lstm
 
 
 def train(X=None, Y=None, data=None,
@@ -15,11 +15,13 @@ def train(X=None, Y=None, data=None,
           optimizer='adam',
           activation='relu',
           activation_out='sigmoid',
+          metrics=['accuracy'],
           save_model=False,
           neuron_max='auto',
           batch_size=10,
           verbose=0,
           shape='funnel',
+          neurons='auto',
           double_check=False,
           validation=False,
           model='mlp',
@@ -31,6 +33,7 @@ def train(X=None, Y=None, data=None,
           hyperscan='False',
           w_regularizer='auto',
           w_reg_values=[0, 0],
+          learning_rate='auto',
           shape_plot=False,
           randomize=False):
 
@@ -112,6 +115,10 @@ def train(X=None, Y=None, data=None,
     activation_out = Same as 'activation' (above), but for the
                      output layer only.
 
+    metrics = list or string with metrics values. Can be used for mlp and
+              regression models. All the Keras metrics are available >
+              https://keras.io/metrics/
+
     save_model =  An option to save the model configuration, weights
                   and parameters.
 
@@ -146,6 +153,10 @@ def train(X=None, Y=None, data=None,
             'triangle'
             'stairs'
 
+    neurons = list of neurons. By default it is automatically set according to
+              a chosen shape. Number of neurons must be the same as number of
+              layers.
+
     double_check = Makes a 'manual' check of the results provided by
                    Keras backend and compares the two. This is good
                    when you have doubt with the results.
@@ -170,6 +181,8 @@ def train(X=None, Y=None, data=None,
                     number of layers starting from 0.
 
     w_reg_value = String with two values for l1 and l2.
+
+    learning_rate = float, which changes the learning rate for an optimizer.
     '''
 
     parameters = {'epoch': epoch,
@@ -185,6 +198,7 @@ def train(X=None, Y=None, data=None,
                   'flatten': flatten,
                   'save_model': save_model,
                   'shape': shape,
+                  'neuron_count': neurons,
                   'double_check': double_check,
                   'validation': validation,
                   'neuron_max': neuron_max,
@@ -198,7 +212,9 @@ def train(X=None, Y=None, data=None,
                   'dense_neurons': dense_neurons,
                   'normalize_window': normalize_window,
                   'shape_plot': shape_plot,
-                  'randomize': randomize
+                  'randomize': randomize,
+                  'metrics': metrics,
+                  'lr': learning_rate
                   }
 
     if model is 'lstm':

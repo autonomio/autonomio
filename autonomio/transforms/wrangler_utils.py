@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 
-from autonomio.transform.nan_handler import nan_filler
-from autonomio.transform.nan_imputer import nan_imputer
-from autonomio.transform.vectorize_text import vectorize_text
+from autonomio.transforms.nan_handler import nan_filler
+from autonomio.transforms.nan_imputer import nan_imputer
+from autonomio.text.vectorize_text import vectorize_text
 
 
 def max_category(data, max_categories):

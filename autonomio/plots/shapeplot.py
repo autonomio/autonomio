@@ -3,7 +3,7 @@ matplotlib.use('Agg')  # this needs to be here exceptionslly
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-from autonomio.transform.rescale import max_rescale
+from autonomio.transforms.rescale import max_rescale
 
 plt.style.use('bmh')
 

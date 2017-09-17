@@ -1,13 +1,13 @@
-from autonomio.commands import data, train, predictor, wrangler, hyperscan
-from autonomio.transform.transform_data import transform_data
-from autonomio.transform.col_name_generator import col_name_generator
-from autonomio.transform.nan_imputer import nan_imputer
-from autonomio.transform.sohot_encoding import all_is_binary
+from autonomio.commands._wrapper import data, train, predictor, wrangler, hyperscan
+from autonomio.transforms.transform_data import transform_data
+from autonomio.transforms.col_name_generator import col_name_generator
+from autonomio.transforms.nan_imputer import nan_imputer
+from autonomio.transforms.sohot_encoding import all_is_binary
 from autonomio.plots.scatterz import scatterz
-from autonomio.hyperparameters import load_parameters
-from autonomio.hyperstats import hyper_descriptive
-from autonomio.transform.onehot_encoding import onehot
-from autonomio.transform.rescale import max_rescale
+from autonomio._utils.hyperparameters import load_parameters
+from autonomio._utils.hyperstats import hyper_descriptive
+from autonomio.transforms.onehot_encoding import onehot
+from autonomio.transforms.rescale import max_rescale
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
 from autonomio.plots.quadparam import quadparam
@@ -84,12 +84,13 @@ tr = train([1, 5], 'neg', temp, model='regression',
 tr = train([1, 2, 3, 4, 5], 'neg', temp,
            model='regression',
            reg_mode='regularized',
-           flatten='cat_numeric')
+           flatten='cat_numeric',
+           learning_rate=0.1)
 
 tr = train(1, 'quality_score', temp, flatten='median')
 tr = train(1, 'quality_score', temp, flatten=6)
-tr = train(1, 'quality_score', temp, flatten=.5)
-tr = train(1, 'quality_score', temp, flatten='mean')
+tr = train(1, 'quality_score', temp, flatten=.5, learning_rate=0.1)
+tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
 
 tr = train('text', 'neg', temp, save_model='test_model')
 te = predictor(temp, 'test_model')
@@ -97,11 +98,17 @@ te = predictor(temp, 'test_model')
 tr = train(1, 'neg', temp, layers=1, validation=True)
 tr = train(1, 'neg', temp, validation=.6, shape_plot=True)
 
+try:
+    train(1, 'neg', temp, neurons=[1])
+except:
+    pass
+
 train(temp_employment.MUU,
       epoch=1,
       batch_size=512,
       model='lstm',
-      normalize_window=False)
+      normalize_window=False,
+      learning_rate=0.1)
 train(temp_employment.MUU,
       epoch=1,
       batch_size=512,

@@ -1,7 +1,7 @@
 import datetime
 import pandas as pd
 
-from autonomio.transform.column_handler import column_mover
+from autonomio.transforms.column_handler import column_mover
 
 
 def datetime_detector(data, datetime_mode='retain'):

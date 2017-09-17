@@ -2,7 +2,7 @@ import math
 import numpy as np
 import pandas as pd
 
-from autonomio.transform.dataframe import df_merge
+from autonomio.transforms.dataframe import df_merge
 
 
 def max_rescale(values, scale=1, to_int=False):

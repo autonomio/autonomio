@@ -1,8 +1,8 @@
 import pandas as pd
 
-from autonomio.transform.datetime_handler import datetime_detector
-from autonomio.transform.wrangler_utils import string_contains_to_binary
-from autonomio.transform.value_starts_with import value_starts_with
+from autonomio.transforms.datetime_handler import datetime_detector
+from autonomio.transforms.wrangler_utils import string_contains_to_binary
+from autonomio.transforms.value_starts_with import value_starts_with
 
 
 def to_category_labels(data,

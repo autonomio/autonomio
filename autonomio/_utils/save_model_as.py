@@ -1,4 +1,4 @@
-def save_model_as(X, columns, model, save_model, flatten):
+def save_model_as(X, columns, model, save_model):
 
     '''Model Saver
 
@@ -36,7 +36,6 @@ def save_model_as(X, columns, model, save_model, flatten):
                 for i in X:
                     temp += columns[i] + " "
 
-
     # for multiple column labels
     if type(X) == list:
         if type(X[0]) == str:
@@ -55,8 +54,6 @@ def save_model_as(X, columns, model, save_model, flatten):
     if type(X) == str:
 
         temp = X
-
-    temp += " "+str(flatten)
 
     f.write(temp)
     f.close()

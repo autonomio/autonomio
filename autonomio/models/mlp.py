@@ -5,6 +5,8 @@ from keras.layers import Dense
 from keras.layers import Dropout
 from keras.regularizers import l1_l2
 
+from autonomio._utils.get_method import get_method
+
 
 def mlp(X, Y, para):
 
@@ -19,6 +21,10 @@ def mlp(X, Y, para):
 
     if para['w_regularizer'] is 'auto':
         para['w_regularizer'] = [para['layers']]
+
+    if para['lr'] is not 'auto':
+        para['optimizer'] = get_method(para['optimizer'],
+                                       'optimizers')(lr=para['lr'])
 
     l1, l2 = check_w_reg(0, para['w_regularizer'], para['w_reg_values'])
 
@@ -51,7 +57,7 @@ def mlp(X, Y, para):
                     W_regularizer=l1_l2(l1=l1, l2=l2)))
     model.compile(loss=para['loss'],
                   optimizer=para['optimizer'],
-                  metrics=['accuracy'])
+                  metrics=para['metrics'])
 
     if para['verbose'] >= 1:
         time.sleep(0.1)

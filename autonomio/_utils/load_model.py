@@ -1,6 +1,3 @@
-from keras.models import model_from_json
-
-
 def load_model(saved_model):
 
     '''Load Model
@@ -9,6 +6,7 @@ def load_model(saved_model):
     prediction use by predictor().
 
     '''
+    from keras.models import model_from_json
 
     json_file = open(saved_model + ".json", 'r')
     loaded_model_json = json_file.read()
@@ -20,19 +18,13 @@ def load_model(saved_model):
     f = open(saved_model + ".x", 'r')
     temp = f.read()
     try:
-        X = map(int, temp.split()[:-1])
+        X = map(int, temp.split())
     except ValueError:
-        X = temp.split()[:-1]
-
-    try:
-        flatten = float(temp.split()[-1])
-
-    except ValueError:
-        flatten = temp.split()[-1]
+        X = temp.split()
 
     f.close()
 
     if type(X) == list and len(X) == 1:
         X = X[0]
 
-    return loaded_model, X, flatten
+    return loaded_model, X

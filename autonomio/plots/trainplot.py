@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt  # not pep8 but will not pass travis otherwise
 plt.style.use('bmh')
 
 
-def trainplot(train_vals, test_vals):
+def trainplot(train_vals, test_vals, val):
 
     '''Train Metrics Plot
 
@@ -27,7 +27,8 @@ def trainplot(train_vals, test_vals):
     ax = fig.add_subplot(111)
 
     ax.bar(train_pos, train_vals, width=.5, align='center', label='Train')
-    ax.bar(test_pos, test_vals, width=0.5, align='center', label='Test')
+    if val is not 0:
+        ax.bar(test_pos, test_vals, width=0.5, align='center', label='Test')
 
     plt.ylim((0, 1))
     plt.tick_params(axis='both', labelsize=11, which='major', pad=10)

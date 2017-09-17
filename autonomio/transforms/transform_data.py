@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 
 
 def transform_data(data,
-                   flatten,
+                   flatten=False,
                    X=False,
                    Y=False):
 

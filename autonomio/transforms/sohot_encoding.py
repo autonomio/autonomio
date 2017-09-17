@@ -1,9 +1,9 @@
 import pandas as pd
 
-from autonomio.transform.col_name_generator import col_name_generator
-from autonomio.transform.nan_imputer import nan_imputer
-from autonomio.transform.onehot_encoding import onehot
-from autonomio.transform.nan_handler import nan_filler
+from autonomio.transforms.col_name_generator import col_name_generator
+from autonomio.transforms.nan_imputer import nan_imputer
+from autonomio.transforms.onehot_encoding import onehot
+from autonomio.transforms.nan_handler import nan_filler
 
 
 def all_is_binary(data, y):
