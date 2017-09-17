@@ -72,21 +72,48 @@ def trainer(X, Y, data, para):
     elif para['neuron_max'] == 'auto':
         para['neuron_max'] = 4
 
-    para['neuron_count'] = shapes(para)
+    if para['neuron_count'] is 'auto':
+        para['neuron_count'] = shapes(para)
+
+    if len(para['neuron_count']) is not para['layers']:
+        print("NB! Number of neurons should be equal to the number of layers")
+
+    if type(para['metrics']) is not list:
+        para['metrics'] = [para['metrics']]
 
     if para['model'] is 'mlp':
         model, history = mlp(X, Y, para)
     if para['model'] is 'regression':
-        model, history = regression(X, Y, para['epoch'], para['reg_mode'])
+        model, history = regression(X, Y, para)
 
     network_scale = len(X)*para['epoch']*para['layers']*para['neuron_max']
 
+    val_acc = None
+    val_loss = None
+    for key, val in history.history.iteritems():
+        if 'acc' in key:
+            if 'val' in key:
+                val_acc = key
+            else:
+                acc = key
+
+        if 'loss' in key:
+            if 'val' in key:
+                val_loss = key
+            else:
+                loss = key
+
+    if val_acc is None:
+        val_acc = acc
+    if val_loss is None:
+        val_loss = loss
+
     # train / test results
     ex2 = pd.DataFrame({
-                    'train_acc': history.history['acc'],
-                    'train_loss': history.history['loss'],
-                    'test_acc': history.history['val_acc'],
-                    'test_loss': history.history['val_loss']})
+                    'train_acc': history.history[acc],
+                    'train_loss': history.history[loss],
+                    'test_acc': history.history[val_acc],
+                    'test_loss': history.history[val_loss]})
 
     scores = model.evaluate(X, Y, verbose=para['verbose'])
 
@@ -107,8 +134,7 @@ def trainer(X, Y, data, para):
     if para['save_model'] is not False:
         save_model_as(X_num,
                       data.columns,
-                      model, para['save_model'],
-                      para['flatten'])
+                      model, para['save_model'])
 
     # shuffling and separating the data
     if para['validation'] is not False:
@@ -161,7 +187,7 @@ def trainer(X, Y, data, para):
         if para['shape_plot'] is True:
             shapeplot(para['neuron_count'], para['model'])
 
-        trainplot(train_stats, test_stats)
-        accuracy(ex2)
+        trainplot(train_stats, test_stats, para['validation_split'])
+        accuracy(ex2, para['validation_split'])
         prediction_distribution(predictions, bins=100)
         return
