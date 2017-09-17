@@ -2,8 +2,6 @@
 
 ready_for_commit(){
 
-    while true; do
-
         echo "DOCSTRING UPDATE: passed"
 
 
@@ -33,17 +31,10 @@ ready_for_commit(){
 
         read -p "Ready to commit then? " yn
         case $yn in
-            [Yy]* ) echo -e "Let's do this! Committing now... \n";;
+            [Yy]* ) echo -e "Let's do this! You're ready to commit :) \n";;
             [Nn]* ) echo "That's right, better be safe than sorry" ; exit;;
             * ) echo "Yes (y) or no (n) answers only."; break;;
         esac
-
-        read -p "Enter your commit message (without quotes): " MESSAGE
-
-        git commit ./* -m "\"$MESSAGE\""
-        git push
-
-    done
 
 }
 
@@ -66,8 +57,6 @@ remove_tempfiles(){
 }
 
 sanity_check(){
-
-    while true; do
 
         echo " "
     	echo "--------------------------------"
@@ -103,6 +92,13 @@ sanity_check(){
             * ) echo "Yes (y) or no (n) answers only."; break;;
         esac
 
+        read -p "Did you check that the API namespace is clean?" yn
+        case $yn in
+            [Yy]* ) echo -e "API NAMESPACE INTEGRITY: passed \n";;
+            [Nn]* ) echo "This is a key point you know..." ; exit;;
+            * ) echo "Yes (y) or no (n) answers only."; break;;
+        esac
+
         read -p "Code is pep8? " yn
         case $yn in
             [Yy]* ) echo -e "PEP8 Check: passed \n";;
@@ -134,7 +130,6 @@ sanity_check(){
             echo " "
             break
         fi 
-    done
 }
 
 clear

@@ -36,6 +36,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
+
 def check_dependencies():
 
     install_requires = []
@@ -88,33 +89,34 @@ if __name__ == "__main__":
     install_requires = check_dependencies()
 
     setup(name=DISTNAME,
-        author=MAINTAINER,
-        author_email=MAINTAINER_EMAIL,
-        maintainer=MAINTAINER,
-        maintainer_email=MAINTAINER_EMAIL,
-        description=DESCRIPTION,
-        long_description=LONG_DESCRIPTION,
-        license=LICENSE,
-        url=URL,
-        version=VERSION,
-        download_url=DOWNLOAD_URL,
-        install_requires=install_requires,
-        packages=['autonomio',
-                  'autonomio.plots',
-                  'autonomio.transform',
-                  'autonomio.utils',
-                  'autonomio.models'],
+          author=MAINTAINER,
+          author_email=MAINTAINER_EMAIL,
+          maintainer=MAINTAINER,
+          maintainer_email=MAINTAINER_EMAIL,
+          description=DESCRIPTION,
+          long_description=LONG_DESCRIPTION,
+          license=LICENSE,
+          url=URL,
+          version=VERSION,
+          download_url=DOWNLOAD_URL,
+          install_requires=install_requires,
+          packages=['autonomio',
+                    'autonomio.plots',
+                    'autonomio.transforms',
+                    'autonomio._utils',
+                    'autonomio.models',
+                    'autonomio.commands',
+                    'autonomio.text'],
 
-        classifiers=[
-                     'Intended Audience :: Science/Research',
-                     'Programming Language :: Python :: 2.7',
-                     'License :: OSI Approved :: MIT License',
-                     'Topic :: Scientific/Engineering :: Human Machine Interfaces',
-                     'Topic :: Scientific/Engineering :: Artificial Intelligence',
-                     'Topic :: Scientific/Engineering :: Mathematics',
-                     'Operating System :: POSIX',
-                     'Operating System :: Unix',
-                     'Operating System :: MacOS'],
-)
+          classifiers=[
+              'Intended Audience :: Science/Research',
+              'Programming Language :: Python :: 2.7',
+              'License :: OSI Approved :: MIT License',
+              'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+              'Topic :: Scientific/Engineering :: Artificial Intelligence',
+              'Topic :: Scientific/Engineering :: Mathematics',
+              'Operating System :: POSIX',
+              'Operating System :: Unix',
+              'Operating System :: MacOS'])
 
 os.system("python -m spacy download en")

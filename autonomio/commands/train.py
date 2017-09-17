@@ -5,15 +5,15 @@ from IPython.display import display
 
 from keras import backend as K
 
-from transform.transform_data import transform_data
-from plots.plots import accuracy
-from utils.shapes import shapes
-from utils.double_check import check
-from utils.validator import validate, separate
-from save_model_as import save_model_as
-from models.mlp import mlp
-from models.regression import regression
-from plots.trainplot import trainplot
+from autonomio.transforms.transform_data import transform_data
+from autonomio.plots.plots import accuracy
+from autonomio._utils.shapes import shapes
+from autonomio._utils.double_check import check
+from autonomio._utils.validator import validate, separate
+from autonomio._utils.save_model_as import save_model_as
+from autonomio.models.mlp import mlp
+from autonomio.models.regression import regression
+from autonomio.plots.trainplot import trainplot
 from autonomio.plots.plots import prediction_distribution
 from autonomio.plots.shapeplot import shapeplot
 

@@ -1,4 +1,4 @@
-from vectorize_text import vectorize_text
+from autonomio.text.vectorize_text import vectorize_text
 
 
 def x_transform(X, data):

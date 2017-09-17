@@ -1,13 +1,13 @@
-from autonomio.commands import data, train, predictor, wrangler, hyperscan
-from autonomio.transform.transform_data import transform_data
-from autonomio.transform.col_name_generator import col_name_generator
-from autonomio.transform.nan_imputer import nan_imputer
-from autonomio.transform.sohot_encoding import all_is_binary
+from autonomio.commands._wrapper import data, train, predictor, wrangler, hyperscan
+from autonomio.transforms.transform_data import transform_data
+from autonomio.transforms.col_name_generator import col_name_generator
+from autonomio.transforms.nan_imputer import nan_imputer
+from autonomio.transforms.sohot_encoding import all_is_binary
 from autonomio.plots.scatterz import scatterz
-from autonomio.hyperparameters import load_parameters
-from autonomio.hyperstats import hyper_descriptive
-from autonomio.transform.onehot_encoding import onehot
-from autonomio.transform.rescale import max_rescale
+from autonomio._utils.hyperparameters import load_parameters
+from autonomio._utils.hyperstats import hyper_descriptive
+from autonomio.transforms.onehot_encoding import onehot
+from autonomio.transforms.rescale import max_rescale
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
 from autonomio.plots.quadparam import quadparam

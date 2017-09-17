@@ -1,8 +1,8 @@
-from prediction import make_prediction
-from train import trainer
-from load_data import load_data
-from transform.wrangler import wrangler_main
-from models.lstm import lstm
+from .prediction import make_prediction
+from .train import trainer
+from .load_data import load_data
+from .wrangler import wrangler_main
+from autonomio.models.lstm import lstm
 
 
 def train(X=None, Y=None, data=None,

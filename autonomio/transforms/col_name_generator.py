@@ -1,7 +1,3 @@
-from string import ascii_lowercase
-import itertools
-
-
 def col_name_generator(data, prefix='C'):
 
     '''Column Name Generator

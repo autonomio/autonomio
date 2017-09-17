@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
 
-from ..transform.transform_data import transform_data
-from ..prediction import make_prediction, load_model
+from autonomio.commands.prediction import *
+from autonomio.transforms.transform_data import transform_data
+from autonomio._utils.load_model import load_model
 
 
 def validate(X, Y, saved_model):
