@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 plt.style.use('bmh')
 
 
-def accuracy(data):
+def accuracy(data, val):
 
     '''Training Accuracy Plot
 
@@ -23,9 +23,11 @@ def accuracy(data):
     fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
 
     ax1.plot(data['train_acc'])
-    ax1.plot(data['test_acc'])
     ax2.plot(data['train_loss'])
-    ax2.plot(data['test_loss'])
+
+    if val is not 0:
+        ax1.plot(data['test_acc'])
+        ax2.plot(data['test_loss'])
 
     ax1.set_title('accuracy')
     ax1.set_xlabel('epoch')
