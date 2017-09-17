@@ -5,7 +5,7 @@ from keras.layers import Dense
 from keras.layers import Dropout
 from keras.regularizers import l1_l2
 
-from autonomio.utils.get_method import get_method
+from autonomio._utils.get_method import get_method
 
 
 def mlp(X, Y, para):
