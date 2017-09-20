@@ -106,6 +106,13 @@ sanity_check(){
             * ) echo "Yes (y) or no (n) answers only."; break;;
         esac
 
+        read -p "WIKI is updated with version changes? " yn
+        case $yn in
+            [Yy]* ) echo -e "Version changes check: passed \n";;
+            [Nn]* ) echo "You do know there is NO way out of it." ; exit;;
+            * ) echo "Yes (y) or no (n) answers only."; break;;
+        esac
+
      
         read -p "Ready for a local test then eh? " yn
         case $yn in
