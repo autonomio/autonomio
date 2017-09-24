@@ -6,6 +6,7 @@ from keras.layers import Dropout
 from keras.regularizers import l1_l2
 
 from autonomio._utils.get_method import get_method
+from autonomio._utils.callbacks import callbacks
 
 
 def mlp(X, Y, para):
@@ -65,7 +66,8 @@ def mlp(X, Y, para):
     out = model.fit(X, Y, validation_split=para['validation_split'],
                     epochs=para['epoch'],
                     verbose=para['verbose'],
-                    batch_size=para['batch_size'])
+                    batch_size=para['batch_size'],
+                    callbacks=callbacks(para['early_stop']))
 
     return model, out
 

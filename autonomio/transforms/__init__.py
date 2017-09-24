@@ -15,4 +15,4 @@ from wrangler_utils import string_contains_to_binary
 from x_transform import x_transform
 from y_transform import y_transform
 
-__version__ = "0.4.9"
+__version__ = "0.5.0"

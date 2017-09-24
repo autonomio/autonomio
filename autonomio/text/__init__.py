@@ -14,4 +14,4 @@ from cleaning import remove_stopwords
 from ngrams import embeds_ngrams
 from ngrams import text_to_ngram
 
-__version__ = "0.4.9"
+__version__ = "0.5.0"

@@ -35,7 +35,8 @@ def train(X=None, Y=None, data=None,
           w_reg_values=[0, 0],
           learning_rate='auto',
           shape_plot=False,
-          randomize=False):
+          randomize=False,
+          early_stop=False):
 
     '''The command for training a new model.
 
@@ -183,6 +184,14 @@ def train(X=None, Y=None, data=None,
     w_reg_value = String with two values for l1 and l2.
 
     learning_rate = float, which changes the learning rate for an optimizer.
+
+    early_stop = can be boolean, integer, string or list with two values -
+                 integer and string.
+                 Integer represents patience - number of epochs, when
+                 the program will wait till the result becomes better, if not -
+                 it stops. String is the value we monitor - can be
+                 'val_acc' or 'val_loss'. By default patience is 5 and monitor
+                 is 'val_loss'.
     '''
 
     parameters = {'epoch': epoch,
@@ -214,7 +223,8 @@ def train(X=None, Y=None, data=None,
                   'shape_plot': shape_plot,
                   'randomize': randomize,
                   'metrics': metrics,
-                  'lr': learning_rate
+                  'lr': learning_rate,
+                  'early_stop': early_stop
                   }
 
     if model is 'lstm':
