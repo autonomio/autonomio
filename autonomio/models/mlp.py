@@ -67,7 +67,7 @@ def mlp(X, Y, para):
                     epochs=para['epoch'],
                     verbose=para['verbose'],
                     batch_size=para['batch_size'],
-                    callbacks=callbacks(para['early_stop']))
+                    callbacks=callbacks(para))
 
     return model, out
 

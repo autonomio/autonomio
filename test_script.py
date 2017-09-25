@@ -1,18 +1,22 @@
-from autonomio.commands._wrapper import data, train, predictor, wrangler, hyperscan
+from autonomio.commands._wrapper import data
+from autonomio.commands._wrapper import train
+from autonomio.commands._wrapper import predictor
+from autonomio.commands._wrapper import wrangler
+from autonomio.commands._wrapper import hyperscan
 from autonomio.transforms.transform_data import transform_data
 from autonomio.transforms.col_name_generator import col_name_generator
 from autonomio.transforms.nan_imputer import nan_imputer
 from autonomio.transforms.sohot_encoding import all_is_binary
-from autonomio.plots.scatterz import scatterz
-from autonomio._utils.hyperparameters import load_parameters
-from autonomio._utils.hyperstats import hyper_descriptive
 from autonomio.transforms.onehot_encoding import onehot
 from autonomio.transforms.rescale import max_rescale
+from autonomio._utils.hyperparameters import load_parameters
+from autonomio._utils.hyperstats import hyper_descriptive
 from autonomio.plots.duaparam import duaparam
 from autonomio.plots.paramagg import paramagg
 from autonomio.plots.quadparam import quadparam
 from autonomio.plots.paramscatter import paramscatter
 from autonomio.plots.paramgrid import paramgrid
+from autonomio.plots.scatterz import scatterz
 
 import pandas as pd
 import numpy as np
@@ -80,14 +84,15 @@ temp1 = wrangler(data=temp,
 # 3) train
 tr = train(1, 'neg', temp, model='regression', flatten='mode')
 tr = train([1, 5], 'neg', temp, model='regression',
-           reg_mode='logistic', flatten='cat_string')
+           reg_mode='logistic', flatten='cat_string',
+           early_stop=True, reduce_lr=True)
 tr = train([1, 2, 3, 4, 5], 'neg', temp,
            model='regression',
            reg_mode='regularized',
            flatten='cat_numeric',
            learning_rate=0.1)
 
-tr = train(1, 'quality_score', temp, flatten='median', early_stop=1)
+tr = train(1, 'quality_score', temp, flatten='median')
 tr = train(1, 'quality_score', temp, flatten=6, early_stop=['val_acc'])
 tr = train(1, 'quality_score', temp, flatten=.5, learning_rate=0.1)
 tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
