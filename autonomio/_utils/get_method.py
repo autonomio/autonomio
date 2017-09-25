@@ -17,6 +17,8 @@ def get_method(method_name, mode):
         from keras.activations import *
     if mode is 'optimizers':
         from keras.optimizers import *
+    if mode is 'shapes':
+        from autonomio._utils.shapes import *
 
     possibles = globals().copy()
     possibles.update(locals())

@@ -35,7 +35,17 @@ def train(X=None, Y=None, data=None,
           w_reg_values=[0, 0],
           learning_rate='auto',
           shape_plot=False,
-          randomize=False):
+          randomize=False,
+          early_stop=False,
+          patience=5,
+          monitor='val_loss',
+          min_delta=0,
+          early_stop_mode='auto',
+          reduce_lr=False,
+          factor=0.1,
+          epsilon=0.0001,
+          cooldown=0,
+          min_lr=0.001):
 
     '''The command for training a new model.
 
@@ -183,6 +193,38 @@ def train(X=None, Y=None, data=None,
     w_reg_value = String with two values for l1 and l2.
 
     learning_rate = float, which changes the learning rate for an optimizer.
+
+    early_stop = When True turns on the callback EarlyStopping, which stops
+                 the training after some number of epochs(patience).
+
+    patience = By default equals to 5. When we use early_stop and reduce_lr at
+               the same time, patience is 1.5 times bigger for EarlyStopping.
+
+    monitor = can be 'val_acc' or 'val_loss'(which is set by default), depends
+              on which value we want to watch. Used for early_stop and
+              reduce_lr.
+
+    min_delta = only change of more than min_delta will count as improvement.
+                Used for EarlyStopping callback.
+
+    early_stop_mode = can be 'auto', 'min' and 'max'. 'min' mode will stop
+                      the training when monitored value will stop decreasing,
+                      max - when increasing. Used for EarlyStopping callback.
+
+    reduce_lr = When True model uses callback ReduceLROnPlateau, which will
+                reduce lr when there will be no improvement for some number
+                of epochs(patience).
+
+    factor = number by which learning rate will be decreased. By default 0.1.
+             new_lr = lr * factor. Used for ReduceLROnPlateau callback.
+
+    epsilon = Treshhold. For concentrating on sufficient changes.
+              By default 0.0001. Used for ReduceLROnPlateau callback.
+
+    cooldown = number of epochs to wait before resuming the operation.
+               By default 0. Used for ReduceLROnPlateau callback.
+
+    min_lr = minimum value of learning rate that callback can reduce to.
     '''
 
     parameters = {'epoch': epoch,
@@ -214,7 +256,17 @@ def train(X=None, Y=None, data=None,
                   'shape_plot': shape_plot,
                   'randomize': randomize,
                   'metrics': metrics,
-                  'lr': learning_rate
+                  'lr': learning_rate,
+                  'early_stop': early_stop,
+                  'patience': patience,
+                  'monitor': monitor,
+                  'min_delta': min_delta,
+                  'ESmode': early_stop_mode,
+                  'reduce_lr': reduce_lr,
+                  'factor': factor,
+                  'epsilon': epsilon,
+                  'cooldown': cooldown,
+                  'min_lr': min_lr
                   }
 
     if model is 'lstm':

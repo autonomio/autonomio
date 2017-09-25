@@ -137,7 +137,7 @@ def hyperscan(x,
                                 backup_to_csv = _to_df(temp_list, column_list)
                                 backup_to_csv.to_csv('hyperscan.csv')
 
-                                print('tries left: %d' % no_of_tries - counter)
+                                print('tries left: %d' % (no_of_tries - counter))
 
     df = _to_df(temp_list, column_list)
 

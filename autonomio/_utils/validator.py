@@ -1,12 +1,15 @@
 import numpy as np
-import pandas as pd
 
-from autonomio.commands.prediction import *
-from autonomio.transforms.transform_data import transform_data
 from autonomio._utils.load_model import load_model
 
 
 def validate(X, Y, saved_model):
+
+    '''Validation
+
+    WHAT: function that makes predictions for the separated
+    data and compares them with the actual output.
+    '''
 
     model = load_model(saved_model)[0]
 
@@ -15,7 +18,7 @@ def validate(X, Y, saved_model):
 
     len_round = len(rounded)
 
-    #transpose Y for comparing
+    # transpose Y for comparing
     Y = map(list, zip(*Y))
     l = np.array(Y == rounded)
     l = l.astype(float)
@@ -26,7 +29,16 @@ def validate(X, Y, saved_model):
 
     print('validation accuracy: %.2f%%' % (val_acc))
 
+
 def separate(X, Y, validation):
+
+    '''Separation
+
+    WHAT: separating data for validation.
+
+    OUTPUT: returns X and Y data for training the model and
+    validation.
+    '''
 
     if validation is not True:
         n = len(X) * validation
