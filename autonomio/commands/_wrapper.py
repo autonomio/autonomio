@@ -45,7 +45,11 @@ def train(X=None, Y=None, data=None,
           factor=0.1,
           epsilon=0.0001,
           cooldown=0,
-          min_lr=0.001):
+          min_lr=0.001,
+          lr_scheduler=False,
+          initial_lr='auto',
+          drop=0.5,
+          drop_each=10):
 
     '''The command for training a new model.
 
@@ -225,6 +229,18 @@ def train(X=None, Y=None, data=None,
                By default 0. Used for ReduceLROnPlateau callback.
 
     min_lr = minimum value of learning rate that callback can reduce to.
+
+    lr_scheduler = When True, activates LearningRateScheduler callback,
+                   which drops learning rate each specified number
+                   of epochs.
+
+    initial_lr = the learning rate we start with before droppint.
+                 When 'auto' makes learning rate 5 times bigger than
+                 the optimizer's default value.
+
+    drop = the factor by which we reduce learning late. 0.5 by default.
+
+    drop_each = number of epoch after which we drop learning rate.
     '''
 
     parameters = {'epoch': epoch,
@@ -266,7 +282,11 @@ def train(X=None, Y=None, data=None,
                   'factor': factor,
                   'epsilon': epsilon,
                   'cooldown': cooldown,
-                  'min_lr': min_lr
+                  'min_lr': min_lr,
+                  'lr_scheduler': lr_scheduler,
+                  'initial_lr': initial_lr,
+                  'drop': drop,
+                  'drop_each': drop_each
                   }
 
     if model is 'lstm':

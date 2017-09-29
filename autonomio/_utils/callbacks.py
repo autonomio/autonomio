@@ -2,6 +2,10 @@ from keras.callbacks import EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 from keras.callbacks import LearningRateScheduler
 
+from autonomio._utils.get_method import get_method
+
+import math
+
 
 def callbacks(para):
 
@@ -27,5 +31,18 @@ def callbacks(para):
                                monitor=para['monitor'],
                                min_delta=para['min_delta'],
                                mode=para['ESmode']))
+
+    if para['lr_scheduler'] is True:
+
+        if para['initial_lr'] is 'auto':
+            optim = get_method(para['optimizer'], 'optimizers')
+            para['initial_lr'] = optim.__init__.__defaults__[0] * 5
+
+        def step_decay(epoch):
+            temp = math.floor(epoch / para['drop_each'])
+            lr = para['initial_lr'] * math.pow(para['drop'], temp)
+            return lr
+
+        l.append(LearningRateScheduler(step_decay))
 
     return l
