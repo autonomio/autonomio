@@ -17,6 +17,7 @@ def train(X=None, Y=None, data=None,
           activation_out='sigmoid',
           metrics=['accuracy'],
           save_model=False,
+          save_best=False,
           neuron_max='auto',
           batch_size=10,
           verbose=0,
@@ -134,12 +135,15 @@ def train(X=None, Y=None, data=None,
               https://keras.io/metrics/
 
     save_model =  An option to save the model configuration, weights
-                  and parameters.
+                  and parameters from last epoch.
 
                   OPTIONS:  default is 'False', if 'True' model
                             will be saved with default name ('model')
                             and if string, then the model name
                             will be the string value e.g. 'titanic'.
+
+    save_best = When True saves the best model. Works only when 'save_model'
+                is activated.
 
     neuron_max = The maximum number of neurons on any layer.
 
@@ -286,7 +290,8 @@ def train(X=None, Y=None, data=None,
                   'lr_scheduler': lr_scheduler,
                   'initial_lr': initial_lr,
                   'drop': drop,
-                  'drop_each': drop_each
+                  'drop_each': drop_each,
+                  'save_best': save_best
                   }
 
     if model is 'lstm':

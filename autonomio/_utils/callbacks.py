@@ -1,6 +1,7 @@
 from keras.callbacks import EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 from keras.callbacks import LearningRateScheduler
+from keras.callbacks import ModelCheckpoint
 
 from autonomio._utils.get_method import get_method
 
@@ -44,5 +45,11 @@ def callbacks(para):
             return lr
 
         l.append(LearningRateScheduler(step_decay))
+
+    if para['save_best'] is True:
+
+        path = './' + para['save_model'] + '.h5'
+        l.append(ModelCheckpoint(path, save_best_only=True,
+                                 save_weights_only=True))
 
     return l

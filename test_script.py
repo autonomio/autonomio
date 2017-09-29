@@ -97,7 +97,7 @@ tr = train(1, 'quality_score', temp, flatten=6, early_stop=['val_acc'])
 tr = train(1, 'quality_score', temp, flatten=.5, learning_rate=0.1)
 tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
 
-tr = train('text', 'neg', temp, save_model='test_model')
+tr = train('text', 'neg', temp, save_model='test_model', save_best=True)
 te = predictor(temp, 'test_model')
 
 tr = train(1, 'neg', temp, layers=1, validation=True)
