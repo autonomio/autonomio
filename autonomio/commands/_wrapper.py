@@ -350,14 +350,20 @@ def hyperscan(x,
               losses='auto',
               optimizers='auto',
               activations='auto',
-              shapes='auto'):
+              shapes='auto',
+              early_stop=False,
+              patience=5,
+              monitor='val_loss',
+              min_delta=0,
+              early_stop_mode='auto'):
 
     from hyperscan import hyperscan
 
     df = hyperscan(x, y, data, epochs, flatten, dropout, batch_sizes,
                    batch_sizes_step, layers, layers_step, activation_out,
                    neuron_max, losses, optimizers,
-                   activations, shapes)
+                   activations, shapes, early_stop, patience, monitor,
+                   min_delta, early_stop_mode)
 
     return df
 

@@ -20,7 +20,12 @@ def hyperscan(x,
               losses,
               optimizers,
               activations,
-              shapes):
+              shapes,
+              early_stop,
+              patience,
+              monitor,
+              min_delta,
+              early_stop_mode):
 
     '''
     mode = 'auto' will scan through all
@@ -118,7 +123,12 @@ def hyperscan(x,
                                          loss=loss,
                                          activation=activation,
                                          optimizer=optimizer,
-                                         shape=shape)
+                                         shape=shape,
+                                         early_stop=early_stop,
+                                         patience=patience,
+                                         monitor=monitor,
+                                         min_delta=min_delta,
+                                         early_stop_mode=early_stop_mode)
 
                             out = _data_prep(temp)
 
