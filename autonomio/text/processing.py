@@ -111,11 +111,11 @@ def word_filtering(data,
             except ValueError:
                 pass
 
-        if output is str:
-            temp_str = ''
-            for word in temp:
-                temp_str += word
+    if output is str:
+        temp_str = ''
+        for word in temp:
+            temp_str += word
 
-            temp = temp_str
+        temp = temp_str
 
     return temp
