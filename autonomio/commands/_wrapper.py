@@ -17,6 +17,7 @@ def train(X=None, Y=None, data=None,
           activation_out='sigmoid',
           metrics=['accuracy'],
           save_model=False,
+          save_best=False,
           neuron_max='auto',
           batch_size=10,
           verbose=0,
@@ -45,7 +46,11 @@ def train(X=None, Y=None, data=None,
           factor=0.1,
           epsilon=0.0001,
           cooldown=0,
-          min_lr=0.001):
+          min_lr=0.001,
+          lr_scheduler=False,
+          initial_lr='auto',
+          drop=0.5,
+          drop_each=10):
 
     '''The command for training a new model.
 
@@ -130,12 +135,15 @@ def train(X=None, Y=None, data=None,
               https://keras.io/metrics/
 
     save_model =  An option to save the model configuration, weights
-                  and parameters.
+                  and parameters from last epoch.
 
                   OPTIONS:  default is 'False', if 'True' model
                             will be saved with default name ('model')
                             and if string, then the model name
                             will be the string value e.g. 'titanic'.
+
+    save_best = When True saves the best model. Works only when 'save_model'
+                is activated.
 
     neuron_max = The maximum number of neurons on any layer.
 
@@ -225,6 +233,18 @@ def train(X=None, Y=None, data=None,
                By default 0. Used for ReduceLROnPlateau callback.
 
     min_lr = minimum value of learning rate that callback can reduce to.
+
+    lr_scheduler = When True, activates LearningRateScheduler callback,
+                   which drops learning rate each specified number
+                   of epochs.
+
+    initial_lr = the learning rate we start with before droppint.
+                 When 'auto' makes learning rate 5 times bigger than
+                 the optimizer's default value.
+
+    drop = the factor by which we reduce learning late. 0.5 by default.
+
+    drop_each = number of epoch after which we drop learning rate.
     '''
 
     parameters = {'epoch': epoch,
@@ -266,7 +286,12 @@ def train(X=None, Y=None, data=None,
                   'factor': factor,
                   'epsilon': epsilon,
                   'cooldown': cooldown,
-                  'min_lr': min_lr
+                  'min_lr': min_lr,
+                  'lr_scheduler': lr_scheduler,
+                  'initial_lr': initial_lr,
+                  'drop': drop,
+                  'drop_each': drop_each,
+                  'save_best': save_best
                   }
 
     if model is 'lstm':
@@ -325,14 +350,20 @@ def hyperscan(x,
               losses='auto',
               optimizers='auto',
               activations='auto',
-              shapes='auto'):
+              shapes='auto',
+              early_stop=False,
+              patience=5,
+              monitor='val_loss',
+              min_delta=0,
+              early_stop_mode='auto'):
 
     from hyperscan import hyperscan
 
     df = hyperscan(x, y, data, epochs, flatten, dropout, batch_sizes,
                    batch_sizes_step, layers, layers_step, activation_out,
                    neuron_max, losses, optimizers,
-                   activations, shapes)
+                   activations, shapes, early_stop, patience, monitor,
+                   min_delta, early_stop_mode)
 
     return df
 

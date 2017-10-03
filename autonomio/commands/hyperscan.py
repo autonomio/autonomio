@@ -20,7 +20,12 @@ def hyperscan(x,
               losses,
               optimizers,
               activations,
-              shapes):
+              shapes,
+              early_stop,
+              patience,
+              monitor,
+              min_delta,
+              early_stop_mode):
 
     '''
     mode = 'auto' will scan through all
@@ -118,7 +123,12 @@ def hyperscan(x,
                                          loss=loss,
                                          activation=activation,
                                          optimizer=optimizer,
-                                         shape=shape)
+                                         shape=shape,
+                                         early_stop=early_stop,
+                                         patience=patience,
+                                         monitor=monitor,
+                                         min_delta=min_delta,
+                                         early_stop_mode=early_stop_mode)
 
                             out = _data_prep(temp)
 
@@ -129,7 +139,7 @@ def hyperscan(x,
                                 try_time = dt.datetime.now()
                                 temp = (try_time - start_time) * no_of_tries
                                 finish_est = temp + start_time
-                                finish_est = finish_est.strftime('%H:%M')
+                                finish_est = finish_est.strftime('%H:%M %d %B')
                                 print("Estimated finish: %s" % finish_est)
 
                             # creating a backup to a file every 50 tries
@@ -137,7 +147,8 @@ def hyperscan(x,
                                 backup_to_csv = _to_df(temp_list, column_list)
                                 backup_to_csv.to_csv('hyperscan.csv')
 
-                                print('tries left: %d' % (no_of_tries - counter))
+                                tries_left = no_of_tries - counter
+                                print('tries left: %d' % (tries_left))
 
     df = _to_df(temp_list, column_list)
 
