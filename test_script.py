@@ -9,6 +9,7 @@ from autonomio.transforms.nan_imputer import nan_imputer
 from autonomio.transforms.sohot_encoding import all_is_binary
 from autonomio.transforms.onehot_encoding import onehot
 from autonomio.transforms.rescale import max_rescale
+from autonomio.transforms import value_starts_with
 from autonomio._utils.hyperparameters import load_parameters
 from autonomio._utils.hyperstats import hyper_descriptive
 from autonomio.plots.duaparam import duaparam
@@ -17,6 +18,10 @@ from autonomio.plots.quadparam import quadparam
 from autonomio.plots.paramscatter import paramscatter
 from autonomio.plots.paramgrid import paramgrid
 from autonomio.plots.scatterz import scatterz
+from autonomio.text.processing import text_to_words
+from autonomio.text.processing import text_to_blob
+from autonomio.text.processing import text_to_chars
+from autonomio.text.processing import word_filtering
 
 import pandas as pd
 import numpy as np
@@ -210,6 +215,15 @@ l = temp_titanic.Parch.tolist()
 a = onehot(l)
 
 temp3 = col_name_generator(pd.DataFrame([1, 2]))
+temp3 = value_starts_with(temp, 'text')
+
+temp3 = text_to_words(temp.text[0])
+temp3 = text_to_blob(temp.text[0])
+temp3 = text_to_chars(temp.text[0])
+
+temp3 = word_filtering(temp.text[0], entity=True)
+temp3 = word_filtering(temp.text[0], pos='NOUN')
+temp3 = word_filtering(temp.text[0], pos='', output=str)
 
 # 8) plots
 
