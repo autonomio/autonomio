@@ -1,9 +1,9 @@
 # the methods in the namespace
-from autonomio.commands._wrapper import train
-from autonomio.commands._wrapper import hyperscan
-from autonomio.commands._wrapper import wrangler
-from autonomio.commands._wrapper import data
-from autonomio.commands._wrapper import predictor
+from .commands._wrapper import train
+from .commands._wrapper import hyperscan
+from .commands._wrapper import wrangler
+from .commands._wrapper import data
+from .commands._wrapper import predictor
 
 # stuff we don't want in the namespace
 try:

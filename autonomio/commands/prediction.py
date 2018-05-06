@@ -1,9 +1,9 @@
 import pandas as pd
 
-from autonomio.transforms.transform_data import transform_data
-from autonomio.plots.plots import prediction_distribution
-from autonomio._utils.load_model import load_model
-from autonomio.transforms.dataframe import df_merge
+from ..transforms.transform_data import transform_data
+from ..plots.plots import prediction_distribution
+from .._utils.load_model import load_model
+from ..transforms.dataframe import df_merge
 
 from IPython.display import display
 

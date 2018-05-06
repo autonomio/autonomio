@@ -2,8 +2,8 @@ import warnings
 import pandas as pd
 import numpy as np
 
-from x_transform import x_transform
-from y_transform import y_transform
+from .x_transform import x_transform
+from .y_transform import y_transform
 
 warnings.filterwarnings("ignore")
 

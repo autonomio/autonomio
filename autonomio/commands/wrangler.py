@@ -1,11 +1,11 @@
 import pandas as pd
-from autonomio.transforms.wrangler_utils import max_category
-from autonomio.transforms.datetime_handler import datetime_handler
-from autonomio.transforms.wrangler_utils import vectorize_string_cols
-from autonomio.transforms.wrangler_utils import filling_nans
-from autonomio.transforms.wrangler_utils import imputing_nans
-from autonomio.transforms.category_labeling import to_category_labels
-from autonomio.transforms.nan_handler import nan_dropper
+from ..transforms.wrangler_utils import max_category
+from ..transforms.datetime_handler import datetime_handler
+from ..transforms.wrangler_utils import vectorize_string_cols
+from ..transforms.wrangler_utils import filling_nans
+from ..transforms.wrangler_utils import imputing_nans
+from ..transforms.category_labeling import to_category_labels
+from ..transforms.nan_handler import nan_dropper
 
 
 def wrangler_main(data,

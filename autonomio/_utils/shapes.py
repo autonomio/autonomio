@@ -1,6 +1,16 @@
 from autonomio._utils.get_method import get_method
+from autonomio._utils.shapes import *
 
 import math
+
+
+def get_shape(method_name):
+
+    possibles = globals().copy()
+    possibles.update(locals())
+    method = possibles.get(method_name)
+
+    return method
 
 
 def shapes(para):
@@ -12,8 +22,7 @@ def shapes(para):
     '''
 
     neuron_count = []
-
-    shape = get_method(para['shape'], mode='shapes')
+    shape = get_shape(para['shape'])
     neuron_count = shape(para, neuron_count)
 
     for i in range(len(neuron_count)):

@@ -1,5 +1,5 @@
 import spacy as sp
-from ascify import Ascify
+from .ascify import Ascify
 
 
 def vectorize_text(data, language='en', ascifying=True):

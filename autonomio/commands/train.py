@@ -5,17 +5,17 @@ from IPython.display import display
 
 from keras import backend as K
 
-from autonomio.transforms.transform_data import transform_data
-from autonomio.plots.plots import accuracy
-from autonomio._utils.shapes import shapes
-from autonomio._utils.double_check import check
-from autonomio._utils.validator import validate, separate
-from autonomio._utils.save_model_as import save_model_as
-from autonomio.models.mlp import mlp
-from autonomio.models.regression import regression
-from autonomio.plots.trainplot import trainplot
-from autonomio.plots.plots import prediction_distribution
-from autonomio.plots.shapeplot import shapeplot
+from ..transforms.transform_data import transform_data
+from ..plots.plots import accuracy
+from .._utils.shapes import shapes
+from .._utils.double_check import check
+from .._utils.validator import validate, separate
+from .._utils.save_model_as import save_model_as
+from ..models.mlp import mlp
+from ..models.regression import regression
+from ..plots.trainplot import trainplot
+from ..plots.plots import prediction_distribution
+from ..plots.shapeplot import shapeplot
 
 
 def trainer(X, Y, data, para):
@@ -90,7 +90,7 @@ def trainer(X, Y, data, para):
 
     val_acc = None
     val_loss = None
-    for key, val in history.history.iteritems():
+    for key, val in history.history.items():
         if 'acc' in key:
             if 'val' in key:
                 val_acc = key

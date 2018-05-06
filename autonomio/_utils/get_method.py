@@ -1,4 +1,10 @@
-def get_method(method_name, mode):
+from keras.layers import *
+from keras.activations import *
+from keras.optimizers import *
+from autonomio._utils.shapes import *
+
+
+def get_method(method_name):
 
     '''
     Utility function that helps calling methods/functions
@@ -10,15 +16,6 @@ def get_method(method_name, mode):
            that the method needs to be included within the
            selected mode.
     '''
-
-    if mode is 'layers':
-        from keras.layers import *
-    if mode is 'activations':
-        from keras.activations import *
-    if mode is 'optimizers':
-        from keras.optimizers import *
-    if mode is 'shapes':
-        from autonomio._utils.shapes import *
 
     possibles = globals().copy()
     possibles.update(locals())

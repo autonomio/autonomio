@@ -1,5 +1,5 @@
 import pandas as pd
-from autonomio.transforms.col_name_generator import col_name_generator
+from ..transforms.col_name_generator import col_name_generator
 
 url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
 data_path = url

@@ -1,8 +1,8 @@
 import datetime as dt
 import pandas as pd
 
-from autonomio._utils.hyperparameters import load_parameters
-from _wrapper import train
+from .._utils.hyperparameters import load_parameters
+from ._wrapper import train
 
 
 def hyperscan(x,
