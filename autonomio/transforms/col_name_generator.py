@@ -17,7 +17,7 @@ def col_name_generator(data, prefix='C'):
     no_of_cols = data.shape[1]
     l = []
 
-    for i in xrange(no_of_cols):
+    for i in range(no_of_cols):
 
         l.append(prefix + str(i))
 
