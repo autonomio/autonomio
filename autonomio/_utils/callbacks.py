@@ -7,6 +7,14 @@ from autonomio._utils.get_method import get_method
 
 import math
 
+def get_optimizer(method_name):
+
+    possibles = globals().copy()
+    possibles.update(locals())
+    method = possibles.get(method_name)
+
+    return method
+
 
 def callbacks(para):
 
@@ -36,7 +44,7 @@ def callbacks(para):
     if para['lr_scheduler'] is True:
 
         if para['initial_lr'] is 'auto':
-            optim = get_method(para['optimizer'], 'optimizers')
+            optim = get_optimizer(para['optimizer'])
             para['initial_lr'] = optim.__init__.__defaults__[0] * 5
 
         def step_decay(epoch):
