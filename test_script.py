@@ -61,14 +61,16 @@ temp2 = temp2[:, 2:4]
 temp2 = pd.DataFrame(temp2)
 
 data('temp.x', 'file')
-
 temp2.to_csv('test_data.csv')
 data('test_data.csv', 'file', header=None)
-data('test_data.csv')
+data('test_data.csv', 'file')
 
 # 2) wrangler
+temp = data('random_tweets')
 
+temp.columns = [i.decode("utf-8") for i in list(temp.columns)]
 temp['datetime'] = temp['created_at']
+
 
 temp1 = wrangler(data=temp,
                  y='neg',

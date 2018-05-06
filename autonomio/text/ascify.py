@@ -48,7 +48,7 @@ class Ascify:
         for i in range(self.length):
 
             temp = filter(lambda x: x in self.printable, self.s[i])
-            temp = temp.encode('ascii')
+            temp = [i.encode('ascii') for i in temp]
             out.append(temp)
 
         return out

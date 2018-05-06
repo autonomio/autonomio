@@ -28,8 +28,11 @@ def vectorize_text(data, language='en', ascifying=True):
             temp_string = Ascify(str(data[i:i+1])).ascify()
         else:
             temp_string = str(data[i:i+1])
+        try:
+            uni_string = unicode(temp_string)
+        except NameError:
+            uni_string = str(temp_string)
 
-        uni_string = unicode(temp_string)
         vec_obj = nlp(uni_string)
         vector = vec_obj.vector
         l.append(vector)
