@@ -67,10 +67,10 @@ data('test_data.csv', 'file')
 
 # 2) wrangler
 temp = data('random_tweets')
+temp = temp.head(100)
 
 temp.columns = [i.decode("utf-8") for i in list(temp.columns)]
 temp['datetime'] = temp['created_at']
-
 
 temp1 = wrangler(data=temp,
                  y='neg',
@@ -99,7 +99,8 @@ tr = train([1, 2, 3, 4, 5], 'neg', temp,
            flatten='cat_numeric',
            learning_rate=0.1)
 
-tr = train(1, 'quality_score', temp, flatten='median', lr_scheduler=True)
+#tr = train(1, 'quality_score', temp, flatten='median', lr_scheduler=True)
+
 tr = train(1, 'quality_score', temp, flatten=6, early_stop=['val_acc'])
 tr = train(1, 'quality_score', temp, flatten=.5, learning_rate=0.1)
 tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
@@ -114,6 +115,8 @@ try:
     train(1, 'neg', temp, neurons=[1])
 except:
     pass
+
+temp_employment.head(30)
 
 train(temp_employment.MUU,
       epoch=1,

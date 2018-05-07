@@ -44,10 +44,17 @@ def x_transform(X, data):
     if type(X) == str:
 
         first_index = data.index.values[0]
-        if type(data[X][first_index]) == str or type(data[X][first_index]) == unicode:
-            x = vectorize_text(data[X])
-
-        else:
-            x = data[X]
+        # for python2
+        try:
+            if type(data[X][first_index]) == str or type(data[X][first_index]) == unicode:
+                x = vectorize_text(data[X])
+            else:
+                x = data[X]
+        # for python3
+        except NameError:
+            if type(data[X][first_index]) == str:
+                x = vectorize_text(data[X])
+            else:
+                x = data[X]
 
     return x
