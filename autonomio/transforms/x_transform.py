@@ -43,17 +43,12 @@ def x_transform(X, data):
     # for a single column label which contains string values
     if type(X) == str:
 
-        first_index = data.index.values[0]
+        first_index = data.iloc[0][0]
         # for python2
         try:
-            if type(data[X][first_index]) == str or type(data[X][first_index]) == unicode:
+            if type(first_index) == type(b'') or type(first_index) == type('') or type(first_index) == type(u''):
                 x = vectorize_text(data[X])
-            else:
-                x = data[X]
-        # for python3
-        except NameError:
-            if type(data[X][first_index]) == str:
-                x = vectorize_text(data[X])
+                print("'x' was vectorized automatically.")
             else:
                 x = data[X]
 

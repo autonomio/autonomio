@@ -62,7 +62,7 @@ def embeds(x,
                         output_dim=output_dim,
                         input_length=input_length))
 
-    elif mode is 'LSTM':
+    if mode is 'LSTM':
         model.add(LSTM(hidden_dim))
 
     elif mode is 'SimpleRNN':
