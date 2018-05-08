@@ -1,5 +1,4 @@
-from autonomio.text.vectorize_text import vectorize_text
-
+from ..text.vectorize_text import vectorize_text
 
 def x_transform(X, data):
 
@@ -42,14 +41,17 @@ def x_transform(X, data):
 
     # for a single column label which contains string values
     if type(X) == str:
+        print('h')
 
-        first_index = data.iloc[0][0]
-        # for python2
-        try:
-            if type(first_index) == type(b'') or type(first_index) == type('') or type(first_index) == type(u''):
-                x = vectorize_text(data[X])
-                print("'x' was vectorized automatically.")
-            else:
-                x = data[X]
+        first_index = data[X][0]
+        print(first_index)
+        if type(first_index) == type(b'') or type(first_index) == type('') or type(first_index) == type(u''):
+            x = vectorize_text(data[X])
+            print("'x' was vectorized automatically.")
+        else:
+            x = data[X]
+
+    if type(X) == float:
+        x = data[X]
 
     return x

@@ -1,7 +1,7 @@
 import pandas as pd
 from ..transforms.col_name_generator import col_name_generator
 
-url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/'
+url = 'https://github.com/autonomio/datasets/raw/master/autonomio-datasets/msgpack/'
 data_path = url
 
 

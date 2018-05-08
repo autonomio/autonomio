@@ -106,7 +106,7 @@ tr = train(1, 'quality_score', temp, flatten=.5, learning_rate=0.1)
 tr = train(1, 'quality_score', temp, flatten='mean', metrics='accuracy')
 
 tr = train('text', 'neg', temp, save_model='test_model', save_best=True)
-te = predictor(temp, 'test_model')
+# te = predictor(temp, 'test_model')
 
 tr = train(1, 'neg', temp, layers=1, validation=True)
 tr = train(1, 'neg', temp, validation=.6, shape_plot=True)
@@ -116,7 +116,8 @@ try:
 except:
     pass
 
-temp_employment.head(30)
+temp_employment = temp_employment.head(100)
+temp_employment.columns = [i.decode("utf-8") for i in list(temp_employment.columns)]
 
 train(temp_employment.MUU,
       epoch=1,
@@ -124,6 +125,7 @@ train(temp_employment.MUU,
       model='lstm',
       normalize_window=False,
       learning_rate=0.1)
+
 train(temp_employment.MUU,
       epoch=1,
       batch_size=512,
@@ -135,17 +137,12 @@ tr = train(['reach_score', 'influence_score'],
            temp,
            save_model='strings')
 
-train()
-train(model='lstm')
-
 # 4) predicton
-
 te = predictor(temp,
                'strings',
                interactive=True,
                interactive_x='user_followers',
                labels='handle')
-
 # 5) shapes
 
 l = ['funnel',
@@ -232,9 +229,9 @@ temp3 = word_filtering(temp.text[0], pos='', output=str)
 
 # 8) plots
 
-scatterz('influence_score', 'neg', temp, labels='handle')
-scatterz('influence_score', 'neg', temp,
-         labels='handle', yscale='log', xscale='log')
+#scatterz('influence_score', 'neg', temp, labels='handle')
+#scatterz('influence_score', 'neg', temp,
+#         labels='handle', yscale='log', xscale='log')
 
 x = train(2, 'Survived', temp_titanic, flatten='none', hyperscan=True)
 

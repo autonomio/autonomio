@@ -34,6 +34,8 @@ def lstm(data, param):
     else:
         optimizer = 'rmsprop'
 
+    print(param['seq_len'])
+
     X_train, y_train, X_test, y_test = _lstm_load_data(
                                                     data,
                                                     param['seq_len'],

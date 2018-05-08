@@ -1,3 +1,10 @@
 *.DS_Store
 *.ipynb_checkpoints
 *.pyc
+*.ipynb
+*.csv
+*.png
+*.json
+*.msgpack
+*.x
+*.h5

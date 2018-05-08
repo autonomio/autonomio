@@ -15,7 +15,7 @@ def save_model_as(X, columns, model, save_model):
 
     temp = ""
 
-    f = open(save_model+".x", "w+")
+    f = open(save_model + ".x", "w+")
 
     # for a range of columns (two ints)
     if type(X) == list:

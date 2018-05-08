@@ -15,7 +15,11 @@ def vectorize_text(data, language='en', ascifying=True):
 
     '''
 
-    nlp = sp.load(language)
+    try:
+        nlp = sp.load(language)
+    except OSError:
+        print('TRY: "python -m spacy download en" from command line')
+
     nlp.parser.model  # to confirm that the parser loaded ok
 
     c = len(data)

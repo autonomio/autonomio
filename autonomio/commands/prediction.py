@@ -26,7 +26,7 @@ def make_prediction(data,
 
     # loading model and transforming data
     loaded_model, X = load_model(saved_model)
-    temp_data = transform_data(data, X=X)
+    temp_data = transform_data(data, X)
     prediction = loaded_model.predict(temp_data)
     prediction = pd.DataFrame(prediction)
 
