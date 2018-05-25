@@ -12,7 +12,7 @@ def datetime_detector(data, datetime_mode='retain'):
     datetime_handler for processing based on the
     datetime_mode setting.
 
-    OPTIONS: 'drop', 'sequence', and 'retain'
+    OPTIONS: 'pass', drop', 'sequence', and 'retain'
 
     '''
 
@@ -25,9 +25,12 @@ def datetime_detector(data, datetime_mode='retain'):
     return datetime_cols
 
 
-def datetime_handler(data, datetime_mode='retain'):
+def datetime_handler(data, datetime_mode='pass'):
 
-    datetime_cols = datetime_detector(data, datetime_mode='retain')
+    if datetime_mode == 'pass':
+        return data
+
+    datetime_cols = datetime_detector(data, datetime_mode=datetime_mode)
     datetime_cols_len = len(datetime_cols)
 
     # case where there is no datetime
